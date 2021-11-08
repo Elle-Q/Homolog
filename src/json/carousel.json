@@ -1,0 +1,37 @@
+[
+  {
+    "name": "软件 & 插件",
+    "subTitle": "plugins and presets",
+    "imgSrc": "./carousel3.png"
+  },
+  {
+    "name": "动画",
+    "subTitle": "tutorials, rigs, and assets",
+    "imgSrc": "./carousel1.gif"
+  },
+  {
+    "name": "CG & 游戏",
+    "subTitle": "tutorials, shorts, and demos",
+    "imgSrc": "./carousel2.jpg"
+  },
+  {
+    "name": "人体解剖",
+    "subTitle": "Anatomy guides",
+    "imgSrc": "./carousel4.jpg"
+  },
+  {
+    "name": "书籍 & 文档",
+    "subTitle": "stories, books, and guides",
+    "imgSrc": "./carousel5.jpg"
+  },
+  {
+    "name": "兄弟们的佳作",
+    "subTitle": "from our site",
+    "imgSrc": "./carousel6.jpg"
+  },
+  {
+    "name": "3d人物",
+    "subTitle": "Character, sculpt",
+    "imgSrc": "./carousel7.png"
+  }
+]

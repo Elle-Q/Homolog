@@ -9,6 +9,7 @@ function Home(props) {
         <React.Fragment>
             <HeaderBar/>
             <Routes>
+                <Route path="home" element={<Body/>}/>
                 <Route path="/" element={<Body/>}/>
                 <Route path="play" element={<Play/>}/>
             </Routes>

@@ -67,7 +67,7 @@ function Carousell({items}) {
             clearInterval(handleAutoRightplay);
             clearInterval(handleAutoLeftplay)
         }
-    }, [handleClickNext, handleAutoRightplay])
+    }, [handleClickNext])
 
 
     const getDots = () => {

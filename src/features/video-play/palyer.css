@@ -1,0 +1,51 @@
+.video-js .vjs-big-play-button .vjs-icon-placeholder:before {
+    content: "";
+    background-image: url("../../assets/cat.svg");
+    background-repeat: no-repeat;
+    background-size: 46px;
+    border-radius: 500px;
+    background-position: 55% calc(50% - 0px);
+    background-color: transparent;
+    transition: all 2s ease .5s;
+    /*border: none !important;*/
+    /*box-shadow: none !important;*/
+}
+
+.video-js .vjs-big-play-button {
+    background-color: transparent;
+    border: none;
+}
+
+.video-js:hover .vjs-big-play-button,
+.video-js .vjs-big-play-button:focus {
+    border-color: #fff;
+    background-color: transparent;
+    transform: scale(1.5);
+    transition: all 1s ease .5s;
+}
+
+.video-js .vjs-progress-control {
+    cursor: pointer;
+    flex: auto;
+    display: flex;
+    align-items: center;
+    min-width: 4em;
+    touch-action: none;
+    color: #3399FF;
+    border: none;
+}
+
+.video-js .vjs-play-progress:before {
+    color: #3399FF;
+    background-color: #3399FF;
+    border-radius: 50px;
+    box-shadow: 0 0 5px #3399FF;
+}
+
+.video-js .vjs-play-progress {
+    background-color: #3399FF70;
+    /*box-shadow: 0 0 5px #3399FF;*/
+
+}
+
+

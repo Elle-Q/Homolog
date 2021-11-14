@@ -16,15 +16,21 @@ import darkScrollbar from "@mui/material/darkScrollbar";
              dark: '#20262d',
              contrastText: '#000',
          },
+         third: {
+             main: '#3399FF',
+         },
          mode:"dark",
          background: {
-             default: '#0A1929'
+             default: '#0A1929',
+             paper:'#0a0908'
          },
          text: {
              primary: '#3399FF',
              secondary: '#fff',
              fourth: '#EB5E28',
              third: '#000',
+             fifth:'#CCC5B9',
+             sixth:'#403D39'
          },
      },
 
@@ -55,7 +61,8 @@ import darkScrollbar from "@mui/material/darkScrollbar";
                          '&:hover fieldset': {
                              borderColor: '#001E3C',
                          },
-                         // backgroundColor:'#001E3C',
+                         border:'none',
+                         borderRadius: '50px',
                      //
                      },
                  },

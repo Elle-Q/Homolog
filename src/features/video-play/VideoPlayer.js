@@ -1,106 +1,172 @@
-import React, {useState} from 'react';
-import VideoJs from "./VideoJs";
+import React, {useEffect, useState} from 'react';
+import Player from "./Player";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import PlayCircleRoundedIcon from '@mui/icons-material/PlayCircleRounded';
-import styled from "styled-components";
-import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
-import Avatar from "@mui/material/Avatar";
-import author from '../../assets/avatar2.jpg'
-import Grid from "@mui/material/Grid";
-import ReplayRoundedIcon from '@mui/icons-material/ReplayRounded';
-import SkipNextRoundedIcon from '@mui/icons-material/SkipNextRounded';
-import PauseCircleFilledRoundedIcon from '@mui/icons-material/PauseCircleFilledRounded';
-import UseInput from "./CustomInput";
+import ControlBar from "./ControlBar";
+import VideoPlayerHeader from "./VideoPlayerHeader";
+import Barrage from 'barrage-ui';
+import barageData from '../../json/barrage.json'
+
+
+const videoJsOptions = {
+    autoplay: false,
+    height:"auto",
+    controls: true,
+    responsive: true,
+    fluid: true,
+    sources: [{
+        src: 'video2.mp4',
+        type: 'video/mp4'
+    }],
+    controlBar: {
+        children: [
+            {
+                name: 'ProgressControl'
+            },
+        ]
+    }
+}
 
 function VideoPlayer(props) {
-    const CustomInput = UseInput;
-    const {videoSrc} = props;
+
+    const {videoSrc, danmuData} = props;
     const [play, setPlay] = useState(false);
+    const [visible, setVisible] = useState("hidden");
+    const [barrageVisible, setBarrageVisible] = useState(true);
     const playerRef = React.useRef(null);
-    const videoJsOptions = { // lookup the options in the docs for more options
-        autoplay: false,
-        controls: false,
-        responsive: true,
-        fluid: true,
-        sources: [{
-            src: 'video1.mp4',
-            type: 'video/mp4'
-        }]
+    const barrageRef = React.useRef(null);
+
+    useEffect(() => {
+        barrageRef.current=new Barrage({
+            container: document.getElementById('videoPlayContainer'),
+            data: barageData,
+            config: {
+                duration: -1,
+                speed: 50,
+                fontSize: 15,
+                fontFamily: '-apple-system',
+                textShadowBlur: 1.0,
+                opacity: 0.5,
+                defaultColor: '#fff',
+            },
+        });
+    },[])
+
+    useEffect(() => {
+        if (!playerRef.current) return;
+        playerRef.current.pause();
+        playerRef.current.src(
+            {
+                type: 'video/mp4',
+                src: videoSrc
+            });
+    },[videoSrc])
+
+    useEffect(() => {
+        const player = playerRef.current;
+        if (!player || !barrageVisible) return;
+        barrageRef.current.add({
+            time: player.currentTime() * 1000,
+            text: danmuData,
+            color:"red"
+        });
+    },[danmuData])
+
+    //toggle
+    function togglePlay() {
+        const player = playerRef.current;
+        if (play) {
+            player.pause();
+        } else {
+            player.play();
+        }
     }
 
+    //toggleShowBarrage
+    function toggleShowBarrage() {
+        setBarrageVisible(!barrageVisible);
+        if (barrageVisible) {
+            barrageRef.current.setData([]);
+        } else {
+            barrageRef.current.setData(barageData);
+        }
+    }
+
+    //listen event
     const handlePlayerReady = (player) => {
         playerRef.current = player;
-        // you can handle player events here
-        player.on('waiting', () => {
-            console.log('player is waiting');
+        //   handle player events
+        player.on(['waiting', 'pause'], () => {
+            setPlay(false);
+            barrageRef.current.pause();
+        });
+
+        player.on('playing', () => {
+            setPlay(true)
+            barrageRef.current.play();
         });
 
         player.on('dispose', () => {
-            console.log('player will dispose');
+        });
+
+        player.on('seeked', () => {
+            setPlay(true);
+            barrageRef.current.goto(player.currentTime() * 1000);
         });
     };
 
+    const rePlay = () => {
+        playerRef.current.currentTime(0);
+    }
+
+    const setVolume = (volume) => {
+        playerRef.current.volume(volume / 100);
+    }
+
+    const enterFullScreen = () => {
+        playerRef.current.requestFullscreen();
+    };
+
+    const handleRateClick = (event, popupState) => {
+        const {myValue} = event.currentTarget.dataset;
+        popupState.close();
+        playerRef.current.playbackRate(myValue);
+    };
+
+
     return (
-        <Box sx={{
-            // padding:'50px 50px 0 50px',
-            borderRadius: '10px',
-            backgroundColor: 'black',
-            zIndex:1,
-        }}>
+        <Box
+            id="videoPlayContainer"
+            sx={{
+                height:'530px',
+                width:'810px',
+                // width:'100%',
+                position:"absolute",
+                borderRadius: '10px',
+                backgroundColor: 'black',
+                zIndex: 1,
+            }}
+            onMouseEnter={() => setVisible("visible")}
+            onMouseLeave={() => setVisible("hidden")}
+        >
+            <VideoPlayerHeader visible={visible}/>
 
-            <Stack direction="column">
-                <Box display="flex"
-                     flexDirection="row-reverse"
-                     sx={{mr:'10px', height:'50px', alignItems: 'center'}}>
-                    <Avatar  alt="Remy Sharp" src={author}/>
-                 </Box>
-                <Box sx={{margin:'0px 30px '}}>
-                    <VideoJs
-                        options={videoJsOptions}
-                        onReady={handlePlayerReady}
-                        play={play}
-                    />
-                </Box>
-                <Box display="flex"
-                     flexDirection="row-start"
-                     sx={{
-                         mr:'10px',
-                         height:'50px',
-                         alignItems: 'center',
-                         ml:'20px'
-                     }}>
-                    <Button sx={{
-                        backgroundColor: "inherit",
-                        border: "none",
-                    }}
-                            onClick={() => setPlay(!play)}>
-                        {
-                            play ? <PauseCircleFilledRoundedIcon fontSize="large" sx={{color:'secondary.light', }}/>
-                            : <PlayCircleRoundedIcon fontSize="large" sx={{color:'secondary.light'}}/>
-                        }
+            <Box sx={{margin: '5px 30px '}}>
+                <Player
+                    options={videoJsOptions}
+                    onReady={handlePlayerReady}
+                />
+            </Box>
 
-                    </Button>
-                    <Button sx={{
-                        backgroundColor: "inherit",
-                        border: "none",
-                    }}
-                            onClick={() => {}}>
-                        <SkipNextRoundedIcon fontSize="medium" sx={{color:'secondary.light'}}/>
-                    </Button>
-                    <Button sx={{
-                        backgroundColor: "inherit",
-                        border: "none",
-                    }}
-                            onClick={() => {}}>
-                        <ReplayRoundedIcon fontSize="medium" sx={{color:'secondary.light'}}/>
-                    </Button>
-                </Box>
-
-                <CustomInput />
-
-            </Stack>
+            <ControlBar play={play}
+                        togglePlay={togglePlay}
+                        visible={visible}
+                        barrageVisible={barrageVisible}
+                        rePlay={rePlay}
+                        setVolume={setVolume}
+                        enterFullScreen={enterFullScreen}
+                        handleRateClick={handleRateClick}
+                        toggleShowBarrage={toggleShowBarrage}
+            />
 
         </Box>
     );

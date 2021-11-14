@@ -17,22 +17,22 @@ import StarHalfRoundedIcon from '@mui/icons-material/StarHalfRounded';
 import StarOutlineRoundedIcon from '@mui/icons-material/StarOutlineRounded';
 import StarRateRoundedIcon from '@mui/icons-material/StarRateRounded';
 import Link from "@mui/material/Link";
+import {getStarIcons} from "../../utils/ToolUtil";
 
 function CategoryCard(props) {
     const theme = useTheme();
     const {name, imgSrc, score} = props;
-
-    const getStarIcons = () => {
-        const stars = [];
-        const scoreInt = Math.floor(score);
-        for (let i = 0; i < scoreInt; i++) {
-            stars.push(<StarRateRoundedIcon key={i}/>)
-        }
-        if (score % scoreInt !== 0) {
-            stars.push(<StarHalfRoundedIcon/>)
-        }
-        return stars;
-    }
+    // const getStarIcons = () => {
+    //     const stars = [];
+    //     const scoreInt = Math.floor(score);
+    //     for (let i = 0; i < scoreInt; i++) {
+    //         stars.push(<StarRateRoundedIcon key={i}/>)
+    //     }
+    //     if (score % scoreInt !== 0) {
+    //         stars.push(<StarHalfRoundedIcon/>)
+    //     }
+    //     return stars;
+    // }
 
     return (
         <Card sx={{
@@ -42,7 +42,7 @@ function CategoryCard(props) {
             borderRadius: 3,
             // backgroundColor: 'primary.main',
         }}>
-            <Link href="http://www.google.com" target="_blank">
+            <Link href="/play" >
                 <CardMedia
                     component="img"
                     height="300"
@@ -68,7 +68,7 @@ function CategoryCard(props) {
                 </Typography>
             </CardContent>
             <Typography variant="h7" component="div" color="text.fourth">
-                {getStarIcons()}
+                {getStarIcons(score)}
             </Typography>
             <CardActions disableSpacing>
                 <IconButton aria-label="add to favorites">

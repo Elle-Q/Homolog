@@ -27,7 +27,7 @@ import suggetionJson from '../../../json/suggesttion.json'
 import Popper from '@mui/material/Popper';
 import Paper from "@mui/material/Paper";
 import {Link} from "react-router-dom";
-
+import community from '../../../assets/community1.svg'
 
 const StyledBadge = styled(Badge)(({theme}) => ({
     '& .MuiBadge-badge': {
@@ -60,7 +60,7 @@ const StyledBadge = styled(Badge)(({theme}) => ({
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
-    borderRadius: theme.shape.borderRadius,
+    borderRadius: '50px',
     backgroundColor: alpha(theme.palette.primary.main, 0.15),
     '&:hover': {
         backgroundColor: alpha(theme.palette.primary.main, 0.25),
@@ -81,6 +81,7 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+
 }));
 
 function HeaderBar(props) {
@@ -93,7 +94,9 @@ function HeaderBar(props) {
         <Box sx={{flexGrow: 1, boxShadow:"none"}}>
             <AppBar position="static">
                 <Toolbar sx={{
-                    backgroundColor: 'background.default', display: 'inline-flex', minHeight: '64px'
+                    backgroundColor: 'background.default',
+                    display: 'inline-flex',
+                    minHeight: '64px'
                 }}>
                     <IconButton>
                         <img className="logo" src={logo} style={{width:'50px',height:'50px'}} alt={"logo"}/>
@@ -124,7 +127,12 @@ function HeaderBar(props) {
                         <Autocomplete
                             sx={{
                                 paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-                                border: '1px solid #173A5E',
+                                border: "none",
+                                borderRadius: '50px',
+                                boxShadow: '0 0 5px #3399FF',
+                                '&:hover': {
+                                    backgroundColor: alpha(theme.palette.primary.main, 0.25),
+                                },
                             }}
                             size="small"
                             id="free-solo-2-demo"
@@ -148,6 +156,9 @@ function HeaderBar(props) {
                                         ...params.InputProps,
                                         type: 'search',
                                     }}
+                                    sx={{
+                                        border:"none"
+                                    }}
                                 />
                             )}
                         />
@@ -159,11 +170,16 @@ function HeaderBar(props) {
                             {theme.palette.mode === 'dark' ? <BedtimeIcon fontSize="small"/> :
                                 <WbSunnyIcon fontSize="small"/>}
                         </Button>
+
+                        <Button size="large" >
+                            <img style={{width:20, height:20}} alt ="community" title="社区" src={community}/>
+                        </Button>
                         <Button size="large" color="inherit"
-                                component={Link} to={"/play"}>
+                                component={Link} to={"/home"}>
                             <HomeIcon fontSize="small"/>
                         </Button>
-                        <Button size="large" color="inherit">
+                        <Button size="large" color="inherit"
+                                component={Link} to={"/play"}>
                             <RestoreOutlinedIcon fontSize="small"/>
                         </Button>
                         <Button size="large" color="inherit">

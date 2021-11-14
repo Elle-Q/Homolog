@@ -11,6 +11,7 @@
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
+    "barrage-ui": "^1.4.1",
     "lodash": "^4.17.21",
     "lodash.mapvalues": "^4.6.0",
     "react": "^17.0.2",
@@ -47,6 +48,8 @@
     ]
   },
   "devDependencies": {
+    "material-ui-popup-state": "^2.0.0",
+    "react-window": "^1.8.6",
     "styled-components": "^5.3.3"
   }
 }

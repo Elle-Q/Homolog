@@ -1,0 +1,143 @@
+import React from 'react';
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import {getStarIcons} from "../../utils/ToolUtil";
+import Avatar from '@mui/material/Avatar';
+import avatar1 from '../../assets/avatar1.jpg'
+import styled from "styled-components";
+import Paper from "@mui/material/Paper";
+import Chip from "@mui/material/Chip";
+import more from "../../assets/more.svg";
+import Button from "@mui/material/Button";
+import Divider from "@mui/material/Divider";
+
+const AvatarContainer = styled.div`
+  display: flex;
+  margin-top: 14px;
+  margin-bottom: 20px;
+  & > * {
+    margin: 4px;
+  }
+`;
+
+const LabelContainer = styled.div`
+  display: flex;
+  font-size:50px;
+  width:100%;
+  height:auto;
+  margin-top: 14px;
+  margin-bottom: 14px;
+  background-color: #3399FF;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #3399FF;
+`;
+
+
+const AvatarLabel = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const Label = props => {
+    const {name, value, lables, goCategoryClick} = props;
+    return (
+        <div style={{marginBottom: '14px', marginTop: '14px', marginLeft: '24px'}}>
+            <em style={{color: "#999", marginRight: '15px'}}>{name}:</em>
+            <Typography variant="body" color='white'> {value} </Typography>
+            {
+                lables && lables.map((key, index) => {
+                    return <Chip
+                        sx={{
+                            color: 'secondary.light',
+                            m: '2px',
+                            boxShadow: '0 0 2px #3399FF',
+                            borderColor: 'secondary.light',
+                            '& > *:hover': {
+                                color: 'secondary.contrastText'
+                            }
+                        }}
+                        component="a"
+                        href=""
+                        color='primary'
+                        label={key}
+                        key={index}
+                        onClick={goCategoryClick}
+                    />
+                })
+            }
+        </div>
+    )
+}
+
+function VideoBriefDesc(props) {
+    const {score} = props;
+    const lables = ["懒人", "blender", "建模", "路追", "教程"]
+
+    const goCategoryClick = () => {
+
+    }
+
+    return (
+        <Box
+            sx={{
+                // height: '900px',
+                width: '100%',
+                borderRadius: '10px',
+                backgroundColor: 'background.paper',
+                boxShadow: '0 0 5px black',
+                border: '1px solid #0a0908',
+                padding: '10px',
+            }}
+        >
+            <Typography variant="h6" sx={{mb: '20px'}}>简介 & 相关</Typography>
+
+
+            <Typography color='text.fourth' sx={{ml: '20px'}}> {getStarIcons(4.5, '40px', '40px')}(143)</Typography>
+
+
+            <AvatarContainer>
+                <AvatarLabel>
+                    <Avatar
+                        sx={{width: '60px', height: '60px'}}
+                        style={{marginRight: "14px"}}
+                        alt="Elle Qu"
+                        src={avatar1}
+                    />
+                    <Typography variant="body2" sx={{fontSize: '20px'}} color="text.fifth"> Elle Qu</Typography>
+                </AvatarLabel>
+            </AvatarContainer>
+            <Divider variant="middle" />
+            {/*<Paper elevation={1} sx={{width: '100%', height: "auto", border: '1px solid #20262d'}}>*/}
+                <Label name='文件格式' value='.blender'/>
+                <Label name='下载格式' value='zip'/>
+                <Label name='文件大小' value='12M'/>
+                <Label name='blender版本推荐' value='2.8+'/>
+                <Label name='分类' value='懒人建模大法'/>
+                <Label name='标签' lables={lables} goCategoryClick={goCategoryClick}/>
+            {/*</Paper>*/}
+
+            <Divider variant="middle" />
+            <Paper elevation={1} sx={{width: '100%', height: "auto", mt: '24px'}}>
+                {/*<Typography variant="body2" sx={{fontSize: '18px'}} color="text.fifth">描述</Typography>*/}
+                <em style={{color: "#173A5E", marginRight: '15px'}}>描述</em>
+
+                <p style={{color: "#173A5E", marginLeft: '24px'}}>
+                    An invisible connection system; a mystical portal between Illustrator and After Effects.
+
+                    Transfer shapes as you need them without importing, converting or redrawing. The vector workflow you
+                    imagined between apps created by the same company.
+
+                    Work with shapes, not files.
+                </p>
+
+                <div style={{display: 'flex', justifyContent: 'flex-end'}}>
+                    <Button sx={{border: "none", backgroundColor: "transparent"}}>
+                        <img style={{width: 20, height: 20}} alt="community" title="more" src={more}/>
+                    </Button>
+                </div>
+            </Paper>
+        </Box>
+    );
+}
+
+export default VideoBriefDesc;

@@ -14,7 +14,7 @@ const videoJsOptions = {
     responsive: true,
     fluid: true,
     sources: [{
-        src: 'video2.mp4',
+        src: 'video3.mp4',
         type: 'video/mp4'
     }],
     controlBar: {

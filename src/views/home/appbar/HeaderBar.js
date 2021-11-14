@@ -16,7 +16,6 @@ import {ColorModeContext} from "../../../App";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import Avatar from "@mui/material/Avatar";
-import avatar1 from '../../../assets/avatar1.jpg'
 import logo from '../../../assets/cat.svg'
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from '@mui/icons-material/Search';
@@ -201,7 +200,7 @@ function HeaderBar(props) {
                             anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}
                             variant="dot"
                         >
-                            <Avatar alt="Remy Sharp" src={avatar1}/>
+                            <Avatar alt="Remy Sharp" src="/avatar/avatar1.jpg"/>
                         </StyledBadge>
                     </Stack>
                 </Toolbar>

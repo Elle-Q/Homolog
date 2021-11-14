@@ -1,7 +1,6 @@
 import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
 import StarHalfRoundedIcon from "@mui/icons-material/StarHalfRounded";
 import React from "react";
-import Typography from "@mui/material/Typography";
 
 export function getStarIcons(score, width, height){
     const stars = [];
@@ -10,7 +9,7 @@ export function getStarIcons(score, width, height){
         stars.push(<StarRateRoundedIcon sx={{width:width, height:height}}  key={i}/>)
     }
     if (score % scoreInt !== 0) {
-        stars.push(<StarHalfRoundedIcon sx={{width:width, height:height}}/>)
+        stars.push(<StarHalfRoundedIcon sx={{width:width, height:height}} key='6'/>)
     }
     return stars;
 }

@@ -6,22 +6,9 @@ import VideoInfo from "../../features/video-play/VideoInfo";
 import VideoPlayer from "../../features/video-play/VideoPlayer";
 import VideoPeriods from "../../features/video-play/VideoPeriods";
 import DanmuInput from "../../features/video-play/DanmuInput";
-import ControlBar from "../../features/video-play/ControlBar";
-import SpeedDial from "@mui/material/SpeedDial";
-import SpeedDialIcon from "@mui/material/SpeedDialIcon";
-import SpeedDialAction from "@mui/material/SpeedDialAction";
-import ShareIcon from '@mui/icons-material/Share';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ContentCopyIcon from '@mui/icons-material/ContentCopy';
-import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import AdbRoundedIcon from '@mui/icons-material/AdbRounded';
-import monkey from '../../assets/monkey.svg'
-import {width} from "@mui/system";
-import VideoDanmu from "../../features/video-play/VideoDanmu";
 import PageTipFloatingBar from "../../common/PageTipFloatingBar";
 import VideoBriefDesc from "../../features/video-play/VideoBriefDesc";
-import Comments from "../../features/video-play/Comments";
+import Comments from "../../features/comment/Comments";
 
 
 function Play(props) {
@@ -62,7 +49,8 @@ function Play(props) {
                 <Grid item xs={7} sx={{height:'580px', position:"relative"}}>
                     <VideoPlayer danmuData={danmuData} videoSrc={videoSrc}/>
                     {/*<VideoDanmu />*/}
-                    <DanmuInput ref={danmuRef} handleDanmuSend={handleDanmuSend}/>
+                    <DanmuInput ref={danmuRef}
+                                handleDanmuSend={handleDanmuSend}/>
                 </Grid>
 
                 <Grid item xs={4}>

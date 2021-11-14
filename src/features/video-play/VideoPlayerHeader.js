@@ -1,6 +1,5 @@
 import React from 'react';
 import Avatar from "@mui/material/Avatar";
-import author from "../../assets/avatar2.jpg";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 
@@ -17,7 +16,7 @@ function VideoPlayerHeader(props) {
                  opacity: `${visible}` === 'visible' ? 1 : 0,
                  transition: 'opacity 2s'
              }}>
-            <Avatar alt="author" src={author}/>
+            <Avatar alt="author" src="/avatar/avatar2.jpg"/>
             <Typography color="secondary"
                         sx={{
                             letterSpacing:'2px',

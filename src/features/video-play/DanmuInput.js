@@ -54,7 +54,7 @@ function DanmuInput(props, ref) {
         <DanmuBox>
             <StyledInputElement ref={ref}
                                 aria-label="danmu input"
-                                placeholder="不好请别骂   请用鸡蛋砸   文明你我他 :) " />
+                                placeholder={"不好请别骂   请用鸡蛋砸   文明你我他 :) "} />
             <Button
                 sx={{
                     backgroundColor: "transparent",

@@ -3,7 +3,6 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import {getStarIcons} from "../../utils/ToolUtil";
 import Avatar from '@mui/material/Avatar';
-import avatar1 from '../../assets/avatar1.jpg'
 import styled from "styled-components";
 import Paper from "@mui/material/Paper";
 import Chip from "@mui/material/Chip";
@@ -41,7 +40,7 @@ const AvatarLabel = styled.div`
 const Label = props => {
     const {name, value, lables, goCategoryClick} = props;
     return (
-        <div style={{marginBottom: '14px', marginTop: '14px', marginLeft: '24px'}}>
+        <div style={{marginBottom: '14px', marginTop: '14px', marginLeft: '10px'}}>
             <em style={{color: "#999", marginRight: '15px'}}>{name}:</em>
             <Typography variant="body" color='white'> {value} </Typography>
             {
@@ -53,7 +52,7 @@ const Label = props => {
                             boxShadow: '0 0 2px #3399FF',
                             borderColor: 'secondary.light',
                             '& > *:hover': {
-                                color: 'secondary.contrastText'
+                                color: 'secondary.contrastText',
                             }
                         }}
                         component="a"
@@ -101,24 +100,24 @@ function VideoBriefDesc(props) {
                         sx={{width: '60px', height: '60px'}}
                         style={{marginRight: "14px"}}
                         alt="Elle Qu"
-                        src={avatar1}
+                        src="/avatar/avatar1.jpg"
                     />
                     <Typography variant="body2" sx={{fontSize: '20px'}} color="text.fifth"> Elle Qu</Typography>
                 </AvatarLabel>
             </AvatarContainer>
-            <Divider variant="middle" />
-            {/*<Paper elevation={1} sx={{width: '100%', height: "auto", border: '1px solid #20262d'}}>*/}
-                <Label name='文件格式' value='.blender'/>
-                <Label name='下载格式' value='zip'/>
-                <Label name='文件大小' value='12M'/>
-                <Label name='blender版本推荐' value='2.8+'/>
-                <Label name='分类' value='懒人建模大法'/>
-                <Label name='标签' lables={lables} goCategoryClick={goCategoryClick}/>
-            {/*</Paper>*/}
 
-            <Divider variant="middle" />
+            <Divider variant="middle"/>
+
+            <Label name='文件格式' value='.blender'/>
+            <Label name='下载格式' value='zip'/>
+            <Label name='文件大小' value='12M'/>
+            <Label name='blender版本推荐' value='2.8+'/>
+            <Label name='分类' value='懒人建模大法'/>
+            <Label name='标签' lables={lables} goCategoryClick={goCategoryClick}/>
+
+            <Divider variant="middle"/>
+
             <Paper elevation={1} sx={{width: '100%', height: "auto", mt: '24px'}}>
-                {/*<Typography variant="body2" sx={{fontSize: '18px'}} color="text.fifth">描述</Typography>*/}
                 <em style={{color: "#173A5E", marginRight: '15px'}}>描述</em>
 
                 <p style={{color: "#173A5E", marginLeft: '24px'}}>

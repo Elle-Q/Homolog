@@ -3,24 +3,29 @@
     "name": "动画-Animation",
     "items": [
       {
+        "id": 1,
         "name": "寻梦记",
-        "imgSrc": "./animation1.gif",
+        "imgSrc": "/animation1.gif",
         "score": 4.9
       },
 
+
       {
+        "id": 2,
         "name": "Blender人物动画",
-        "imgSrc": "./animation3.jpg",
+        "imgSrc": "/animation3.jpg",
         "score": 2
       },
       {
+        "id": 3,
         "name": "出事拉!救命",
-        "imgSrc": "./animation2.gif",
+        "imgSrc": "/animation2.gif",
         "score": 5
       },
       {
+        "id": 4,
         "name": "动画绑定",
-        "imgSrc": "./animation4.jpg",
+        "imgSrc": "/animation4.jpg",
         "score": 3.8
       }
     ]
@@ -29,23 +34,27 @@
     "name": "硬表面-HardSurface",
     "items": [
       {
+        "id": 5,
         "name": "机器人-Robot",
-        "imgSrc": "./hardSurface1.jpg",
+        "imgSrc": "/hardSurface1.jpg",
         "score": 2.8
       },
       {
+        "id": 6,
         "name": "手榴弹-bomb",
-        "imgSrc": "./hardSurface2.jpg",
+        "imgSrc": "/hardSurface2.jpg",
         "score": 3.8
       },
       {
-        "name": "机甲怪恶车",
-        "imgSrc": "./hardSurface3.jpeg",
+        "id": 7,
+        "name": "机甲恶车",
+        "imgSrc": "/hardSurface3.jpeg",
         "score": 5
       },
       {
+        "id": 8,
         "name": "小鸡",
-        "imgSrc": "./hardSurface4.jpg",
+        "imgSrc": "/hardSurface4.jpg",
         "score": 4.8
       }
     ]

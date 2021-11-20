@@ -3,6 +3,9 @@ import {HeaderBar} from "./appbar/HeaderBar";
 import {Route, Routes} from "react-router-dom";
 import Play from "../paly/Play";
 import Body from "./body/Body";
+import Category from "../category/Category";
+import Account from "../account/Account";
+import Item from "../item/Item";
 
 function Home(props) {
     return (
@@ -12,7 +15,11 @@ function Home(props) {
                 <Route path="home" element={<Body/>}/>
                 <Route path="/" element={<Body/>}/>
                 <Route path="play" element={<Play/>}/>
+                <Route path="category/:subject" element={<Category/>}/>
+                <Route path="item/:id" element={<Item/>}/>
+                <Route path="account" element={<Account/>}/>
             </Routes>
+
 
         </React.Fragment>
     );

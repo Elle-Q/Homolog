@@ -3,8 +3,9 @@ import Grid from "@mui/material/Grid";
 import Carousell from "../../../features/carousel/Carousell";
 import carouselJson from "../../../json/carousel.json";
 import Categories from "../../../json/category.json";
-import Category from "../../../features/category/Category";
+import Subject from "../../../features/subject/Subject";
 import Box from "@mui/material/Box";
+import PageTipFloatingBar from "../../../common/PageTipFloatingBar";
 
 function Body(props) {
     return (
@@ -12,6 +13,7 @@ function Body(props) {
             width: '80%',
             ml: '10%',
             mr: '10%',
+            mt:'20px',
             overflow: "hidden",
         }}>
             <Grid container
@@ -27,13 +29,14 @@ function Body(props) {
                     Categories.map((category, index) => {
                         return (
                             <Grid item xs={12} key={index}>
-                                <Category category={category}/>
+                                <Subject category={category}/>
                             </Grid>
                         )
                     })
                 }
             </Grid>
 
+            <PageTipFloatingBar />
         </Box>
     );
 }

@@ -27,6 +27,9 @@ import Popper from '@mui/material/Popper';
 import Paper from "@mui/material/Paper";
 import {Link} from "react-router-dom";
 import community from '../../../assets/community1.svg'
+import categoryS from '../../../assets/category_S.svg'
+import categoryB from '../../../assets/category_B.svg'
+import MultilevelMenu from "../../../features/menu/MultilevelMenu";
 
 const StyledBadge = styled(Badge)(({theme}) => ({
     '& .MuiBadge-badge': {
@@ -86,11 +89,12 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
 function HeaderBar(props) {
     const theme = useTheme();
     const colorMode = React.useContext(ColorModeContext);
+    const [showMenu,setShowMenu] = React.useState(false);
 
     const suggestions = suggetionJson.map((s) => s.label);
 
     return (
-        <Box sx={{flexGrow: 1, boxShadow:"none"}}>
+        <Box sx={{flexGrow: 1, boxShadow:"none", position:"sticky", zIndex:50, top:0}}>
             <AppBar position="static">
                 <Toolbar sx={{
                     backgroundColor: 'background.default',
@@ -113,10 +117,15 @@ function HeaderBar(props) {
                         edge="start"
                         color="inherit"
                         aria-label="open drawer"
-                        sx={{ pl:20}}
+                        sx={{ ml:20}}
+                        onClick={() => setShowMenu(!showMenu)}
                     >
-                        <MenuIcon />
+                        <img style={{width:25, height:25}} alt ="community" title="分类" src={categoryB}/>
+                        {/*<MenuIcon />*/}
                     </IconButton>
+                    {
+                        showMenu && (<div style={{position:'relative'}}> <MultilevelMenu/></div>)
+                    }
 
                     <Search>
                         <SearchIconWrapper>
@@ -178,8 +187,9 @@ function HeaderBar(props) {
                             <HomeIcon fontSize="small"/>
                         </Button>
                         <Button size="large" color="inherit"
-                                component={Link} to={"/play"}>
-                            <RestoreOutlinedIcon fontSize="small"/>
+                                component={Link} to={"/category/animation"}>
+                            <img style={{width:20, height:20}} alt ="category" title="分类" src={categoryS}/>
+                            {/*<RestoreOutlinedIcon fontSize="small"/>*/}
                         </Button>
                         <Button size="large" color="inherit">
                             <Badge badgeContent={4} color="error">
@@ -199,8 +209,9 @@ function HeaderBar(props) {
                             overlap="circular"
                             anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}
                             variant="dot"
+                            component={Link} to={"/account"}
                         >
-                            <Avatar alt="Remy Sharp" src="/avatar/avatar1.jpg"/>
+                            <Avatar alt="elle" src="/avatar/avatar1.jpg"/>
                         </StyledBadge>
                     </Stack>
                 </Toolbar>

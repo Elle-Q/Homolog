@@ -3,32 +3,44 @@ import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
 import {useTheme} from "@mui/material/styles";
 import CardMedia from "@mui/material/CardMedia";
-import Link from "@mui/material/Link";
 import {alpha} from "@mui/system";
 import CardHeader from "@mui/material/CardHeader";
+import { Link } from "react-router-dom";
+import {styled} from '@mui/system';
+
+const StyledLink = styled(Link)`
+    text-decoration: none;
+
+    &:focus, &:hover, &:visited, &:link, &:active {
+        text-decoration: none;
+    }
+`;
 
 function ImageCard(props) {
     const theme = useTheme();
     const {imgSrc, name, subTitle, width} = props;
+    const subject = 'animation';
     return (
         <Card
             raised={true}
             sx={{
                 backgroundColor: "transparent",
                 boxShadow: "none",
-                // border: '1px solid #173A5E',
-                ml:'20px',
-                mr:'20px',
+                ml: '20px',
+                mr: '20px',
                 minWidth: '258px',
                 minHeight: '170px',
-            }}
-        style={{
-            transform:  `translateX(${width}px)`,
-            transition: 'transform 1s ease-in-out'
-        }}>
-            <CardHeader sx={{backgroundColor:alpha(theme.palette.secondary.light,0.8), height:'5px', padding:0}}
+                transform: `translateX(${width}px)`,
+                transition: 'transform 1s ease-in-out',
+                '&:hover' : {
+                    '.MuiCardHeader-root': {
+                        height: '2px',
+                    }
+                }
+            }} >
+            <CardHeader sx={{backgroundColor: alpha(theme.palette.secondary.light, 0.8), height: '5px', padding: 0}}
             />
-            <Link href="http://www.google.com" target="_blank">
+            <StyledLink to={`/category/${subject}`} key={name}  >
                 <CardMedia
                     raised="true"
                     component="img"
@@ -48,7 +60,7 @@ function ImageCard(props) {
                     {subTitle}
 
                 </Typography>
-            </Link>
+            </StyledLink>
         </Card>
     );
 }

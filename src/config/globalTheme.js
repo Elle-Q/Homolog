@@ -11,8 +11,8 @@ import darkScrollbar from "@mui/material/darkScrollbar";
              contrastText: '#fff',
          },
          secondary: {
-             light:'#3399FF',
-             main: '#132F4C',
+             light:'#3399ff',
+             main: '#132f4c',
              dark: '#20262d',
              contrastText: '#000',
          },
@@ -30,12 +30,15 @@ import darkScrollbar from "@mui/material/darkScrollbar";
              fourth: '#EB5E28',
              third: '#000',
              fifth:'#CCC5B9',
-             sixth:'#403D39'
+             sixth:'#403D39',
          },
+         icon: {
+             first:'#e9c46a'
+         }
      },
 
      typography: {
-         fontFamily:  "Helvetica" ,
+         fontFamily:  "open sans,helvetica neue,Helvetica,Arial,sans-serif" ,
          fontSize: 14,
          fontWeightLight: 300,
          fontWeightRegular: 400,

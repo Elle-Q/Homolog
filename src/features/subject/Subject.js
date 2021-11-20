@@ -4,7 +4,7 @@ import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import CategoryCard from "./CategoryCard";
 
-function Category(props) {
+function Subject(props) {
     const theme = useTheme();
     const {category} = props;
 
@@ -19,7 +19,7 @@ function Category(props) {
                justifyContent="center">
             {
                 category.items.map((item, index) => {
-                    return <CategoryCard {...item}/>
+                    return <CategoryCard key={index} {...item}/>
                 })
             }
         </Stack>
@@ -28,4 +28,4 @@ function Category(props) {
     );
 }
 
-export default Category;
+export default Subject;

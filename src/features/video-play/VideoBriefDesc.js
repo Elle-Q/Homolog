@@ -9,39 +9,21 @@ import Chip from "@mui/material/Chip";
 import more from "../../assets/more.svg";
 import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
+import LoyaltyIcon from '@mui/icons-material/Loyalty';
+import {Link} from "react-router-dom";
+import ByAuthor from "../../common/ByAuthor";
 
-const AvatarContainer = styled.div`
-  display: flex;
-  margin-top: 14px;
-  margin-bottom: 20px;
-  & > * {
-    margin: 4px;
-  }
-`;
-
-const LabelContainer = styled.div`
-  display: flex;
-  font-size:50px;
-  width:100%;
-  height:auto;
-  margin-top: 14px;
-  margin-bottom: 14px;
-  background-color: #3399FF;
-  border-radius: 5px;
-  box-shadow: 0 0 5px #3399FF;
-`;
-
-
-const AvatarLabel = styled.div`
-  display: flex;
-  align-items: center;
-`;
 
 const Label = props => {
     const {name, value, lables, goCategoryClick} = props;
     return (
         <div style={{marginBottom: '14px', marginTop: '14px', marginLeft: '10px'}}>
-            <em style={{color: "#999", marginRight: '15px'}}>{name}:</em>
+            {
+                name === 'tags' ?
+                    <LoyaltyIcon sx={{color: "icon.first"}}/>
+                    :
+                    <em style={{color: "#999", marginRight: '15px'}}>{name}:</em>
+            }
             <Typography variant="body" color='white'> {value} </Typography>
             {
                 lables && lables.map((key, index) => {
@@ -53,6 +35,7 @@ const Label = props => {
                             borderColor: 'secondary.light',
                             '& > *:hover': {
                                 color: 'secondary.contrastText',
+                                // backgroundColor:'red'
                             }
                         }}
                         component="a"
@@ -94,17 +77,7 @@ function VideoBriefDesc(props) {
             <Typography color='text.fourth' sx={{ml: '20px'}}> {getStarIcons(4.5, '40px', '40px')}(143)</Typography>
 
 
-            <AvatarContainer>
-                <AvatarLabel>
-                    <Avatar
-                        sx={{width: '60px', height: '60px'}}
-                        style={{marginRight: "14px"}}
-                        alt="Elle Qu"
-                        src="/avatar/avatar1.jpg"
-                    />
-                    <Typography variant="body2" sx={{fontSize: '20px'}} color="text.fifth"> Elle Qu</Typography>
-                </AvatarLabel>
-            </AvatarContainer>
+            <ByAuthor/>
 
             <Divider variant="middle"/>
 
@@ -113,7 +86,7 @@ function VideoBriefDesc(props) {
             <Label name='文件大小' value='12M'/>
             <Label name='blender版本推荐' value='2.8+'/>
             <Label name='分类' value='懒人建模大法'/>
-            <Label name='标签' lables={lables} goCategoryClick={goCategoryClick}/>
+            <Label name='tags' lables={lables} goCategoryClick={goCategoryClick}/>
 
             <Divider variant="middle"/>
 
@@ -130,7 +103,8 @@ function VideoBriefDesc(props) {
                 </p>
 
                 <div style={{display: 'flex', justifyContent: 'flex-end'}}>
-                    <Button sx={{border: "none", backgroundColor: "transparent"}}>
+                    <Button sx={{border: "none", backgroundColor: "transparent"}}
+                            component={Link} to={"/category"}>
                         <img style={{width: 20, height: 20}} alt="community" title="more" src={more}/>
                     </Button>
                 </div>

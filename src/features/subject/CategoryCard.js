@@ -1,8 +1,5 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Card from "@mui/material/Card";
-import CardHeader from "@mui/material/CardHeader";
-import Avatar from "@mui/material/Avatar";
-import red from "@mui/material/colors/red";
 import {useTheme} from "@mui/system";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
@@ -11,38 +8,25 @@ import CardActions from "@mui/material/CardActions";
 import IconButton from "@mui/material/IconButton";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
-import CircleRoundedIcon from "@mui/icons-material/CircleRounded";
-import CircleOutlinedIcon from "@mui/icons-material/CircleOutlined";
-import StarHalfRoundedIcon from '@mui/icons-material/StarHalfRounded';
-import StarOutlineRoundedIcon from '@mui/icons-material/StarOutlineRounded';
-import StarRateRoundedIcon from '@mui/icons-material/StarRateRounded';
-import Link from "@mui/material/Link";
+import { Link } from "react-router-dom";
 import {getStarIcons} from "../../utils/ToolUtil";
+import PriceTag from "../../common/PriceTag";
 
 function CategoryCard(props) {
     const theme = useTheme();
-    const {name, imgSrc, score} = props;
-    // const getStarIcons = () => {
-    //     const stars = [];
-    //     const scoreInt = Math.floor(score);
-    //     for (let i = 0; i < scoreInt; i++) {
-    //         stars.push(<StarRateRoundedIcon key={i}/>)
-    //     }
-    //     if (score % scoreInt !== 0) {
-    //         stars.push(<StarHalfRoundedIcon/>)
-    //     }
-    //     return stars;
-    // }
+    const {width, id, name, imgSrc, score} = props;
+    const [collected, setCollected] = useState(false);
 
     return (
         <Card sx={{
-            maxWidth: 345,
+            width:{width},
+            minWidth: 200,
+            maxWidth: 360,
             boxShadow: 10,
             textShadow: 10,
             borderRadius: 3,
-            // backgroundColor: 'primary.main',
         }}>
-            <Link href="/play" >
+            <Link to={`/item/${id}`} key={id}>
                 <CardMedia
                     component="img"
                     height="300"
@@ -71,12 +55,13 @@ function CategoryCard(props) {
                 {getStarIcons(score)}
             </Typography>
             <CardActions disableSpacing>
-                <IconButton aria-label="add to favorites">
-                    <FavoriteIcon/>
+                <IconButton aria-label="add to favorites" onClick={() => setCollected(!collected)}>
+                    <FavoriteIcon sx={{color:`${collected ? 'red':'white'}`}}/>
                 </IconButton>
-                <IconButton aria-label="share">
+                <IconButton aria-label="share" style={{marginRight:'100px'}}>
                     <ShareIcon/>
                 </IconButton>
+                <PriceTag height={36}/>
             </CardActions>
         </Card>
     );

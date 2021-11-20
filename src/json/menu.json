@@ -1,0 +1,35 @@
+[
+  {
+    "name": "Menu 1",
+    "url": "/",
+    "children": [
+      {
+        "name": "Menu 1.1",
+        "url": "/"
+      }
+    ]
+  },
+  {
+    "name": "Menu 2",
+    "url": "/"
+  },
+  {
+    "name": "Menu 3",
+    "url": "/",
+    "children": [
+      {
+        "name": "Menu 3.1",
+        "url": "/"
+      },
+      {
+        "name": "Menu 3.2",
+        "url": "/"
+      },
+      {
+        "name": "Menu 3.3",
+        "url": "/"
+      }
+    ]
+  }
+
+]

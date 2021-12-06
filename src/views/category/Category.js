@@ -47,7 +47,7 @@ function Category(props) {
                   alignItems="flex-start"
                   justifyContent="flex-start"
                   columnSpacing={{xs: 1, sm: 2, md: 3}}
-                  sx={{backgroundColor: 'secondary.main'}}
+                  sx={{backgroundColor: '#132f4c'}}
             >
                 <Grid item xs={6} style={{textAlign: "right", marginTop: '50px'}}>
                     <img src={img} alt='category' style={{
@@ -55,7 +55,7 @@ function Category(props) {
                         // width: '80%',
                     }}/>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={6} >
                     <Typography component="h2"
                                 color="primary.dark"
                                 sx={{

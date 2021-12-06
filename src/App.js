@@ -3,10 +3,6 @@ import {createTheme, ThemeProvider} from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import {globalTheme} from "./config/globalTheme";
 import Home from "./views/home/home";
-import VideoPlayer from "./features/video-play/VideoPlayer";
-import Play from "./views/paly/Play";
-import Link from "@mui/material/Link";
-import {HeaderBar} from "./views/home/appbar/HeaderBar";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 
 export const ColorModeContext = React.createContext({

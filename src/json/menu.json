@@ -1,35 +1,38 @@
 [
   {
-    "name": "Menu 1",
-    "url": "/",
-    "children": [
-      {
-        "name": "Menu 1.1",
-        "url": "/"
-      }
-    ]
+    "name": "动画",
+    "url": "/category/animation",
+    "icon": "/menu/Animation.svg"
   },
   {
-    "name": "Menu 2",
-    "url": "/"
+    "name": "CG & 游戏",
+    "url": "/category/cg",
+    "icon": "/menu/cg.svg"
   },
   {
-    "name": "Menu 3",
-    "url": "/",
-    "children": [
-      {
-        "name": "Menu 3.1",
-        "url": "/"
-      },
-      {
-        "name": "Menu 3.2",
-        "url": "/"
-      },
-      {
-        "name": "Menu 3.3",
-        "url": "/"
-      }
-    ]
+    "name": "软件 & 插件",
+    "url": "/category/soft",
+    "icon": "/menu/soft.svg"
+  },
+  {
+    "name": "站友作品",
+    "url": "/show/piece",
+    "icon": "/menu/piece.svg"
+  },
+  {
+    "name": "书籍 & 文档",
+    "url": "/category/book",
+    "icon": "/menu/book.svg"
+  },
+  {
+    "name": "建模",
+    "url": "/category/model",
+    "icon": "/menu/3d.svg"
+  },
+  {
+    "name": "绘画",
+    "url": "/category/sketch",
+    "icon": "/menu/draw.svg"
   }
 
 ]

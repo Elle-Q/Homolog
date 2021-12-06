@@ -109,8 +109,9 @@ function HeaderBar(props) {
                         variant="h6"
                         sx={{display: {xs: 'none', sm: 'block', fontFamily:'-apple-system'}}}
                     >
-                        GOMOLOG
+                        HOMOLOG
                     </Typography>
+
 
                     <IconButton
                         size="small"
@@ -118,13 +119,14 @@ function HeaderBar(props) {
                         color="inherit"
                         aria-label="open drawer"
                         sx={{ ml:20}}
-                        onClick={() => setShowMenu(!showMenu)}
+                        onMouseEnter={() => setShowMenu(!showMenu)}
                     >
                         <img style={{width:25, height:25}} alt ="community" title="分类" src={categoryB}/>
-                        {/*<MenuIcon />*/}
                     </IconButton>
                     {
-                        showMenu && (<div style={{position:'relative'}}> <MultilevelMenu/></div>)
+                        showMenu && (<div style={{position:'relative'}}>
+                            <MultilevelMenu onMouseLeave={() => setShowMenu(!showMenu)}/>
+                        </div>)
                     }
 
                     <Search>

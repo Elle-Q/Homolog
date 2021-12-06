@@ -67,14 +67,14 @@ function VideoBriefDesc(props) {
                 borderRadius: '10px',
                 backgroundColor: 'background.paper',
                 boxShadow: '0 0 5px black',
-                border: '1px solid #0a0908',
+                // border: '1px solid #0a0908',
                 padding: '10px',
             }}
         >
             <Typography variant="h6" sx={{mb: '20px'}}>简介 & 相关</Typography>
 
 
-            <Typography color='text.fourth' sx={{ml: '20px'}}> {getStarIcons(4.5, '40px', '40px')}(143)</Typography>
+            <Typography color='#EB5E28 !important' sx={{ml: '20px'}}> {getStarIcons(4.5, '40px', '40px')}(143)</Typography>
 
 
             <ByAuthor/>

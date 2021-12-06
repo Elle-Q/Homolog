@@ -65,7 +65,6 @@ function VideoPeriods(props) {
                 borderRadius: '10px',
                 backgroundColor: 'background.paper',
                 boxShadow: '0 0 5px black',
-                border: '1px solid #0a0908',
                 // color:'#403D39'
             }}
         >

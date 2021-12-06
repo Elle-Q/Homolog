@@ -66,7 +66,6 @@ import darkScrollbar from "@mui/material/darkScrollbar";
                          },
                          border:'none',
                          borderRadius: '50px',
-                     //
                      },
                  },
              }

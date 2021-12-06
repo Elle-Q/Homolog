@@ -1,7 +1,7 @@
 import React from 'react';
 import {HeaderBar} from "./appbar/HeaderBar";
 import {Route, Routes} from "react-router-dom";
-import Play from "../paly/Play";
+import Play from "../play/Play";
 import Body from "./body/Body";
 import Category from "../category/Category";
 import Account from "../account/Account";

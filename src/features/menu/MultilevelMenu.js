@@ -5,68 +5,55 @@ import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRound
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import {alpha} from "@mui/system";
+import Collapse from "@mui/material/Collapse";
+import List from "@mui/material/List";
+import IconButton from "@mui/material/IconButton";
+import AnimationIcon from '@mui/icons-material/Animation';
+import more from "../../assets/more.svg";
+import Button from "@mui/material/Button";
 
 function MultilevelMenu(props) {
-    const {setShowMenu} = props;
-    const [secondlevel, setSecondlevel] = useState(null);
-    // const [offset, setOffset] = useState(0);
+    const {onMouseLeave} = props;
 
-    let offset = 0;
-    const handleSecond = (index, data) => {
-
-        offset=index*30 + 30;
-        setSecondlevel(data);
-        console.log(index,offset, data)
-    }
-
-    const renderMenuItems = (data) => {
-        return data.map((item, index) => {
-                return <div key={index} style={{width: '100px', marginBottom: '15px'}}>
-                    <Link to={item.url} style={{textDecoration: "none"}}>
-                        <Typography variant="body" component="span" color='#3399ff'>
-                            {item.name}
-                        </Typography>
-                    </Link>
-                    {
-                        item.children &&
-                        <ArrowForwardIosRoundedIcon
-                            sx={{height: '10px'}}
-                            onMouseEnter={() => handleSecond(index,item.children)}
-                        />
-                    }
-
+    const MenuItem = (props) => {
+        const {item} = props;
+        return (
+            <Link to={item.url} style={{textDecoration: "none"}} onClick={onMouseLeave}>
+                <div
+                    style={{
+                        width: '180px',
+                        padding: '10px',
+                        display:'flex',
+                        alignItems: 'center',
+                    }}>
+                    <img style={{width:25, height:25}} alt="menu" title="more" src={item.icon}/>
+                    <Typography sx={{ml:'15px',cursor:"pointer"}} variant="body" component="label" color='#EB5E28'>
+                        {item.name}
+                    </Typography>
                 </div>
-            }
+            </Link>
         )
-    }
+    };
 
     return (
-        <div>
-            <Box sx={{
+        <Box
+            onMouseLeave={onMouseLeave}
+            sx={{
                 position: 'absolute',
-                left: -10,
+                left: -50,
                 top: 25,
                 zIndex: 111,
-                backgroundColor: alpha('#0a0908', 0.2),
+                borderRadius: '10px',
+                backgroundColor: alpha('#0a0908', 0.9),
             }}>
-                {renderMenuItems(menu)}
-            </Box>
-            {
-                console.log(offset)
-                // secondlevel &&
-                // <Box sx={{
-                //     position: 'absolute',
-                //     left: 90,
-                //     top: {offset},
-                //     zIndex: 111,
-                //     backgroundColor: alpha('#0a0908', 0.2),
-                // }}>
-                //     {renderMenuItems(secondlevel)}
-                // </Box>
-            }
+            <List component="div" disablePadding>
+                {menu.map((item, key) => (
+                    <MenuItem key={key} item={item}/>
+                ))}
+            </List>
 
+        </Box>
 
-        </div>
     );
 }
 

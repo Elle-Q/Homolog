@@ -2,11 +2,11 @@ import React from 'react';
 import Box from "@mui/material/Box";
 import Sort from "../../common/Sort";
 import Divider from "@mui/material/Divider";
-import Grid from "@mui/material/Grid";
 import PriceFilter from "../../common/PriceFilter";
 import {alpha} from "@mui/system";
 import RatingFilter from "../../common/RatingFilter";
 import FileFormatFilter from "../../common/FileFormatFilter";
+
 
 function SideBar(props) {
     return (

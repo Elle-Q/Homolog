@@ -3,10 +3,8 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
 import Badge from '@mui/material/Badge';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
-import RestoreOutlinedIcon from '@mui/icons-material/RestoreOutlined';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import HomeIcon from '@mui/icons-material/Home';
 import {styled, useTheme} from '@mui/material/styles';
@@ -16,8 +14,6 @@ import {ColorModeContext} from "../../../App";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import Avatar from "@mui/material/Avatar";
-import logo from '../../../assets/cat.svg'
-import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from '@mui/icons-material/Search';
 import {alpha} from "@mui/system";
 import TextField from "@mui/material/TextField";
@@ -30,35 +26,10 @@ import community from '../../../assets/community1.svg'
 import categoryS from '../../../assets/category_S.svg'
 import categoryB from '../../../assets/category_B.svg'
 import MultilevelMenu from "../../../features/menu/MultilevelMenu";
+import AppLogo from "../../../common/AppLogo";
+import {StyledBadge} from "../../../common/StyledComponent";
 
-const StyledBadge = styled(Badge)(({theme}) => ({
-    '& .MuiBadge-badge': {
-        backgroundColor: '#44b700',
-        color: '#44b700',
-        boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
-        '&::after': {
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            borderRadius: '50%',
-            animation: 'ripple 1.2s infinite ease-in-out',
-            border: '1px solid currentColor',
-            content: '""',
-        },
-    },
-    '@keyframes ripple': {
-        '0%': {
-            transform: 'scale(.8)',
-            opacity: 1,
-        },
-        '100%': {
-            transform: 'scale(2.4)',
-            opacity: 0,
-        },
-    },
-}));
+
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -101,18 +72,7 @@ function HeaderBar(props) {
                     display: 'inline-flex',
                     minHeight: '64px'
                 }}>
-                    <IconButton>
-                        <img className="logo" src={logo} style={{width:'50px',height:'50px'}} alt={"logo"}/>
-                    </IconButton>
-
-                    <Typography
-                        variant="h6"
-                        sx={{display: {xs: 'none', sm: 'block', fontFamily:'-apple-system'}}}
-                    >
-                        HOMOLOG
-                    </Typography>
-
-
+                    <AppLogo />
                     <IconButton
                         size="small"
                         edge="start"
@@ -139,21 +99,22 @@ function HeaderBar(props) {
                                 paddingLeft: `calc(1em + ${theme.spacing(4)})`,
                                 border: "none",
                                 borderRadius: '50px',
+                                // boxShadow: '0 0 5px #3399FF',
                                 boxShadow: '0 0 5px #3399FF',
                                 '&:hover': {
                                     backgroundColor: alpha(theme.palette.primary.main, 0.25),
-                                },
+                                }
                             }}
                             size="small"
                             id="free-solo-2-demo"
                             disableClearable
                             options={suggestions}
                             PopperComponent={(props) => (
-                                <Popper {...props}  sx={{color:'red'}} element='bottom-start' />
+                                <Popper {...props} element='bottom-start' />
                             )}
                             PaperComponent={(props) => (
                                 <Paper {...props} sx={{
-                                    backgroundColor:alpha(theme.palette.primary.main, 0.85),
+                                    backgroundColor:alpha(theme.palette.primary.main, 0.65),
                                     color: theme.palette.secondary.light
                                 }}/>
                             )}
@@ -167,7 +128,7 @@ function HeaderBar(props) {
                                         type: 'search',
                                     }}
                                     sx={{
-                                        border:"none"
+                                        border:"none",
                                     }}
                                 />
                             )}

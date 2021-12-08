@@ -4,6 +4,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import {globalTheme} from "./config/globalTheme";
 import Home from "./views/home/home";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
+import Admin from "./views/admin/Admin";
 
 export const ColorModeContext = React.createContext({
     toggleColorMode: () => {
@@ -39,6 +40,7 @@ function App() {
                 <BrowserRouter>
                     <Routes>
                         <Route path="/*" element={<Home/>}/>
+                        <Route path="/admin/*" element={<Admin/>}/>
                     </Routes>
                 </BrowserRouter>
             </ThemeProvider>

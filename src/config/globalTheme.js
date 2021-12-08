@@ -34,6 +34,13 @@ import darkScrollbar from "@mui/material/darkScrollbar";
          },
          icon: {
              first:'#e9c46a'
+         },
+         admin: {
+             light:'#EB5E28',
+             main: '#252422',
+             secondary: '#403D39',
+             light_D: '#CCC5B9',
+             light_L: '#FFFCF2',
          }
      },
 

@@ -9,21 +9,38 @@ import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import List from "@mui/material/List";
+import {Collapse, ListItemIcon, ListItemText, ListSubheader} from "@mui/material";
+import ListItemButton from "@mui/material/ListItemButton";
+import {ExpandLess, ExpandMore, StarBorder} from "@mui/icons-material";
+
+function SendIcon() {
+    return null;
+}
+
+function DraftsIcon() {
+    return null;
+}
+
+function InboxIcon() {
+    return null;
+}
 
 function SideBar(props) {
 
     const [showText, setShowText] = useState(true);
+    const [open, setOpen] = useState(true);
 
     return (
         <Box sx={{
-            display:'flex',
-            padding:'20px',
+            display: 'flex',
+            padding: '20px',
             borderRadius: '10px',
-            boxShadow: '0 0 5px #403D39',
-            backgroundColor:'secondary.main',
-            minHeight:'800px'
+            boxShadow: '0 0 5px #132f4c',
+            // backgroundColor:'secondary.main',
+            minHeight: '800px'
         }}>
-            <Stack spacing={2} >
+            <Stack spacing={2}>
                 {
                     showText ?
                         <ArrowBackIosNewIcon fontSize="small" onClick={() => setShowText(!showText)}/>
@@ -36,6 +53,16 @@ function SideBar(props) {
                 <NavItem icon={contentIcon} text="内容管理" showText={showText}/>
                 <NavItem icon={analysisIcon} text="系统管理" showText={showText}/>
                 <NavItem icon={fixIcon} text="工单管理" showText={showText}/>
+                <Collapse in={open} timeout="auto" unmountOnExit>
+                    <List component="div" disablePadding>
+                        <ListItemButton sx={{pl: 4}}>
+                            <ListItemIcon>
+                                <StarBorder/>
+                            </ListItemIcon>
+                            <ListItemText primary="Starred"/>
+                        </ListItemButton>
+                    </List>
+                </Collapse>
             </Stack>
         </Box>
     );

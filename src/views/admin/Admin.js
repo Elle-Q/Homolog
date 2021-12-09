@@ -9,15 +9,18 @@ function Admin(props) {
     return (
         <React.Fragment>
             <Grid container spacing={1} sx={{
-                justifyContent:"space-between",
+                justifyContent:"space-around",
                 width:'100%'
-            }}>s
-                <Grid item sx={{minWidth:'50px', maxWidth:'200px',
-                display:"flex"}}>
+            }}>
+                <Grid item sx={{
+                    minWidth:'50px',
+                    maxWidth:'200px',
+                    display:"flex",
+                }}>
                     <SideBar/>
                 </Grid>
                 <Grid item style={{
-                    flexGrow:1,
+                    flexGrow:1, //very important
                     display:"flex"
                 }}>
                     <Body/>

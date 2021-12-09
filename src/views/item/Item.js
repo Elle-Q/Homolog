@@ -49,7 +49,7 @@ function Item(props) {
                 <Grid item style={{textAlign: "center"}} xs={12}>
                     <img src={`${item.imgSrc}`} alt='bg1'
                          style={{
-                             maxWidth: '900px',
+                             maxWidth: '1000px',
                              borderRadius: '3px'
                          }}/>
                 </Grid>

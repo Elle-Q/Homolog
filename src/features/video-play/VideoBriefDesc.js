@@ -104,7 +104,7 @@ function VideoBriefDesc(props) {
 
                 <div style={{display: 'flex', justifyContent: 'flex-end'}}>
                     <Button sx={{border: "none", backgroundColor: "transparent"}}
-                            component={Link} to={"/category"}>
+                            component={Link} to={"/app/category"}>
                         <img style={{width: 20, height: 20}} alt="community" title="more" src={more}/>
                     </Button>
                 </div>

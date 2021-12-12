@@ -8,7 +8,7 @@ function VideoInfo(props) {
 
     return (
         <Box sx={{
-            mt: '80px',
+            mt: '50px',
             mb:'30px'
         }}>
             <Typography

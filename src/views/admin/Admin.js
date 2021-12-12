@@ -1,39 +1,39 @@
-import React from 'react';
-import {HeaderBar} from "../home/appbar/HeaderBar";
+import React, {useState} from 'react';
 import {Route, Routes} from "react-router-dom";
 import SideBar from "./sideBar/SideBar";
 import Body from "./body/Body";
 import Grid from "@mui/material/Grid";
+import CssBaseline from "@mui/material/CssBaseline";
+import {HeaderBar} from "./appbar/HeaderBar";
+import User from "../../features/manage/user/user";
+import Box from "@mui/material/Box";
 
 function Admin(props) {
+    const [tabName, setTabName] = useState("user");
+
+    const handleBarClilck = (tabName) => {
+        setTabName(tabName)
+    }
+
     return (
         <React.Fragment>
+            <CssBaseline/>
+            <HeaderBar/>
             <Grid container spacing={1} sx={{
-                justifyContent:"space-around",
-                width:'100%'
+                // justifyContent:"space-around",
+                width:'100%',
+                backgroundColor:'primary.main'
             }}>
-                <Grid item sx={{
-                    minWidth:'50px',
-                    maxWidth:'200px',
-                    display:"flex",
-                }}>
-                    <SideBar/>
+                <Grid item>
+                    <SideBar />
                 </Grid>
-                <Grid item style={{
-                    flexGrow:1, //very important
-                    display:"flex"
+                <Grid item sx={{
+                    flexGrow:1  //very important
                 }}>
                     <Body/>
                 </Grid>
             </Grid>
-            <Routes>
-                {/*<Route path="admin" element={<Body/>}/>*/}
-                {/*<Route path="/" element={<Body/>}/>*/}
-                {/*<Route path="play" element={<Play/>}/>*/}
-                {/*<Route path="category/:subject" element={<Category/>}/>*/}
-                {/*<Route path="item/:id" element={<Item/>}/>*/}
-                {/*<Route path="account" element={<Account/>}/>*/}
-            </Routes>
+
         </React.Fragment>
     );
 }

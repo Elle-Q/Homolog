@@ -31,7 +31,7 @@ function PageTipFloatingBar(props) {
                 sx: {
                     "&.MuiSpeedDial-fab": {
                         backgroundColor: "transparent",
-                        boxShadow:"none"
+                        boxShadow: "none"
                     },
                     "&.MuiSpeedDial-fab:hover": {
                         backgroundColor: '#132F4C',
@@ -39,10 +39,8 @@ function PageTipFloatingBar(props) {
                     }
                 }
             }
-
             }
-            // icon={<AdbRoundedIcon fontSize="medium"/>}
-            icon={<img alt="tips" src={monkey} style={{width:60, height:60}}/>}>
+            icon={<img alt="tips" src={monkey} style={{width: 60, height: 60}}/>}>
             {actions.map((action) => (
                 <SpeedDialAction
                     key={action.name}

@@ -40,7 +40,7 @@ function ImageCard(props) {
             }} >
             <CardHeader sx={{backgroundColor: alpha(theme.palette.secondary.light, 0.8), height: '5px', padding: 0}}
             />
-            <StyledLink to={`/category/${subject}`} key={name}  >
+            <StyledLink to={`/app/category/${subject}`} key={name}  >
                 <CardMedia
                     raised="true"
                     component="img"

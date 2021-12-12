@@ -143,7 +143,7 @@ function Item(props) {
                     </Typography>
 
                     <StyledDiv>
-                        <Link to={`/play`} style={{color: '#EB5E28'}}>
+                        <Link to={`/app/play`} style={{color: '#EB5E28'}}>
                             <AirplayIcon> </AirplayIcon>
                         </Link>
                     </StyledDiv>

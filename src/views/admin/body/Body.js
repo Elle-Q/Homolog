@@ -1,13 +1,22 @@
 import React from 'react';
+import {Routes, Route} from "react-router-dom";
+import User from "../../../features/manage/user/user";
 import Box from "@mui/material/Box";
-import {HeaderBar} from "../appbar/HeaderBar";
+import Category from "../../../features/manage/category/category";
 
 function Body(props) {
+
     return (
-        <React.Fragment>
-            <HeaderBar />
-            <Box ></Box>
-        </React.Fragment>
+        <Box>
+            <Routes>
+                <Route path="/user" element={<User/>}/>
+                <Route path="/content/cat" element={<Category/>}/>
+                {/*<Route path="play" element={<Play/>}/>*/}
+                {/*<Route path="category/:subject" element={<Category/>}/>*/}
+                {/*<Route path="item/:id" element={<Item/>}/>*/}
+                {/*<Route path="account" element={<Account/>}/>*/}
+            </Routes>
+        </Box>
     );
 }
 

@@ -26,7 +26,7 @@ function CategoryCard(props) {
             textShadow: 10,
             borderRadius: 3,
         }}>
-            <Link to={`/item/${id}`} key={id}>
+            <Link to={`/app/item/${id}`} key={id}>
                 <CardMedia
                     component="img"
                     height="300"

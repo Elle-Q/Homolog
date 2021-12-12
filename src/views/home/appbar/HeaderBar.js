@@ -27,7 +27,7 @@ import categoryS from '../../../assets/category_S.svg'
 import categoryB from '../../../assets/category_B.svg'
 import MultilevelMenu from "../../../features/menu/MultilevelMenu";
 import AppLogo from "../../../common/AppLogo";
-import {StyledBadge} from "../../../common/StyledComponent";
+import {StyledBadge} from "../../../common/StyledBadge";
 
 
 
@@ -72,7 +72,7 @@ function HeaderBar(props) {
                     display: 'inline-flex',
                     minHeight: '64px'
                 }}>
-                    <AppLogo />
+                    <AppLogo title="HOMOLOG" />
                     <IconButton
                         size="small"
                         edge="start"
@@ -146,11 +146,11 @@ function HeaderBar(props) {
                             <img style={{width:20, height:20}} alt ="community" title="社区" src={community}/>
                         </Button>
                         <Button size="large" color="inherit"
-                                component={Link} to={"/home"}>
+                                component={Link} to={"/app/home"}>
                             <HomeIcon fontSize="small"/>
                         </Button>
                         <Button size="large" color="inherit"
-                                component={Link} to={"/category/animation"}>
+                                component={Link} to={"/app/category/animation"}>
                             <img style={{width:20, height:20}} alt ="category" title="分类" src={categoryS}/>
                             {/*<RestoreOutlinedIcon fontSize="small"/>*/}
                         </Button>
@@ -172,7 +172,7 @@ function HeaderBar(props) {
                             overlap="circular"
                             anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}
                             variant="dot"
-                            component={Link} to={"/account"}
+                            component={Link} to={"/app/account"}
                         >
                             <Avatar alt="elle" src="/avatar/avatar1.jpg"/>
                         </StyledBadge>

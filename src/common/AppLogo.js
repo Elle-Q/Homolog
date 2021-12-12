@@ -1,11 +1,10 @@
 import React from 'react';
-import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import logo from "../assets/cat.svg";
 import Typography from "@mui/material/Typography";
-import AppBar from "@mui/material/AppBar";
 
 function AppLogo(props) {
+    const {title, color} = props
     return (
        <React.Fragment>
             <IconButton>
@@ -14,9 +13,13 @@ function AppLogo(props) {
 
             <Typography
                 variant="h6"
-                sx={{display: {xs: 'none', sm: 'block', fontFamily: '-apple-system'}}}
+                sx={{
+                    display: {xs: 'none', sm: 'block', fontFamily: '-apple-system'},
+                    color:`${color}`
+                }}
             >
-                HOMOLOG
+                {title}
+
             </Typography>
        </React.Fragment>
     );

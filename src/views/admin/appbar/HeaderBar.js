@@ -2,42 +2,38 @@ import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Badge from '@mui/material/Badge';
-import {styled} from '@mui/material/styles';
-import logo from '../../../assets/cat.svg'
 import AppLogo from "../../../common/AppLogo";
 import {Link} from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
-import Stack from "@mui/material/Stack";
-import {StyledBadge} from "../../../common/StyledComponent";
+import {StyledBadge} from "../../../common/StyledBadge";
 
 
 function HeaderBar(props) {
     return (
         <Box sx={{
             flexGrow: 1,
-            boxShadow: "none",
+            boxShadow: "0 0 10px #252422",
             position: "sticky",
             zIndex: 50,
             top: 0,
-            width:'100%',
+            width: '100%',
             alignItems: 'flex-end',
         }}>
+
             <AppBar position="static">
                 <Toolbar sx={{
-                    // backgroundColor: 'secondary.main',
                     display: 'inline-flex',
-                    minHeight: '64px'
+                    minHeight: '64px',
+                    backgroundColor:'secondary.dark'
                 }}>
-                    <AppLogo/>
+                    <AppLogo title="HOMOLOG 管理系统" color='#3399ff'/>
                     <Box sx={{flexGrow: 10}}/>
+                    <span style={{color: '#999', fontSize: '15px', marginRight: '5px'}}>Admin--elle</span>
                     <StyledBadge
                         overlap="circular"
                         anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}
                         variant="dot"
-                        component={Link} to={"/account"}
+                        component={Link} to={"/app/account"}
                     >
                         <Avatar alt="elle" src="/avatar/avatar1.jpg"/>
                     </StyledBadge>

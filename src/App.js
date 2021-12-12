@@ -1,10 +1,11 @@
 import React from 'react';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
 import {globalTheme} from "./config/globalTheme";
 import Home from "./views/home/home";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Admin from "./views/admin/Admin";
+import {adminTheme} from "./config/adminTheme";
+import useInterceptor from "./hook/useInterceptor";
 
 export const ColorModeContext = React.createContext({
     toggleColorMode: () => {
@@ -13,6 +14,7 @@ export const ColorModeContext = React.createContext({
 
 
 function App() {
+    useInterceptor();
     const [mode, setMode] = React.useState('light');
     const colorMode = React.useMemo(
         () => ({
@@ -23,7 +25,7 @@ function App() {
         [],
     );
 
-    const theme = React.useMemo(
+    const app_theme = React.useMemo(
         () =>
             createTheme(globalTheme, {
                 palette: {
@@ -33,14 +35,28 @@ function App() {
         [mode],
     );
 
+
+    const admin_theme =  React.useMemo(
+        () =>
+            createTheme(adminTheme, {
+                palette: {
+                    mode: mode,
+                },
+            }),
+        [mode],
+    );
+
     return (
         <ColorModeContext.Provider value={colorMode}>
-            <ThemeProvider theme={theme}>
-                <CssBaseline/>
+            <ThemeProvider theme={app_theme}>
                 <BrowserRouter>
                     <Routes>
-                        <Route path="/*" element={<Home/>}/>
-                        <Route path="/admin/*" element={<Admin/>}/>
+                        <Route path="/app/*" element={<Home/>}/>
+                        <Route path="/admin/*" element={
+                            <ThemeProvider theme={admin_theme}>
+                                <Admin/>
+                            </ThemeProvider>
+                        }/>
                     </Routes>
                 </BrowserRouter>
             </ThemeProvider>

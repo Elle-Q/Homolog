@@ -2,35 +2,30 @@ import {createTheme} from "@mui/material/styles";
 import darkScrollbar from "@mui/material/darkScrollbar";
 
 //#001E3C #0A1929 #132F4C #173A5E
- export const globalTheme = createTheme({
+ export const adminTheme = createTheme({
      palette: {
          primary: {
-             light: '#173A5E',
-             main: '#001E3C',
-             dark: '#EB5E28',
+             light:'#EB5E28',
+             main: '#252422',
+             secondary: '#403D39',
              contrastText: '#fff',
          },
          secondary: {
-             light:'#3399ff',
-             main: '#132f4c',
-             dark: '#20262d',
+             light:'#CCC5B9',
+             main: '#FFFCF2',
+             dark: '#0a0908',
              contrastText: '#000',
-         },
-         third: {
-             main: '#3399FF',
          },
          mode:"dark",
          background: {
-             default: '#0A1929',
+             default: '#252422',
              paper:'#0a0908'
          },
          text: {
-             primary: '#3399FF',
-             secondary: '#fff',
-             fourth: '#EB5E28',
+             primary: '#fff',
+             secondary: '#3399ff',
+             fourth: '#0aa858',
              third: '#000',
-             fifth:'#CCC5B9',
-             sixth:'#403D39',
          },
          icon: {
              first:'#e9c46a'
@@ -52,7 +47,7 @@ import darkScrollbar from "@mui/material/darkScrollbar";
                      fontSize: '1rem',
                      border: '1px solid #173A5E',
                      borderRadius: '10px',
-                     backgroundColor:'#001E3C',
+                     backgroundColor:'#403D39',
                      minWidth:"42px"
                  },
              },
@@ -62,7 +57,7 @@ import darkScrollbar from "@mui/material/darkScrollbar";
                  root: {
                      '& .MuiOutlinedInput-root': {
                          '&:hover fieldset': {
-                             borderColor: '#001E3C',
+                             borderColor: '#403D39',
                          },
                          border:'none',
                          borderRadius: '50px',

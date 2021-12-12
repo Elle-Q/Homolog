@@ -16,7 +16,6 @@ function VideoDanmu(props) {
         "睡着了, 希望梦见golang",
         "醒了,  梦见了前男友",
         "今天一天孤芳自赏, 抹泪自怜",
-        "有点想devon"
     ],
         [
             "我是工资条",

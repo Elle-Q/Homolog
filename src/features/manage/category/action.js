@@ -7,6 +7,7 @@ import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 
 function Action(props) {
     const {data, handleOpen, handleEdit, handleDel} = props
+
     return (
         <React.Fragment>
             <Tooltip title="删除">

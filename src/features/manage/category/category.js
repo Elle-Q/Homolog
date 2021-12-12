@@ -19,7 +19,6 @@ function Category(props) {
     const [cats, setCats] = useState();
     const [modalOpen, setModalOpen] = useState(false);
     const [readyOnly, setReadyOnly] = useState(false);
-    const [currentID, setCurrentID] = useState(null);
     const [currentData, setCurrentData] = useState([]);
 
     React.useEffect(() => {
@@ -41,9 +40,9 @@ function Category(props) {
     };
 
     const handleModalOpenReadOnly = (data) => {
-        setCurrentData(data);
         setModalOpen(true);
         setReadyOnly(true);
+        setCurrentData(data);
     };
 
     const handleDel = () => {
@@ -104,7 +103,12 @@ function Category(props) {
             </TableContainer>
 
             {OpenIconSpeedDial(actions)}
-            <CatModal data={currentData} readyOnly={readyOnly} open={modalOpen} handleClose={handleModalClose}/>
+
+            <CatModal data={currentData}
+                      readyOnly={readyOnly}
+                      open={modalOpen}
+                      handleClose={handleModalClose}/>
+
         </React.Fragment>
     );
 }

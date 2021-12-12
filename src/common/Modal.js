@@ -52,7 +52,7 @@ const ModalDialogTitle = (props) => {
 
 
 function Modal(props) {
-    const {title, children, open, handleClose} = props;
+    const {title, children, open, handleClose, handleSave} = props;
 
     return (
         <ModalDialog
@@ -69,7 +69,7 @@ function Modal(props) {
                 {children}
             </DialogContent>
             <DialogActions sx={{justifyContent: "center", mt: '30px'}}>
-                <SaveButton handleClick={handleClose}/>
+                <SaveButton handleClick={handleSave}/>
                 <CancelButton handleClick={handleClose}/>
             </DialogActions>
         </ModalDialog>

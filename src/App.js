@@ -6,6 +6,7 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Admin from "./views/admin/Admin";
 import {adminTheme} from "./config/adminTheme";
 import useInterceptor from "./hook/useInterceptor";
+import AlertLog from "./features/alert/AlertLog";
 
 export const ColorModeContext = React.createContext({
     toggleColorMode: () => {
@@ -59,6 +60,8 @@ function App() {
                         }/>
                     </Routes>
                 </BrowserRouter>
+
+                <AlertLog />
             </ThemeProvider>
         </ColorModeContext.Provider>
     );

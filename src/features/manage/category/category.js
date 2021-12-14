@@ -14,12 +14,13 @@ import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
 import DoNotDisturbOnIcon from '@mui/icons-material/DoNotDisturbOn';
 import CatModal from "./catModal";
+import {useDispatch} from "react-redux";
+import {open} from "./catSlice";
 
 function Category(props) {
     const [cats, setCats] = useState();
-    const [modalOpen, setModalOpen] = useState(false);
-    const [readyOnly, setReadyOnly] = useState(false);
     const [currentData, setCurrentData] = useState([]);
+    const dispatch = useDispatch();
 
     React.useEffect(() => {
         axios.get('/homo-admin/cat/list').then((data) => {
@@ -29,19 +30,13 @@ function Category(props) {
 
     if (!cats) return null;
 
-    const handleModalClose = () => {
-        setModalOpen(false);
-    };
-
     const handleModalOpen = (data) => {
-        setModalOpen(true);
-        setReadyOnly(false);
+        dispatch(open(false))
         setCurrentData(data);
     };
 
     const handleModalOpenReadOnly = (data) => {
-        setModalOpen(true);
-        setReadyOnly(true);
+        dispatch(open(true))
         setCurrentData(data);
     };
 
@@ -49,7 +44,8 @@ function Category(props) {
     };
 
     const actions = [
-        {icon: <AddIcon/>, name: '添加', onClick: handleModalOpen},
+        // {icon: <AddIcon/>, name: '添加', onClick: handleModalOpen},
+        {icon: <AddIcon/>, name: '添加', onClick: () => dispatch(open(false))},
         {icon: <DeleteIcon/>, name: '批量删除'},
         {icon: <DoNotDisturbOnIcon/>, name: '批量下架'},
     ];
@@ -104,10 +100,7 @@ function Category(props) {
 
             {OpenIconSpeedDial(actions)}
 
-            <CatModal data={currentData}
-                      readyOnly={readyOnly}
-                      open={modalOpen}
-                      handleClose={handleModalClose}/>
+            <CatModal data={currentData} />
 
         </React.Fragment>
     );

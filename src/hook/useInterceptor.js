@@ -2,14 +2,21 @@ import React, {useState} from 'react';
 import axios from "axios";
 import Alert from "@mui/material/Alert";
 import AlertTitle from "@mui/material/AlertTitle";
+import {useDispatch} from "react-redux";
+import {updateMsg} from "../features/alert/alertSlice";
 
 export default function useInterceptor(props) {
     // const [status, setStatus] =  useState(null);
-    //
+    const dispatch = useDispatch();
+
     const errorHandler = (data) => {
-        switch (data && data.code) {
+        switch (data && data.Code) {
             case 500:
-                console.log("err")
+                dispatch(updateMsg({status:"error",msg:data.Msg}))
+                break
+            case 200:
+                dispatch(updateMsg({status:"success",msg:data.Msg}))
+                break
         }
     }
 
@@ -21,7 +28,6 @@ export default function useInterceptor(props) {
 
     // Add a response interceptor
     axios.interceptors.response.use(function (resp) {
-        console.log("resp:", resp)
         const {data} = resp;
         errorHandler(data)
         return data
@@ -29,28 +35,5 @@ export default function useInterceptor(props) {
         return Promise.reject(error);
     })
 
-    // function render(status) {
-    //     switch (status) {
-    //         case 'error' :
-    //             return (
-    //                 <Alert severity="error">
-    //                     <AlertTitle>Error</AlertTitle>检查参数是否正确且完整
-    //                 </Alert>
-    //             )
-    //         case 'success' :
-    //             return (
-    //                 <Alert severity="success">
-    //                     <AlertTitle>成功</AlertTitle>
-    //                 </Alert>
-    //             )
-    //         default :
-    //             return (<div />)
-    //     }
-    // }
-    //
-    // return (
-    //     <React.Fragment>
-    //         {render(status)}
-    //     </React.Fragment>
-    // )
+
 }

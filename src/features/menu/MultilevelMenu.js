@@ -5,12 +5,7 @@ import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRound
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import {alpha} from "@mui/system";
-import Collapse from "@mui/material/Collapse";
 import List from "@mui/material/List";
-import IconButton from "@mui/material/IconButton";
-import AnimationIcon from '@mui/icons-material/Animation';
-import more from "../../assets/more.svg";
-import Button from "@mui/material/Button";
 
 function MultilevelMenu(props) {
     const {onMouseLeave} = props;

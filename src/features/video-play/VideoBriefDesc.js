@@ -2,8 +2,6 @@ import React from 'react';
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import {getStarIcons} from "../../utils/ToolUtil";
-import Avatar from '@mui/material/Avatar';
-import styled from "styled-components";
 import Paper from "@mui/material/Paper";
 import Chip from "@mui/material/Chip";
 import more from "../../assets/more.svg";

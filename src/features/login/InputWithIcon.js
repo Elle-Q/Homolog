@@ -9,7 +9,6 @@ function InputWithIcon(props) {
     const [timer, setTimer] = useState(10);
     const [start, setStart] = useState(false);
 
-    console.log("ss")
     useEffect(() => {
         if (!start) return;
         if (timer < 1) {
@@ -32,11 +31,11 @@ function InputWithIcon(props) {
             marginTop: '30px',
             textAlign: "bottom",
             display: 'flex',
-            alignItems: 'center'
+            alignItems: 'center',
         }}>
             <IconButton
                 sx={{
-                    color: '#3399ff',
+                    color: '#dcddde',
                 }}>
                 {icon}
 
@@ -48,15 +47,17 @@ function InputWithIcon(props) {
                 placeholder={placeholder}
                 // disabled={disabled}
                 sx={{
+                    color:'#dcddde',
                     marginLeft: '5px',
                     paddingLeft: '5px',
                     borderRadius: '5px',
-                    fontSize: '14px',
+                    fontSize: '18px',
                     fontFamily: '-apple-system',
-                    width: `${type === 'verify' ? 300 : 400}px`,
-                    backgroundColor: alpha('#0a0908', 0.2),
-                    height: `40px`,
-                    border: '1px solid #173A5E',
+                    width: `${type === 'verify' ? 300 : 450}px`,
+
+                    backgroundColor: alpha('#000', 0.3),
+                    height: `50px`,
+                    border: '1px solid #000',
                     '&:hover': {
                         border: '1px solid #3399ff'
                     }
@@ -67,8 +68,9 @@ function InputWithIcon(props) {
                 <Button sx={{
                     backgroundColor: "transparent",
                     color: '#3399ff',
-                    fontSize: '14px',
+                    fontSize: '18px',
                     marginLeft: '10px',
+                    width:'150px'
                 }}
                         onClick={makeTimer}
                 >发送验证码

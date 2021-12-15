@@ -5,13 +5,12 @@ import Modal from "../../../common/Modal";
 import axios from "axios";
 import {selectCatModal, close} from "./catSlice";
 import { useSelector, useDispatch } from 'react-redux'
-import {open} from "../../alert/alertSlice";
+import {openAlert} from "../../alert/alertSlice";
 
 
 function CatModal(props) {
-    const {openModal, readOnly} = useSelector(selectCatModal);
+    const {openModal, readOnly, data} = useSelector(selectCatModal);
     const dispatch = useDispatch();
-    const {data} = props;
     const [detail, setDetail] = React.useState(data);
     const [imgFile, setImgFile] = useState(null);
     const [imgUri, setImgUri] = useState(data.Preview);
@@ -20,6 +19,9 @@ function CatModal(props) {
         imgFile && setImgUri(URL.createObjectURL(imgFile));
     },[imgFile])
 
+    useEffect(() => {
+        setDetail(data)
+    },[data])
 
     const handleClose = () => {
         dispatch(close())
@@ -39,15 +41,17 @@ function CatModal(props) {
     };
 
     const handleSave = async () => {
-        const data = new FormData();
-        imgFile && data.append("Preview", imgFile);
+        const param = new FormData();
+        imgFile && param.append("Preview", imgFile);
         for (let k in detail ) {
-            data.append(k, detail[k]);
+            param.append(k, detail[k]);
         }
-        const resp = await axios.post('/homo-admin/cat/update', data);
-        dispatch(open())
-        resp && handleClose();
-        setImgFile(null)
+        await axios.post('/homo-admin/cat/update', param)
+            .then((resp) => {
+                resp && handleClose();
+            });
+        dispatch(openAlert());
+        setImgFile(null);
     };
 
     return (

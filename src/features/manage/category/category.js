@@ -16,10 +16,10 @@ import DoNotDisturbOnIcon from '@mui/icons-material/DoNotDisturbOn';
 import CatModal from "./catModal";
 import {useDispatch} from "react-redux";
 import {open} from "./catSlice";
+import {openAlert} from "../../alert/alertSlice";
 
 function Category(props) {
     const [cats, setCats] = useState();
-    const [currentData, setCurrentData] = useState([]);
     const dispatch = useDispatch();
 
     React.useEffect(() => {
@@ -30,22 +30,27 @@ function Category(props) {
 
     if (!cats) return null;
 
-    const handleModalOpen = (data) => {
-        dispatch(open(false))
-        setCurrentData(data);
-    };
+    const handleAddClick = () =>
+        dispatch(
+            open({
+                readOnly: false,
+                data:{}
+            }));
 
-    const handleModalOpenReadOnly = (data) => {
-        dispatch(open(true))
-        setCurrentData(data);
-    };
-
-    const handleDel = () => {
+    const handleDel = async (id) => {
+        const resp = axios.post('/homo-admin/cat/delete', {
+            id: id
+        }).then((resp) => {
+            if (resp) {
+                    const arr = cats.filter((item) => item.ID !== id);
+                    setCats(arr);
+            }
+        })
+        dispatch(openAlert())
     };
 
     const actions = [
-        // {icon: <AddIcon/>, name: '添加', onClick: handleModalOpen},
-        {icon: <AddIcon/>, name: '添加', onClick: () => dispatch(open(false))},
+        {icon: <AddIcon/>, name: '添加', onClick:handleAddClick},
         {icon: <DeleteIcon/>, name: '批量删除'},
         {icon: <DoNotDisturbOnIcon/>, name: '批量下架'},
     ];
@@ -90,7 +95,7 @@ function Category(props) {
                                 <StyledTableCell align="center">{row.UpdateTime}</StyledTableCell>
                                 <StyledTableCell align="center">{row.CreateTime}</StyledTableCell>
                                 <StyledTableCell align="center">
-                                    <Action data={row} handleDel={handleDel} handleEdit={handleModalOpen} handleOpen={handleModalOpenReadOnly}/>
+                                    <Action data={row} handleDel={handleDel}/>
                                 </StyledTableCell>
                             </StyledTableRow>
                         ))}
@@ -100,7 +105,7 @@ function Category(props) {
 
             {OpenIconSpeedDial(actions)}
 
-            <CatModal data={currentData} />
+            <CatModal/>
 
         </React.Fragment>
     );

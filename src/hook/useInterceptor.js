@@ -1,21 +1,18 @@
 import React, {useState} from 'react';
 import axios from "axios";
-import Alert from "@mui/material/Alert";
-import AlertTitle from "@mui/material/AlertTitle";
 import {useDispatch} from "react-redux";
 import {updateMsg} from "../features/alert/alertSlice";
 
 export default function useInterceptor(props) {
-    // const [status, setStatus] =  useState(null);
     const dispatch = useDispatch();
 
     const errorHandler = (data) => {
         switch (data && data.Code) {
             case 500:
-                dispatch(updateMsg({status:"error",msg:data.Msg}))
+                dispatch(updateMsg({status: "error", msg: data.Msg}))
                 break
             case 200:
-                dispatch(updateMsg({status:"success",msg:data.Msg}))
+                dispatch(updateMsg({status: "success", msg: data.Msg}))
                 break
         }
     }
@@ -27,13 +24,15 @@ export default function useInterceptor(props) {
     });
 
     // Add a response interceptor
-    axios.interceptors.response.use(function (resp) {
-        const {data} = resp;
-        errorHandler(data)
-        return data
-    }, function (error) {
-        return Promise.reject(error);
-    })
+    axios.interceptors.response.use(
+        function (resp) {
+            const {data} = resp;
+            errorHandler(data)
+            return data
+        },
+        function (error) {
+            return Promise.reject(error);
+        })
 
 
 }

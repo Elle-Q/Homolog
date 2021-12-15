@@ -16,7 +16,7 @@ export const alertSlice = createSlice({
                 msg:msg,
             }
         },
-        open: (state) => {
+        openAlert: (state) => {
             return {
                 ...state,
                 openAlert:true
@@ -31,7 +31,7 @@ export const alertSlice = createSlice({
     }
 })
 
-export const {updateMsg, close, open} = alertSlice.actions
+export const {updateMsg, close, openAlert} = alertSlice.actions
 
 export const selectAlert = state => state.alert
 

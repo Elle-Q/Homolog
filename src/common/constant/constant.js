@@ -8,3 +8,20 @@ export const CatStatus = {
     off: '下架',
     edit: '编辑中',
 }
+
+export const Gender = {
+    male: '男',
+    female: '女',
+    free: '自由人',
+}
+
+export const UserStatus = {
+    online: '在线',
+    offline: '离线',
+    busy: '忙碌',
+}
+
+export const LoginAction = {
+    signin: '登录',
+    signup: '注册',
+}

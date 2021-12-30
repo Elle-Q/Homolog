@@ -4,7 +4,7 @@ import IconButton from "@mui/material/IconButton";
 import Button from "@mui/material/Button";
 import {alpha} from "@mui/system";
 
-function InputWithIcon(props) {
+function InputWithIcon(props, ref) {
     const {onChange, placeholder, icon, type} = props
     const [timer, setTimer] = useState(10);
     const [start, setStart] = useState(false);
@@ -42,9 +42,11 @@ function InputWithIcon(props) {
             </IconButton>
 
             <Input
+                type={type === 'password' ? 'password' : 'text'}
                 disableUnderline={true}
                 onChange={onChange}
                 placeholder={placeholder}
+                inputRef={ref}
                 // disabled={disabled}
                 sx={{
                     color:'#dcddde',
@@ -81,4 +83,4 @@ function InputWithIcon(props) {
     );
 }
 
-export default InputWithIcon;
+export default React.forwardRef(InputWithIcon)

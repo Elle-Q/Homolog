@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import useWindowDimensions from "../../hook/useWindowDimensions";
 import Box from "@mui/material/Box";
 import {alpha} from "@mui/system";
@@ -7,28 +7,56 @@ import wechat from '../../assets/temp/wechat.jpg'
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import RegisterAction from "../../features/login/registerAction";
-import LoginAction from "../../features/login/loginAction";
 import LoginOtherWay from "../../features/login/LoginOtherWay";
-import { useNavigate } from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
+import InputWithIcon from "../../features/login/InputWithIcon";
+import PhoneIphoneIcon from "@mui/icons-material/PhoneIphone";
+import VpnKeyIcon from "@mui/icons-material/VpnKey";
+import PersonIcon from "@mui/icons-material/Person";
+import ShieldIcon from "@mui/icons-material/Shield";
+import {Link} from "@mui/material";
+import {LoginAction} from "../../common/constant/constant";
 
 function Login(props) {
     const {height, width} = useWindowDimensions();
-    const [action, setAction] = useState('login');//register
+    const [action, setAction] = useState('signin');//register
     const [type, setType] = useState('name');
     const navigate = useNavigate();
+    const phoneRef = React.createRef();
+    const passRef = React.createRef();
 
-    const renderInputs = () => {
-        switch (action) {
-            case 'login' :
-                return (<LoginAction type={type}/>)
-            case 'register' :
-                return (<RegisterAction/>)
+    const getPlaceHolder = () => {
+        switch (type) {
+            case 'phone' :
+                return '输入手机号...'
+            case 'email' :
+                return '输入注册邮箱...'
+            case 'name' :
+                return '输入用户名...'
         }
     }
 
-    const handleLogin = () => {
+    const handleLogin = async () => {
+        let param = {
+            UserName: phoneRef.current.value,
+            Password: passRef.current.value
+        }
+        // await axios.post('/app/user/login', param)
+        //     .then((resp) => {
+        //         console.log(resp)
+        //         if (resp.AccessToken) {
+        //             localStorage.setItem("AccessToken", JSON.stringify(resp));
+        //         }
+        //     });
         navigate('/admin');
+    }
+
+    function toggleAction() {
+        if (action === 'signin') {
+            setAction("signup")
+        } else {
+            setAction("signin")
+        }
     }
 
     return (
@@ -50,7 +78,7 @@ function Login(props) {
             }}>
                 <Typography variant="h4" align="center" color='#fff' sx={{fontFamily: '-apple-system',}}>
                     {
-                        action === 'login' ? '登录' : '注册账号'
+                        action === 'signin' ? '登录' : '注册账号'
                     }
                 </Typography>
 
@@ -64,11 +92,48 @@ function Login(props) {
                         }} alt="wechat" title="wechat" src={wechat}/>
                     </Box>
 
-                    {renderInputs()}
+                    <Box sx={{
+                        display: "flex",
+                        flexDirection: 'column',
+                        justifyContent: "center"
+                    }}>
+                        {
+                            action === 'signin' ?
+                                <React.Fragment>
+                                    <InputWithIcon ref={phoneRef} placeholder={getPlaceHolder()}
+                                                   icon={<PhoneIphoneIcon fontSize="medium"/>}/>
+                                    <InputWithIcon ref={passRef} placeholder="输入密码..." type="password"
+                                                   icon={<VpnKeyIcon fontSize="medium"/>}/>
+                                </React.Fragment>
+                                :
+                                <React.Fragment>
+                                    <InputWithIcon placeholder="输入昵称..." icon={<PersonIcon fontSize="medium"/>}/>
+                                    <InputWithIcon placeholder="输入手机号..." icon={<PhoneIphoneIcon fontSize="medium"/>}/>
+                                    <InputWithIcon placeholder="输入短信验证码..." type="verify"
+                                                   icon={<ShieldIcon fontSize="medium"/>}/>
+                                    <InputWithIcon placeholder="输入密码..." type="password"
+                                                   icon={<VpnKeyIcon fontSize="medium"/>}/>
+                                </React.Fragment>
+                        }
+
+                        <div style={{ margin: "40px 40px" }}>
+                            {
+                                action === 'signin' ?
+                                    '没有账号? '  : '已有账号 '
+                            }
+                            <Link color="#3399FF" onClick={toggleAction} sx={{cursor:"pointer"}}>{
+                                action === 'signin' ?
+                                    ' 注册'  : ' 登录'
+                            }</Link>
+                        </div>
+
+                    </Box>
+
 
                 </Stack>
 
                 <LoginOtherWay/>
+
 
                 <Button
                     onClick={handleLogin}
@@ -87,7 +152,7 @@ function Login(props) {
                     }}
                 >
                     {
-                        action === 'login' ? '登录' : '注册'
+                        action === 'signin' ? '登录' : '注册'
 
                     }
                 </Button>

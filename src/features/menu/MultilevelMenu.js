@@ -13,19 +13,27 @@ function MultilevelMenu(props) {
     const MenuItem = (props) => {
         const {item} = props;
         return (
-            <Link to={item.url} style={{textDecoration: "none"}} onClick={onMouseLeave}>
-                <div
-                    style={{
+            <Link to={item.url}
+                  style={{
+                      textDecoration: "none",
+                  }}
+                  onClick={onMouseLeave}>
+                <Box
+                    sx={{
                         width: '180px',
                         padding: '10px',
-                        display:'flex',
+                        display: 'flex',
                         alignItems: 'center',
+                        '&:hover': {
+                            backgroundColor: alpha('#fff', 0.1),
+                            borderRadius:'8px'
+                        }
                     }}>
-                    <img style={{width:25, height:25}} alt="menu" title="more" src={item.icon}/>
-                    <Typography sx={{ml:'15px',cursor:"pointer"}} variant="body" component="label" color='#EB5E28'>
+                    <img style={{width: 25, height: 25}} alt="menu" title="more" src={item.icon}/>
+                    <Typography sx={{ml: '15px', cursor: "pointer"}} variant="body" component="label" color='#EB5E28'>
                         {item.name}
                     </Typography>
-                </div>
+                </Box>
             </Link>
         )
     };

@@ -10,6 +10,5 @@ module.exports = function(app) {
                 '^/homo-admin': '/admin', // rewrite path
             },
         }),
-
     );
 };

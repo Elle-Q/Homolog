@@ -27,7 +27,7 @@ const StyledDiv = styled.div`
         color:#e9c46a;
 `
 
-function Item(props) {
+function Item() {
     let params = useParams();
     let item = items[params.id - 1];
     return (
@@ -143,7 +143,7 @@ function Item(props) {
                     </Typography>
 
                     <StyledDiv>
-                        <Link to={`/app/play`} style={{color: '#EB5E28'}}>
+                        <Link to={`/app/play`} style={{ color: '#EB5E28'}}>
                             <AirplayIcon> </AirplayIcon>
                         </Link>
                     </StyledDiv>

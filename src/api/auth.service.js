@@ -1,4 +1,5 @@
 import axios from "axios";
+import TokenService from './token.service'
 
 class AuthService {
     login(username, password) {
@@ -43,7 +44,7 @@ export const signup = (username, phone, password) => (dispatch) => {
         err => {
             dispatch({
                 type: "SET_MESSAGE",
-                payload: message,
+                payload: "message",
             });
 
             return Promise.reject();
@@ -73,4 +74,11 @@ export const login = (username, password) => (dispatch) => {
             });
         }
     )
+}
+
+export const refreshToken = (accessToken) => (dispatch) => {
+    dispatch({
+        type: "REFRESH_TOKEN",
+        payload: accessToken,
+    })
 }

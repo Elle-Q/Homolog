@@ -3,6 +3,7 @@ import axios from "axios";
 import {useDispatch} from "react-redux";
 import {updateMsg} from "../features/alert/alertSlice";
 import TokenService from "../api/token.service";
+import {refreshToken} from "../api/auth.service";
 
 export default function useInterceptor(props) {
     const dispatch = useDispatch();
@@ -60,7 +61,6 @@ export default function useInterceptor(props) {
                     }
                 }
             }
-        )
             return Promise.reject(error);
         })
 

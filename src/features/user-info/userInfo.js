@@ -2,14 +2,13 @@ import React, {useState} from 'react';
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import Toolbar from "@mui/material/Toolbar";
 import RoomOutlinedIcon from '@mui/icons-material/RoomOutlined';
 import {alpha, styled} from '@mui/material/styles';
 import EditIcon from '@mui/icons-material/Edit';
 import IconButton from "@mui/material/IconButton";
 import {Drawer} from "@mui/material";
 import LogoutIcon from '@mui/icons-material/Logout';
-import axios from "axios";
+import api from "../../api/api";
 import Modal from "./modal";
 
 const StyledTypography = styled(Typography)({
@@ -29,7 +28,7 @@ function UserInfo(props) {
     }
 
     const logout = async () => {
-        await axios.get('/app/user/logout').then((data) => {
+        await api.get('/app/user/logout').then((data) => {
             console.log(data)
         })
     }

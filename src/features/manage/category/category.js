@@ -5,7 +5,6 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import TableBody from "@mui/material/TableBody";
 import Paper from "@mui/material/Paper";
-import axios from "axios";
 import {CatStatus} from "../../../common/constant/constant";
 import {StyledTableCell, StyledTableRow} from "../../table/table";
 import Action from "./action";
@@ -17,13 +16,14 @@ import CatModal from "./catModal";
 import {useDispatch} from "react-redux";
 import {open} from "./catSlice";
 import {openAlert} from "../../alert/alertSlice";
+import api from "../../../api/api";
 
 function Category(props) {
     const [cats, setCats] = useState();
     const dispatch = useDispatch();
 
     React.useEffect(() => {
-        axios.get('/homo-admin/cat/list').then((data) => {
+        api.get('/homo-admin/cat/list').then((data) => {
             setCats(data)
         })
     }, [])
@@ -38,7 +38,7 @@ function Category(props) {
             }));
 
     const handleDel = async (id) => {
-        const resp = axios.post('/homo-admin/cat/delete', {
+        const resp = api.post('/homo-admin/cat/delete', {
             id: id
         }).then((resp) => {
             if (resp) {

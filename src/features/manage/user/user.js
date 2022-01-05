@@ -5,7 +5,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import TableBody from "@mui/material/TableBody";
 import Paper from "@mui/material/Paper";
-import axios from "axios";
+import api from "../../../api/api";
 import FemaleIcon from '@mui/icons-material/Female';
 import MaleIcon from '@mui/icons-material/Male';
 import Action from "./action";
@@ -22,7 +22,7 @@ function User(props) {
     };
 
     React.useEffect(async () =>  {
-       await axios.get('/homo-admin/user/list').then((data) => {
+       api.get('/homo-admin/user/list').then((data) => {
             setUsers(data)
         })
     }, [])

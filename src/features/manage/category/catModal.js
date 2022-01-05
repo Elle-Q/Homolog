@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {CatStatus} from "../../../common/constant/constant";
 import {ImagInputWithHeader, InputWithHeader, SelectInputWithHeader} from "../../../common/CustomInput";
 import Modal from "../../../common/Modal";
-import axios from "axios";
+import api from "../../../api/api";
 import {selectCatModal, close} from "./catSlice";
 import { useSelector, useDispatch } from 'react-redux'
 import {openAlert} from "../../alert/alertSlice";
@@ -46,7 +46,7 @@ function CatModal(props) {
         for (let k in detail ) {
             param.append(k, detail[k]);
         }
-        await axios.post('/homo-admin/cat/update', param)
+        await api.post('/homo-admin/cat/update', param)
             .then((resp) => {
                 resp && handleClose();
             });

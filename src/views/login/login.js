@@ -15,7 +15,10 @@ import VpnKeyIcon from "@mui/icons-material/VpnKey";
 import PersonIcon from "@mui/icons-material/Person";
 import ShieldIcon from "@mui/icons-material/Shield";
 import {Link} from "@mui/material";
-import {LoginAction} from "../../common/constant/constant";
+import {login} from "../../api/auth.service";
+import {logout, selectAuth} from "../../api/authSlice";
+import {useDispatch, useSelector} from "react-redux";
+import {selectAlert} from "../../features/alert/alertSlice";
 
 function Login(props) {
     const {height, width} = useWindowDimensions();
@@ -24,6 +27,8 @@ function Login(props) {
     const navigate = useNavigate();
     const phoneRef = React.createRef();
     const passRef = React.createRef();
+    const dispatch = useDispatch();
+    const {isLogin} = useSelector(selectAuth);
 
     const getPlaceHolder = () => {
         switch (type) {
@@ -37,18 +42,11 @@ function Login(props) {
     }
 
     const handleLogin = async () => {
-        let param = {
-            UserName: phoneRef.current.value,
-            Password: passRef.current.value
+        console.log(isLogin)
+        dispatch(login(phoneRef.current.value, passRef.current.value))
+        if (isLogin) {
+            navigate('/admin');
         }
-        // await axios.post('/app/user/login', param)
-        //     .then((resp) => {
-        //         console.log(resp)
-        //         if (resp.AccessToken) {
-        //             localStorage.setItem("AccessToken", JSON.stringify(resp));
-        //         }
-        //     });
-        navigate('/admin');
     }
 
     function toggleAction() {

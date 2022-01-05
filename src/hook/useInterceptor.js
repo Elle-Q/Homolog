@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
-import axios from "axios";
 import {useDispatch} from "react-redux";
 import {updateMsg} from "../features/alert/alertSlice";
 import TokenService from "../api/token.service";
 import {refreshToken} from "../api/auth.service";
+import api from "../api/api";
+import {logout, selectAuth} from "../api/authSlice";
 
 export default function useInterceptor(props) {
     const dispatch = useDispatch();
@@ -16,46 +17,51 @@ export default function useInterceptor(props) {
             case 200:
                 dispatch(updateMsg({status: "success", msg: data.Msg}))
                 break
+            case 401:
+                window.location = "/login";
+                break
         }
     }
 
-    axios.interceptors.request.use(
+    api.interceptors.request.use(
+
         config => {
             const token = TokenService.getLocalAccessToken();
             if (token) {
-                config.headers["Authorization"] = 'Bearer' + token;
+                config.headers["Authorization"] = token;
             }
             return config
         },
         error => {
+            debugger
             return Promise.reject(error);
         });
 
     // Add a response interceptor
-    axios.interceptors.response.use(
+    api.interceptors.response.use(
         resp=> {
             const {data} = resp;
             errorHandler(data)
             return data
         },
-        async error => {
+        error => {
+            debugger
             const originalConfig = error.config;
 
-            if (originalConfig.url !== '/login' && error.response) {
+            if (error.response) {
                 //Access token was expired
                 if (error.response.status === 401 && !originalConfig._retry) {
                     originalConfig._retry = true;
 
                     try {
-                        const rs = await axios.post('/auth/refresh-token', {
+                        const rs = api.post('/homo-app/user/refresh', {
                             RefreshToken: TokenService.getLocalRefreshToken()
+                        }).then(resp => {
+                            // dispatch(refreshToken(AccessToken));
+                            TokenService.updateLocalToken(resp);
+                            return api(originalConfig);
                         });
 
-                        const {accessToken} = rs.data;
-
-                        dispatch(refreshToken(accessToken));
-                        TokenService.updateLocalAccessToken(accessToken);
-                        return originalConfig;
                     } catch (_err) {
                         return Promise.reject(_err);
                     }

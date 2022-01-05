@@ -10,9 +10,10 @@ class TokenService {
         return user?.AccessToken;
     }
 
-    updateLocalAccessToken(token) {
+    updateLocalToken(tokens) {
         let user = JSON.parse(localStorage.getItem("user"));
-        user.AccessToken = token;
+        user.AccessToken = tokens?.AccessToken;
+        user.RefreshToken = tokens?.RefreshToken;
         localStorage.setItem("user", JSON.stringify(user))
     }
 

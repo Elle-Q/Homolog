@@ -56,6 +56,7 @@ function CatModal(props) {
 
     return (
         <Modal title="新增分类"
+               maxWidth="md"
                open={openModal}
                handleClose={()=>{
                    setImgUri(null);  //置空, 否则会影响其他modal

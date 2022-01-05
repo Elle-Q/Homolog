@@ -10,7 +10,7 @@ export const SaveButton = (props) => {
             borderColor:'#252422',
             backgroundColor:"transparent",
             fontSize:'12px',
-            color:'text.fourth',
+            color:'text.sixth',
             width:'80px',
             height:'50px',
             '&:hover': {

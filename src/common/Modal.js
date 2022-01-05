@@ -52,7 +52,7 @@ const ModalDialogTitle = (props) => {
 
 
 function Modal(props) {
-    const {title, children, open, handleClose, handleSave} = props;
+    const {title, children, open, handleClose, handleSave, maxWidth} = props;
 
     return (
         <ModalDialog
@@ -60,7 +60,7 @@ function Modal(props) {
             aria-labelledby="dialog-title"
             open={open}
             fullWidth={true}
-            maxWidth='md'
+            maxWidth={maxWidth}
         >
             <ModalDialogTitle id="dialog-title" onClose={handleClose}>
                 <span style={{color: '#3399ff', fontSize: '18px', marginLeft: '5px', textAlign: "center"}}>{title}</span>

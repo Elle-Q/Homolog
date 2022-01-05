@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {createRef, useState} from 'react';
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -9,7 +9,9 @@ import IconButton from "@mui/material/IconButton";
 import {Drawer} from "@mui/material";
 import LogoutIcon from '@mui/icons-material/Logout';
 import api from "../../api/api";
-import Modal from "./modal";
+import {default as AvatarModal}  from "../../common/Modal";
+import {default as InfoModal} from "./modal";
+import UserService from "../../api/user.service";
 
 const StyledTypography = styled(Typography)({
     color: '#bbb',
@@ -22,6 +24,8 @@ const StyledTypography = styled(Typography)({
 function UserInfo(props) {
 
     const [drawerOpen, setDrawerOpen] = useState();
+    const [openModal, setOpenModal] = useState(false);
+    const fileRef = createRef();
 
     const toggleDrawer = open => () => {
         setDrawerOpen(open)
@@ -53,20 +57,27 @@ function UserInfo(props) {
         )
     }
 
+    function changeAvatar() {
+        UserService.changeAvatar()
+    }
+
     const AvatarWithEdit = () => {
         return (
             <div style={{marginBottom: '100px'}}>
-                <Avatar alt="elle" src="/avatar/avatar1.jpg"
+                <Avatar alt="elle"
+                        src="/avatar/avatar1.jpg"
                         sx={{
                             width: 120,
                             height: 120,
                             position: "absolute",
                             border:'8px solid #252422',
                             boxShadow: '0 0 5px #403D39',
-                        }}/>
+                            cursor:"pointer"
+                        }}
+                        onClick={()=>setOpenModal(true)}
+                />
                 <ActionButton icon={<EditIcon/>} name="edit" onClick={toggleDrawer(true)}/>
                 <ActionButton icon={<LogoutIcon/>} name="logout" onClick={logout}/>
-                ZZ
             </div>
         )
     }
@@ -84,7 +95,7 @@ function UserInfo(props) {
                 open={drawerOpen}
                 onClose={toggleDrawer(false)}
             >
-                <Modal/>
+                <InfoModal/>
             </Drawer>
 
             <Typography variant="h6" sx={{display: {xs: 'none', sm: 'block'}}}>
@@ -102,6 +113,57 @@ function UserInfo(props) {
             <StyledTypography>
                 <RoomOutlinedIcon fontSize="small"/>shanghai, china
             </StyledTypography>
+
+            <AvatarModal title="修改头像"
+                   maxWidth="sm"
+                   open={openModal}
+                   handleClose={()=>{setOpenModal(false)}}
+                   handleSave={changeAvatar}
+            >
+
+                <div style={{display: "flex", justifyContent: "center"}} >
+                    <Avatar alt="elle"
+                            src="http://pub.gomolog.com/1641388218414/animation.gif"
+                            sx={{
+                                width: 120,
+                                height: 120,
+                                position: "absolute",
+                                boxShadow: '0 0 5px #403D39',
+                                cursor:"pointer"
+                            }}
+                    />
+                </div>
+
+                <div style={{display: "flex",justifyContent: "center",marginTop:'150px'}} >
+                    <img alt="preview" style={{width: '55px', height: '55px', marginRight:'10px', borderRadius: '50%'}} src="http://pub.gomolog.com/1641393954370/c76632ec-0566-4343-b134-7002c12a63aa/avatar3.jpg"/>
+                    <img alt="preview" style={{width: '55px', height: '55px', marginRight:'10px', borderRadius: '50%'}} src="http://pub.gomolog.com/1641393954370/c76632ec-0566-4343-b134-7002c12a63aa/avatar3.jpg"/>
+                    <img alt="preview" style={{width: '55px', height: '55px', marginRight:'10px', borderRadius: '50%'}} src="http://pub.gomolog.com/1641393954370/c76632ec-0566-4343-b134-7002c12a63aa/avatar3.jpg"/>
+                    <img alt="preview" style={{width: '55px', height: '55px', marginRight:'10px', borderRadius: '50%'}} src="http://pub.gomolog.com/1641393954370/c76632ec-0566-4343-b134-7002c12a63aa/avatar3.jpg"/>
+                    <img alt="preview" style={{width: '55px', height: '55px', marginRight:'10px', borderRadius: '50%'}} src="http://pub.gomolog.com/1641393954370/c76632ec-0566-4343-b134-7002c12a63aa/avatar3.jpg"/>
+                    <img alt="preview" style={{width: '55px', height: '55px', marginRight:'10px', borderRadius: '50%'}} src="http://pub.gomolog.com/1641393954370/c76632ec-0566-4343-b134-7002c12a63aa/avatar3.jpg"/>
+                    <img alt="preview" style={{width: '55px', height: '55px', marginRight:'10px', borderRadius: '50%'}} src="http://pub.gomolog.com/1641393954370/c76632ec-0566-4343-b134-7002c12a63aa/avatar3.jpg"/>
+                </div>
+                <div style={{display: "flex",justifyContent: "center",marginTop:'20px'}} >
+                    <input type="file"
+                           name="avatar"
+                           ref={fileRef}
+                        // onChange={onChange}
+                           style={{display: 'none',}}/>
+                    <IconButton  onClick={() => fileRef.current.click()}
+                                 sx={{
+                                     width: '200px',
+                                     maxHeight: '200px',
+                                     borderRadius: '5px',
+                                     backgroundColor: alpha('#252422', 0.3),
+                                     '&:hover': {
+                                         backgroundColor: alpha('#252422', 0.1)
+                                     }
+                                 }}
+                    >
+                        <span style={{fontSize: '16px', color: '#3399ff'}}>+ 上传图片</span>
+                    </IconButton>
+                </div>
+            </AvatarModal>
         </Box>
     );
 }

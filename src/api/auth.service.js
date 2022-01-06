@@ -1,4 +1,5 @@
 import TokenService from './token.service'
+import UserService from './user.service'
 import {loginFail, loginSuccess, registerFail, registerSuccess} from "./authSlice";
 import api from "./api";
 
@@ -6,14 +7,18 @@ class AuthService {
     login(username, password) {
         return api
             .post("/homo-app/user/login", {
-                username,
-                password
+                UserName:username,
+                Password: password
             })
             .then(resp => {
                 if (resp) {
-                    TokenService.setUser(resp);
+                    //设置token
+                    TokenService.setTokens({
+                        AccessToken: resp.AccessToken,
+                        RefreshToken: resp.RefreshToken,
+                    });
+                    return resp;
                 }
-                return resp;
             },
             err => {
                return Promise.reject(err)
@@ -21,7 +26,8 @@ class AuthService {
     }
 
     logout() {
-        TokenService.removeUser();
+        TokenService.removeTokens();
+        window.location = "/app";
     }
 
     signup(username, phone, password) {
@@ -33,7 +39,7 @@ class AuthService {
     }
 }
 
-const authService = new AuthService()
+export const authService = new AuthService()
 
 export const signup = (username, phone, password) => (dispatch) => {
     return authService.signup(username, phone, password).then(
@@ -53,7 +59,7 @@ export const signup = (username, phone, password) => (dispatch) => {
 export const login = (username, password) => (dispatch) => {
     return authService.login(username, password).then(
         resp => {
-            dispatch(loginSuccess(resp));
+            dispatch(loginSuccess({user:resp.User}));
 
             return Promise.resolve();
         },

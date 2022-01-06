@@ -42,10 +42,9 @@ function Login(props) {
     }
 
     const handleLogin = async () => {
-        console.log(isLogin)
         dispatch(login(phoneRef.current.value, passRef.current.value))
         if (isLogin) {
-            navigate('/admin');
+            navigate('/app');
         }
     }
 

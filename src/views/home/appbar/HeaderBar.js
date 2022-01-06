@@ -21,15 +21,15 @@ import Autocomplete from "@mui/material/Autocomplete";
 import suggetionJson from '../../../json/suggesttion.json'
 import Popper from '@mui/material/Popper';
 import Paper from "@mui/material/Paper";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import community from '../../../assets/community1.svg'
 import categoryS from '../../../assets/category_S.svg'
 import categoryB from '../../../assets/category_B.svg'
 import MultilevelMenu from "../../../features/menu/MultilevelMenu";
 import AppLogo from "../../../common/AppLogo";
 import {StyledBadge} from "../../../common/StyledBadge";
-
-
+import {useSelector} from "react-redux";
+import {selectAuth} from "../../../api/authSlice";
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -59,10 +59,21 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
 
 function HeaderBar(props) {
     const theme = useTheme();
+    const navigate = useNavigate();
+
     const colorMode = React.useContext(ColorModeContext);
     const [showMenu,setShowMenu] = React.useState(false);
-
+    const {isLogin, user} = useSelector(selectAuth);
     const suggestions = suggetionJson.map((s) => s.label);
+
+    const enterAccount = (e) => {
+        e.preventDefault();
+        if (isLogin) {
+            navigate('/app/account')
+        } else {
+            navigate('/login');
+        }
+    };
 
     return (
         <Box sx={{flexGrow: 1, boxShadow:"none", position:"sticky", zIndex:50, top:0}}>
@@ -172,9 +183,11 @@ function HeaderBar(props) {
                             overlap="circular"
                             anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}
                             variant="dot"
-                            component={Link} to={"/app/account"}
+                            component={Link}
+                            to={"/"}
+                            onClick={enterAccount}
                         >
-                            <Avatar alt="elle" src="/avatar/avatar1.jpg"/>
+                            <Avatar alt="elle" src={user.Avatar}/>
                         </StyledBadge>
                     </Stack>
                 </Toolbar>

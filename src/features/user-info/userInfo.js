@@ -1,4 +1,4 @@
-import React, {createRef, useState} from 'react';
+import React, {createRef, useEffect, useState} from 'react';
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -12,6 +12,9 @@ import api from "../../api/api";
 import {default as AvatarModal} from "../../common/Modal";
 import {default as InfoModal} from "./modal";
 import UserService from "../../api/user.service";
+import {authService} from "../../api/auth.service";
+import {useSelector} from "react-redux";
+import {selectAuth} from "../../api/authSlice";
 
 const StyledTypography = styled(Typography)({
     color: '#bbb',
@@ -23,18 +26,25 @@ const StyledTypography = styled(Typography)({
 
 function UserInfo(props) {
 
+    const fileRef = createRef();
     const [drawerOpen, setDrawerOpen] = useState();
     const [openModal, setOpenModal] = useState(false);
-    const fileRef = createRef();
+    const {user} = useSelector(selectAuth);
+    // const [imgUri, setImgUri] = useState(data.Preview);
+
+    // useEffect(() => {
+    //     UserService.getUserById()
+    // },[])
 
     const toggleDrawer = open => () => {
         setDrawerOpen(open)
     }
 
     const logout = async () => {
-        await api.get('/app/user/logout').then((data) => {
-            console.log(data)
-        })
+        authService.logout()
+        // await api.get('/app/user/logout').then((data) => {
+        //     console.log(data)
+        // })
     }
 
     const ActionButton = (props) => {
@@ -65,7 +75,7 @@ function UserInfo(props) {
         return (
             <div style={{marginBottom: '100px'}}>
                 <Avatar alt="elle"
-                        src="/avatar/avatar1.jpg"
+                        src={user.Avatar}
                         sx={{
                             width: 120,
                             height: 120,
@@ -125,7 +135,7 @@ function UserInfo(props) {
 
                 <div style={{display: "flex", justifyContent: "center"}}>
                     <Avatar alt="elle"
-                            src="http://pub.gomolog.com/1641388218414/animation.gif"
+                            src={user.Avatar}
                             sx={{
                                 width: 120,
                                 height: 120,
@@ -156,7 +166,7 @@ function UserInfo(props) {
                     <input type="file"
                            name="avatar"
                            ref={fileRef}
-                           onChange={onChange}
+                           // onChange={onChange}
                            style={{display: 'none',}}/>
                     <IconButton onClick={() => fileRef.current.click()}
                                 sx={{

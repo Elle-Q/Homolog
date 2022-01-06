@@ -1,11 +1,11 @@
 import {createSlice} from '@reduxjs/toolkit'
 
-const user = JSON.parse(localStorage.getItem("user"))
+const tokens = JSON.parse(localStorage.getItem("tokens"))
 export const authSlice = createSlice({
     name: 'auth',
 
-    initialState: user
-        ? {isLogin: true, user}
+    initialState: tokens
+        ? {isLogin: true,user: null}
         : {isLogin: false, user: null},
 
     reducers: {
@@ -46,15 +46,6 @@ export const authSlice = createSlice({
                 user: null
             }
         },
-        refreshToken: (state, action) => {
-            const {AccessToken} = action.payload;
-            return {
-                ...state,
-                isLogin: false,
-                user: {...user, AccessToken:AccessToken}
-            }
-        },
-
     }
 })
 

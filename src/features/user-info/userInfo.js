@@ -9,7 +9,7 @@ import IconButton from "@mui/material/IconButton";
 import {Drawer} from "@mui/material";
 import LogoutIcon from '@mui/icons-material/Logout';
 import api from "../../api/api";
-import {default as AvatarModal}  from "../../common/Modal";
+import {default as AvatarModal} from "../../common/Modal";
 import {default as InfoModal} from "./modal";
 import UserService from "../../api/user.service";
 
@@ -70,11 +70,11 @@ function UserInfo(props) {
                             width: 120,
                             height: 120,
                             position: "absolute",
-                            border:'8px solid #252422',
+                            border: '8px solid #252422',
                             boxShadow: '0 0 5px #403D39',
-                            cursor:"pointer"
+                            cursor: "pointer"
                         }}
-                        onClick={()=>setOpenModal(true)}
+                        onClick={() => setOpenModal(true)}
                 />
                 <ActionButton icon={<EditIcon/>} name="edit" onClick={toggleDrawer(true)}/>
                 <ActionButton icon={<LogoutIcon/>} name="logout" onClick={logout}/>
@@ -115,13 +115,15 @@ function UserInfo(props) {
             </StyledTypography>
 
             <AvatarModal title="修改头像"
-                   maxWidth="sm"
-                   open={openModal}
-                   handleClose={()=>{setOpenModal(false)}}
-                   handleSave={changeAvatar}
+                         maxWidth="sm"
+                         open={openModal}
+                         handleClose={() => {
+                             setOpenModal(false)
+                         }}
+                         handleSave={changeAvatar}
             >
 
-                <div style={{display: "flex", justifyContent: "center"}} >
+                <div style={{display: "flex", justifyContent: "center"}}>
                     <Avatar alt="elle"
                             src="http://pub.gomolog.com/1641388218414/animation.gif"
                             sx={{
@@ -129,36 +131,43 @@ function UserInfo(props) {
                                 height: 120,
                                 position: "absolute",
                                 boxShadow: '0 0 5px #403D39',
-                                cursor:"pointer"
+                                cursor: "pointer"
                             }}
                     />
                 </div>
 
-                <div style={{display: "flex",justifyContent: "center",marginTop:'150px'}} >
-                    <img alt="preview" style={{width: '55px', height: '55px', marginRight:'10px', borderRadius: '50%'}} src="http://pub.gomolog.com/1641393954370/c76632ec-0566-4343-b134-7002c12a63aa/avatar3.jpg"/>
-                    <img alt="preview" style={{width: '55px', height: '55px', marginRight:'10px', borderRadius: '50%'}} src="http://pub.gomolog.com/1641393954370/c76632ec-0566-4343-b134-7002c12a63aa/avatar3.jpg"/>
-                    <img alt="preview" style={{width: '55px', height: '55px', marginRight:'10px', borderRadius: '50%'}} src="http://pub.gomolog.com/1641393954370/c76632ec-0566-4343-b134-7002c12a63aa/avatar3.jpg"/>
-                    <img alt="preview" style={{width: '55px', height: '55px', marginRight:'10px', borderRadius: '50%'}} src="http://pub.gomolog.com/1641393954370/c76632ec-0566-4343-b134-7002c12a63aa/avatar3.jpg"/>
-                    <img alt="preview" style={{width: '55px', height: '55px', marginRight:'10px', borderRadius: '50%'}} src="http://pub.gomolog.com/1641393954370/c76632ec-0566-4343-b134-7002c12a63aa/avatar3.jpg"/>
-                    <img alt="preview" style={{width: '55px', height: '55px', marginRight:'10px', borderRadius: '50%'}} src="http://pub.gomolog.com/1641393954370/c76632ec-0566-4343-b134-7002c12a63aa/avatar3.jpg"/>
-                    <img alt="preview" style={{width: '55px', height: '55px', marginRight:'10px', borderRadius: '50%'}} src="http://pub.gomolog.com/1641393954370/c76632ec-0566-4343-b134-7002c12a63aa/avatar3.jpg"/>
+                <div style={{display: "flex", justifyContent: "center", marginTop: '150px'}}>
+                    <img alt="preview" style={{width: '55px', height: '55px', marginRight: '10px', borderRadius: '50%'}}
+                         src="http://pub.gomolog.com/1641393954370/c76632ec-0566-4343-b134-7002c12a63aa/avatar3.jpg"/>
+                    <img alt="preview" style={{width: '55px', height: '55px', marginRight: '10px', borderRadius: '50%'}}
+                         src="http://pub.gomolog.com/1641393954370/c76632ec-0566-4343-b134-7002c12a63aa/avatar3.jpg"/>
+                    <img alt="preview" style={{width: '55px', height: '55px', marginRight: '10px', borderRadius: '50%'}}
+                         src="http://pub.gomolog.com/1641393954370/c76632ec-0566-4343-b134-7002c12a63aa/avatar3.jpg"/>
+                    <img alt="preview" style={{width: '55px', height: '55px', marginRight: '10px', borderRadius: '50%'}}
+                         src="http://pub.gomolog.com/1641393954370/c76632ec-0566-4343-b134-7002c12a63aa/avatar3.jpg"/>
+                    <img alt="preview" style={{width: '55px', height: '55px', marginRight: '10px', borderRadius: '50%'}}
+                         src="http://pub.gomolog.com/1641393954370/c76632ec-0566-4343-b134-7002c12a63aa/avatar3.jpg"/>
+                    <img alt="preview" style={{width: '55px', height: '55px', marginRight: '10px', borderRadius: '50%'}}
+                         src="http://pub.gomolog.com/1641393954370/c76632ec-0566-4343-b134-7002c12a63aa/avatar3.jpg"/>
+                    <img alt="preview" style={{width: '55px', height: '55px', marginRight: '10px', borderRadius: '50%'}}
+                         src="http://pub.gomolog.com/1641393954370/c76632ec-0566-4343-b134-7002c12a63aa/avatar3.jpg"/>
                 </div>
-                <div style={{display: "flex",justifyContent: "center",marginTop:'20px'}} >
+                <div style={{display: "flex", justifyContent: "center", marginTop: '20px'}}>
                     <input type="file"
                            name="avatar"
                            ref={fileRef}
-                        // onChange={onChange}
+                           onChange={onChange}
                            style={{display: 'none',}}/>
-                    <IconButton  onClick={() => fileRef.current.click()}
-                                 sx={{
-                                     width: '200px',
-                                     maxHeight: '200px',
-                                     borderRadius: '5px',
-                                     backgroundColor: alpha('#252422', 0.3),
-                                     '&:hover': {
-                                         backgroundColor: alpha('#252422', 0.1)
-                                     }
-                                 }}
+                    <IconButton onClick={() => fileRef.current.click()}
+                                sx={{
+                                    width: '200px',
+                                    maxHeight: '200px',
+                                    borderRadius: '5px',
+                                    backgroundColor: alpha('#252422', 0.3),
+                                    '&:hover': {
+                                        backgroundColor: alpha('#252422', 0.1)
+                                    }
+                                }}
                     >
                         <span style={{fontSize: '16px', color: '#3399ff'}}>+ 上传图片</span>
                     </IconButton>

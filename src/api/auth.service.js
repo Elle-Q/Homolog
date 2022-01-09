@@ -30,19 +30,20 @@ class AuthService {
         window.location = "/app";
     }
 
-    signup(username, phone, password) {
+    signup(username, phone, password, code) {
         return api.post('/homo-app/user/signup', {
             username,
             phone,
-            password
+            password,
+            code
         })
     }
 }
 
 export const authService = new AuthService()
 
-export const signup = (username, phone, password) => (dispatch) => {
-    return authService.signup(username, phone, password).then(
+export const signup = (username, phone, password, code) => (dispatch) => {
+    return authService.signup(username, phone, password, code).then(
         resp => {
             dispatch(registerSuccess())
 

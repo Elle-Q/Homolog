@@ -15,7 +15,7 @@ import VpnKeyIcon from "@mui/icons-material/VpnKey";
 import PersonIcon from "@mui/icons-material/Person";
 import ShieldIcon from "@mui/icons-material/Shield";
 import {Link} from "@mui/material";
-import {login} from "../../api/auth.service";
+import {login, signup} from "../../api/auth.service";
 import {logout, selectAuth} from "../../api/authSlice";
 import {useDispatch, useSelector} from "react-redux";
 import {selectAlert} from "../../features/alert/alertSlice";
@@ -25,10 +25,12 @@ function Login(props) {
     const [action, setAction] = useState('signin');//register
     const [type, setType] = useState('name');
     const navigate = useNavigate();
-    const phoneRef = React.createRef();
-    const passRef = React.createRef();
     const dispatch = useDispatch();
     const {isLogin} = useSelector(selectAuth);
+    const userNameRef = React.createRef();
+    const phoneRef = React.createRef();
+    const passRef = React.createRef();
+    const codeRef = React.createRef();
 
     const getPlaceHolder = () => {
         switch (type) {
@@ -42,10 +44,25 @@ function Login(props) {
     }
 
     const handleLogin = async () => {
-        dispatch(login(phoneRef.current.value, passRef.current.value))
+        //登录
+        if (action === 'signin') {
+            dispatch(login(phoneRef.current.value, passRef.current.value))
+        } else { // 注册
+            dispatch(signup(
+                userNameRef.current.value,
+                phoneRef.current.value,
+                passRef.current.value,
+                codeRef.current.value,
+                ))
+        }
         if (isLogin) {
             navigate('/app');
         }
+    }
+
+    //todo: 验证手机号， 发送短信获取短信验证码
+    const onMSCodeClick = () => {
+        codeRef.current.value = '1122'
     }
 
     function toggleAction() {
@@ -106,7 +123,9 @@ function Login(props) {
                                 <React.Fragment>
                                     <InputWithIcon placeholder="输入昵称..." icon={<PersonIcon fontSize="medium"/>}/>
                                     <InputWithIcon placeholder="输入手机号..." icon={<PhoneIphoneIcon fontSize="medium"/>}/>
-                                    <InputWithIcon placeholder="输入短信验证码..." type="verify"
+                                    <InputWithIcon placeholder="输入短信验证码..."
+                                                   type="verify"
+                                                   onMSCodeClick={onMSCodeClick}
                                                    icon={<ShieldIcon fontSize="medium"/>}/>
                                     <InputWithIcon placeholder="输入密码..." type="password"
                                                    icon={<VpnKeyIcon fontSize="medium"/>}/>

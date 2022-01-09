@@ -15,6 +15,8 @@ import UserService from "../../api/user.service";
 import {authService} from "../../api/auth.service";
 import {useSelector} from "react-redux";
 import {selectAuth} from "../../api/authSlice";
+import {upload} from "../../api/qiniu.service";
+import DragAndDrop from "../../common/DragAndDrop";
 
 const StyledTypography = styled(Typography)({
     color: '#bbb',
@@ -24,17 +26,39 @@ const StyledTypography = styled(Typography)({
     textShadow: '1px 1px 2px rgb(0 0 0 / 37%)'
 })
 
+
+const ActionButton = (props) => {
+    const {icon, onClick, name} = props;
+
+    return (
+        <IconButton onClick={onClick}
+                    sx={{
+                        position: "relative",
+                        left: `${name === 'logout' ? 30 : 70}px`,
+                        top: `${name === 'logout' && 80}px`,
+                        backgroundColor: alpha('#252422', 0.5),
+                        '&:hover': {
+                            transform: 'scale(1.3)',
+                            transition: 'all .2s ease .2s'
+                        }
+                    }}>
+            {icon}
+        </IconButton>
+    )
+}
+
 function UserInfo(props) {
 
     const fileRef = createRef();
     const [drawerOpen, setDrawerOpen] = useState();
     const [openModal, setOpenModal] = useState(false);
     const {user} = useSelector(selectAuth);
-    // const [imgUri, setImgUri] = useState(data.Preview);
+    const [avatarUri, setAvatarUri] = useState(user.Avatar);
+    const [avatarFile, setAvatarFile] = useState(null);
 
-    // useEffect(() => {
-    //     UserService.getUserById()
-    // },[])
+    useEffect(() => {
+        avatarFile && setAvatarUri(URL.createObjectURL(avatarFile));
+    },[avatarFile])
 
     const toggleDrawer = open => () => {
         setDrawerOpen(open)
@@ -42,33 +66,25 @@ function UserInfo(props) {
 
     const logout = async () => {
         authService.logout()
-        // await api.get('/app/user/logout').then((data) => {
-        //     console.log(data)
-        // })
     }
 
-    const ActionButton = (props) => {
-        const {icon, onClick, name} = props;
+    const onAvatarChange = (event) => {
+        if (event.target.type === 'file') {
+            setAvatarFile(event.target.files[0]);
+        }
+    }
 
-        return (
-            <IconButton onClick={onClick}
-                        sx={{
-                            position: "relative",
-                            left: `${name === 'logout' ? 30 : 70}px`,
-                            top: `${name === 'logout' && 80}px`,
-                            backgroundColor: alpha('#252422', 0.5),
-                            '&:hover': {
-                                transform: 'scale(1.3)',
-                                transition: 'all .2s ease .2s'
-                            }
-                        }}>
-                {icon}
-            </IconButton>
-        )
+    const handleDrop = (files) => {
+        console.log(files)
+        setAvatarFile(files[0])
     }
 
     function changeAvatar() {
-        UserService.changeAvatar()
+        //上传头像到qiniu
+        let link = upload(avatarFile);
+        setAvatarUri(link)
+        //更新数据库
+        UserService.changeAvatar(user.Id, link)
     }
 
     const AvatarWithEdit = () => {
@@ -135,7 +151,7 @@ function UserInfo(props) {
 
                 <div style={{display: "flex", justifyContent: "center"}}>
                     <Avatar alt="elle"
-                            src={user.Avatar}
+                            src={avatarUri}
                             sx={{
                                 width: 120,
                                 height: 120,
@@ -163,24 +179,40 @@ function UserInfo(props) {
                          src="http://pub.gomolog.com/1641393954370/c76632ec-0566-4343-b134-7002c12a63aa/avatar3.jpg"/>
                 </div>
                 <div style={{display: "flex", justifyContent: "center", marginTop: '20px'}}>
-                    <input type="file"
-                           name="avatar"
-                           ref={fileRef}
-                           // onChange={onChange}
-                           style={{display: 'none',}}/>
-                    <IconButton onClick={() => fileRef.current.click()}
-                                sx={{
-                                    width: '200px',
-                                    maxHeight: '200px',
-                                    borderRadius: '5px',
-                                    backgroundColor: alpha('#252422', 0.3),
-                                    '&:hover': {
-                                        backgroundColor: alpha('#252422', 0.1)
-                                    }
-                                }}
-                    >
-                        <span style={{fontSize: '16px', color: '#3399ff'}}>+ 上传图片</span>
-                    </IconButton>
+                    <DragAndDrop handleDropFile={handleDrop}>
+                        <input type="file"
+                               name="avatar"
+                               ref={fileRef}
+                               onChange={onAvatarChange}
+                               style={{display: 'none',}}/>
+                        <IconButton onClick={() => fileRef.current.click()}
+                                    sx={{
+                                        width: '200px',
+                                        height: '50px',
+                                        borderRadius: '5px',
+                                        backgroundColor: alpha('#252422', 0.3),
+                                        '&:hover': {
+                                            backgroundColor: alpha('#252422', 0.1)
+                                        }
+                                    }}
+                        >
+                            <span style={{fontSize: '16px', color: '#3399ff'}}>+ 上传图片</span>
+                        </IconButton>
+                        {/*<div style={{*/}
+                        {/*    display:'flex',*/}
+                        {/*    width:'200px',*/}
+                        {/*    height: '50px',*/}
+                        {/*    borderRadius: '5px',*/}
+                        {/*    justifyContent: "center",*/}
+                        {/*    alignItems:"center",*/}
+                        {/*    fontSize: '16px',*/}
+                        {/*    color: '#3399ff'*/}
+                        {/*}}>*/}
+                        {/*   + 上传图片*/}
+                        {/*</div>*/}
+                    </DragAndDrop>
+
+
                 </div>
             </AvatarModal>
         </Box>

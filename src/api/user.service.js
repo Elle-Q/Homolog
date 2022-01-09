@@ -2,17 +2,16 @@ import React from 'react';
 import api from "./api";
 
 class UserService {
-    changeAvatar(avatarFile) {
-        const param = new FormData();
-        avatarFile && param.append("Avatar", avatarFile);
-        param.append("UserId", 1);
-        api.post('/homo-app/user/avatar/update', param)
+    changeAvatar(userId, avatarLink) {
+        api.post('/homo-app/user/avatar/update', {
+            UserId: userId,
+            Avatar: avatarLink
+        })
             .then((resp) => {
-                console.log("热水瓶:", resp)
+                console.log("头像修改成功:", resp)
                return resp;
             });
     }
-
 }
 
 export default new UserService();

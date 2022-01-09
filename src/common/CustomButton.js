@@ -10,7 +10,7 @@ export const SaveButton = (props) => {
             borderColor:'#252422',
             backgroundColor:"transparent",
             fontSize:'12px',
-            color:'text.sixth',
+            color:'secondary.light',
             width:'80px',
             height:'50px',
             '&:hover': {
@@ -32,7 +32,7 @@ export const CancelButton = (props) => {
             borderColor:'#252422',
             backgroundColor:"transparent",
             fontSize:'12px',
-            color:'secondary.light',
+            color:'text.secondary',
             width:'80px',
             height:'50px',
             '&:hover': {

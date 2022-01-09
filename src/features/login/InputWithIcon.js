@@ -5,7 +5,7 @@ import Button from "@mui/material/Button";
 import {alpha} from "@mui/system";
 
 function InputWithIcon(props, ref) {
-    const {onChange, placeholder, icon, type} = props
+    const {onChange, placeholder, icon, type, onMSCodeClick} = props
     const [timer, setTimer] = useState(10);
     const [start, setStart] = useState(false);
 
@@ -20,7 +20,7 @@ function InputWithIcon(props, ref) {
         }, 1000);
     }, [timer, start])
 
-    const makeTimer = () => {
+    const SendMSCode = () => {
         if (start) return
         setStart(true)
         setTimer(10)
@@ -74,7 +74,7 @@ function InputWithIcon(props, ref) {
                     marginLeft: '10px',
                     width:'150px'
                 }}
-                        onClick={makeTimer}
+                        onClick={SendMSCode}
                 >发送验证码
                     {start && timer}</Button>
             }

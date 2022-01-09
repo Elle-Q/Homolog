@@ -30,7 +30,8 @@ function SideBar(props) {
     return (
         <Box sx={{
             display: 'flex',
-            // padding: '20px',
+            pl: '20px',
+            pr: '20px',
             borderRadius: '10px',
             boxShadow: '0 0 3px #0a0908',
             minHeight: '800px',

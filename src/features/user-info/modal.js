@@ -106,7 +106,7 @@ function Modal(props) {
                 }}
             >
                 <FormControlLabel value="female" control={<Radio sx={radioStyle}/>}
-                                  label={<FemaleIcon sx={{color: '#ff7096'}}/>}/>
+                                  label={<FemaleIcon sx={{color: '#ff7096',mr:'10px'}}/>}/>
                 <FormControlLabel value="male" control={<Radio sx={radioStyle}/>}
                                   label={<MaleIcon sx={{color: '#3399ff'}}/>}/>
             </RadioGroup>

@@ -9,6 +9,9 @@ import DialogActions from "@mui/material/DialogActions";
 import {CancelButton, SaveButton} from "./CustomButton";
 
 const ModalDialog = styled(Dialog)(({theme}) => ({
+    '& .MuiPaper-root':{
+        backgroundColor: alpha('#0a0908', 0.9),
+    },
     '& .MuiDialogContent-root': {
         padding: theme.spacing(2),
     },

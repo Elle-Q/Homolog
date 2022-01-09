@@ -20,6 +20,7 @@ import rescIcon from '../../../assets/admin/resc.svg'
 import uploadIcon from '../../../assets/admin/upload.svg'
 import catIcon from '../../../assets/admin/cat.svg'
 import accountIcon from '../../../assets/admin/account.svg'
+import configIcon from '../../../assets/admin/config_s.svg'
 
 function SideBar(props) {
 
@@ -59,10 +60,13 @@ function SideBar(props) {
                             <NavItem to = '/admin/content/cat' icon={catIcon} text="分类" showText={showText} type='sub' />
                         </ListItemButton>
                         <ListItemButton sx={{pl: 4}}>
-                            <NavItem to = '/api' icon={rescIcon} text="资源" showText={showText} type='sub' />
+                            <NavItem to = '/admin/content/item' icon={rescIcon} text="资源" showText={showText} type='sub' />
                         </ListItemButton>
                         <ListItemButton sx={{pl: 4}}>
-                            <NavItem to = '/time' icon={uploadIcon} text="上传" showText={showText} type='sub' />
+                            <NavItem to = '/admin/content/upload' icon={uploadIcon} text="上传" showText={showText} type='sub' />
+                        </ListItemButton>
+                        <ListItemButton sx={{pl: 4}}>
+                            <NavItem to = '/admin/content/config' icon={configIcon} text="配置" showText={showText} type='sub' />
                         </ListItemButton>
                     </List>
                 </Collapse>

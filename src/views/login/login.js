@@ -44,20 +44,25 @@ function Login(props) {
     }
 
     const handleLogin = async () => {
-        //登录
-        if (action === 'signin') {
-            dispatch(login(phoneRef.current.value, passRef.current.value))
+
+        if (action === 'signin') { //登录
+            dispatch(
+                login(
+                    phoneRef.current.value,
+                    passRef.current.value
+                )).then(() => {
+                    navigate('/app'); //跳转到首页
+            })
         } else { // 注册
-            dispatch(signup(
-                userNameRef.current.value,
-                phoneRef.current.value,
-                passRef.current.value,
-                codeRef.current.value,
+            dispatch(
+                signup(
+                    userNameRef.current.value,
+                    phoneRef.current.value,
+                    passRef.current.value,
+                    codeRef.current.value,
                 ))
         }
-        if (isLogin) {
-            navigate('/app');
-        }
+
     }
 
     //todo: 验证手机号， 发送短信获取短信验证码
@@ -132,14 +137,14 @@ function Login(props) {
                                 </React.Fragment>
                         }
 
-                        <div style={{ margin: "40px 40px" }}>
+                        <div style={{margin: "40px 40px"}}>
                             {
                                 action === 'signin' ?
-                                    '没有账号? '  : '已有账号 '
+                                    '没有账号? ' : '已有账号 '
                             }
-                            <Link color="#3399FF" onClick={toggleAction} sx={{cursor:"pointer"}}>{
+                            <Link color="#3399FF" onClick={toggleAction} sx={{cursor: "pointer"}}>{
                                 action === 'signin' ?
-                                    ' 注册'  : ' 登录'
+                                    ' 注册' : ' 登录'
                             }</Link>
                         </div>
 

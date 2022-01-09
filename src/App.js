@@ -8,7 +8,6 @@ import {adminTheme} from "./config/adminTheme";
 import useInterceptor from "./hook/useInterceptor";
 import AlertLog from "./features/alert/AlertLog";
 import Login from "./views/login/login";
-import {CSSTransition, TransitionGroup} from "react-transition-group";
 import "./styles.css";
 
 export const ColorModeContext = React.createContext({

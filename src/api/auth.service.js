@@ -2,6 +2,7 @@ import TokenService from './token.service'
 import UserService from './user.service'
 import {loginFail, loginSuccess, registerFail, registerSuccess} from "./authSlice";
 import api from "./api";
+import {useNavigate} from "react-router-dom";
 
 class AuthService {
     login(username, password) {
@@ -46,7 +47,6 @@ export const signup = (username, phone, password, code) => (dispatch) => {
     return authService.signup(username, phone, password, code).then(
         resp => {
             dispatch(registerSuccess())
-
             return Promise.resolve();
         },
         err => {
@@ -61,8 +61,7 @@ export const login = (username, password) => (dispatch) => {
     return authService.login(username, password).then(
         resp => {
             dispatch(loginSuccess({user:resp.User}));
-
-            return Promise.resolve();
+            return resp;
         },
         err => {
             dispatch(loginFail());

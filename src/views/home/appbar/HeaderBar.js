@@ -30,6 +30,8 @@ import AppLogo from "../../../common/AppLogo";
 import {StyledBadge} from "../../../common/StyledBadge";
 import {useSelector} from "react-redux";
 import {selectAuth} from "../../../api/authSlice";
+import AdminPanelSettingsRoundedIcon from '@mui/icons-material/AdminPanelSettingsRounded';
+
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -163,7 +165,6 @@ function HeaderBar(props) {
                         <Button size="large" color="inherit"
                                 component={Link} to={"/app/category/animation"}>
                             <img style={{width:20, height:20}} alt ="category" title="分类" src={categoryS}/>
-                            {/*<RestoreOutlinedIcon fontSize="small"/>*/}
                         </Button>
                         <Button size="large" color="inherit">
                             <Badge badgeContent={4} color="error">
@@ -179,6 +180,14 @@ function HeaderBar(props) {
                                 <NotificationsIcon fontSize="small"/>
                             </Badge>
                         </Button>
+                        {
+                            user.Admin &&
+                            <Button size="large" color="inherit"
+                                    component={Link} to={"/admin"}>
+                                <AdminPanelSettingsRoundedIcon fontSize="small"/>
+                            </Button>
+                        }
+
                         <StyledBadge
                             overlap="circular"
                             anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}
@@ -192,8 +201,6 @@ function HeaderBar(props) {
                     </Stack>
                 </Toolbar>
             </AppBar>
-            {/*{renderMobileMenu}*/}
-            {/*{renderMenu}*/}
         </Box>
     );
 }

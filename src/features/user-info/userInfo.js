@@ -8,7 +8,6 @@ import EditIcon from '@mui/icons-material/Edit';
 import IconButton from "@mui/material/IconButton";
 import {Drawer} from "@mui/material";
 import LogoutIcon from '@mui/icons-material/Logout';
-import api from "../../api/api";
 import {default as AvatarModal} from "../../common/Modal";
 import {default as InfoModal} from "./modal";
 import UserService from "../../api/user.service";
@@ -59,6 +58,10 @@ function UserInfo(props) {
     useEffect(() => {
         avatarFile && setAvatarUri(URL.createObjectURL(avatarFile));
     },[avatarFile])
+
+    useEffect(() => {
+
+    })
 
     const toggleDrawer = open => () => {
         setDrawerOpen(open)

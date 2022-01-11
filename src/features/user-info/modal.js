@@ -64,9 +64,9 @@ const radioStyle = {
 }
 
 function Modal(props) {
-
-    const [gender, setGender] = React.useState('female');
-    const [userStatus, setUserStatus] = React.useState('online');
+    const {user} = props
+    const [gender, setGender] = React.useState(user.Gender);
+    const [userStatus, setUserStatus] = React.useState(user.Status);
 
     const handleGenderChange = (event) => {
         setGender(event.target.value);
@@ -131,7 +131,7 @@ function Modal(props) {
                     }
                 }}
             >
-                <Avatar alt="elle" src="/avatar/avatar1.jpg"
+                <Avatar alt="elle" src={user.Avatar}
                         sx={{
                             width: 120,
                             height: 120,
@@ -139,8 +139,8 @@ function Modal(props) {
                         }}/>
             </StyledBadge>
 
-            <CusInput label="昵称" defaultValue="Elle Qu" inputProps={inputProps}/>
-            <CusInput label="手机号" defaultValue="19542813042" inputProps={inputProps}/>
+            <CusInput label="昵称" defaultValue={user.Name} inputProps={inputProps}/>
+            <CusInput label="手机号" defaultValue={user.Phone} inputProps={inputProps}/>
             <GenderRadio/>
             <div style={{marginTop: '30px', color: '#403D39'}}>
                 <span style={{marginLeft: '10px', color: '#403D39', display:'block'}}>背景图片</span>

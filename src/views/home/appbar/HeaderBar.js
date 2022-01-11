@@ -28,10 +28,11 @@ import categoryB from '../../../assets/category_B.svg'
 import MultilevelMenu from "../../../features/menu/MultilevelMenu";
 import AppLogo from "../../../common/AppLogo";
 import {StyledBadge} from "../../../common/StyledBadge";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {selectAuth} from "../../../api/authSlice";
 import AdminPanelSettingsRoundedIcon from '@mui/icons-material/AdminPanelSettingsRounded';
-
+import {useEffect, useState} from "react";
+import UserService, {getUser} from '../../../api/user.service'
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -63,9 +64,11 @@ function HeaderBar(props) {
     const theme = useTheme();
     const navigate = useNavigate();
 
+    const {isLogin, userId, user} = useSelector(selectAuth);
     const colorMode = React.useContext(ColorModeContext);
     const [showMenu,setShowMenu] = React.useState(false);
-    const {isLogin, user} = useSelector(selectAuth);
+    const dispatch = useDispatch();
+
     const suggestions = suggetionJson.map((s) => s.label);
 
     const enterAccount = (e) => {
@@ -76,6 +79,15 @@ function HeaderBar(props) {
             navigate('/login');
         }
     };
+
+    useEffect(() => {
+        if (user) return
+        dispatch(getUser(userId))
+        // UserService.getUser(userId).then(
+        //     resp => setUser(resp)
+        // )
+    }, [])
+
 
     return (
         <Box sx={{flexGrow: 1, boxShadow:"none", position:"sticky", zIndex:50, top:0}}>
@@ -181,7 +193,7 @@ function HeaderBar(props) {
                             </Badge>
                         </Button>
                         {
-                            user.Admin &&
+                            user && user.Admin &&
                             <Button size="large" color="inherit"
                                     component={Link} to={"/admin"}>
                                 <AdminPanelSettingsRoundedIcon fontSize="small"/>
@@ -196,7 +208,7 @@ function HeaderBar(props) {
                             to={"/"}
                             onClick={enterAccount}
                         >
-                            <Avatar alt="elle" src={user.Avatar}/>
+                            <Avatar alt="elle" src={user && user.Avatar}/>
                         </StyledBadge>
                     </Stack>
                 </Toolbar>

@@ -1,7 +1,6 @@
 import React from 'react';
 import Box from "@mui/material/Box";
 import bg from '../../assets/bg/bg2.jpg'
-import Avatar from "@mui/material/Avatar";
 import UserInfo from "../../features/user-info/userInfo";
 import TabBar from "../../common/TabBar";
 

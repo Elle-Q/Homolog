@@ -33,7 +33,6 @@ export default function useInterceptor(props) {
             return config
         },
         error => {
-            debugger
             return Promise.reject(error);
         });
 
@@ -45,7 +44,6 @@ export default function useInterceptor(props) {
             return data
         },
         error => {
-            debugger
             const originalConfig = error.config;
 
             if (error.response) {

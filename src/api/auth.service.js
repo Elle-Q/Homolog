@@ -1,8 +1,6 @@
 import TokenService from './token.service'
-import UserService from './user.service'
 import {loginFail, loginSuccess, registerFail, registerSuccess} from "./authSlice";
 import api from "./api";
-import {useNavigate} from "react-router-dom";
 
 class AuthService {
     login(username, password) {
@@ -18,6 +16,8 @@ class AuthService {
                         AccessToken: resp.AccessToken,
                         RefreshToken: resp.RefreshToken,
                     });
+                    //设置User
+                    TokenService.setUser(resp.User.ID);
                     return resp;
                 }
             },
@@ -27,7 +27,7 @@ class AuthService {
     }
 
     logout() {
-        TokenService.removeTokens();
+        TokenService.removeAuth();
         window.location = "/app";
     }
 

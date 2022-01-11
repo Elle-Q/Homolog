@@ -10,12 +10,13 @@ import {Drawer} from "@mui/material";
 import LogoutIcon from '@mui/icons-material/Logout';
 import {default as AvatarModal} from "../../common/Modal";
 import {default as InfoModal} from "./modal";
-import UserService from "../../api/user.service";
 import {authService} from "../../api/auth.service";
-import {useSelector} from "react-redux";
-import {selectAuth} from "../../api/authSlice";
+import {useDispatch, useSelector} from "react-redux";
+import {selectAuth, setUser} from "../../api/authSlice";
 import {upload} from "../../api/qiniu.service";
 import DragAndDrop from "../../common/DragAndDrop";
+import {getDefaultAvatar} from "../../api/config.service";
+import {changeAvatar, getUser, updateAvatar} from "../../api/user.service";
 
 const StyledTypography = styled(Typography)({
     color: '#bbb',
@@ -49,19 +50,21 @@ const ActionButton = (props) => {
 function UserInfo(props) {
 
     const fileRef = createRef();
+    const {userId, user} = useSelector(selectAuth);
     const [drawerOpen, setDrawerOpen] = useState();
     const [openModal, setOpenModal] = useState(false);
-    const {user} = useSelector(selectAuth);
-    const [avatarUri, setAvatarUri] = useState(user.Avatar);
+    const [avatarUri, setAvatarUri] = useState(null);
     const [avatarFile, setAvatarFile] = useState(null);
+    const [defaultAvatars, setDefaultAvatars] = useState([]);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         avatarFile && setAvatarUri(URL.createObjectURL(avatarFile));
     },[avatarFile])
 
     useEffect(() => {
-
-    })
+        user && setAvatarUri(user.Avatar)
+    }, [user])
 
     const toggleDrawer = open => () => {
         setDrawerOpen(open)
@@ -78,23 +81,37 @@ function UserInfo(props) {
     }
 
     const handleDrop = (files) => {
-        console.log(files)
         setAvatarFile(files[0])
     }
 
     function changeAvatar() {
         //上传头像到qiniu
-        let link = upload(avatarFile);
-        setAvatarUri(link)
-        //更新数据库
-        UserService.changeAvatar(user.Id, link)
+        upload(avatarFile).then((link) => {
+            debugger
+            // dispatch(setUser({
+            //     ...user,
+            //     Avatar: link
+            // }))
+            //更新数据库
+            dispatch(updateAvatar(user.ID, link))
+            setOpenModal(false)
+        })
+
+    }
+
+    const onClickAvatar = () => {
+        setOpenModal(true)
+        //获取默认头像
+        getDefaultAvatar().then(resp => {
+            setDefaultAvatars(resp)
+        })
     }
 
     const AvatarWithEdit = () => {
         return (
             <div style={{marginBottom: '100px'}}>
                 <Avatar alt="elle"
-                        src={user.Avatar}
+                        src={avatarUri}
                         sx={{
                             width: 120,
                             height: 120,
@@ -103,7 +120,7 @@ function UserInfo(props) {
                             boxShadow: '0 0 5px #403D39',
                             cursor: "pointer"
                         }}
-                        onClick={() => setOpenModal(true)}
+                        onClick={onClickAvatar}
                 />
                 <ActionButton icon={<EditIcon/>} name="edit" onClick={toggleDrawer(true)}/>
                 <ActionButton icon={<LogoutIcon/>} name="logout" onClick={logout}/>
@@ -111,6 +128,10 @@ function UserInfo(props) {
         )
     }
 
+
+    function renderDefaluAvatars() {
+        defaultAvatars.map()
+    }
 
     return (
         <Box sx={{mb: '20px', textAlign: "center"}}>
@@ -124,11 +145,11 @@ function UserInfo(props) {
                 open={drawerOpen}
                 onClose={toggleDrawer(false)}
             >
-                <InfoModal/>
+                <InfoModal user={user}/>
             </Drawer>
 
             <Typography variant="h6" sx={{display: {xs: 'none', sm: 'block'}}}>
-                ELLE QU
+                {user && user.Name}
             </Typography>
 
             <Typography variant="body" sx={{
@@ -137,7 +158,7 @@ function UserInfo(props) {
                 fontSize: '14px',
                 textShadow: '1px 1px 2px rgb(0 0 0 / 37%)'
             }}>
-                我 小可爱
+                {user && user.Moto}
             </Typography>
             <StyledTypography>
                 <RoomOutlinedIcon fontSize="small"/>shanghai, china
@@ -147,7 +168,8 @@ function UserInfo(props) {
                          maxWidth="sm"
                          open={openModal}
                          handleClose={() => {
-                             setOpenModal(false)
+                             setOpenModal(false);
+                             setAvatarUri(user.Avatar)
                          }}
                          handleSave={changeAvatar}
             >
@@ -166,20 +188,15 @@ function UserInfo(props) {
                 </div>
 
                 <div style={{display: "flex", justifyContent: "center", marginTop: '150px'}}>
-                    <img alt="preview" style={{width: '55px', height: '55px', marginRight: '10px', borderRadius: '50%'}}
-                         src="http://pub.gomolog.com/1641393954370/c76632ec-0566-4343-b134-7002c12a63aa/avatar3.jpg"/>
-                    <img alt="preview" style={{width: '55px', height: '55px', marginRight: '10px', borderRadius: '50%'}}
-                         src="http://pub.gomolog.com/1641393954370/c76632ec-0566-4343-b134-7002c12a63aa/avatar3.jpg"/>
-                    <img alt="preview" style={{width: '55px', height: '55px', marginRight: '10px', borderRadius: '50%'}}
-                         src="http://pub.gomolog.com/1641393954370/c76632ec-0566-4343-b134-7002c12a63aa/avatar3.jpg"/>
-                    <img alt="preview" style={{width: '55px', height: '55px', marginRight: '10px', borderRadius: '50%'}}
-                         src="http://pub.gomolog.com/1641393954370/c76632ec-0566-4343-b134-7002c12a63aa/avatar3.jpg"/>
-                    <img alt="preview" style={{width: '55px', height: '55px', marginRight: '10px', borderRadius: '50%'}}
-                         src="http://pub.gomolog.com/1641393954370/c76632ec-0566-4343-b134-7002c12a63aa/avatar3.jpg"/>
-                    <img alt="preview" style={{width: '55px', height: '55px', marginRight: '10px', borderRadius: '50%'}}
-                         src="http://pub.gomolog.com/1641393954370/c76632ec-0566-4343-b134-7002c12a63aa/avatar3.jpg"/>
-                    <img alt="preview" style={{width: '55px', height: '55px', marginRight: '10px', borderRadius: '50%'}}
-                         src="http://pub.gomolog.com/1641393954370/c76632ec-0566-4343-b134-7002c12a63aa/avatar3.jpg"/>
+                    {
+                        defaultAvatars.map((link, index) =>
+                            (<img alt="default_avatar"
+                                 style={{width: '55px', height: '55px', marginRight: '10px', borderRadius: '50%'}}
+                                 src={link}
+                                  onClick={() => setAvatarUri(link)}
+                                />
+                            ))
+                    }
                 </div>
                 <div style={{display: "flex", justifyContent: "center", marginTop: '20px'}}>
                     <DragAndDrop handleDropFile={handleDrop}>
@@ -201,18 +218,7 @@ function UserInfo(props) {
                         >
                             <span style={{fontSize: '16px', color: '#3399ff'}}>+ 上传图片</span>
                         </IconButton>
-                        {/*<div style={{*/}
-                        {/*    display:'flex',*/}
-                        {/*    width:'200px',*/}
-                        {/*    height: '50px',*/}
-                        {/*    borderRadius: '5px',*/}
-                        {/*    justifyContent: "center",*/}
-                        {/*    alignItems:"center",*/}
-                        {/*    fontSize: '16px',*/}
-                        {/*    color: '#3399ff'*/}
-                        {/*}}>*/}
-                        {/*   + 上传图片*/}
-                        {/*</div>*/}
+
                     </DragAndDrop>
 
 

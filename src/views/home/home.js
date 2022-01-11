@@ -24,7 +24,7 @@ function Home(props) {
     const AnimatedSwitch = () => {
         const location = useLocation();
         return (
-            <TransitionGroup class="router-wrapper">
+            <TransitionGroup className="router-wrapper">
                 <CSSTransition
                     key={location.key}
                     timeout={2000}

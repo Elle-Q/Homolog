@@ -17,16 +17,17 @@ class TokenService {
         localStorage.setItem("tokens", JSON.stringify(tokens))
     }
 
-    getUser() {
-        return JSON.parse(localStorage.getItem("user"))
-    }
-
     setTokens(tokens) {
         localStorage.setItem("tokens", JSON.stringify(tokens))
     }
 
-    removeTokens() {
+    removeAuth() {
         localStorage.removeItem("tokens");
+        localStorage.removeItem("userId")
+    }
+
+    setUser(userId) {
+        localStorage.setItem("userId", JSON.stringify(userId))
     }
 }
 

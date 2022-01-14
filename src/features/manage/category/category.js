@@ -17,9 +17,13 @@ import {useDispatch} from "react-redux";
 import {open} from "./catSlice";
 import {openAlert} from "../../alert/alertSlice";
 import api from "../../../api/api";
+import bg from "../../../assets/bg/bg2.jpg";
+import IconButton from "@mui/material/IconButton";
+import {alpha} from "@mui/material/styles";
+import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
 
 function Category(props) {
-    const [cats, setCats] = useState();
+    const [cats, setCats] = useState([]);
     const dispatch = useDispatch();
 
     React.useEffect(() => {
@@ -27,8 +31,6 @@ function Category(props) {
             setCats(data)
         })
     }, [])
-
-    if (!cats) return null;
 
     const handleAddClick = () =>
         dispatch(
@@ -64,7 +66,6 @@ function Category(props) {
                             <StyledTableCell>id</StyledTableCell>
                             <StyledTableCell align="center">标题</StyledTableCell>
                             <StyledTableCell align="center">副标题</StyledTableCell>
-                            <StyledTableCell align="center">主图</StyledTableCell>
                             <StyledTableCell align="center">描述</StyledTableCell>
                             <StyledTableCell align="center">状态</StyledTableCell>
                             <StyledTableCell align="center">资源数量</StyledTableCell>
@@ -74,14 +75,14 @@ function Category(props) {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {cats.map((row) => (
+                        {
+                            cats.map((row) => (
                             <StyledTableRow key={row.ID}>
                                 <StyledTableCell component="th" scope="row">
                                     {row.ID}
                                 </StyledTableCell>
                                 <StyledTableCell align="center">{row.Title}</StyledTableCell>
                                 <StyledTableCell align="center">{row.SubTitle}</StyledTableCell>
-                                <StyledTableCell align="center">{row.Preview}</StyledTableCell>
                                 <StyledTableCell align="center">{row.Desc}</StyledTableCell>
                                 <StyledTableCell align="center">
                                     <span style={{

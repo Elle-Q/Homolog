@@ -60,7 +60,7 @@ function UserInfo(props) {
 
     useEffect(() => {
         avatarFile && setAvatarUri(URL.createObjectURL(avatarFile));
-    },[avatarFile])
+    }, [avatarFile])
 
     useEffect(() => {
         user && setAvatarUri(user.Avatar)
@@ -128,9 +128,11 @@ function UserInfo(props) {
         )
     }
 
-
-    function renderDefaluAvatars() {
-        defaultAvatars.map()
+    const defaultAvatarClick = (link) => {
+        return () => {
+            setAvatarUri(link)
+            setAvatarFile(null)
+        }
     }
 
     return (
@@ -191,9 +193,9 @@ function UserInfo(props) {
                     {
                         defaultAvatars.map((link, index) =>
                             (<img alt="default_avatar"
-                                 style={{width: '55px', height: '55px', marginRight: '10px', borderRadius: '50%'}}
-                                 src={link}
-                                  onClick={() => setAvatarUri(link)}
+                                  style={{width: '55px', height: '55px', marginRight: '10px', borderRadius: '50%'}}
+                                  src={link}
+                                  onClick={defaultAvatarClick(link)}
                                 />
                             ))
                     }

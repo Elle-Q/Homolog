@@ -64,7 +64,7 @@ const radioStyle = {
 }
 
 function Modal(props) {
-    const {user} = props
+    const {user, handleSave} = props
     const [gender, setGender] = React.useState(user.Gender);
     const [userStatus, setUserStatus] = React.useState(user.Status);
 

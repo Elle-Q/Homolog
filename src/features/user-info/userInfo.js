@@ -87,11 +87,6 @@ function UserInfo(props) {
     function changeAvatar() {
         //上传头像到qiniu
         upload(avatarFile).then((link) => {
-            debugger
-            // dispatch(setUser({
-            //     ...user,
-            //     Avatar: link
-            // }))
             //更新数据库
             dispatch(updateAvatar(user.ID, link))
             setOpenModal(false)
@@ -126,11 +121,6 @@ function UserInfo(props) {
                 <ActionButton icon={<LogoutIcon/>} name="logout" onClick={logout}/>
             </div>
         )
-    }
-
-
-    function renderDefaluAvatars() {
-        defaultAvatars.map()
     }
 
     return (

@@ -31,8 +31,9 @@ import {StyledBadge} from "../../../common/StyledBadge";
 import {useDispatch, useSelector} from "react-redux";
 import {selectAuth} from "../../../api/authSlice";
 import AdminPanelSettingsRoundedIcon from '@mui/icons-material/AdminPanelSettingsRounded';
-import {useEffect, useState} from "react";
-import UserService, {getUser} from '../../../api/user.service'
+import {useEffect} from "react";
+import {getUser} from '../../../api/user.service'
+import {getColorFromUserStatus} from "../../../utils/ToolUtil";
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -63,7 +64,6 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
 function HeaderBar(props) {
     const theme = useTheme();
     const navigate = useNavigate();
-
     const {isLogin, userId, user} = useSelector(selectAuth);
     const colorMode = React.useContext(ColorModeContext);
     const [showMenu,setShowMenu] = React.useState(false);
@@ -83,9 +83,6 @@ function HeaderBar(props) {
     useEffect(() => {
         if (user) return
         dispatch(getUser(userId))
-        // UserService.getUser(userId).then(
-        //     resp => setUser(resp)
-        // )
     }, [])
 
 
@@ -124,7 +121,6 @@ function HeaderBar(props) {
                                 paddingLeft: `calc(1em + ${theme.spacing(4)})`,
                                 border: "none",
                                 borderRadius: '50px',
-                                // boxShadow: '0 0 5px #3399FF',
                                 boxShadow: '0 0 5px #3399FF',
                                 '&:hover': {
                                     backgroundColor: alpha(theme.palette.primary.main, 0.25),
@@ -207,6 +203,12 @@ function HeaderBar(props) {
                             component={Link}
                             to={"/"}
                             onClick={enterAccount}
+                            sx={{
+                                '& .MuiBadge-badge': {
+                                    backgroundColor: user && getColorFromUserStatus(user.Status),
+                                    color: user && getColorFromUserStatus(user.Status),
+                                }
+                            }}
                         >
                             <Avatar alt="elle" src={user && user.Avatar}/>
                         </StyledBadge>

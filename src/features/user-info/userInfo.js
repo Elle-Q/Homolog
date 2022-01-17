@@ -6,17 +6,13 @@ import RoomOutlinedIcon from '@mui/icons-material/RoomOutlined';
 import {alpha, styled} from '@mui/material/styles';
 import EditIcon from '@mui/icons-material/Edit';
 import IconButton from "@mui/material/IconButton";
-import {Drawer} from "@mui/material";
 import LogoutIcon from '@mui/icons-material/Logout';
-import {default as AvatarModal} from "../../common/Modal";
-import {default as InfoModal} from "./modal";
 import {authService} from "../../api/auth.service";
-import {useDispatch, useSelector} from "react-redux";
-import {selectAuth, setUser} from "../../api/authSlice";
-import {upload} from "../../api/qiniu.service";
-import DragAndDrop from "../../common/DragAndDrop";
+import {useSelector} from "react-redux";
+import {selectAuth} from "../../api/authSlice";
 import {getDefaultAvatar} from "../../api/config.service";
-import {changeAvatar, getUser, updateAvatar} from "../../api/user.service";
+import UserDrawer from "./user-drawer";
+import AvatarEditModal from "./avatar-edit-modal";
 
 const StyledTypography = styled(Typography)({
     color: '#bbb',
@@ -49,18 +45,12 @@ const ActionButton = (props) => {
 
 function UserInfo(props) {
 
-    const fileRef = createRef();
-    const {userId, user} = useSelector(selectAuth);
+    const { user} = useSelector(selectAuth);
     const [drawerOpen, setDrawerOpen] = useState();
     const [openModal, setOpenModal] = useState(false);
     const [avatarUri, setAvatarUri] = useState(null);
-    const [avatarFile, setAvatarFile] = useState(null);
     const [defaultAvatars, setDefaultAvatars] = useState([]);
-    const dispatch = useDispatch();
 
-    useEffect(() => {
-        avatarFile && setAvatarUri(URL.createObjectURL(avatarFile));
-    }, [avatarFile])
 
     useEffect(() => {
         user && setAvatarUri(user.Avatar)
@@ -70,35 +60,17 @@ function UserInfo(props) {
         setDrawerOpen(open)
     }
 
+    //注销账号
     const logout = async () => {
         authService.logout()
     }
 
-    const onAvatarChange = (event) => {
-        if (event.target.type === 'file') {
-            setAvatarFile(event.target.files[0]);
-        }
-    }
+    const handleClose = () => {
+        setOpenModal(false);
+        // setAvatarUri(user.Avatar)
+    };
 
-    const handleDrop = (files) => {
-        setAvatarFile(files[0])
-    }
-
-    function changeAvatar() {
-        //上传头像到qiniu
-        upload(avatarFile).then((link) => {
-            debugger
-            // dispatch(setUser({
-            //     ...user,
-            //     Avatar: link
-            // }))
-            //更新数据库
-            dispatch(updateAvatar(user.ID, link))
-            setOpenModal(false)
-        })
-
-    }
-
+    //点击头像获取默认头像集合
     const onClickAvatar = () => {
         setOpenModal(true)
         //获取默认头像
@@ -107,6 +79,7 @@ function UserInfo(props) {
         })
     }
 
+    //带有编辑和注销按钮的头像结合体!(结合体! 哈哈`)
     const AvatarWithEdit = () => {
         return (
             <div style={{marginBottom: '100px'}}>
@@ -128,27 +101,15 @@ function UserInfo(props) {
         )
     }
 
-    const defaultAvatarClick = (link) => {
-        return () => {
-            setAvatarUri(link)
-            setAvatarFile(null)
-        }
-    }
 
     return (
         <Box sx={{mb: '20px', textAlign: "center"}}>
             <AvatarWithEdit/>
-            <Drawer
-                PaperProps={{
-                    sx: {
-                        backgroundColor: alpha('#252422', 0.9),
-                    }
-                }}
+            <UserDrawer
+                user={user}
+                toggleDrawer={toggleDrawer}
                 open={drawerOpen}
-                onClose={toggleDrawer(false)}
-            >
-                <InfoModal user={user}/>
-            </Drawer>
+            />
 
             <Typography variant="h6" sx={{display: {xs: 'none', sm: 'block'}}}>
                 {user && user.Name}
@@ -162,70 +123,18 @@ function UserInfo(props) {
             }}>
                 {user && user.Moto}
             </Typography>
+
             <StyledTypography>
                 <RoomOutlinedIcon fontSize="small"/>shanghai, china
             </StyledTypography>
 
-            <AvatarModal title="修改头像"
-                         maxWidth="sm"
-                         open={openModal}
-                         handleClose={() => {
-                             setOpenModal(false);
-                             setAvatarUri(user.Avatar)
-                         }}
-                         handleSave={changeAvatar}
-            >
+            <AvatarEditModal
+                user={user}
+                open={openModal}
+                handleClose={handleClose}
+                defaultAvatars={defaultAvatars}
+            />
 
-                <div style={{display: "flex", justifyContent: "center"}}>
-                    <Avatar alt="elle"
-                            src={avatarUri}
-                            sx={{
-                                width: 120,
-                                height: 120,
-                                position: "absolute",
-                                boxShadow: '0 0 5px #403D39',
-                                cursor: "pointer"
-                            }}
-                    />
-                </div>
-
-                <div style={{display: "flex", justifyContent: "center", marginTop: '150px'}}>
-                    {
-                        defaultAvatars.map((link, index) =>
-                            (<img alt="default_avatar"
-                                  style={{width: '55px', height: '55px', marginRight: '10px', borderRadius: '50%'}}
-                                  src={link}
-                                  onClick={defaultAvatarClick(link)}
-                                />
-                            ))
-                    }
-                </div>
-                <div style={{display: "flex", justifyContent: "center", marginTop: '20px'}}>
-                    <DragAndDrop handleDropFile={handleDrop}>
-                        <input type="file"
-                               name="avatar"
-                               ref={fileRef}
-                               onChange={onAvatarChange}
-                               style={{display: 'none',}}/>
-                        <IconButton onClick={() => fileRef.current.click()}
-                                    sx={{
-                                        width: '200px',
-                                        height: '50px',
-                                        borderRadius: '5px',
-                                        backgroundColor: alpha('#252422', 0.3),
-                                        '&:hover': {
-                                            backgroundColor: alpha('#252422', 0.1)
-                                        }
-                                    }}
-                        >
-                            <span style={{fontSize: '16px', color: '#3399ff'}}>+ 上传图片</span>
-                        </IconButton>
-
-                    </DragAndDrop>
-
-
-                </div>
-            </AvatarModal>
         </Box>
     );
 }

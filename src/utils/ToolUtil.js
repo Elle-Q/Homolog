@@ -14,3 +14,14 @@ export function getStarIcons(score, width, height){
     return stars;
 }
 
+
+export function getColorFromUserStatus(status) {
+    switch (status) {
+        case 'online':
+            return '#44b700'
+        case 'offline':
+            return '#252422'
+        case 'busy':
+            return '#FF0000'
+    }
+}

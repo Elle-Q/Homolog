@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {createRef} from 'react';
 import Avatar from "@mui/material/Avatar";
 import {alpha, styled} from '@mui/material/styles';
 import TextField from "@mui/material/TextField";
@@ -13,6 +13,10 @@ import {CancelButton, SaveButton} from "../../common/CustomButton";
 import ChangeCircleIcon from '@mui/icons-material/ChangeCircle';
 import IconButton from "@mui/material/IconButton";
 import bg from '../../assets/bg/bg2.jpg'
+import {useDispatch, useSelector} from "react-redux";
+import {selectAuth} from "../../api/authSlice";
+import {updateUser} from "../../api/user.service";
+import {getColorFromUserStatus} from "../../utils/ToolUtil";
 
 const CusInput = styled(TextField)({
     display: "flex",
@@ -64,28 +68,35 @@ const radioStyle = {
 }
 
 function Modal(props) {
-    const {user} = props
-    const [gender, setGender] = React.useState(user.Gender);
-    const [userStatus, setUserStatus] = React.useState(user.Status);
+    const {toggleDrawer} = props;
+    const dispatch = useDispatch();
+    const {user} = useSelector(selectAuth);
+    const [userDetail, setUserDetail] = React.useState(user);
+    const nameRef = React.createRef();
+    const phoneRef = React.createRef();
 
     const handleGenderChange = (event) => {
-        setGender(event.target.value);
+        setUserDetail({
+            ...userDetail,
+            Gender:event.target.value
+        })
     };
 
     const handleUserStatusChange = (event) => {
-        setUserStatus(event.target.value);
+        setUserDetail({
+            ...userDetail,
+            Status:event.target.value
+        })
     };
 
-
-    function getColorFromUserStatus() {
-        switch (userStatus) {
-            case 'online':
-                return '#44b700'
-            case 'offline':
-                return '#252422'
-            case 'busy':
-                return '#FF0000'
-        }
+    const handleSave = () => {
+        dispatch(updateUser({
+            ...userDetail,
+            Name: nameRef.current.value,
+            Phone: phoneRef.current.value
+        }))
+        //关闭侧边栏
+        toggleDrawer(false)()
     }
 
     const GenderRadio = () => (
@@ -94,7 +105,7 @@ function Modal(props) {
             <RadioGroup
                 aria-label="gender"
                 name="controlled-radio-buttons-group"
-                value={gender}
+                value={userDetail.Gender}
                 onChange={handleGenderChange}
                 row={true}
                 sx={{
@@ -125,13 +136,13 @@ function Modal(props) {
                         width: '12px',
                         height: '12px',
                         borderRadius: '50%',
-                        backgroundColor: getColorFromUserStatus(),
-                        color: getColorFromUserStatus(),
+                        backgroundColor: getColorFromUserStatus(userDetail.Status),
+                        color: getColorFromUserStatus(userDetail.Status),
                         boxShadow: `0 0 0 3px #000`,
                     }
                 }}
             >
-                <Avatar alt="elle" src={user.Avatar}
+                <Avatar alt="elle" src={userDetail.Avatar}
                         sx={{
                             width: 120,
                             height: 120,
@@ -139,8 +150,8 @@ function Modal(props) {
                         }}/>
             </StyledBadge>
 
-            <CusInput label="昵称" defaultValue={user.Name} inputProps={inputProps}/>
-            <CusInput label="手机号" defaultValue={user.Phone} inputProps={inputProps}/>
+            <CusInput label="昵称" inputRef ={nameRef} defaultValue={userDetail.Name} inputProps={inputProps}/>
+            <CusInput label="手机号" inputRef ={phoneRef} defaultValue={userDetail.Phone} inputProps={inputProps}/>
             <GenderRadio/>
             <div style={{marginTop: '30px', color: '#403D39'}}>
                 <span style={{marginLeft: '10px', color: '#403D39', display:'block'}}>背景图片</span>
@@ -156,7 +167,7 @@ function Modal(props) {
             <CusInput
                 select
                 label="状态 (即时生效)"
-                value={userStatus}
+                value={userDetail.Status}
                 inputProps={inputProps}
                 onChange={handleUserStatusChange}
             >
@@ -169,7 +180,7 @@ function Modal(props) {
 
             <div style={{marginTop:'30px', padding:'20px'}}>
                 <CancelButton/>
-                <SaveButton/>
+                <SaveButton handleClick={handleSave} />
             </div>
 
         </div>

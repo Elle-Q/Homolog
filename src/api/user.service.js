@@ -4,7 +4,6 @@ import {loginSuccess, setAvatar, setUser} from "./authSlice";
 
 class UserService {
     changeAvatar(userId, avatarLink) {
-        debugger
         return api.post('/homo-app/user/avatar/update', {
             UserId: userId,
             Avatar: avatarLink
@@ -17,6 +16,13 @@ class UserService {
 
     getUser(userId) {
        return api.get(`/homo-app/user/${userId}`)
+            .then((resp) => {
+                return resp
+            });
+    }
+
+    update(user) {
+        return api.post(`/homo-app/user/update`, user)
             .then((resp) => {
                 return resp
             });
@@ -39,6 +45,15 @@ export const updateAvatar = (userId, link) => (dispatch) => {
     userService.changeAvatar(userId, link).then(
         resp => {
             dispatch(setAvatar(link))
+            return resp
+        }
+    )
+}
+
+export const updateUser = (user) => (dispatch) => {
+    userService.update(user).then(
+        resp => {
+            dispatch(setUser(user))
             return resp
         }
     )

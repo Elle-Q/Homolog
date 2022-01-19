@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {CatStatus} from "../../../common/constant/constant";
-import {ImagInputWithHeader, InputWithHeader, SelectInputWithHeader} from "../../../common/CustomInput";
-import Modal from "../../../common/Modal";
+import {ImagInputWithHeader, InputWithHeader, SelectInputWithHeader} from "../../../common/custom-input";
+import Modal from "../../../common/modal";
 import api from "../../../api/api";
 import {selectCatModal, close} from "./catSlice";
 import { useSelector, useDispatch } from 'react-redux'

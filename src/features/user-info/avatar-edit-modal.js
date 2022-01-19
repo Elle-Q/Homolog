@@ -1,9 +1,9 @@
 import React, {createRef, useEffect, useState} from "react";
 import Avatar from "@mui/material/Avatar";
-import DragAndDrop from "../../common/DragAndDrop";
+import DragDrop from "../../common/drag-drop";
 import IconButton from "@mui/material/IconButton";
 import {alpha} from "@mui/material/styles";
-import {default as AvatarModal} from "../../common/Modal";
+import {default as AvatarModal} from "../../common/modal";
 import {updateAvatar} from "../../api/user.service";
 import {upload} from "../../api/qiniu.service";
 import {useDispatch, useSelector} from "react-redux";
@@ -15,7 +15,6 @@ function AvatarEditModal(props) {
 
     const [avatarUri, setAvatarUri] = useState(null);
     const [avatarFile, setAvatarFile] = useState(null);
-    const [hovered, setHovered] = useState(false);
 
     const dispatch = useDispatch();
     const fileRef = createRef();
@@ -29,25 +28,30 @@ function AvatarEditModal(props) {
     }, [avatarFile])
 
 
+    //点击任意默认头像, 设置头像预览
     const defaultAvatarClick = (link) => {
+
         return () => {
             setAvatarUri(link)
             setAvatarFile(null)
         }
     }
 
+    //上传本地文件(点击), 预览
     const onAvatarChange = (event) => {
         if (event.target.type === 'file') {
             setAvatarFile(event.target.files[0]);
         }
     }
 
+    //上传本地文件(拖拽), 预览
     const handleDrop = (files) => {
         setAvatarFile(files[0])
     }
 
     //修改头像(上传七牛, 更新数据库)
     function changeAvatar() {
+
         if (!avatarFile) {
             dispatch(updateAvatar(user.ID, avatarUri))
             handleClose()
@@ -97,14 +101,12 @@ function AvatarEditModal(props) {
                                 }}
                                 src={link}
                                 onClick={defaultAvatarClick(link)}
-                                onMouseLeave={() => setHovered(false)}
-                                onMouseOver={() => setHovered(true)}
                             />
                         ))
                 }
             </div>
             <div style={{display: "flex", justifyContent: "center", marginTop: '20px'}}>
-                <DragAndDrop handleDropFile={handleDrop}>
+                <DragDrop handleDropFile={handleDrop}>
                     <input type="file"
                            name="avatar"
                            ref={fileRef}
@@ -123,7 +125,7 @@ function AvatarEditModal(props) {
                     >
                         <span style={{fontSize: '16px', color: '#3399ff'}}>+ 上传图片</span>
                     </IconButton>
-                </DragAndDrop>
+                </DragDrop>
 
             </div>
         </AvatarModal>

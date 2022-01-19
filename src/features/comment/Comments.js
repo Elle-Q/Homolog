@@ -4,7 +4,7 @@ import Typography from "@mui/material/Typography";
 import CommentLabel from "./CommentLabel";
 import comments from "../../json/comments.json"
 import 'emoji-mart/css/emoji-mart.css'
-import CommentInput from "../../common/CommentInput";
+import CommentInput from "../../common/comment-input";
 
 
 function Comments(props) {

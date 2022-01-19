@@ -1,7 +1,7 @@
 import React from 'react';
 import {getStarIcons} from "../utils/ToolUtil";
 import Stack from "@mui/material/Stack";
-import {StyledRatioInput} from "./StyledRatioInput";
+import {StyledRatioInput} from "./styled-ratio-input";
 
 
 

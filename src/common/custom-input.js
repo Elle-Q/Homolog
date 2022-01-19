@@ -5,6 +5,7 @@ import {alpha} from "@mui/material/styles";
 import AddIcon from "@mui/icons-material/Add";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
+import {styled} from "@mui/system";
 
 export const InputWithHeader = (props) => {
     const {header, value, name, onChange, multiline, placeholder, disabled} = props;
@@ -95,6 +96,24 @@ export const SelectInputWithHeader = (props) => {
             </Select>
         </React.Fragment>
     )
-
-
 }
+
+export const StyledInputElement = styled('textarea')(({theme}) => ({
+    resize: 'none',
+    width: '95%',
+    fontSize: '1rem',
+    fontFamily: '-apple-system',
+    backgroundColor:'transparent',
+    border: 'none',
+    borderRadius:'10px',
+    padding: '6px 10px',
+    color: '#3399FF',
+    transition: 'width 300ms ease',
+    '&:hover': {
+        backgroundColor: 'transparent',
+    },
+    '&:focus': {
+        outline: 'none',
+        transition: 'width 200ms ease-out'
+    }
+}));

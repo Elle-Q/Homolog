@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {alpha, styled} from "@mui/system";
 import {Picker} from "emoji-mart";
 import InsertEmoticonIcon from "@mui/icons-material/InsertEmoticon";
+import {StyledInputElement} from "./custom-input";
 
 const InputBox = styled('div')(({theme}) => ({
     zIndex: 1,
@@ -26,25 +27,6 @@ const InputBox = styled('div')(({theme}) => ({
     }
 }));
 
-const StyledInputElement = styled('textarea')(({theme}) => ({
-    resize: 'none',
-    width: '95%',
-    height: '100%',
-    fontSize: '1rem',
-    fontFamily: 'IBM Plex Sans, sans-serif',
-    backgroundColor:'transparent',
-    border: 'none',
-    padding: '6px 10px',
-    color: '#3399FF',
-    transition: 'width 300ms ease',
-    '&:hover': {
-        backgroundColor: 'transparent',
-    },
-    '&:focus': {
-        outline: 'none',
-        transition: 'width 200ms ease-out'
-    }
-}));
 
 function CommentInput(props) {
 
@@ -69,7 +51,13 @@ function CommentInput(props) {
                         theme='dark'
                     /> : <div/>
             }
-            <StyledInputElement onClick={() => setShowPicker(false)} placeholder='Be Nice, Man'/>
+            <StyledInputElement
+                onClick={() => setShowPicker(false)}
+                placeholder='Be Nice, Man'
+                style={{
+                    height: '100%',
+                }}
+            />
 
             <InsertEmoticonIcon sx={{zIndex:99, color:'#e9c46a'}} onClick={() => setShowPicker(true)}/>
 

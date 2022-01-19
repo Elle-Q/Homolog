@@ -40,7 +40,6 @@ export const upload = (file) => {
     };
 
     return qiniuService.getUpToken().then(resp => {
-        debugger
         let key = new Date().getTime() + '/' + file.name;
         const observable = qiniu.upload(file, key, resp.UpToken, putExtra, config)
         const subscription = observable.subscribe(observer)

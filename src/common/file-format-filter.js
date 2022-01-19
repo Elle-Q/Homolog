@@ -1,7 +1,7 @@
 import React from 'react';
 import Stack from "@mui/material/Stack";
 import {getStarIcons} from "../utils/ToolUtil";
-import {StyledRatioInput} from "./StyledRatioInput";
+import {StyledRatioInput} from "./styled-ratio-input";
 
 const formats = {
     zip: ".zip",

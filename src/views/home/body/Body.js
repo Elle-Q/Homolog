@@ -5,7 +5,7 @@ import carouselJson from "../../../json/carousel.json";
 import Categories from "../../../json/category.json";
 import Subject from "../../../features/subject/Subject";
 import Box from "@mui/material/Box";
-import PageTipFloatingBar from "../../../common/PageTipFloatingBar";
+import PageTipFloatingBar from "../../../common/page-tip-floating-bar";
 
 function Body(props) {
     return (

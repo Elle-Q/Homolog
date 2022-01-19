@@ -67,6 +67,16 @@ export const authSlice = createSlice({
             return {
                 ...state,
                 user: {
+                    ...state.user,
+                    Avatar:action.payload
+                }
+            }
+        },
+        setBG: (state, action) => {
+            return {
+                ...state,
+                user: {
+                    ...state.user,
                     Avatar:action.payload
                 }
             }
@@ -74,7 +84,7 @@ export const authSlice = createSlice({
     }
 })
 
-export const {loginSuccess, loginFail, logout, registerSuccess, registerFail, setUser, setAvatar} = authSlice.actions
+export const {loginSuccess, loginFail, logout, registerSuccess, registerFail, setUser, setAvatar, setBG} = authSlice.actions
 
 export const selectAuth = state => state.auth
 

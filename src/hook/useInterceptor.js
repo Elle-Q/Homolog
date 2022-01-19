@@ -1,10 +1,8 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {useDispatch} from "react-redux";
 import {updateMsg} from "../features/alert/alertSlice";
 import TokenService from "../api/token.service";
-import {refreshToken} from "../api/auth.service";
 import api from "../api/api";
-import {logout, selectAuth} from "../api/authSlice";
 
 export default function useInterceptor(props) {
     const dispatch = useDispatch();

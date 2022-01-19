@@ -1,6 +1,6 @@
 import React from 'react';
 import api from "./api";
-import {loginSuccess, setAvatar, setUser} from "./authSlice";
+import {loginSuccess, setAvatar, setBG, setUser} from "./authSlice";
 
 class UserService {
     changeAvatar(userId, avatarLink) {
@@ -9,7 +9,6 @@ class UserService {
             Avatar: avatarLink
         })
             .then((resp) => {
-                debugger
                return resp;
             });
     }
@@ -45,6 +44,16 @@ export const updateAvatar = (userId, link) => (dispatch) => {
     userService.changeAvatar(userId, link).then(
         resp => {
             dispatch(setAvatar(link))
+            return resp
+        }
+    )
+}
+
+export const updateBG = (userId, link) => (dispatch) => {
+    debugger
+    userService.changeAvatar(userId, link).then(
+        resp => {
+            dispatch(setBG(link))
             return resp
         }
     )

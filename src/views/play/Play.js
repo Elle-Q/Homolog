@@ -6,7 +6,7 @@ import VideoInfo from "../../features/video-play/VideoInfo";
 import VideoPlayer from "../../features/video-play/VideoPlayer";
 import VideoPeriods from "../../features/video-play/VideoPeriods";
 import DanmuInput from "../../features/video-play/DanmuInput";
-import PageTipFloatingBar from "../../common/PageTipFloatingBar";
+import PageTipFloatingBar from "../../common/page-tip-floating-bar";
 import VideoBriefDesc from "../../features/video-play/VideoBriefDesc";
 import Comments from "../../features/comment/Comments";
 

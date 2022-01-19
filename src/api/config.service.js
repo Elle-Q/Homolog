@@ -9,3 +9,11 @@ export const getDefaultAvatar = () => {
             return resp
         });
 }
+
+export const getDefaultBG = () => {
+    let name = 'default_bg'
+    return api.get(`/homo-app/config/${name}`)
+        .then((resp) => {
+            return resp
+        });
+}

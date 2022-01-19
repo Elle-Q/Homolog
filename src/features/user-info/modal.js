@@ -1,22 +1,22 @@
-import React, {createRef} from 'react';
+import React, {createRef, useEffect} from 'react';
 import Avatar from "@mui/material/Avatar";
 import {alpha, styled} from '@mui/material/styles';
 import TextField from "@mui/material/TextField";
-import {CatStatus, Gender, UserStatus} from "../../common/constant/constant";
+import {UserStatus} from "../../common/constant/constant";
 import MenuItem from "@mui/material/MenuItem";
 import FemaleIcon from "@mui/icons-material/Female";
 import MaleIcon from "@mui/icons-material/Male";
 import FormControl from "@mui/material/FormControl";
 import {FormControlLabel, FormLabel, Radio, RadioGroup} from "@mui/material";
-import {StyledBadge} from "../../common/StyledBadge";
-import {CancelButton, SaveButton} from "../../common/CustomButton";
+import {StyledBadge} from "../../common/styled-badge";
+import {CancelButton, SaveButton} from "../../common/custom-button";
 import ChangeCircleIcon from '@mui/icons-material/ChangeCircle';
 import IconButton from "@mui/material/IconButton";
-import bg from '../../assets/bg/bg2.jpg'
 import {useDispatch, useSelector} from "react-redux";
 import {selectAuth} from "../../api/authSlice";
 import {updateUser} from "../../api/user.service";
 import {getColorFromUserStatus} from "../../utils/ToolUtil";
+import {StyledInputElement} from "../../common/custom-input";
 
 const CusInput = styled(TextField)({
     display: "flex",
@@ -35,7 +35,7 @@ const CusInput = styled(TextField)({
     },
     '& .MuiOutlinedInput-root': {
         '& fieldset': {
-            borderColor: '#252422',
+            borderColor: '#403D39',
             fontSize: '15px'
         },
         '&:hover fieldset': {
@@ -68,24 +68,29 @@ const radioStyle = {
 }
 
 function Modal(props) {
+    const {user} = props;
     const {toggleDrawer} = props;
     const dispatch = useDispatch();
-    const {user} = useSelector(selectAuth);
     const [userDetail, setUserDetail] = React.useState(user);
     const nameRef = React.createRef();
     const phoneRef = React.createRef();
+    const motoRef = React.createRef();
+
+    useEffect(() => {
+        setUserDetail(user)
+    }, [user])
 
     const handleGenderChange = (event) => {
         setUserDetail({
             ...userDetail,
-            Gender:event.target.value
+            Gender: event.target.value
         })
     };
 
     const handleUserStatusChange = (event) => {
         setUserDetail({
             ...userDetail,
-            Status:event.target.value
+            Status: event.target.value
         })
     };
 
@@ -93,7 +98,8 @@ function Modal(props) {
         dispatch(updateUser({
             ...userDetail,
             Name: nameRef.current.value,
-            Phone: phoneRef.current.value
+            Phone: phoneRef.current.value,
+            Moto:motoRef.current.value,
         }))
         //关闭侧边栏
         toggleDrawer(false)()
@@ -117,7 +123,7 @@ function Modal(props) {
                 }}
             >
                 <FormControlLabel value="female" control={<Radio sx={radioStyle}/>}
-                                  label={<FemaleIcon sx={{color: '#ff7096',mr:'10px'}}/>}/>
+                                  label={<FemaleIcon sx={{color: '#ff7096', mr: '10px'}}/>}/>
                 <FormControlLabel value="male" control={<Radio sx={radioStyle}/>}
                                   label={<MaleIcon sx={{color: '#3399ff'}}/>}/>
             </RadioGroup>
@@ -132,6 +138,7 @@ function Modal(props) {
                 anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}
                 variant="dot"
                 sx={{
+                    mb: '10px',
                     '& .MuiBadge-badge': {
                         width: '12px',
                         height: '12px',
@@ -146,16 +153,30 @@ function Modal(props) {
                         sx={{
                             width: 120,
                             height: 120,
-                            ml: '50px'
+                            ml: '50px',
                         }}/>
             </StyledBadge>
 
-            <CusInput label="昵称" inputRef ={nameRef} defaultValue={userDetail.Name} inputProps={inputProps}/>
-            <CusInput label="手机号" inputRef ={phoneRef} defaultValue={userDetail.Phone} inputProps={inputProps}/>
+            <StyledInputElement
+                style={{
+                    display: 'flex',
+                    border: "none",
+                    color: '#3399ff',
+                    fontSize:'12px',
+                    padding:'5px',
+                    fontStyle: 'italic'
+                }}
+                defaultValue={userDetail && userDetail.Moto && userDetail.Moto}
+                placeholder={(userDetail && userDetail.Moto==='') && '展示一下你丑陋模样吧...'}
+                ref={motoRef}
+            >
+                </StyledInputElement>
+            <CusInput label="昵称" inputRef={nameRef} defaultValue={userDetail.Name} inputProps={inputProps}/>
+            <CusInput label="手机号" inputRef={phoneRef} defaultValue={userDetail.Phone} inputProps={inputProps}/>
             <GenderRadio/>
             <div style={{marginTop: '30px', color: '#403D39'}}>
-                <span style={{marginLeft: '10px', color: '#403D39', display:'block'}}>背景图片</span>
-                <img alt="sm_bg" src={bg} style={{width:'150px', margin: '10px 10px 0 10px',}}/>
+                <span style={{marginLeft: '10px', color: '#403D39', display: 'block'}}>背景图片</span>
+                <img alt="sm_bg" src={userDetail && userDetail.BgImag} style={{width: '150px', margin: '10px 10px 0 10px',}}/>
                 <IconButton
                     sx={{
                         color: alpha('#dcddde', 0.5),
@@ -166,7 +187,7 @@ function Modal(props) {
             </div>
             <CusInput
                 select
-                label="状态 (即时生效)"
+                label="状态"
                 value={userDetail.Status}
                 inputProps={inputProps}
                 onChange={handleUserStatusChange}
@@ -178,9 +199,9 @@ function Modal(props) {
                 ))}
             </CusInput>
 
-            <div style={{marginTop:'30px', padding:'20px'}}>
+            <div style={{marginTop: '30px', padding: '20px'}}>
                 <CancelButton/>
-                <SaveButton handleClick={handleSave} />
+                <SaveButton handleClick={handleSave}/>
             </div>
 
         </div>

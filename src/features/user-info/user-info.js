@@ -1,4 +1,4 @@
-import React, {createRef, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -65,18 +65,21 @@ function UserInfo(props) {
         authService.logout()
     }
 
-    const handleClose = () => {
+    const handleClose = (e) => {
+        e.stopPropagation()
         setOpenModal(false);
-        // setAvatarUri(user.Avatar)
     };
 
     //点击头像获取默认头像集合
-    const onClickAvatar = () => {
+    const onClickAvatar = (e) => {
+        e.nativeEvent.stopImmediatePropagation();
+        e.stopPropagation()
         setOpenModal(true)
         //获取默认头像
         getDefaultAvatar().then(resp => {
             setDefaultAvatars(resp)
         })
+
     }
 
     //带有编辑和注销按钮的头像结合体!(结合体! 哈哈`)
@@ -103,7 +106,7 @@ function UserInfo(props) {
 
 
     return (
-        <Box sx={{mb: '20px', textAlign: "center"}}>
+        <Box sx={{mb: '20px', textAlign: "center" }}>
             <AvatarWithEdit/>
             <UserDrawer
                 user={user}

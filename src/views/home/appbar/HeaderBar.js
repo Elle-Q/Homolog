@@ -26,8 +26,8 @@ import community from '../../../assets/community1.svg'
 import categoryS from '../../../assets/category_S.svg'
 import categoryB from '../../../assets/category_B.svg'
 import MultilevelMenu from "../../../features/menu/MultilevelMenu";
-import AppLogo from "../../../common/AppLogo";
-import {StyledBadge} from "../../../common/StyledBadge";
+import AppLogo from "../../../common/app-logo";
+import {StyledBadge} from "../../../common/styled-badge";
 import {useDispatch, useSelector} from "react-redux";
 import {selectAuth} from "../../../api/authSlice";
 import AdminPanelSettingsRoundedIcon from '@mui/icons-material/AdminPanelSettingsRounded';

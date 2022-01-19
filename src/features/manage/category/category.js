@@ -8,7 +8,7 @@ import Paper from "@mui/material/Paper";
 import {CatStatus} from "../../../common/constant/constant";
 import {StyledTableCell, StyledTableRow} from "../../table/table";
 import Action from "./action";
-import OpenIconSpeedDial from "../../../common/OpenIconSpeedDial";
+import OpenIconSpeedDial from "../../../common/open-icon-speed-dial";
 import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
 import DoNotDisturbOnIcon from '@mui/icons-material/DoNotDisturbOn';

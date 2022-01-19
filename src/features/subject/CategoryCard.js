@@ -10,7 +10,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import { Link } from "react-router-dom";
 import {getStarIcons} from "../../utils/ToolUtil";
-import PriceTag from "../../common/PriceTag";
+import PriceTag from "../../common/price-tag";
 
 function CategoryCard(props) {
     const theme = useTheme();

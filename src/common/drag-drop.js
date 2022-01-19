@@ -1,7 +1,7 @@
 import React, {createRef, useEffect, useState} from 'react';
 import {alpha} from "@mui/material/styles";
 
-function DragAndDrop(props) {
+function DragDrop(props) {
     const {handleDropFile} = props
     const dropRef = createRef();
     const [dragging, setDragging] = useState(false);
@@ -73,4 +73,4 @@ function DragAndDrop(props) {
 
 }
 
-export default DragAndDrop;
+export default DragDrop;

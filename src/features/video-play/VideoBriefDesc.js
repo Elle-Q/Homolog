@@ -9,7 +9,7 @@ import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
 import LoyaltyIcon from '@mui/icons-material/Loyalty';
 import {Link} from "react-router-dom";
-import ByAuthor from "../../common/ByAuthor";
+import ByAuthor from "../../common/by-author";
 
 
 const Label = props => {

@@ -4,72 +4,71 @@ import DragDrop from "../../common/drag-drop";
 import IconButton from "@mui/material/IconButton";
 import {alpha} from "@mui/material/styles";
 import {default as AvatarModal} from "../../common/modal";
-import {updateAvatar} from "../../api/user.service";
+import {updateAvatar, updateBG} from "../../api/user.service";
 import {upload} from "../../api/qiniu.service";
 import {useDispatch, useSelector} from "react-redux";
 import {selectAuth} from "../../api/authSlice";
+import Stack from "@mui/material/Stack";
+import {ImageList} from "@mui/material";
+import {getDefaultBG} from "../../api/config.service";
+import {light} from "@mui/material/styles/createPalette";
 
 function BGEditModal(props) {
-    const {open, user, handleClose,defaultBGs} = props;
+    const {open, user, handleClose, previewBG, closeModal} = props;
 
     const [bgUri, setBGUri] = useState(null);
-    const [bgFile, setBGFile] = useState(null);
     const dispatch = useDispatch();
+    const [defaultBGs, setDefaultBGs] = useState([]);
+
 
     useEffect(() => {
-        bgFile && setBGUri(URL.createObjectURL(bgFile));
-    }, [bgFile])
-
+        //获取默认背景
+        getDefaultBG().then(resp => {
+            setDefaultBGs(resp)
+        })
+    }, [])
 
     //点击任意默认头像, 设置头像预览
     const defaultBGClick = (link) => {
-        return () => {
+        return (e) => {
+            e.stopPropagation()
+            previewBG(link)
             setBGUri(link)
-            setBGFile(null)
         }
     }
 
-    //修改头像(上传七牛, 更新数据库)
+    //更新数据库
     function changeBG() {
-        if (!bgFile) {
-            dispatch(updateAvatar(user.ID, bgUri))
-            handleClose()
-        } else {
-            upload(bgFile).then((link) => {
-                dispatch(updateAvatar(user.ID, link))
-                handleClose()
-            })
-        }
-
+        dispatch(updateBG(user.ID, bgUri))
+        closeModal()
     }
 
     return (
-        <AvatarModal title="修改头像"
-                     maxWidth="sm"
+        <AvatarModal
+                     maxWidth="md"
                      open={open}
                      handleClose={handleClose}
                      handleSave={changeBG}
         >
-            {/*<div style={{display: "flex", justifyContent: "center", marginTop: '150px'}}>*/}
+            <ImageList cols={3} rowHeight={164}>
                 {
                     defaultBGs.map((link, index) =>
-                        (<img
+                        (
+                            <img
                                 key={index}
                                 alt="default_avatar"
                                 style={{
                                     width: '250px',
-                                    // height: '50px',
                                     marginRight: '10px',
                                     borderRadius: '10px',
-                                    cursor:'pointer'
-                                    // transform: `${hovered && 'scale(1.5,1.5)'}`,
+                                    cursor: 'pointer',
                                 }}
                                 src={link}
                                 onClick={defaultBGClick(link)}
                             />
                         ))
                 }
-            {/*</div>*/}
+            </ImageList>
         </AvatarModal>
     )
 }

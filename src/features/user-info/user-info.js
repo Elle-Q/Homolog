@@ -56,12 +56,14 @@ function UserInfo(props) {
         user && setAvatarUri(user.Avatar)
     }, [user])
 
-    const toggleDrawer = open => () => {
+    const toggleDrawer = open => (e) => {
+        e.stopPropagation()
         setDrawerOpen(open)
     }
 
     //注销账号
-    const logout = async () => {
+    const logout = async (e) => {
+        e.stopPropagation()
         authService.logout()
     }
 
@@ -72,7 +74,6 @@ function UserInfo(props) {
 
     //点击头像获取默认头像集合
     const onClickAvatar = (e) => {
-        e.nativeEvent.stopImmediatePropagation();
         e.stopPropagation()
         setOpenModal(true)
         //获取默认头像

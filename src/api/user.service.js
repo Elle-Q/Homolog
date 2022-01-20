@@ -13,6 +13,16 @@ class UserService {
             });
     }
 
+    changeBG(userId, bgLink) {
+        return api.post('/homo-app/user/bg/update', {
+            UserId: userId,
+            BgImag: bgLink
+        })
+            .then((resp) => {
+                return resp;
+            });
+    }
+
     getUser(userId) {
        return api.get(`/homo-app/user/${userId}`)
             .then((resp) => {
@@ -40,7 +50,6 @@ export const getUser = (userId) => (dispatch) => {
 }
 
 export const updateAvatar = (userId, link) => (dispatch) => {
-    debugger
     userService.changeAvatar(userId, link).then(
         resp => {
             dispatch(setAvatar(link))
@@ -50,8 +59,7 @@ export const updateAvatar = (userId, link) => (dispatch) => {
 }
 
 export const updateBG = (userId, link) => (dispatch) => {
-    debugger
-    userService.changeAvatar(userId, link).then(
+    userService.changeBG(userId, link).then(
         resp => {
             dispatch(setBG(link))
             return resp

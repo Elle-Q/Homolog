@@ -30,8 +30,8 @@ function AvatarEditModal(props) {
 
     //点击任意默认头像, 设置头像预览
     const defaultAvatarClick = (link) => {
-
-        return () => {
+        return (e) => {
+            e.stopPropagation()
             setAvatarUri(link)
             setAvatarFile(null)
         }

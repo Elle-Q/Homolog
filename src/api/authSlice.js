@@ -77,7 +77,7 @@ export const authSlice = createSlice({
                 ...state,
                 user: {
                     ...state.user,
-                    Avatar:action.payload
+                    BgImag:action.payload
                 }
             }
         },

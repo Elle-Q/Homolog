@@ -16,7 +16,7 @@ export const InputWithHeader = (props) => {
             <Input multiline={multiline}
                    name={name}
                    disableUnderline={true}
-                   value={value}
+                   defaultValue={value}
                    onChange={onChange}
                    placeholder={placeholder}
                    disabled={disabled}
@@ -70,7 +70,7 @@ export const ImagInputWithHeader = (props) => {
 }
 
 export const SelectInputWithHeader = (props) => {
-    const {header, name, items, defaultValue, handleChange, disabled} = props;
+    const {header, name, items, defaultValue, handleChange, disabled, type} = props;
     return (
         <React.Fragment>
             <span style={{marginRight: '15px', verticalAlign: "bottom"}}>{header}</span>
@@ -80,6 +80,7 @@ export const SelectInputWithHeader = (props) => {
                 disabled={disabled}
                 onChange={handleChange}
                 sx={{
+                    mr:'50px',
                     border: "1px solid #403D39",
                     fontSize: '14px',
                     variant: 'standard',
@@ -88,11 +89,15 @@ export const SelectInputWithHeader = (props) => {
                     }
                 }}>
                 {
-                    Object.keys(items).map((value, index) => (
-                        <MenuItem key={index} value={value}>
-                            {items[value]}
-                        </MenuItem>
-                    ))}
+                    type === 'enum' ?
+                        Object.keys(items).map((value, index) => (
+                            <MenuItem key={index} value={value}>
+                                {items[value]}
+                            </MenuItem>
+                        ))
+                        :
+                        props.children
+                }
             </Select>
         </React.Fragment>
     )
@@ -103,9 +108,9 @@ export const StyledInputElement = styled('textarea')(({theme}) => ({
     width: '95%',
     fontSize: '1rem',
     fontFamily: '-apple-system',
-    backgroundColor:'transparent',
+    backgroundColor: 'transparent',
     border: 'none',
-    borderRadius:'10px',
+    borderRadius: '10px',
     padding: '6px 10px',
     color: '#3399FF',
     transition: 'width 300ms ease',

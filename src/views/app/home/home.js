@@ -8,7 +8,7 @@ import Account from "../account/Account";
 import Item from "../item/Item";
 import CssBaseline from "@mui/material/CssBaseline";
 import {CSSTransition, TransitionGroup} from "react-transition-group";
-import "../../styles.css";
+import "../../../styles.css";
 
 function Home(props) {
 

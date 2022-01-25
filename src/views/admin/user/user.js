@@ -10,7 +10,7 @@ import FemaleIcon from '@mui/icons-material/Female';
 import MaleIcon from '@mui/icons-material/Male';
 import Action from "./action";
 import {AccountStatus} from "../../../common/constant/constant";
-import {StyledSwitch, StyledTableCell, StyledTableRow} from "../../table/table";
+import {StyledSwitch, StyledTableCell, StyledTableRow} from "../../../features/table/table";
 
 
 function User(props) {

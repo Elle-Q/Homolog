@@ -2,10 +2,10 @@ import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import AppLogo from "../../../common/app-logo";
+import AppLogo from "../../../../common/app-logo";
 import {Link} from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
-import {StyledBadge} from "../../../common/styled-badge";
+import {StyledBadge} from "../../../../common/styled-badge";
 
 
 function HeaderBar(props) {

@@ -1,14 +1,14 @@
 import React, {useRef, useState} from 'react';
 import Grid from "@mui/material/Grid";
-import PlaySideBar from "../../features/video-play/VideoPeriods";
+import PlaySideBar from "../../../features/video-play/VideoPeriods";
 import Box from "@mui/material/Box";
-import VideoInfo from "../../features/video-play/VideoInfo";
-import VideoPlayer from "../../features/video-play/VideoPlayer";
-import VideoPeriods from "../../features/video-play/VideoPeriods";
-import DanmuInput from "../../features/video-play/DanmuInput";
-import PageTipFloatingBar from "../../common/page-tip-floating-bar";
-import VideoBriefDesc from "../../features/video-play/VideoBriefDesc";
-import Comments from "../../features/comment/Comments";
+import VideoInfo from "../../../features/video-play/VideoInfo";
+import VideoPlayer from "../../../features/video-play/VideoPlayer";
+import VideoPeriods from "../../../features/video-play/VideoPeriods";
+import DanmuInput from "../../../features/video-play/DanmuInput";
+import PageTipFloatingBar from "../../../common/page-tip-floating-bar";
+import VideoBriefDesc from "../../../features/video-play/VideoBriefDesc";
+import Comments from "../../../features/comment/Comments";
 
 
 function Play(props) {

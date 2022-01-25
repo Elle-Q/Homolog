@@ -1,11 +1,11 @@
 import React from 'react';
 import Grid from "@mui/material/Grid";
-import Carousell from "../../../features/carousel/Carousell";
-import carouselJson from "../../../json/carousel.json";
-import Categories from "../../../json/category.json";
-import Subject from "../../../features/subject/Subject";
+import Carousell from "../../../../features/carousel/Carousell";
+import carouselJson from "../../../../json/carousel.json";
+import Categories from "../../../../json/category.json";
+import Subject from "../../../../features/subject/Subject";
 import Box from "@mui/material/Box";
-import PageTipFloatingBar from "../../../common/page-tip-floating-bar";
+import PageTipFloatingBar from "../../../../common/page-tip-floating-bar";
 
 function Body(props) {
     return (

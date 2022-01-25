@@ -1,14 +1,14 @@
 import React from 'react';
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import img from '../../assets/cat_animate3-2.gif'
+import img from '../../../assets/cat_animate3-2.gif'
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
-import tags from '../../json/popTags.json';
+import tags from '../../../json/popTags.json';
 import Button from "@mui/material/Button";
-import SideBar from "../../features/subject/SideBar";
-import items from "../../json/items.json";
-import CategoryCard from "../../features/subject/CategoryCard";
+import SideBar from "../../../features/subject/SideBar";
+import items from "../../../json/items.json";
+import CategoryCard from "../../../features/subject/CategoryCard";
 
 function Category(props) {
 

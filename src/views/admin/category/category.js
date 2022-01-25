@@ -6,28 +6,29 @@ import TableRow from "@mui/material/TableRow";
 import TableBody from "@mui/material/TableBody";
 import Paper from "@mui/material/Paper";
 import {CatStatus} from "../../../common/constant/constant";
-import {StyledTableCell, StyledTableRow} from "../../table/table";
+import {StyledTableCell, StyledTableRow} from "../../../features/table/table";
 import Action from "./action";
 import OpenIconSpeedDial from "../../../common/open-icon-speed-dial";
 import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
 import DoNotDisturbOnIcon from '@mui/icons-material/DoNotDisturbOn';
-import CatModal from "./catModal";
+import CatModal from "./cat-modal";
 import {useDispatch} from "react-redux";
 import {open} from "./catSlice";
-import {openAlert} from "../../alert/alertSlice";
+import {openAlert} from "../../../features/alert/alertSlice";
 import api from "../../../api/api";
 import bg from "../../../assets/bg/bg2.jpg";
 import IconButton from "@mui/material/IconButton";
 import {alpha} from "@mui/material/styles";
 import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
+import {ListCat} from "../../../api/cat.service";
 
 function Category(props) {
     const [cats, setCats] = useState([]);
     const dispatch = useDispatch();
 
     React.useEffect(() => {
-        api.get('/homo-admin/cat/list').then((data) => {
+        ListCat().then((data) => {
             setCats(data)
         })
     }, [])
@@ -66,7 +67,6 @@ function Category(props) {
                             <StyledTableCell>id</StyledTableCell>
                             <StyledTableCell align="center">标题</StyledTableCell>
                             <StyledTableCell align="center">副标题</StyledTableCell>
-                            <StyledTableCell align="center">描述</StyledTableCell>
                             <StyledTableCell align="center">状态</StyledTableCell>
                             <StyledTableCell align="center">资源数量</StyledTableCell>
                             <StyledTableCell align="center">更新时间</StyledTableCell>
@@ -83,7 +83,6 @@ function Category(props) {
                                 </StyledTableCell>
                                 <StyledTableCell align="center">{row.Title}</StyledTableCell>
                                 <StyledTableCell align="center">{row.SubTitle}</StyledTableCell>
-                                <StyledTableCell align="center">{row.Desc}</StyledTableCell>
                                 <StyledTableCell align="center">
                                     <span style={{
                                         color: '#0aa858',
@@ -106,7 +105,7 @@ function Category(props) {
 
             {OpenIconSpeedDial(actions)}
 
-            <CatModal/>
+            <CatModal />
 
         </React.Fragment>
     );

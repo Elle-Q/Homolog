@@ -5,7 +5,9 @@ import Modal from "../../../common/modal";
 import api from "../../../api/api";
 import {selectCatModal, close} from "./catSlice";
 import { useSelector, useDispatch } from 'react-redux'
-import {openAlert} from "../../alert/alertSlice";
+import {openAlert} from "../../../features/alert/alertSlice";
+import {upload} from "../../../api/qiniu.service";
+import {UpdateCat} from "../../../api/cat.service";
 
 
 function CatModal(props) {
@@ -21,6 +23,7 @@ function CatModal(props) {
 
     useEffect(() => {
         setDetail(data)
+        setImgUri(data.Preview)
     },[data])
 
     const handleClose = () => {
@@ -40,18 +43,21 @@ function CatModal(props) {
         }
     };
 
+    //保存分类信息
     const handleSave = async () => {
-        const param = new FormData();
-        imgFile && param.append("Preview", imgFile);
-        for (let k in detail ) {
-            param.append(k, detail[k]);
-        }
-        await api.post('/homo-admin/cat/update', param)
-            .then((resp) => {
-                resp && handleClose();
-            });
-        dispatch(openAlert());
-        setImgFile(null);
+        //上传文件到七牛, 获取图片外链
+        imgFile && upload(imgFile).then(link => {
+            let param = Object.assign({}, detail, {Preview: link})
+
+            UpdateCat(param).then(() => {
+                handleClose();
+            })
+
+            dispatch(openAlert());
+            setImgFile(null);
+        })
+
+
     };
 
     return (

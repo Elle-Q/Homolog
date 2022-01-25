@@ -10,7 +10,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import {styled, useTheme} from '@mui/material/styles';
 import BedtimeIcon from '@mui/icons-material/Bedtime';
 import WbSunnyIcon from '@mui/icons-material/WbSunny';
-import {ColorModeContext} from "../../../App";
+import {ColorModeContext} from "../../../../App";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import Avatar from "@mui/material/Avatar";
@@ -18,22 +18,22 @@ import SearchIcon from '@mui/icons-material/Search';
 import {alpha} from "@mui/system";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
-import suggetionJson from '../../../json/suggesttion.json'
+import suggetionJson from '../../../../json/suggesttion.json'
 import Popper from '@mui/material/Popper';
 import Paper from "@mui/material/Paper";
 import {Link, useNavigate} from "react-router-dom";
-import community from '../../../assets/community1.svg'
-import categoryS from '../../../assets/category_S.svg'
-import categoryB from '../../../assets/category_B.svg'
-import MultilevelMenu from "../../../features/menu/MultilevelMenu";
-import AppLogo from "../../../common/app-logo";
-import {StyledBadge} from "../../../common/styled-badge";
+import community from '../../../../assets/community1.svg'
+import categoryS from '../../../../assets/category_S.svg'
+import categoryB from '../../../../assets/category_B.svg'
+import MultilevelMenu from "../../../../features/menu/MultilevelMenu";
+import AppLogo from "../../../../common/app-logo";
+import {StyledBadge} from "../../../../common/styled-badge";
 import {useDispatch, useSelector} from "react-redux";
-import {selectAuth} from "../../../api/authSlice";
+import {selectAuth} from "../../../../api/authSlice";
 import AdminPanelSettingsRoundedIcon from '@mui/icons-material/AdminPanelSettingsRounded';
 import {useEffect} from "react";
-import {getUser} from '../../../api/user.service'
-import {getColorFromUserStatus} from "../../../utils/ToolUtil";
+import {getUser} from '../../../../api/user.service'
+import {getColorFromUserStatus} from "../../../../utils/ToolUtil";
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',

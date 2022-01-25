@@ -5,7 +5,7 @@ import Body from "./body/Body";
 import Grid from "@mui/material/Grid";
 import CssBaseline from "@mui/material/CssBaseline";
 import {HeaderBar} from "./appbar/HeaderBar";
-import User from "../../features/manage/user/user";
+import User from "../user/user";
 import Box from "@mui/material/Box";
 
 function Admin(props) {

@@ -1,11 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import Box from "@mui/material/Box";
-import UserInfo from "../../features/user-info/user-info";
-import TabBar from "../../common/tab-bar";
+import UserInfo from "../../../features/user-info/user-info";
+import TabBar from "../../../common/tab-bar";
 import { useSelector} from "react-redux";
-import {selectAuth } from "../../api/authSlice";
-import BGEditModal from "../../features/user-info/bg-edit-modal";
-import {getDefaultBG} from "../../api/config.service";
+import {selectAuth } from "../../../api/authSlice";
+import BGEditModal from "../../../features/user-info/bg-edit-modal";
 
 function Account(props) {
 

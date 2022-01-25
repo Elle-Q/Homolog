@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import NavItem from "../../../features/nav/NavItem";
+import NavItem from "../../../../features/nav/NavItem";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import {Collapse} from "@mui/material";
@@ -8,19 +8,19 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ListItemButton from "@mui/material/ListItemButton";
 
-import userIcon from '../../../assets/admin/user.svg'
-import orderIcon from '../../../assets/admin/order.svg'
-import analysisIcon from '../../../assets/admin/sys.svg'
-import watchIcon from '../../../assets/admin/watch.svg'
-import timeIcon from '../../../assets/admin/time.svg'
-import apiIcon from '../../../assets/admin/api.svg'
-import fixIcon from '../../../assets/admin/fix.svg'
-import contentIcon from '../../../assets/admin/content.svg'
-import rescIcon from '../../../assets/admin/resc.svg'
-import uploadIcon from '../../../assets/admin/upload.svg'
-import catIcon from '../../../assets/admin/cat.svg'
-import accountIcon from '../../../assets/admin/account.svg'
-import configIcon from '../../../assets/admin/config_s.svg'
+import userIcon from '../../../../assets/admin/user.svg'
+import orderIcon from '../../../../assets/admin/order.svg'
+import analysisIcon from '../../../../assets/admin/sys.svg'
+import watchIcon from '../../../../assets/admin/watch.svg'
+import timeIcon from '../../../../assets/admin/time.svg'
+import apiIcon from '../../../../assets/admin/api.svg'
+import fixIcon from '../../../../assets/admin/fix.svg'
+import contentIcon from '../../../../assets/admin/content.svg'
+import rescIcon from '../../../../assets/admin/resc.svg'
+import uploadIcon from '../../../../assets/admin/upload.svg'
+import catIcon from '../../../../assets/admin/cat.svg'
+import accountIcon from '../../../../assets/admin/account.svg'
+import configIcon from '../../../../assets/admin/config_s.svg'
 
 function SideBar(props) {
 

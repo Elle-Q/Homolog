@@ -26,7 +26,7 @@ export const InputWithHeader = (props) => {
                        borderRadius: '5px',
                        fontSize: '14px',
                        fontFamily: '-apple-system',
-                       marginRight: 20,
+                       marginRight: 18,
                        rows: `${multiline & 4}`,
                        width: `${multiline ? 500 : 200}px`,
                        '&:hover': {
@@ -44,8 +44,10 @@ export const ImagInputWithHeader = (props) => {
     return (
         <React.Fragment>
             <span style={{marginRight: '15px', verticalAlign: "bottom"}}>{header}</span>
-            <img alt="preview" style={{maxWidth: '200px', maxHeight: '200px', borderRadius: '5px'}}
-                 src={img}/>
+            {
+                img &&  <img src={img} alt="preview" style={{maxWidth: '200px', maxHeight: '200px', borderRadius: '5px'}} />
+            }
+
             <input type="file"
                    name={name}
                    ref={fileRef}

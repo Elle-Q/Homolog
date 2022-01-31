@@ -16,6 +16,12 @@ import darkScrollbar from "@mui/material/darkScrollbar";
              dark: '#0a0908',
              contrastText: '#000',
          },
+         third: {
+             light: '#173A5E',
+             main: '#001E3C',
+             dark: '#EB5E28',
+             contrastText: '#fff',
+         },
          mode:"dark",
          background: {
              default: '#252422',
@@ -30,6 +36,7 @@ import darkScrollbar from "@mui/material/darkScrollbar";
          icon: {
              first:'#e9c46a'
          },
+
      },
 
      typography: {

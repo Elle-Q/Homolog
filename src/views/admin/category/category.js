@@ -37,16 +37,17 @@ function Category(props) {
         dispatch(
             open({
                 readOnly: false,
+                type:"add",
                 data:{}
             }));
 
     const handleDel = async (id) => {
-        const resp = api.post('/homo-admin/cat/delete', {
+        api.post('/homo-admin/cat/delete', {
             id: id
         }).then((resp) => {
             if (resp) {
-                    const arr = cats.filter((item) => item.ID !== id);
-                    setCats(arr);
+                const arr = cats.filter((item) => item.ID !== id);
+                setCats(arr);
             }
         })
         dispatch(openAlert())

@@ -6,6 +6,7 @@ import KeyboardArrowLeftRoundedIcon from "@mui/icons-material/KeyboardArrowLeftR
 import KeyboardArrowRightRoundedIcon from "@mui/icons-material/KeyboardArrowRightRounded";
 import CircleRoundedIcon from '@mui/icons-material/CircleRounded';
 import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined';
+import {ListCat} from "../../api/cat.service";
 
 const Button = styled.div`
   position: absolute;
@@ -19,7 +20,7 @@ const Button = styled.div`
 `;
 
 const DotIndex = styled.div` {
-background-color:'red';
+  background-color:'red';
   display: flex;
   height:10px;
   width: 100%;
@@ -28,14 +29,22 @@ background-color:'red';
   justify-content: center;
 `;
 
-function Carousell({items}) {
+function Carousell() {
 
     const [index, setIndex] = useState(0);
     const [moveWidth, setMoveWidth] = useState(0);
     const [isLeftSlide, setIsLeftSlide] = useState(false);
+    const [cats, setCats] = useState([]);
+
+    React.useEffect(() => {
+        ListCat().then((data) => {
+            setCats(data)
+        })
+    }, [])
+
 
     const handleClickNext = () => {
-        if (index === items.length-4) {
+        if (index === cats.length-4) {
             return;
         }
         setMoveWidth(moveWidth - 300);
@@ -53,7 +62,7 @@ function Carousell({items}) {
     useEffect(() => {
         if (!isLeftSlide) {
             handleAutoRightplay = setInterval(handleClickNext, 3000);
-            if (index === items.length-4) {
+            if (index === cats.length-4) {
                 setIsLeftSlide(true);
             }
         }
@@ -72,7 +81,7 @@ function Carousell({items}) {
 
     const getDots = () => {
         const dots = [];
-        for (let i = 0; i < items.length; i++) {
+        for (let i = 0; i < cats.length; i++) {
             if (index === i) {
                 dots.push(<CircleRoundedIcon key={i} sx={{width: '10px', height: '10px', ml: '5px'}}/>)
             } else {
@@ -108,8 +117,8 @@ function Carousell({items}) {
                 </Button>
 
                 {
-                    items.map((item, i) => (
-                        <ImageCard {...item} width={moveWidth}/>
+                    cats.map((item, i) => (
+                        <ImageCard item={item} width={moveWidth}/>
                     ))
                 }
 
@@ -122,8 +131,6 @@ function Carousell({items}) {
             <DotIndex>
                 {getDots()}
             </DotIndex>
-
-            {/* index dots*/}
 
         </React.Fragment>
 

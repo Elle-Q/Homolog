@@ -18,8 +18,7 @@ const StyledLink = styled(Link)`
 
 function ImageCard(props) {
     const theme = useTheme();
-    const {imgSrc, name, subTitle, width} = props;
-    const subject = 'animation';
+    const {item, width} = props;
     return (
         <Card
             raised={true}
@@ -40,12 +39,12 @@ function ImageCard(props) {
             }} >
             <CardHeader sx={{backgroundColor: alpha(theme.palette.secondary.light, 0.8), height: '5px', padding: 0}}
             />
-            <StyledLink to={`/app/category/${subject}`} key={name}  >
+            <StyledLink to={`/app/category/${item.ID}`} key={item.Title}  >
                 <CardMedia
                     raised="true"
                     component="img"
-                    image={imgSrc}
-                    alt={name}
+                    image={item.Preview}
+                    alt={item.Title}
                     sx={{
                         width: '258px',
                         height: '150px',
@@ -54,10 +53,10 @@ function ImageCard(props) {
                     }}
                 />
                 <Typography variant="h6" component="div" color={theme.palette.secondary.light} sx={{mt: '5px'}}>
-                    {name}
+                    {item.Title}
                 </Typography>
                 <Typography color={alpha(theme.palette.primary.contrastText, 0.75)}>
-                    {subTitle}
+                    {item.SubTitle}
 
                 </Typography>
             </StyledLink>

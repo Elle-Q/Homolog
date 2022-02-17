@@ -21,7 +21,7 @@ function ItemModal(props) {
     const [imgFile, setImgFile] = useState(null);
     const [imgUri, setImgUri] = useState(data.Preview);
     const [catNames, setCatNames] = useState(null);
-    const [tags, setTags] = useState(["s", "sss"]);
+    const [tags, setTags] = useState(["ss","ssss"]);
     const [showTagInput, setShowTagInput] = useState(false);
     const tagRef = useRef();
 
@@ -45,7 +45,7 @@ function ItemModal(props) {
     }
 
     const handleInputChange = (event) => {
-        // debugger
+        debugger
         const name = event.target.name;
         const value = event.target.value;
         if (event.target.type === 'file') {
@@ -54,7 +54,7 @@ function ItemModal(props) {
             setDetail({
                 ...detail,
                 [name]: value
-            })
+            }) 
         }
     };
 
@@ -65,18 +65,14 @@ function ItemModal(props) {
             let param = Object.assign({}, detail,
                 {
                     Preview: link,
-                    Tags: tags
+                    Tags: tags.toString()
                 })
-            debugger
             UpdateItem(param).then(() => {
                 handleClose();
                 dispatch(openAlert());
                 setImgFile(null);
             })
-
         })
-
-
     };
 
     return (
@@ -128,7 +124,7 @@ function ItemModal(props) {
                                  name="Desc"
                                  header="描述:"
                                  value={data.Desc}
-                                 placeholder="描述一下分类"
+                                 placeholder="描述一下内容"
                                  disabled={readOnly}
                                  onChange={handleInputChange}/>
             </div>
@@ -175,7 +171,6 @@ function ItemModal(props) {
                                 label={key}
                                 key={index}
                                 onDelete={() => {
-                                    console.log(key)
                                     setTags(tags.filter(t => t !== key))
                                 }}
                             />

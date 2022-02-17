@@ -4,6 +4,7 @@ export const catSlice = createSlice({
     name: 'catModal',
     initialState: {
         openModal: false,
+        type: "add",
         readOnly: true,
         data: {},
     },
@@ -15,11 +16,12 @@ export const catSlice = createSlice({
             }
         },
         open: (state, action) => {
-            const {readOnly, data} = action.payload
+            const {readOnly, data, type} = action.payload
             return {
                 ...state,
                 openModal: true,
                 readOnly:readOnly,
+                type: type,
                 data:data,
             }
         },

@@ -11,30 +11,42 @@ import {UpdateCat} from "../../../api/cat.service";
 
 
 function CatModal(props) {
-    const {openModal, readOnly, data} = useSelector(selectCatModal);
+    const {openModal, readOnly, data, type} = useSelector(selectCatModal);
     const dispatch = useDispatch();
     const [detail, setDetail] = React.useState(data);
     const [imgFile, setImgFile] = useState(null);
+    const [pageImgFile, setPageImgFile] = useState(null);
     const [imgUri, setImgUri] = useState(data.Preview);
+    const [pageImgUri, setPageImgUri] = useState(data.PageImg);
 
     useEffect(() => {
         imgFile && setImgUri(URL.createObjectURL(imgFile));
     },[imgFile])
 
     useEffect(() => {
+        pageImgFile && setPageImgUri(URL.createObjectURL(pageImgFile));
+    },[pageImgFile])
+
+    useEffect(() => {
         setDetail(data)
         setImgUri(data.Preview)
+        setPageImgUri(data.PageImg)
     },[data])
 
     const handleClose = () => {
-        dispatch(close())
+        dispatch(close());
+        // window.location.reload();
     }
 
     const handleInputChange = (event) => {
         const name = event.target.name;
         const value = event.target.value;
         if (event.target.type === 'file') {
-            setImgFile(event.target.files[0]);
+            if (name === 'Preview') {
+                setImgFile(event.target.files[0]);
+            } else  {
+                setPageImgFile(event.target.files[0]);
+            }
         } else {
             setDetail({
                 ...detail,
@@ -45,23 +57,34 @@ function CatModal(props) {
 
     //保存分类信息
     const handleSave = async () => {
-        //上传文件到七牛, 获取图片外链
-        imgFile && upload(imgFile).then(link => {
-            let param = Object.assign({}, detail, {Preview: link})
-
+        const save = (param) => {
             UpdateCat(param).then(() => {
                 handleClose();
             })
 
             dispatch(openAlert());
             setImgFile(null);
+        }
+
+        //上传文件到七牛, 获取图片外链
+        imgFile &&  upload(imgFile).then(link => {
+                let param = Object.assign({}, detail, {Preview: link})
+                save(param)
+            })
+
+         //上传文件到七牛, 获取图片外链
+        pageImgFile && upload(pageImgFile).then(link => {
+            let param = Object.assign({}, detail, {PageImg: link})
+            save(param);
         })
 
-
+        if (pageImgFile === null && imgFile === null) {
+            save(detail)
+        }
     };
 
     return (
-        <Modal title="新增分类"
+        <Modal title={type === "add" ? "新增分类" : (type === "show" ? "展示分类": "编辑分类")}
                maxWidth="md"
                open={openModal}
                handleClose={()=>{
@@ -84,9 +107,17 @@ function CatModal(props) {
 
             <div style={{display: "flex", marginTop: '30px'}}>
                 <ImagInputWithHeader
-                    header="主图"
+                    header="预览图"
                     name="Preview"
                     img={imgUri}
+                    onChange={handleInputChange}/>
+            </div>
+
+            <div style={{display: "flex", marginTop: '30px'}}>
+                <ImagInputWithHeader
+                    header="主图"
+                    name="PageImg"
+                    img={pageImgUri}
                     onChange={handleInputChange}/>
             </div>
 
@@ -108,6 +139,7 @@ function CatModal(props) {
                     defaultValue="show"
                     handleChange={handleInputChange}
                     disabled={readOnly}
+                    type="enum"
                     items={CatStatus}/>
             </div>
 

@@ -20,3 +20,10 @@ export const ListCatName = () => {
             return resp
         })
 }
+
+export const GetCat = (catId) => {
+    return api.get(`/homo-app/category/${catId}`)
+        .then((resp) => {
+            return resp
+        });
+}

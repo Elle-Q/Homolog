@@ -1,7 +1,6 @@
 import React from 'react';
 import Grid from "@mui/material/Grid";
 import Carousell from "../../../../features/carousel/Carousell";
-import carouselJson from "../../../../json/carousel.json";
 import Categories from "../../../../json/category.json";
 import Subject from "../../../../features/subject/Subject";
 import Box from "@mui/material/Box";
@@ -23,7 +22,7 @@ function Body(props) {
                   justify="center"
             >
                 <Grid item xs={12}>
-                    <Carousell items={carouselJson}/>
+                    <Carousell />
                 </Grid>
                 {
                     Categories.map((category, index) => {

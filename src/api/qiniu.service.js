@@ -19,6 +19,7 @@ class QiniuService {
 const qiniuService =  new QiniuService()
 
 export const upload = (file) => {
+    const key = new Date().getTime() + '/' + file.name;
     const observer = {
         next(res){
             console.log("next")
@@ -40,7 +41,6 @@ export const upload = (file) => {
     };
 
     return qiniuService.getUpToken().then(resp => {
-        let key = new Date().getTime() + '/' + file.name;
         const observable = qiniu.upload(file, key, resp.UpToken, putExtra, config)
         const subscription = observable.subscribe(observer)
         // subscription.unsubscribe() // 上传取消

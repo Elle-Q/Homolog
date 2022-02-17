@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import img from '../../../assets/cat_animate3-2.gif'
@@ -9,8 +9,20 @@ import Button from "@mui/material/Button";
 import SideBar from "../../../features/subject/SideBar";
 import items from "../../../json/items.json";
 import CategoryCard from "../../../features/subject/CategoryCard";
+import {useParams} from "react-router-dom";
+import {GetCat} from "../../../api/cat.service";
 
 function Category(props) {
+
+    let params = useParams();
+    let id = params.id;
+    const [category, setCategory] = useState({});
+
+    useEffect(() => {
+        GetCat(id).then((data) => {
+            setCategory(data)
+        })
+    }, [])
 
     function getPopularTags() {
         return (
@@ -50,7 +62,7 @@ function Category(props) {
                   sx={{backgroundColor: 'secondary.main'}}
             >
                 <Grid item xs={6} style={{textAlign: "right", marginTop: '50px'}}>
-                    <img src={img} alt='category' style={{
+                    <img src={category.PageImg} alt='category' style={{
                         maxWidth:'600px'
                         // width: '80%',
                     }}/>
@@ -65,17 +77,18 @@ function Category(props) {
                                     mb: '20px',
                                     display: "block"
                                 }}>
-                        动画
+                        {category.Title}
                     </Typography>
                     <Typography variant="h1"
                                 component="h1"
                                 color="secondary.light"
                                 sx={{
+                                    fontFamily: 'cursive',
                                     fontSize: '44px',
                                     marginRight: '45%',
                                     lineHeight: '1.1em'
                                 }}>
-                        使用 Blender 和 动画制作技巧完善艺术品。
+                        {category.Desc}
                     </Typography>
                 </Grid>
                 <Grid item xs={2}/>

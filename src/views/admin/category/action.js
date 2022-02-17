@@ -15,6 +15,7 @@ function Action(props) {
     const handleOpen = () => {
         dispatch(open({
             readOnly:true,
+            type:"show",
             data:data,
         }))
     }
@@ -22,6 +23,7 @@ function Action(props) {
     const handleEdit = () => {
         dispatch(open({
             readOnly:false,
+            type:"edit",
             data:data,
         }))
     }

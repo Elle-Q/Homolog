@@ -2,7 +2,7 @@ import React, {createRef, useEffect, useState} from 'react';
 import {alpha} from "@mui/material/styles";
 
 function DragDrop(props) {
-    const {handleDropFile} = props
+    const {handleDropFile, width, height,color} = props
     const dropRef = createRef();
     const [dragging, setDragging] = useState(false);
     const [dragCounter, setDragCounter] = useState(0);
@@ -59,12 +59,12 @@ function DragDrop(props) {
              style={{
                  display: 'inline-block',
                  position: 'relative',
-                 width:'200px',
-                 height: '50px',
+                 width: {width},
+                 height: {height},
                  borderRadius: '5px',
                  textAlign: "center",
-                 backgroundColor: `${dragging ? alpha('#3399ff', 0.3)
-                     : alpha('#3399ff', 0.1)}`,
+                 backgroundColor: `${dragging ? alpha(`${color}`, 0.3)
+                     : alpha(`${color}`, 0.1)}`,
              }}>
             {props.children}
         </div>

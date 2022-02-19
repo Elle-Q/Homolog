@@ -11,10 +11,12 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import {StyledTableCell, StyledTableRow} from "../../../features/table/table";
 import TableBody from "@mui/material/TableBody";
-import Action from "../category/action";
+import Action from "../../../features/table/action";
 import {listItem} from "../../../api/item.service";
 import OpenIconSpeedDial from "../../../common/open-icon-speed-dial";
 import ItemModal from "./item-modal";
+import api from "../../../api/api";
+import {openAlert} from "../../../features/alert/alertSlice";
 
 function Item(props) {
     const [items, setItems] = useState([]);
@@ -40,8 +42,33 @@ function Item(props) {
     ];
 
 
-    const handleDel = () => {
+    const handleDel = async (id) => {
+        api.post('/homo-admin/item/delete', {
+            id: id
+        }).then((resp) => {
+            if (resp) {
+                const arr = items.filter((item) => item.ID !== id);
+                setItems(arr);
+            }
+        })
+        dispatch(openAlert())
+    }
 
+    const handleOpen = (data) => {
+        dispatch(open({
+            readOnly:true,
+            type:"show",
+            data:data,
+        }))
+    }
+
+
+    const handleEdit = (data) => {
+        dispatch(open({
+            readOnly:false,
+            type:"edit",
+            data:data,
+        }))
     }
 
     return (
@@ -81,7 +108,11 @@ function Item(props) {
                                     <StyledTableCell align="center">{row.UpdateTime}</StyledTableCell>
                                     <StyledTableCell align="center">{row.CreateTime}</StyledTableCell>
                                     <StyledTableCell align="center">
-                                        <Action data={row} handleDel={handleDel}/>
+                                        <Action data={row}
+                                                handleDel={handleDel}
+                                                handleOpen={handleOpen}
+                                                handleEdit={handleEdit}
+                                        />
                                     </StyledTableCell>
                                 </StyledTableRow>
                             ))}

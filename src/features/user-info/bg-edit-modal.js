@@ -1,17 +1,9 @@
 import React, {createRef, useEffect, useState} from "react";
-import Avatar from "@mui/material/Avatar";
-import DragDrop from "../../common/drag-drop";
-import IconButton from "@mui/material/IconButton";
-import {alpha} from "@mui/material/styles";
 import {default as AvatarModal} from "../../common/modal";
-import {updateAvatar, updateBG} from "../../api/user.service";
-import {upload} from "../../api/qiniu.service";
+import { updateBG} from "../../api/user.service";
 import {useDispatch, useSelector} from "react-redux";
-import {selectAuth} from "../../api/authSlice";
-import Stack from "@mui/material/Stack";
 import {ImageList} from "@mui/material";
 import {getDefaultBG} from "../../api/config.service";
-import {light} from "@mui/material/styles/createPalette";
 
 function BGEditModal(props) {
     const {open, user, handleClose, previewBG, closeModal} = props;

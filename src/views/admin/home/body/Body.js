@@ -5,6 +5,7 @@ import Box from "@mui/material/Box";
 import Category from "../../category/category";
 import Config from "../../config/config";
 import Item from "../../item/item";
+import FileUpload from "../../upload/file-upload";
 
 function Body(props) {
 
@@ -15,6 +16,7 @@ function Body(props) {
                 <Route path="/content/cat" element={<Category/>}/>
                 <Route path="/content/config" element={<Config/>}/>
                 <Route path="/content/item" element={<Item/>}/>
+                <Route path="/content/upload" element={<FileUpload/>}/>
                 {/*<Route path="play" element={<Play/>}/>*/}
                 {/*<Route path="category/:subject" element={<Category/>}/>*/}
                 {/*<Route path="account" element={<Account/>}/>*/}

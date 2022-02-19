@@ -106,7 +106,12 @@ function AvatarEditModal(props) {
                 }
             </div>
             <div style={{display: "flex", justifyContent: "center", marginTop: '20px'}}>
-                <DragDrop handleDropFile={handleDrop}>
+                <DragDrop
+                    handleDropFile={handleDrop}
+                    width="200px"
+                    height="50px"
+                    color="#3399ff"
+                >
                     <input type="file"
                            name="avatar"
                            ref={fileRef}

@@ -21,7 +21,7 @@ function ItemModal(props) {
     const [imgFile, setImgFile] = useState(null);
     const [imgUri, setImgUri] = useState(data.Preview);
     const [catNames, setCatNames] = useState(null);
-    const [tags, setTags] = useState(["ss","ssss"]);
+    const [tags, setTags] = useState([]); //todo: 设计键
     const [showTagInput, setShowTagInput] = useState(false);
     const tagRef = useRef();
 
@@ -45,7 +45,6 @@ function ItemModal(props) {
     }
 
     const handleInputChange = (event) => {
-        debugger
         const name = event.target.name;
         const value = event.target.value;
         if (event.target.type === 'file') {
@@ -60,19 +59,28 @@ function ItemModal(props) {
 
     //保存资源信息
     const handleSave = async () => {
-        //上传文件到七牛, 获取图片外链
-        imgFile && upload(imgFile).then(link => {
-            let param = Object.assign({}, detail,
-                {
-                    Preview: link,
-                    Tags: tags.toString()
-                })
+
+        const save = (param) => {
             UpdateItem(param).then(() => {
                 handleClose();
                 dispatch(openAlert());
                 setImgFile(null);
             })
-        })
+        }
+        //上传文件到七牛, 获取图片外链
+        if (imgFile) {
+            imgFile && upload(imgFile).then(link => {
+                let param = Object.assign({}, detail,
+                    {
+                        Preview: link,
+                        Tags: tags.toString()
+                    });
+                save(param);
+            })
+        } else {
+            let param = Object.assign({}, detail, { Tags: tags.toString()})
+            save(param);
+        }
     };
 
     return (
@@ -184,7 +192,6 @@ function ItemModal(props) {
                         placeholder="输入标签"
                         onKeyPress={(e) => {
                             if (e.key === "Enter") {
-                                console.log()
                                 setTags([...tags, tagRef.current.value])
                                 setShowTagInput(false)
                             }
@@ -208,3 +215,4 @@ function ItemModal(props) {
 }
 
 export default ItemModal;
+

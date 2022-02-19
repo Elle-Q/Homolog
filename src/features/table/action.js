@@ -5,28 +5,11 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import {useDispatch} from "react-redux";
-import {open} from "./catSlice";
+import {open} from "../../views/admin/category/catSlice";
 
 
 function Action(props) {
-    const {data, handleDel} = props
-    const dispatch = useDispatch();
-
-    const handleOpen = () => {
-        dispatch(open({
-            readOnly:true,
-            type:"show",
-            data:data,
-        }))
-    }
-
-    const handleEdit = () => {
-        dispatch(open({
-            readOnly:false,
-            type:"edit",
-            data:data,
-        }))
-    }
+    const {data, handleDel, handleOpen, handleEdit} = props
 
     return (
         <React.Fragment>
@@ -36,12 +19,12 @@ function Action(props) {
                 </IconButton>
             </Tooltip>
             <Tooltip title="编辑">
-                <IconButton onClick={handleEdit}>
+                <IconButton onClick={() => handleEdit(data)}>
                     <EditIcon sx={{color: '#2d85f0'}} fontSize='small'/>
                 </IconButton>
             </Tooltip>
             <Tooltip title="查看">
-                <IconButton onClick={handleOpen}>
+                <IconButton onClick={() => handleOpen(data)}>
                     <RemoveRedEyeIcon sx={{color: '#2d85f0'}} fontSize='small'/>
                 </IconButton>
             </Tooltip>

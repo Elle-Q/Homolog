@@ -7,7 +7,7 @@ import TableBody from "@mui/material/TableBody";
 import Paper from "@mui/material/Paper";
 import {CatStatus} from "../../../common/constant/constant";
 import {StyledTableCell, StyledTableRow} from "../../../features/table/table";
-import Action from "./action";
+import Action from "../../../features/table/action";
 import OpenIconSpeedDial from "../../../common/open-icon-speed-dial";
 import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -53,6 +53,23 @@ function Category(props) {
         dispatch(openAlert())
     };
 
+    const handleOpen = (data) => {
+        dispatch(open({
+            readOnly:true,
+            type:"show",
+            data:data,
+        }))
+    }
+
+
+    const handleEdit = (data) => {
+        dispatch(open({
+            readOnly:false,
+            type:"edit",
+            data:data,
+        }))
+    }
+
     const actions = [
         {icon: <AddIcon/>, name: '添加', onClick:handleAddClick},
         {icon: <DeleteIcon/>, name: '批量删除'},
@@ -96,7 +113,11 @@ function Category(props) {
                                 <StyledTableCell align="center">{row.UpdateTime}</StyledTableCell>
                                 <StyledTableCell align="center">{row.CreateTime}</StyledTableCell>
                                 <StyledTableCell align="center">
-                                    <Action data={row} handleDel={handleDel}/>
+                                    <Action data={row}
+                                            handleDel={handleDel}
+                                            handleOpen={handleOpen}
+                                            handleEdit={handleEdit}
+                                    />
                                 </StyledTableCell>
                             </StyledTableRow>
                         ))}

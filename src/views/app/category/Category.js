@@ -6,9 +6,9 @@ import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import tags from '../../../json/popTags.json';
 import Button from "@mui/material/Button";
-import SideBar from "../../../features/subject/SideBar";
+import SideBar from "./SideBar/SideBar";
 import items from "../../../json/items.json";
-import CategoryCard from "../../../features/subject/CategoryCard";
+import CategoryCard from "../home/body/subject/CategoryCard";
 import {useParams} from "react-router-dom";
 import {GetCat} from "../../../api/cat.service";
 

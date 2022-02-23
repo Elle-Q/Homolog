@@ -3,15 +3,15 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import {Link, useParams} from "react-router-dom";
 import items from "../../../json/items.json";
-import PriceTag from "../../../common/price-tag";
+import PriceTag from "../../../components/PriceTag";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
-import ByAuthor from "../../../common/by-author";
+import ByAuthor from "../../../components/ByAuthor";
 import {alpha} from "@mui/system";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import {getStarIcons} from "../../../utils/ToolUtil";
 import styled from "styled-components";
-import PageTipFloatingBar from "../../../common/page-tip-floating-bar";
+import PageTipFloatingBar from "../../../components/PageTipFloatingBar";
 import AirplayIcon from '@mui/icons-material/Airplay';
 
 const StyledDiv = styled.div`

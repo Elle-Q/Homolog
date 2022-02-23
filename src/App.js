@@ -1,13 +1,13 @@
 import React from 'react';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
 import {globalTheme} from "./config/globalTheme";
-import Home from "./views/app/home/home";
+import Home from "./views/app/home/Home";
 import {BrowserRouter, Route, Routes, useLocation} from "react-router-dom";
 import Admin from "./views/admin/home/Admin";
 import {adminTheme} from "./config/adminTheme";
 import useInterceptor from "./hook/useInterceptor";
-import AlertLog from "./features/alert/AlertLog";
-import Login from "./views/login/login";
+import AlertLog from "./components/alert/AlertLog";
+import Login from "./views/login/Login";
 import "./styles.css";
 
 export const ColorModeContext = React.createContext({

@@ -2,10 +2,10 @@ import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import AppLogo from "../../../../common/app-logo";
+import AppLogo from "../../../app/home/head/AppLogo";
 import {Link} from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
-import {StyledBadge} from "../../../../common/styled-badge";
+import {CustomBadge} from "../../../../components/ui/CustomBadge";
 
 
 function HeaderBar(props) {
@@ -29,14 +29,14 @@ function HeaderBar(props) {
                     <AppLogo title="HOMOLOG 管理系统" color='#3399ff'/>
                     <Box sx={{flexGrow: 10}}/>
                     <span style={{color: '#999', fontSize: '15px', marginRight: '5px'}}>Admin--elle</span>
-                    <StyledBadge
+                    <CustomBadge
                         overlap="circular"
                         anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}
                         variant="dot"
                         component={Link} to={"/app/account"}
                     >
                         <Avatar alt="elle" src="/avatar/avatar1.jpg"/>
-                    </StyledBadge>
+                    </CustomBadge>
                 </Toolbar>
             </AppBar>
         </Box>

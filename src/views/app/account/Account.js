@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import Box from "@mui/material/Box";
-import UserInfo from "../../../features/user-info/user-info";
-import TabBar from "../../../common/tab-bar";
+import UserInfoPageShow from "./user-info/UserInfoPageShow";
+import TabBar from "./tab/TabBar";
 import { useSelector} from "react-redux";
 import {selectAuth } from "../../../api/authSlice";
-import BGEditModal from "../../../features/user-info/bg-edit-modal";
+import BgEditModal from "./user-info/BgEditModal";
 
 function Account(props) {
 
@@ -14,7 +14,6 @@ function Account(props) {
     const [bgUri, setBgUri] = useState(null);
 
     useEffect(() => {
-        user && console.log(user)
         user && setBgUri(user.BgImag)
     }, [user])
 
@@ -55,11 +54,11 @@ function Account(props) {
                 }}
                 onClick={onClickBG}
             >
-                <UserInfo/>
+                <UserInfoPageShow/>
             </Box>
 
             {/*修改背景图像*/}
-            <BGEditModal
+            <BgEditModal
                 open={openModal}
                 user={user}
                 handleClose={handleClose}

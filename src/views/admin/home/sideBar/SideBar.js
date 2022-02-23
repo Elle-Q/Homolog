@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import NavItem from "../../../../features/nav/NavItem";
+import NavItem from "../../../../components/NavItem";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import {Collapse} from "@mui/material";

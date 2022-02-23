@@ -1,14 +1,14 @@
 import React, {useRef, useState} from 'react';
 import Grid from "@mui/material/Grid";
-import PlaySideBar from "../../../features/video-play/VideoPeriods";
+import PlaySideBar from "./video-play/Periods";
 import Box from "@mui/material/Box";
-import VideoInfo from "../../../features/video-play/VideoInfo";
-import VideoPlayer from "../../../features/video-play/VideoPlayer";
-import VideoPeriods from "../../../features/video-play/VideoPeriods";
-import DanmuInput from "../../../features/video-play/DanmuInput";
-import PageTipFloatingBar from "../../../common/page-tip-floating-bar";
-import VideoBriefDesc from "../../../features/video-play/VideoBriefDesc";
-import Comments from "../../../features/comment/Comments";
+import Title from "./video-play/Title";
+import VideoPlayer from "../../../components/player/VideoPlayer";
+import Periods from "./video-play/Periods";
+import DanmuInput from "./video-play/DanmuInput";
+import PageTipFloatingBar from "../../../components/PageTipFloatingBar";
+import BriefDesc from "./video-play/BriefDesc";
+import Comments from "./comment/Comments";
 
 
 function Play(props) {
@@ -42,7 +42,7 @@ function Play(props) {
                   columnSpacing={{xs: 1, sm: 2, md: 3}}
             >
                 <Grid item xs={12} >
-                    <VideoInfo title={"计算机图形学"}/>
+                    <Title title={"计算机图形学"}/>
                     {/*<VideoTag />*/}
                 </Grid>
 
@@ -54,7 +54,7 @@ function Play(props) {
                 </Grid>
 
                 <Grid item xs={4}>
-                    <VideoPeriods changeVideoSrc={changeVideoSrc}/>
+                    <Periods changeVideoSrc={changeVideoSrc}/>
                 </Grid>
 
                 <Grid item xs={7}  >
@@ -62,7 +62,7 @@ function Play(props) {
                 </Grid>
 
                 <Grid item xs={4}  >
-                    <VideoBriefDesc />
+                    <BriefDesc />
                 </Grid>
             </Grid>
 

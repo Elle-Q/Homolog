@@ -5,6 +5,7 @@ import ControlBar from "./ControlBar";
 import InnerPlayerHeader from "../../views/app/play/video-play/InnerPlayerHeader";
 import Barrage from 'barrage-ui';
 import barageData from '../../json/barrage.json'
+import Hls from "hls.js";
 
 
 const videoJsOptions = {
@@ -13,10 +14,10 @@ const videoJsOptions = {
     controls: true,
     responsive: true,
     fluid: true,
-    sources: [{
-        src: 'video3.mp4',
-        type: 'video/mp4'
-    }],
+    // sources: [{
+    //     src: 'https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8',
+    //     type: 'video/mp4',
+    // }],
     controlBar: {
         children: [
             {
@@ -34,6 +35,18 @@ function VideoPlayer(props) {
     const [barrageVisible, setBarrageVisible] = useState(true);
     const playerRef = React.useRef(null);
     const barrageRef = React.useRef(null);
+
+
+    if (Hls.isSupported()) {
+        var video = document.getElementById('video');
+        var hls = new Hls();
+        // bind them together
+        hls.attachMedia(video);
+        // MEDIA_ATTACHED event is fired by hls object once MediaSource is ready
+        hls.on(Hls.Events.MEDIA_ATTACHED, function () {
+            console.log('video and hls.js are now bound together !');
+        });
+    }
 
     useEffect(() => {
         barrageRef.current=new Barrage({
@@ -57,7 +70,8 @@ function VideoPlayer(props) {
         playerRef.current.src(
             {
                 type: 'video/mp4',
-                src: videoSrc
+                src: 'https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8',
+                // withCredentials: true
             });
     },[videoSrc])
 

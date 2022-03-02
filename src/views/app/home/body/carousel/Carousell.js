@@ -118,7 +118,7 @@ function Carousell() {
 
                 {
                     cats.map((item, i) => (
-                        <ImageCard item={item} width={moveWidth}/>
+                        <ImageCard key={i} item={item} width={moveWidth}/>
                     ))
                 }
 

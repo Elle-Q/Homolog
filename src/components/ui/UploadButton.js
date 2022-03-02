@@ -4,10 +4,12 @@ import uploadSvg from "../../assets/admin/upload1.svg";
 import IconButton from "@mui/material/IconButton";
 import {Tooltip} from "@mui/material";
 
-function UploadButton({marginTop}) {
+function UploadButton({onClick}) {
+
     return (
         <Tooltip title="上传所有">
             <IconButton
+                onClick={onClick}
                 sx={{
                     backgroundColor: "#403D39",
                     '&:hover': {

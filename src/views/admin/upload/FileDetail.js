@@ -1,22 +1,20 @@
 import React from 'react';
-import Box from "@mui/material/Box";
 import ItalicLabel from "../../../components/ui/ItalicLabel";
 import {ByteToM} from "../../../utils/MathUtil";
 import {useSelector} from "react-redux";
-import {selectCatModal} from "../category/catSlice";
 import {selectUploadItemResc} from "./uploadSlice";
 import InputLabel from "../../../components/ui/InputLabel";
 
 function FileDetail(props) {
-    const {file} = props;
-    const {selectedFileFormat} = useSelector(selectUploadItemResc);
+    const {selectedFileFormat, selectedFile} = useSelector(selectUploadItemResc);
 
-    console.log(selectedFileFormat)
+    if (!selectedFile) return <></>;
+
     return (
         <React.Fragment>
-            <ItalicLabel name="大小" value={`${ByteToM(file[0].size)}M`}/>
-            <ItalicLabel name="格式" value={file[0].format}/>
-            <InputLabel name="名称*" value={file[0].name}/>
+            <ItalicLabel name="大小" value={`${ByteToM(selectedFile.size)}M`}/>
+            <ItalicLabel name="格式" value={selectedFile.type}/>
+            <InputLabel name="名称*" value={selectedFile.name}/>
             {
                 selectedFileFormat==='video' && <ItalicLabel name="时长" value="63:00"/>
             }

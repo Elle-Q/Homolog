@@ -3,16 +3,17 @@ import {createSlice} from '@reduxjs/toolkit'
 export const uploadSlice = createSlice({
     name: 'uploadItemResc',
     initialState: {
-        selectedFileName: {},
+        selectedFile: null,
         selectedFileFormat: 'video',
+        newRescFiles:[]
     },
     reducers: {
 
-        setSelectedFileName: (state, action) => {
-            const {fileName} = action.payload
+        setSelectedFile: (state, action) => {
+            const {file} = action.payload
             return {
                 ...state,
-                selectedFileName: fileName,
+                selectedFile: file,
             }
         },
 
@@ -22,11 +23,19 @@ export const uploadSlice = createSlice({
                 ...state,
                 selectedFileFormat: fileFormat,
             }
-        }
+        },
+
+        setNewRescFiles: (state, action) => {
+            return {
+                ...state,
+                newRescFiles: action.payload,
+            }
+        },
+
     }
 })
 
-export const {setSelectedFileName, setSelectedFileFormat} = uploadSlice.actions
+export const {setSelectedFile, setSelectedFileFormat, setNewRescFiles} = uploadSlice.actions
 export const selectUploadItemResc = state => state.uploadItemResc
 
 export default uploadSlice.reducer

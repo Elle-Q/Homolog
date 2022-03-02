@@ -31,8 +31,8 @@ function Home(props) {
                     classNames="page"
                 >
                     <Routes>
-                        {routes.map(({path, component}) => (
-                            <Route path={path} element={component}/>
+                        {routes.map(({path, component}, index) => (
+                            <Route key={index} path={path} element={component}/>
                         ))}
                     </Routes>
                 </CSSTransition>

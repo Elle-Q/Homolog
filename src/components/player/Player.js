@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import videojs from "video.js";
 import "video.js/dist/video-js.css";
 import './palyer.css'
+import Hls from "hls.js";
 
 
 function Player(props) {
@@ -18,9 +19,20 @@ function Player(props) {
         if (!playerRef.current) {
             const videoElement = videoRef.current;
             if (!videoElement) return;
+            let hls = new Hls();
+            hls.attachMedia(videoElement);
+            hls.on(Hls.Events.MEDIA_ATTACHED, function () {
+                hls.loadSource('http://private.video.gomolog.com/test.m3u8?pm3u8/0&e=1646168508&token=WhRnhuuljtU1hBNKbBLkkX2T-ymTLTDs_pC7PSn4:qlygojBHYDV4xFKSXFB6PkG__KI=');
+                hls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {
+                    console.log(
+                        'manifest loaded, found ' + data.levels.length + ' quality level'
+                    );
+                });
+            });
             const player = playerRef.current = videojs(videoElement, options, () => {
                 onReady && onReady(player);
             });
+            player.play()
         } else {
             // update player through props
             const player = playerRef.current;

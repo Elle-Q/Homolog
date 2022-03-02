@@ -15,8 +15,10 @@ import SearchIcon from '@mui/icons-material/Search';
 import FilesShow from "./FilesShow";
 import {InputWithHeader} from "../../../components/ui/CustomInput";
 import {useDispatch, useSelector} from "react-redux";
-import {selectUploadItemResc, setSelectedFileFormat, setSelectedFileName} from "./uploadSlice";
+import {selectUploadItemResc, setNewRescFiles, setSelectedFileFormat} from "./uploadSlice";
 import {alpha} from "@mui/system";
+import UploadButton from "../../../components/ui/UploadButton";
+import {UploadItemFiles} from "../../../api/item.service";
 
 const radioStyle = {
 
@@ -31,20 +33,13 @@ const iconStyle = {
 }
 
 function Upload(props) {
-    const [newRescFiles, setNewRescFiles] = useState([]);
     const [originalRescFiles, setOriginalRescFiles] = useState([]);
-    const [selectedFile, setSelectedFile] = useState(null);
-    const {selectedFileName, selectedFileFormat} = useSelector(selectUploadItemResc);
+    const [file, setFile] = useState(null);
+    const {selectedFileFormat, newRescFiles} = useSelector(selectUploadItemResc);
     const dispatch = useDispatch();
-
-    useEffect(() => {
-        const arr = newRescFiles.filter((item) => item.name === selectedFileName);
-        setSelectedFile(arr)
-    }, [selectedFileName])
 
     const handleRscTypeChange = e => {
         dispatch(setSelectedFileFormat({fileFormat: e.target.value}))
-
     }
 
     //多文件上传
@@ -54,16 +49,19 @@ function Upload(props) {
 
     const handleMulti = (event) => {
         let files = [];
+        setFile(event[0])
         for (let i = 0; i < event.length; i++) {
-            console.log(event[i])
+
             files.push({
                 size: event[i].size,
                 format: event[i].type,
                 name: event[i].name,
             })
         }
-        setNewRescFiles([...newRescFiles, ...files]); //fuck, 我怎么没想到
+        //fuck, 我怎么没想到
+        dispatch(setNewRescFiles([...newRescFiles, ...files]))
     };
+
 
     //单选item组件
     const RadioItem = (props) => {
@@ -79,6 +77,19 @@ function Upload(props) {
                                   </Tooltip>
                               }/>
         )
+    }
+
+    // 上传文件
+    const onUploadClick = async () => {
+
+        let param = new FormData();
+
+        for (let x = 0; x < newRescFiles.length; x++) {
+            param.append("Files[]",file);
+        }
+
+        param.append("ItemID", 1)
+        await UploadItemFiles(param)
     }
 
     return (
@@ -136,10 +147,9 @@ function Upload(props) {
 
                 {/*显示文件详情*/}
                 <Box sx={{width: '25%', padding: '50px'}}>
-                    {
-                        selectedFile && selectedFile.length > 0 && <FileDetail file={selectedFile}/>
-                    }
+                     <FileDetail />
                 </Box>
+
                 {/*文件拖拽组件*/}
                 <DragDrop handleDropFile={handleMulti}  color="#001E3C">
                     <Uploader
@@ -148,8 +158,15 @@ function Upload(props) {
                         onFileUpload={onFileUpload}
                     />
                 </DragDrop>
+
                 {/*显示拖拽的文件信息*/}
-                <FilesShow originFiles={originalRescFiles} newFiles={newRescFiles}/>
+                <FilesShow originFiles={originalRescFiles}>
+                    <Box sx={{display: "flex", justifyContent: "center", mt: '50px'}}>
+                        <UploadButton marginTop="50px" onClick={onUploadClick}/>
+                    </Box>
+                </FilesShow>
+
+
 
             </Grid>
         </Grid>

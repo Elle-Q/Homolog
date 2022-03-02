@@ -3,11 +3,13 @@ import Stack from "@mui/material/Stack";
 import UploadedFile from "./UploadedFile";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import UploadButton from "../../../components/ui/UploadButton";
+import {useSelector} from "react-redux";
+import {selectUploadItemResc} from "./uploadSlice";
 
 function FilesShow(props) {
 
-    const {originFiles, newFiles} = props;
+    const {originFiles} = props;
+    const {newRescFiles} = useSelector(selectUploadItemResc);
 
     const Tips = (content) => {
          return <Typography color="#EB5E28"
@@ -31,7 +33,9 @@ function FilesShow(props) {
                 <Stack direction="column" sx={{mt: '30px', color: 'black', display: "flex"}}>
                     {
                         originFiles.map((item, index) => {
-                                return <UploadedFile key={index} fileName={item.name} error={true}/>
+                                return <UploadedFile key={index}
+                                                     file={item}
+                                                     error={true}/>
                             }
                         )
                     }
@@ -45,13 +49,13 @@ function FilesShow(props) {
             {/*新上传的文件*/}
             待上传:
             {
-                newFiles.length > 0 ?
+                newRescFiles.length > 0 ?
                     <Stack direction="column" sx={{mt: '30px', color: 'black', display: "flex"}}>
                         {
-                            newFiles && newFiles.map((item, index) => {
+                            newRescFiles.map((item, index) => {
                                     return <UploadedFile
                                         key={index}
-                                        fileName={item.name}
+                                        file={item}
                                         error={true}
                                     />
                                 }
@@ -62,9 +66,7 @@ function FilesShow(props) {
                     Tips("还没有选择任何文件哦")
             }
 
-            <Box sx={{display: "flex", justifyContent: "center", mt: '50px'}}>
-                <UploadButton marginTop="50px"/>
-            </Box>
+            {props.children}
 
         </Box>
     );

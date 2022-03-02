@@ -13,3 +13,10 @@ export const UpdateItem = (param) => {
             return resp
         })
 }
+
+export const UploadItemFiles = (param) => {
+    return api.post('/homo-admin/item/upload', param)
+        .then(resp => {
+            return resp
+        })
+}

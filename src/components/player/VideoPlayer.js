@@ -14,10 +14,10 @@ const videoJsOptions = {
     controls: true,
     responsive: true,
     fluid: true,
-    // sources: [{
-    //     src: 'https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8',
-    //     type: 'video/mp4',
-    // }],
+    sources: [{
+        src: 'http://private.video.gomolog.com/test.m3u8?pm3u8/0&e=1646339666&token=WhRnhuuljtU1hBNKbBLkkX2T-ymTLTDs_pC7PSn4:qMUShqn0cPsTmPQn1RydsZHuEas=',
+        type: 'application/x-mpegURL',
+    }],
     controlBar: {
         children: [
             {
@@ -35,18 +35,6 @@ function VideoPlayer(props) {
     const [barrageVisible, setBarrageVisible] = useState(true);
     const playerRef = React.useRef(null);
     const barrageRef = React.useRef(null);
-
-
-    if (Hls.isSupported()) {
-        var video = document.getElementById('video');
-        var hls = new Hls();
-        // bind them together
-        hls.attachMedia(video);
-        // MEDIA_ATTACHED event is fired by hls object once MediaSource is ready
-        hls.on(Hls.Events.MEDIA_ATTACHED, function () {
-            console.log('video and hls.js are now bound together !');
-        });
-    }
 
     useEffect(() => {
         barrageRef.current=new Barrage({
@@ -69,9 +57,8 @@ function VideoPlayer(props) {
         playerRef.current.pause();
         playerRef.current.src(
             {
-                type: 'video/mp4',
-                src: 'https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8',
-                // withCredentials: true
+                type: 'application/x-mpegURL',
+                src: 'http://private.video.gomolog.com/test.m3u8?pm3u8/0&e=1646339666&token=WhRnhuuljtU1hBNKbBLkkX2T-ymTLTDs_pC7PSn4:qMUShqn0cPsTmPQn1RydsZHuEas=',
             });
     },[videoSrc])
 

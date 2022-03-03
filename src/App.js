@@ -30,7 +30,6 @@ function App() {
         [mode],
     );
 
-
     const admin_theme = React.useMemo(
         () =>
             createTheme(adminTheme, {

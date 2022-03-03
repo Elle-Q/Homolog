@@ -22,7 +22,7 @@ function Player(props) {
             let hls = new Hls();
             hls.attachMedia(videoElement);
             hls.on(Hls.Events.MEDIA_ATTACHED, function () {
-                hls.loadSource('http://private.video.gomolog.com/test.m3u8?pm3u8/0&e=1646168508&token=WhRnhuuljtU1hBNKbBLkkX2T-ymTLTDs_pC7PSn4:qlygojBHYDV4xFKSXFB6PkG__KI=');
+                hls.loadSource('http://pub.gomolog.com/item01.m3u8');
                 hls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {
                     console.log(
                         'manifest loaded, found ' + data.levels.length + ' quality level'

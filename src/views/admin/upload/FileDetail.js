@@ -12,9 +12,9 @@ function FileDetail(props) {
 
     return (
         <React.Fragment>
-            <ItalicLabel name="大小" value={`${ByteToM(selectedFile.size)}M`}/>
-            <ItalicLabel name="格式" value={selectedFile.type}/>
-            <InputLabel name="名称*" value={selectedFile.name}/>
+            <ItalicLabel name="大小" value={`${ByteToM(selectedFile.Size || selectedFile.size)}M`}/>
+            <ItalicLabel name="格式" value={selectedFile.Format || selectedFile.type}/>
+            <InputLabel name="名称*" value={selectedFile.Name || selectedFile.name}/>
             {
                 selectedFileFormat==='video' && <ItalicLabel name="时长" value="63:00"/>
             }

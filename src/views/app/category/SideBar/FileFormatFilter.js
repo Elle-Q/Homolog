@@ -1,6 +1,5 @@
 import React from 'react';
 import Stack from "@mui/material/Stack";
-import {getStarIcons} from "../../../../utils/ToolUtil";
 import {RatioInput} from "../../../../components/ui/RatioInput";
 
 const formats = {
@@ -17,8 +16,6 @@ const formats = {
 
 
 function FileFormatFilter(props) {
-
-    console.log(formats)
 
     return (
         <React.Fragment>

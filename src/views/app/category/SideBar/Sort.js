@@ -17,7 +17,6 @@ function Sort(props) {
     const [sortBy, setSortBy] = React.useState(sorts['Newest']);
 
     const handleChange = (event) => {
-        console.log()
         setSortBy(sorts[event.target.value]);
     };
 

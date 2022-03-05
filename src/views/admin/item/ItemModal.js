@@ -42,6 +42,7 @@ function ItemModal(props) {
 
     const handleClose = () => {
         dispatch(close())
+        window.location.reload();
     }
 
     const handleInputChange = (event) => {

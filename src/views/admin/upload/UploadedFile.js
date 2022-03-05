@@ -8,16 +8,12 @@ import {setSelectedFile, setNewRescFiles, selectUploadItemResc} from "./uploadSl
 import {useDispatch, useSelector} from "react-redux";
 
 function UploadedFile(props) {
-    const {file, error} = props;
+    const {file, error, handleDel} = props;
     const {newRescFiles} = useSelector(selectUploadItemResc);
     const dispatch = useDispatch();
 
     const handleFileLabelClick = (e) => {
         dispatch(setSelectedFile({file:file}))
-    }
-
-    const handleDeleteClick = (e) => {
-        dispatch(setNewRescFiles(newRescFiles.filter(item=>item.name!==file.name)))
     }
 
     return (
@@ -35,12 +31,12 @@ function UploadedFile(props) {
             >
                 <img alt="icon" className="file-link" src={`${error ? linkErrIcon : linkIcon}`}
                      style={{width: "20px", height: "20px"}}/>
-                <span style={{marginRight: '50px'}}>{file && file.name}</span>
+                <span style={{marginRight: '50px'}}>{file && (file.Name || file.name)}</span>
             </Box>
 
             <Box sx={{display: "flex", alignItems: "flex-end"}}>
                 <DeleteRoundedIcon
-                    onClick={handleDeleteClick}
+                    onClick={handleDel}
                     fontSize="small"
                     sx={{
                         mr: '10px',

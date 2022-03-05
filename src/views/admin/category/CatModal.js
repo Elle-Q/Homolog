@@ -35,7 +35,7 @@ function CatModal(props) {
 
     const handleClose = () => {
         dispatch(close());
-        // window.location.reload();
+        window.location.reload();
     }
 
     const handleInputChange = (event) => {

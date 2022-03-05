@@ -1,29 +1,29 @@
-import React, {useEffect, useState} from 'react';
+import React, {createRef, useState} from 'react';
 import Box from "@mui/material/Box";
 import Uploader from "../../../components/Uploader";
-import {FormControlLabel, FormLabel, Radio, RadioGroup} from "@mui/material";
+import {FormControlLabel, Radio, RadioGroup, Typography} from "@mui/material";
 import Tooltip from "@mui/material/Tooltip";
 import FormControl from "@mui/material/FormControl";
 import IconButton from "@mui/material/IconButton";
-import videoIcon from '../../../assets/admin/video.svg';
-import docIcon from '../../../assets/admin/doc.svg';
-import pluginIcon from '../../../assets/admin/plugin.svg';
+import previewIcon from '../../../assets/admin/preview.svg';
+import mainIcon from '../../../assets/admin/main.svg';
+import refIcon from '../../../assets/admin/ref.svg';
 import Grid from "@mui/material/Grid";
 import DragDrop from "../../../components/DragDrop";
 import FileDetail from "./FileDetail";
 import SearchIcon from '@mui/icons-material/Search';
 import FilesShow from "./FilesShow";
-import {InputWithHeader} from "../../../components/ui/CustomInput";
 import {useDispatch, useSelector} from "react-redux";
-import {selectUploadItemResc, setNewRescFiles, setSelectedFileFormat} from "./uploadSlice";
+import {selectUploadItemResc, setItem, setNewRescFiles, setRescType} from "./uploadSlice";
 import {alpha} from "@mui/system";
 import UploadButton from "../../../components/ui/UploadButton";
-import {UploadItemFiles} from "../../../api/item.service";
+import {GetItemFiles, UploadItemFiles} from "../../../api/item.service";
+import {SimpleInput} from "../../../components/ui/SimpleInput";
 
 const radioStyle = {
-
     '& .MuiSvgIcon-root': {
         fontSize: 17,
+        color: 'white'
     }
 }
 
@@ -33,13 +33,12 @@ const iconStyle = {
 }
 
 function Upload(props) {
-    const [originalRescFiles, setOriginalRescFiles] = useState([]);
-    const [file, setFile] = useState(null);
-    const {selectedFileFormat, newRescFiles} = useSelector(selectUploadItemResc);
+    const {newRescFiles, item, rescType} = useSelector(selectUploadItemResc);
     const dispatch = useDispatch();
+    const itemIDRef = createRef();
 
     const handleRscTypeChange = e => {
-        dispatch(setSelectedFileFormat({fileFormat: e.target.value}))
+        dispatch(setRescType(e.target.value))
     }
 
     //多文件上传
@@ -49,16 +48,10 @@ function Upload(props) {
 
     const handleMulti = (event) => {
         let files = [];
-        setFile(event[0])
         for (let i = 0; i < event.length; i++) {
-
-            files.push({
-                size: event[i].size,
-                format: event[i].type,
-                name: event[i].name,
-            })
+            files.push(event[i])
         }
-        //fuck, 我怎么没想到
+        //fuck, 怎么没想到
         dispatch(setNewRescFiles([...newRescFiles, ...files]))
     };
 
@@ -81,15 +74,29 @@ function Upload(props) {
 
     // 上传文件
     const onUploadClick = async () => {
-
+        if ( newRescFiles.length < 1)  return
         let param = new FormData();
-
         for (let x = 0; x < newRescFiles.length; x++) {
-            param.append("Files[]",file);
+            console.log(newRescFiles[x])
+            // console.log(file)
+            param.append("Files[]", newRescFiles[x]);
         }
-
-        param.append("ItemID", 1)
+        param.append("ItemID", itemIDRef.current.value)
+        param.append("Type", rescType)
         await UploadItemFiles(param)
+
+        // 刷新页面
+        handleSearch()
+        //将新文件置空
+        dispatch(setNewRescFiles([]))
+    }
+
+    //根据item_id搜索
+    const handleSearch = () => {
+        GetItemFiles(itemIDRef.current.value)
+            .then(item => {
+                dispatch(setItem(item))
+            })
     }
 
     return (
@@ -99,7 +106,7 @@ function Upload(props) {
                     <RadioGroup
                         aria-label="resource-type"
                         name="controlled-radio-buttons-group"
-                        value={selectedFileFormat}
+                        value={rescType}
                         onChange={handleRscTypeChange}
                         row={true}
                         sx={{
@@ -109,9 +116,9 @@ function Upload(props) {
                                 color: 'white',
                             }
                         }}>
-                        <RadioItem value="video" title="视频" icon={videoIcon}/>
-                        <RadioItem value="doc" title="文档 & 文件" icon={docIcon}/>
-                        <RadioItem value="plugin" title="软件 & 插件" icon={pluginIcon}/>
+                        <RadioItem value="main" title="主文件" icon={mainIcon}/>
+                        <RadioItem value="preview" title="预览图" icon={previewIcon}/>
+                        <RadioItem value="refs" title="附件" icon={refIcon}/>
                     </RadioGroup>
                 </FormControl>
             </Grid>
@@ -119,27 +126,30 @@ function Upload(props) {
             <Grid item xs={12}
                   style={{display: "flex", alignItems: "flex-end", justifyContent: "center", marginTop: '50px'}}>
                 {/*搜索组件*/}
-                <InputWithHeader
+                <SimpleInput
+                    ref={itemIDRef}
                     name="item_id"
                     marginRight='0'
                     placeholder="输入item_id"
-                    // value={data.Name}
-                    // onChange={handleInputChange}
+                    defaultValue={item&&item.ID}
                 />
                 <IconButton sx={{
-                    ml:'8px',
+                    ml: '8px',
                     backgroundColor: alpha('#3399ff', 0.6),
                     boxShadow: '0 0 5px #3399ff',
-                    '&:hover':{
+                    '&:hover': {
                         boxShadow: '0 0 5px #403D39',
                     }
-                }}>
+                }}
+                onClick={handleSearch}
+                >
                     <SearchIcon/>
                 </IconButton>
             </Grid>
 
+
             <Grid item xs={12} style={{
-                marginTop: '30px',
+                marginTop: '10px',
                 display: "flex",
                 flexWrap: 'nowrap',
                 justifyContent: "space-around",
@@ -147,26 +157,30 @@ function Upload(props) {
 
                 {/*显示文件详情*/}
                 <Box sx={{width: '25%', padding: '50px'}}>
-                     <FileDetail />
+                    <FileDetail/>
                 </Box>
 
-                {/*文件拖拽组件*/}
-                <DragDrop handleDropFile={handleMulti}  color="#001E3C">
-                    <Uploader
-                        width="800px"
-                        height="500px"
-                        onFileUpload={onFileUpload}
-                    />
-                </DragDrop>
-
+                <div>
+                    <Typography variant="h6" component='div'
+                                color='text.secondary'
+                                sx={{mt: '5px', ml: '15px'}}>
+                        {item && item.Name}
+                    </Typography>
+                    {/*文件拖拽组件*/}
+                    <DragDrop handleDropFile={handleMulti} color="#001E3C">
+                        <Uploader
+                            width="800px"
+                            height="500px"
+                            onFileUpload={onFileUpload}
+                        />
+                    </DragDrop>
+                </div>
                 {/*显示拖拽的文件信息*/}
-                <FilesShow originFiles={originalRescFiles}>
+                <FilesShow >
                     <Box sx={{display: "flex", justifyContent: "center", mt: '50px'}}>
                         <UploadButton marginTop="50px" onClick={onUploadClick}/>
                     </Box>
                 </FilesShow>
-
-
 
             </Grid>
         </Grid>

@@ -34,7 +34,6 @@ function Player(props) {
             });
             player.play()
         } else {
-            // update player through props
             const player = playerRef.current;
             // player.autoplay(options.autoplay);
             // player.src(options.sources);

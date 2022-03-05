@@ -50,7 +50,7 @@ export default function useInterceptor(props) {
                     originalConfig._retry = true;
 
                     try {
-                        const rs = api.post('/homo-app/user/refresh', {
+                        api.post('/homo-app/user/refresh', {
                             RefreshToken: TokenService.getLocalRefreshToken()
                         }).then(resp => {
                             // dispatch(refreshToken(AccessToken));

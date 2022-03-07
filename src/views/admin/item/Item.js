@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {open} from "./item-slice";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -16,17 +16,20 @@ import {listItem} from "../../../api/item.service";
 import CustomSpeedDial from "../../../components/CustomSpeedDial";
 import ItemModal from "./ItemModal";
 import api from "../../../api/api";
-import {openAlert} from "../../../components/alert/alertSlice";
+import {openAlert} from "../../../components/alert/ops/alertSlice";
+import {selectRefresh} from "../../../app/refreshSlice";
 
 function Item(props) {
     const [items, setItems] = useState([]);
+    const {refresh} = useSelector(selectRefresh);
+
     const dispatch = useDispatch();
 
     React.useEffect(() => {
         listItem().then((data) => {
             setItems(data)
         })
-    }, [])
+    }, [refresh])
 
     const handleAddClick = () =>
         dispatch(

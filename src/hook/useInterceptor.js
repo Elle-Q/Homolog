@@ -1,6 +1,6 @@
 import React from 'react';
 import {useDispatch} from "react-redux";
-import {updateMsg} from "../components/alert/alertSlice";
+import {updateMsg} from "../components/alert/ops/alertSlice";
 import TokenService from "../api/token.service";
 import api from "../api/api";
 

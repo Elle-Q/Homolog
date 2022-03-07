@@ -6,7 +6,7 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from '@mui/icons-material/Close';
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
-import {CancelButton, SaveButton} from "./ui/CustomButton";
+import {CancelButton, OKButton} from "./ui/CustomButton";
 
 const ModalDialog = styled(Dialog)(({theme}) => ({
     zIndex:999,
@@ -73,7 +73,7 @@ function Modal(props) {
                 {children}
             </DialogContent>
             <DialogActions sx={{justifyContent: "center", mt: '30px'}}>
-                <SaveButton handleClick={handleSave}/>
+                <OKButton handleClick={handleSave}/>
                 <CancelButton handleClick={handleClose}/>
             </DialogActions>
         </ModalDialog>

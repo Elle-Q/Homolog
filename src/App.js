@@ -6,7 +6,7 @@ import {BrowserRouter, Route, Routes, useLocation} from "react-router-dom";
 import Admin from "./views/admin/home/Admin";
 import {adminTheme} from "./config/adminTheme";
 import useInterceptor from "./hook/useInterceptor";
-import AlertLog from "./components/alert/AlertLog";
+import AlertLog from "./components/alert/ops/AlertLog";
 import Login from "./views/login/Login";
 import "./styles.css";
 

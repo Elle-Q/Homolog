@@ -22,7 +22,7 @@ function Player(props) {
             let hls = new Hls();
             hls.attachMedia(videoElement);
             hls.on(Hls.Events.MEDIA_ATTACHED, function () {
-                hls.loadSource('http://pub.gomolog.com/item01.m3u8');
+                // hls.loadSource('http://private.video.gomolog.com/item/3/main/video2.m3u8?pm3u8/0&e=1646592989&token=WhRnhuuljtU1hBNKbBLkkX2T-ymTLTDs_pC7PSn4:3aa5qb8NQGN5kavOzjVS5gmOz7I=');
                 hls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {
                     console.log(
                         'manifest loaded, found ' + data.levels.length + ' quality level'
@@ -32,7 +32,6 @@ function Player(props) {
             const player = playerRef.current = videojs(videoElement, options, () => {
                 onReady && onReady(player);
             });
-            player.play()
         } else {
             const player = playerRef.current;
             // player.autoplay(options.autoplay);

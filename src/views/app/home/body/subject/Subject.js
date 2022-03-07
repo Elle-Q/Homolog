@@ -6,23 +6,25 @@ import CategoryCard from "./CategoryCard";
 
 function Subject(props) {
     const theme = useTheme();
-    const {category} = props;
+    const {subject} = props;
+
+    if (subject === undefined || subject.Items.length < 1) return <></>
 
     return (
         <React.Fragment>
-        <Typography variant="h6" component="div" color={theme.palette.secondary.light} sx={{mt: '5px'}}>
-            {category.name}
-        </Typography>
-        <Stack direction='row'
-               spacing={2}
-               sx={{mt:'10px'}}
-               justifyContent="center">
-            {
-                category.items.map((item, index) => {
-                    return <CategoryCard key={index} {...item}/>
-                })
-            }
-        </Stack>
+            <Typography variant="h6" component="div" color={theme.palette.secondary.light} sx={{mt: '5px'}}>
+                {subject.CatTitle}
+            </Typography>
+            <Stack direction='row'
+                   spacing={2}
+                   sx={{mt: '10px'}}
+                   justifyContent="center">
+                {
+                    subject.Items.map((item, index) => {
+                        return <CategoryCard key={index} item={item}/>
+                    })
+                }
+            </Stack>
         </React.Fragment>
 
     );

@@ -8,33 +8,32 @@ import barageData from '../../json/barrage.json'
 import Hls from "hls.js";
 
 
-const videoJsOptions = {
-    autoplay: false,
-    height:"auto",
-    controls: true,
-    responsive: true,
-    fluid: true,
-    sources: [{
-        src: 'http://private.video.gomolog.com/test.m3u8?pm3u8/0&e=1646339666&token=WhRnhuuljtU1hBNKbBLkkX2T-ymTLTDs_pC7PSn4:qMUShqn0cPsTmPQn1RydsZHuEas=',
-        type: 'application/x-mpegURL',
-    }],
-    controlBar: {
-        children: [
-            {
-                name: 'ProgressControl'
-            },
-        ]
-    }
-}
+
 
 function VideoPlayer(props) {
 
-    const {videoSrc, danmuData} = props;
+    const {videoSrc, danmuData } = props;
     const [play, setPlay] = useState(false);
     const [visible, setVisible] = useState("hidden");
     const [barrageVisible, setBarrageVisible] = useState(true);
     const playerRef = React.useRef(null);
     const barrageRef = React.useRef(null);
+
+    const videoJsOptions = {
+        autoplay: false,
+        height:"auto",
+        controls: true,
+        responsive: true,
+        fluid: true,
+        sources: [videoSrc],
+        controlBar: {
+            children: [
+                {
+                    name: 'ProgressControl'
+                },
+            ]
+        }
+    }
 
     useEffect(() => {
         barrageRef.current=new Barrage({
@@ -55,11 +54,8 @@ function VideoPlayer(props) {
     useEffect(() => {
         if (!playerRef.current) return;
         playerRef.current.pause();
-        playerRef.current.src(
-            {
-                type: 'application/x-mpegURL',
-                src: 'http://private.video.gomolog.com/test.m3u8?pm3u8/0&e=1646339666&token=WhRnhuuljtU1hBNKbBLkkX2T-ymTLTDs_pC7PSn4:qMUShqn0cPsTmPQn1RydsZHuEas=',
-            });
+        playerRef.current.src(videoSrc);
+        playerRef.current.load()
     },[videoSrc])
 
     useEffect(() => {

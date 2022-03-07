@@ -15,7 +15,7 @@ function Home(props) {
     const routes = [
         {path: '/home', name: 'home', component: <Body/>},
         {path: '/', name: 'home_', component: <Body/>},
-        {path: '/play', name: 'play', component: <Play/>},
+        {path: '/play/:id', name: 'play', component: <Play/>},
         {path: '/category/:id', name: 'category', component: <Category/>},
         {path: '/item/:id', name: 'item', component: <Item/>},
         {path: '/account', name: 'account', component: <Account/>},

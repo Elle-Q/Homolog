@@ -4,7 +4,7 @@ import {ImagInputWithHeader, InputWithHeader, SelectInputWithHeader} from "../..
 import Modal from "../../../components/Modal";
 import {selectItemModal, close} from "./item-slice";
 import {useSelector, useDispatch} from 'react-redux'
-import {openAlert} from "../../../components/alert/alertSlice";
+import {openAlert} from "../../../components/alert/ops/alertSlice";
 import {upload} from "../../../api/qiniu.service";
 import {ListCatName} from "../../../api/cat.service";
 import MenuItem from "@mui/material/MenuItem";
@@ -13,6 +13,7 @@ import AddIcon from '@mui/icons-material/Add';
 import Chip from "@mui/material/Chip";
 import IconButton from "@mui/material/IconButton";
 import {Input} from "@mui/material";
+import {setRefresh} from "../../../app/refreshSlice";
 
 function ItemModal(props) {
     const {openModal, readOnly, data} = useSelector(selectItemModal);
@@ -42,12 +43,14 @@ function ItemModal(props) {
 
     const handleClose = () => {
         dispatch(close())
-        window.location.reload();
     }
 
     const handleInputChange = (event) => {
-        const name = event.target.name;
-        const value = event.target.value;
+        let name = event.target.name;
+        let value = event.target.value;
+        if (name === 'Price') {
+            value = parseFloat(value)
+        }
         if (event.target.type === 'file') {
             setImgFile(event.target.files[0]);
         } else {
@@ -60,12 +63,12 @@ function ItemModal(props) {
 
     //保存资源信息
     const handleSave = async () => {
-
         const save = (param) => {
             UpdateItem(param).then(() => {
                 handleClose();
                 dispatch(openAlert());
                 setImgFile(null);
+                dispatch(setRefresh())
             })
         }
         //上传文件到七牛, 获取图片外链

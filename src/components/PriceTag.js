@@ -3,7 +3,7 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 
 function PriceTag(props) {
-    const {height} = props;
+    const {height, price} = props;
     return (
         <Box style={{
             display:"flex",
@@ -19,7 +19,7 @@ function PriceTag(props) {
             border: `${height/2}px solid #fdce71`,
             borderRight: '18px solid transparent',
         }}>
-            <span style={{color:"black",fontSize:18,marginLeft:1}} >$ 188.99</span>
+            <span style={{color:"black",fontSize:18,marginLeft:1}} >$ {price}</span>
         </Box>
     );
 }

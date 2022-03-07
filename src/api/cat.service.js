@@ -27,3 +27,10 @@ export const GetCat = (catId) => {
             return resp
         });
 }
+
+export const ListCatsWithItems = () => {
+    return api.get(`/homo-app/category/list/items`)
+        .then((resp) => {
+            return resp
+        });
+}

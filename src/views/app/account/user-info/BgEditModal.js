@@ -44,7 +44,7 @@ function BgEditModal(props) {
         >
             <ImageList cols={3} rowHeight={164}>
                 {
-                    defaultBGs.map((link, index) =>
+                    defaultBGs && defaultBGs.map((link, index) =>
                         (
                             <img
                                 key={index}

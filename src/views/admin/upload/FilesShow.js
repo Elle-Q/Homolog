@@ -6,13 +6,29 @@ import Box from "@mui/material/Box";
 import {useDispatch, useSelector} from "react-redux";
 import {selectUploadItemResc, setNewRescFiles} from "./uploadSlice";
 import {DeleteFile} from "../../../api/file.service";
-import {openAlert} from "../../../components/alert/alertSlice";
+import {openAlert} from "../../../components/alert/ops/alertSlice";
+import AlertDialog from "../../../components/alert/confirm/AlertDialog";
+import {setOpen} from "../../../components/alert/confirm/confirmSlice";
+import CustomizedDialogs from "../../../components/CustomizedDialogs";
+import VideoPlayer from "../../../components/player/VideoPlayer";
+import SimplePlayer from "../../../components/player/SimplePlayer";
 
 function FilesShow(props) {
 
     const {newRescFiles, item, rescType} = useSelector(selectUploadItemResc);
     const [originFiles, setOriginFiles] = useState([]);
+    const [openView, setOpenView] = React.useState(false);
+    const [viewItem, setViewItem] = React.useState(null);
     const dispatch = useDispatch();
+
+    const handleView = (item) => {
+        setViewItem(item);
+        setOpenView(true);
+    };
+    const handleClose = () => {
+        setOpenView(false);
+    };
+
 
     useEffect(() => {
         if (!item) return
@@ -29,6 +45,7 @@ function FilesShow(props) {
         }
     }, [rescType, item])
 
+    //提示组件
     const Tips = (content) => {
         return <Typography color="#EB5E28"
                            sx={{
@@ -42,41 +59,55 @@ function FilesShow(props) {
         </Typography>
     }
 
+    //删除新增的文件
     const handleNewFileDel = (name) => {
-        dispatch(setNewRescFiles(newRescFiles.filter(item=>item.name!==name)))
+        dispatch(setOpen({
+            open: true,
+            okHandle: () => {
+                dispatch(setNewRescFiles(newRescFiles.filter(item => item.name !== name)))
+            }
+        }));
     }
 
+    //删除已上传的文件
     const handleOriginFileDel = (fileId, bucket, key) => {
-        DeleteFile({
-            FileId:fileId,
-            Bucket:bucket,
-            Key:key
-        }) .then(r => {
+        const ops = () => DeleteFile({
+            FileId: fileId,
+            Bucket: bucket,
+            Key: key
+        }).then(r => {
             dispatch(openAlert());
         })
+        dispatch(setOpen({
+            open: true,
+            okHandle: ops
+        }));
     }
 
+    //todo:清空文件 - 2022-3-6 记录
 
     return (
         <Box sx={{width: '25%', padding: '50px'}}>
             {/*原始文件*/}
-            已上传: {
-            originFiles.length > 0 ?
-                <Stack direction="column" sx={{mt: '30px', color: 'black', display: "flex"}}>
-                    {
-                        originFiles.map((item, index) => {
-                                return <UploadedFile key={index}
-                                                     file={item}
-                                                     error={true}
-                                                     handleDel={() => handleOriginFileDel(item.ID,item.Bucket,item.Key)}
-                                />
-                            }
-                        )
-                    }
-                </Stack>
-                :
-                Tips("还没有任何文件哦, 先上传一些吧")
-        }
+            已上传:
+            {
+                originFiles.length > 0 ?
+                    <Stack direction="column" sx={{mt: '30px', color: 'black', display: "flex"}}>
+                        {
+                            originFiles.map((item, index) => {
+                                    return <UploadedFile key={index}
+                                                         file={item}
+                                                         error={true}
+                                                         handleView={handleView}
+                                                         handleDel={() => handleOriginFileDel(item.ID, item.Bucket, item.Key)}
+                                    />
+                                }
+                            )
+                        }
+                    </Stack>
+                    :
+                    Tips("还没有任何文件哦, 先上传一些吧")
+            }
             <br/>
             <br/>
             <br/>
@@ -91,6 +122,7 @@ function FilesShow(props) {
                                         key={index}
                                         file={item}
                                         error={true}
+                                        handleView={() => handleView(item)}
                                         handleDel={() => handleNewFileDel(item.name)}
                                     />
                                 }
@@ -103,6 +135,24 @@ function FilesShow(props) {
 
             {props.children}
 
+            {/*提示组件*/}
+            <AlertDialog title="删除?" note="删除后不可恢复, 请谨慎操作*_*"/>
+
+            {/*预览文件组件*/}
+            <CustomizedDialogs open={openView}
+                               handleClose={handleClose}
+                               title={viewItem && (viewItem.name || viewItem.Name)}>
+                {viewItem &&
+                <SimplePlayer
+                    size={{
+                        height: '350px',
+                        width: '570px',
+                    }}
+                    videoSrc={{
+                        type: 'video/mp4',
+                        src: URL.createObjectURL(viewItem)
+                    }}/>}
+            </CustomizedDialogs>
         </Box>
     );
 }

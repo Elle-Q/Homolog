@@ -13,21 +13,23 @@ import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
 import DoNotDisturbOnIcon from '@mui/icons-material/DoNotDisturbOn';
 import CatModal from "./CatModal";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {open} from "./catSlice";
-import {openAlert} from "../../../components/alert/alertSlice";
+import {openAlert} from "../../../components/alert/ops/alertSlice";
 import api from "../../../api/api";
 import {ListCat} from "../../../api/cat.service";
+import {selectRefresh} from "../../../app/refreshSlice";
 
 function Category(props) {
     const [cats, setCats] = useState([]);
+    const {refresh} = useSelector(selectRefresh);
     const dispatch = useDispatch();
 
     React.useEffect(() => {
         ListCat().then((data) => {
             setCats(data)
         })
-    }, [])
+    }, [refresh])
 
     const handleAddClick = () =>
         dispatch(
@@ -123,7 +125,7 @@ function Category(props) {
 
             <CustomSpeedDial actions={actions}/>
 
-            <CatModal/>
+            <CatModal  />
 
         </React.Fragment>
     );

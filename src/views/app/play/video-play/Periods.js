@@ -29,7 +29,6 @@ function RenderRow(props) {
     const {list, currentIndex, handleIndexChange} = data;
     const styles = {...style, right: '0px'};
 
-
     return (
         <ListItem style={styles} key={index} component="div" disablePadding>
             <ListItemButton onClick={() => handleIndexChange(index)}>
@@ -39,22 +38,23 @@ function RenderRow(props) {
                     transform: `${index === currentIndex ? 'translate(15px) scale(1.1)' : 'scale(1)'}`,
                     transition: 'all 1s ease .2s'
                 }}
-                              primary={`P${index + 1}  
-                              ${list[index].title}`}/>
-                <ListItemText style={{textAlign: 'right', color: '#403D39'}} primary={`${list[index].duration}`}/>
+                              primary={`P${index + 1}  ${list[index].Name}`}/>
+                <ListItemText style={{textAlign: 'right', color: '#403D39'}} primary={`${list[index].Bucket}`}/>
             </ListItemButton>
         </ListItem>
     );
 }
 
 function Periods(props) {
-    const {changeVideoSrc} = props;
-    const [currentPlayIndex,setCerrentPlayIndex] = useState(1);
+    const {changeVideoSrc, periods} = props;
+    const [currentPlayIndex,setCerrentPlayIndex] = useState(0);
 
     const handleIndexChange = (selectedIndex) => {
         setCerrentPlayIndex(selectedIndex);
-        changeVideoSrc(videoList[selectedIndex+1].src);
+        changeVideoSrc(periods[selectedIndex].QnLink);
     }
+
+    if (periods.length < 1) return <></>
 
     return (
         <Box
@@ -72,10 +72,10 @@ function Periods(props) {
                 height={500}
                 width={360}
                 itemSize={40}
-                itemCount={videoList.length}
+                itemCount={periods.length}
                 overscanCount={5}
                 itemData={{
-                    list: videoList,
+                    list: periods,
                     currentIndex: currentPlayIndex,
                     handleIndexChange: handleIndexChange
                 }}

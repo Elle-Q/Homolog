@@ -1,6 +1,6 @@
 import React from 'react';
 import api from "./api";
-import {loginSuccess, setAvatar, setBG, setUser} from "./authSlice";
+import {setAvatar, setBG, setUser} from "./authSlice";
 
 class UserService {
     changeAvatar(userId, avatarLink) {

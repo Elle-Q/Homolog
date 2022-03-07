@@ -14,7 +14,7 @@ import PriceTag from "../../../../../components/PriceTag";
 
 function CategoryCard(props) {
     const theme = useTheme();
-    const {width, id, name, imgSrc, score} = props;
+    const {width, item} = props;
     const [collected, setCollected] = useState(false);
 
     return (
@@ -26,13 +26,13 @@ function CategoryCard(props) {
             textShadow: 10,
             borderRadius: 3,
         }}>
-            <Link to={`/app/item/${id}`} key={id}>
+            <Link to={`/app/item/${item.ID}`} key={item.ID}>
                 <CardMedia
                     component="img"
                     height="300"
                     width="300"
-                    image={imgSrc}
-                    alt={name}
+                    image={item.Preview}
+                    alt="Preview"
                     sx={{
                         boxShadow: 5,
                         borderRadius: 2,
@@ -42,7 +42,7 @@ function CategoryCard(props) {
             <Typography variant="h6" component="div"
                         color={theme.palette.secondary.light}
                         sx={{mt: '5px', ml: '15px'}}>
-                {name}
+                {item.Name}
             </Typography>
             <CardContent>
                 <Typography variant="body2" color="text.secondary">
@@ -52,7 +52,7 @@ function CategoryCard(props) {
                 </Typography>
             </CardContent>
             <Typography variant="h7" component="div" color="text.fourth">
-                {getStarIcons(score)}
+                {getStarIcons(item.Scores)}
             </Typography>
             <CardActions disableSpacing>
                 <IconButton aria-label="add to favorites" onClick={() => setCollected(!collected)}>
@@ -61,7 +61,7 @@ function CategoryCard(props) {
                 <IconButton aria-label="share" style={{marginRight:'100px'}}>
                     <ShareIcon/>
                 </IconButton>
-                <PriceTag height={36}/>
+                <PriceTag height={36} price={item.Price}/>
             </CardActions>
         </Card>
     );

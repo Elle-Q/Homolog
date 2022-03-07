@@ -9,7 +9,7 @@ import MaleIcon from "@mui/icons-material/Male";
 import FormControl from "@mui/material/FormControl";
 import {FormControlLabel, FormLabel, Radio, RadioGroup} from "@mui/material";
 import {CustomBadge} from "../../../../components/ui/CustomBadge";
-import {CancelButton, SaveButton} from "../../../../components/ui/CustomButton";
+import {CancelButton, OKButton} from "../../../../components/ui/CustomButton";
 import ChangeCircleIcon from '@mui/icons-material/ChangeCircle';
 import IconButton from "@mui/material/IconButton";
 import {useDispatch, useSelector} from "react-redux";
@@ -201,7 +201,7 @@ function Modal(props) {
 
             <div style={{marginTop: '30px', padding: '20px'}}>
                 <CancelButton/>
-                <SaveButton handleClick={handleSave}/>
+                <OKButton handleClick={handleSave}/>
             </div>
 
         </div>

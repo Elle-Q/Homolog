@@ -8,8 +8,9 @@ import {setSelectedFile, setNewRescFiles, selectUploadItemResc} from "./uploadSl
 import {useDispatch, useSelector} from "react-redux";
 
 function UploadedFile(props) {
-    const {file, error, handleDel} = props;
-    const {newRescFiles} = useSelector(selectUploadItemResc);
+    const {file, error, handleDel, handleView} = props;
+    const {selectedFile} = useSelector(selectUploadItemResc);
+
     const dispatch = useDispatch();
 
     const handleFileLabelClick = (e) => {
@@ -46,6 +47,7 @@ function UploadedFile(props) {
                     }}
                 />
                 <RemoveRedEyeRoundedIcon
+                    onClick={handleView}
                     fontSize="small"
                     sx={{
                         mr: '10px',
@@ -55,6 +57,7 @@ function UploadedFile(props) {
                     }}
                 />
             </Box>
+
         </Box>
     );
 }

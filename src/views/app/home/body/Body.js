@@ -1,12 +1,26 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Grid from "@mui/material/Grid";
 import Carousell from "./carousel/Carousell";
 import Categories from "../../../../json/category.json";
 import Subject from "./subject/Subject";
 import Box from "@mui/material/Box";
 import PageTipFloatingBar from "../../../../components/PageTipFloatingBar";
+import {ListCatsWithItems} from "../../../../api/cat.service";
 
 function Body(props) {
+
+    const [subjects, setSubjects] = React.useState([]);
+
+    //查询所有subject todo: 这里需要瀑布流 2022-3-6
+    useEffect(() => {
+        const fetchData = async () => {
+            await ListCatsWithItems().then(data => {
+                setSubjects(data)
+            })
+        }
+        fetchData().catch()
+    },[])
+
     return (
         <Box sx={{
             width: '80%',
@@ -25,10 +39,10 @@ function Body(props) {
                     <Carousell />
                 </Grid>
                 {
-                    Categories.map((category, index) => {
+                    subjects && subjects.map((subject, index) => {
                         return (
                             <Grid item xs={12} key={index}>
-                                <Subject category={category}/>
+                                <Subject subject={subject}/>
                             </Grid>
                         )
                     })

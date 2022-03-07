@@ -19,6 +19,7 @@ const AvatarLabel = styled.div`
 `;
 
 function ByAuthor(props) {
+    const {author} = props
     return (
         <AvatarContainer>
             <AvatarLabel>
@@ -29,7 +30,7 @@ function ByAuthor(props) {
                     alt="Elle Qu"
                     src="/avatar/avatar1.jpg"
                 />
-                <Typography variant="body2" sx={{fontSize: '20px'}} color="text.fifth"> Elle Qu</Typography>
+                <Typography variant="body2" sx={{fontSize: '20px'}} color="text.fifth"> {author}</Typography>
             </AvatarLabel>
         </AvatarContainer>
     );

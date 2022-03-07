@@ -120,15 +120,15 @@ function Category(props) {
                           flexWrap:"wrap"
                       }}
                 >
-                        {
-                            items.map((item, index) => {
-                                return (
-                                    <Grid item xs={4}>
-                                        <CategoryCard width={290} key={index} {...item}/>
-                                    </Grid>
-                                )
-                            })
-                        }
+                        {/*{*/}
+                        {/*    items.map((item, index) => {*/}
+                        {/*        return (*/}
+                        {/*            <Grid item xs={4}>*/}
+                        {/*                <CategoryCard width={290} key={index} {...item}/>*/}
+                        {/*            </Grid>*/}
+                        {/*        )*/}
+                        {/*    })*/}
+                        {/*}*/}
                 </Grid>
             </Box>
 

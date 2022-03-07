@@ -135,10 +135,10 @@ function Upload(props) {
                 />
                 <IconButton sx={{
                     ml: '8px',
-                    backgroundColor: alpha('#3399ff', 0.6),
-                    boxShadow: '0 0 5px #3399ff',
+                    backgroundColor: alpha('#0aa858', 0.6),
+                    boxShadow: '0 0 3px #0aa858',
                     '&:hover': {
-                        boxShadow: '0 0 5px #403D39',
+                        boxShadow: '0 0 3px #403D39',
                     }
                 }}
                 onClick={handleSearch}
@@ -164,7 +164,7 @@ function Upload(props) {
                     <Typography variant="h6" component='div'
                                 color='text.secondary'
                                 sx={{mt: '5px', ml: '15px'}}>
-                        {item && item.Name}
+                        {item && item.ItemName}
                     </Typography>
                     {/*文件拖拽组件*/}
                     <DragDrop handleDropFile={handleMulti} color="#001E3C">

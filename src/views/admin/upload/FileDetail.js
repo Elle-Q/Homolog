@@ -4,9 +4,10 @@ import {ByteToM} from "../../../utils/MathUtil";
 import {useSelector} from "react-redux";
 import {selectUploadItemResc} from "./uploadSlice";
 import InputLabel from "../../../components/ui/InputLabel";
+import {StringToDate} from "../../../utils/DateUtil";
 
 function FileDetail(props) {
-    const {selectedFileFormat, selectedFile} = useSelector(selectUploadItemResc);
+    const {selectedFile} = useSelector(selectUploadItemResc);
 
     if (!selectedFile) return <></>;
 
@@ -15,12 +16,9 @@ function FileDetail(props) {
             <ItalicLabel name="大小" value={`${ByteToM(selectedFile.Size || selectedFile.size)}M`}/>
             <ItalicLabel name="格式" value={selectedFile.Format || selectedFile.type}/>
             <InputLabel name="名称*" value={selectedFile.Name || selectedFile.name}/>
-            {
-                selectedFileFormat==='video' && <ItalicLabel name="时长" value="63:00"/>
-            }
-            {
-                selectedFileFormat==='plugin' && <ItalicLabel name="适用版本" value="Blender2.8+"/>
-            }
+            <ItalicLabel name="七牛空间" value={selectedFile.Bucket || ''}/>
+            <ItalicLabel name="key" value={selectedFile.Key || ''}/>
+            <ItalicLabel name="上传时间" value={StringToDate(selectedFile.CreateTime) || '' }/>
         </React.Fragment>
     );
 }

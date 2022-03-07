@@ -5,9 +5,10 @@ import Modal from "../../../components/Modal";
 import api from "../../../api/api";
 import {selectCatModal, close} from "./catSlice";
 import { useSelector, useDispatch } from 'react-redux'
-import {openAlert} from "../../../components/alert/alertSlice";
+import {openAlert} from "../../../components/alert/ops/alertSlice";
 import {upload} from "../../../api/qiniu.service";
 import {UpdateCat} from "../../../api/cat.service";
+import {setRefresh} from "../../../app/refreshSlice";
 
 
 function CatModal(props) {
@@ -35,7 +36,6 @@ function CatModal(props) {
 
     const handleClose = () => {
         dispatch(close());
-        window.location.reload();
     }
 
     const handleInputChange = (event) => {
@@ -60,6 +60,7 @@ function CatModal(props) {
         const save = (param) => {
             UpdateCat(param).then(() => {
                 handleClose();
+                dispatch(setRefresh())
             })
 
             dispatch(openAlert());

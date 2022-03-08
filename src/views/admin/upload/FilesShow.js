@@ -22,6 +22,7 @@ function FilesShow(props) {
     const dispatch = useDispatch();
 
     const handleView = (item) => {
+        console.log("-------", item)
         setViewItem(item);
         setOpenView(true);
     };
@@ -98,7 +99,7 @@ function FilesShow(props) {
                                     return <UploadedFile key={index}
                                                          file={item}
                                                          error={true}
-                                                         handleView={handleView}
+                                                         handleView={() => handleView(item)}
                                                          handleDel={() => handleOriginFileDel(item.ID, item.Bucket, item.Key)}
                                     />
                                 }
@@ -149,8 +150,8 @@ function FilesShow(props) {
                         width: '570px',
                     }}
                     videoSrc={{
-                        type: 'video/mp4',
-                        src: URL.createObjectURL(viewItem)
+                        type: `${viewItem.QnLink ?  'application/x-mpegURL' : 'video/mp4'}`,
+                        src: `${viewItem.QnLink ? viewItem.QnLink : URL.createObjectURL(viewItem)}`
                     }}/>}
             </CustomizedDialogs>
         </Box>

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {open} from "./item-slice";
+import {open, selectItemModal} from "./item-slice";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import DoNotDisturbOnIcon from "@mui/icons-material/DoNotDisturbOn";
@@ -18,10 +18,13 @@ import ItemModal from "./ItemModal";
 import api from "../../../api/api";
 import {openAlert} from "../../../components/alert/ops/alertSlice";
 import {selectRefresh} from "../../../app/refreshSlice";
+import LinkToButton from "../../../components/ui/LinkToButton";
+import {setItemID} from "../upload/uploadSlice";
 
 function Item(props) {
     const [items, setItems] = useState([]);
     const {refresh} = useSelector(selectRefresh);
+    const {openModal} = useSelector(selectItemModal);
 
     const dispatch = useDispatch();
 
@@ -74,6 +77,10 @@ function Item(props) {
         }))
     }
 
+    const handleUpload = (data) => {
+        dispatch(setItemID(data.ID))
+    }
+
     return (
         <React.Fragment>
             <TableContainer component={Paper}>
@@ -116,6 +123,8 @@ function Item(props) {
                                                 handleOpen={handleOpen}
                                                 handleEdit={handleEdit}
                                         />
+                                        <LinkToButton onClick={() => handleUpload(row)}
+                                                      linkTo={`/admin/content/upload`}/>
                                     </StyledTableCell>
                                 </StyledTableRow>
                             ))}
@@ -125,7 +134,7 @@ function Item(props) {
 
             <CustomSpeedDial actions={actions} />
 
-            <ItemModal />
+            {openModal && <ItemModal />}
         </React.Fragment>
     );
 }

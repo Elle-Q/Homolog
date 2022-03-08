@@ -18,8 +18,8 @@ class QiniuService {
 
 const qiniuService =  new QiniuService()
 
-export const upload = (file) => {
-    const key = new Date().getTime() + '/' + file.name;
+export const upload = (file ) => {
+    const key = 'item/preview/' + file.name;
     const observer = {
         next(res){
             console.log("next")

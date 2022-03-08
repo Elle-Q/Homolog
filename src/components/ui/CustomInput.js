@@ -6,9 +6,11 @@ import AddIcon from "@mui/icons-material/Add";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import {styled} from "@mui/system";
+import {Controller } from "react-hook-form";
 
 export const InputWithHeader = (props) => {
-    const {header, value, name, onChange,
+    const {
+        header, value, name, onChange,
         multiline, placeholder, disabled,
         marginRight
     } = props;
@@ -29,7 +31,7 @@ export const InputWithHeader = (props) => {
                        borderRadius: '5px',
                        fontSize: '14px',
                        fontFamily: '-apple-system',
-                       marginRight:`${typeof(marginRight) !== "undefined"?marginRight:100}px`,
+                       marginRight: `${typeof (marginRight) !== "undefined" ? marginRight : 100}px`,
                        rows: `${multiline & 4}`,
                        width: `${multiline ? 500 : 200}px`,
                        '&:hover': {
@@ -48,7 +50,8 @@ export const ImagInputWithHeader = (props) => {
         <React.Fragment>
             <span style={{marginRight: '15px', verticalAlign: "bottom"}}>{header}</span>
             {
-                img &&  <img src={img} alt="preview" style={{maxWidth: '200px', maxHeight: '200px', borderRadius: '5px'}} />
+                img &&
+                <img src={img} alt="preview" style={{maxWidth: '200px', maxHeight: '200px', borderRadius: '5px'}}/>
             }
 
             <input type="file"
@@ -75,13 +78,13 @@ export const ImagInputWithHeader = (props) => {
 }
 
 export const SelectInputWithHeader = (props) => {
-    const {header, name, items, defaultValue, handleChange, disabled, type} = props;
+    const {header, name, items, value, handleChange, disabled, type} = props;
     return (
         <React.Fragment>
             <span style={{marginRight: '15px', verticalAlign: "bottom"}}>{header}</span>
             <Select
                 name={name}
-                defaultValue={defaultValue}
+                value={value}
                 disabled={disabled}
                 onChange={handleChange}
                 sx={{

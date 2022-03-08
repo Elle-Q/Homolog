@@ -14,6 +14,7 @@ function SimplePlayer(props) {
     const [play, setPlay] = useState(false);
     const playerRef = React.useRef(null);
 
+    console.log(videoSrc)
     const videoJsOptions = {
         autoplay: false,
         height: "auto",

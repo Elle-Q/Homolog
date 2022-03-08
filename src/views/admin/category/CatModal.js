@@ -1,38 +1,40 @@
-import React, {useEffect, useState} from 'react';
+import React, {createRef, useEffect, useState} from 'react';
 import {CatStatus} from "../../../utils/constant/constant";
 import {ImagInputWithHeader, InputWithHeader, SelectInputWithHeader} from "../../../components/ui/CustomInput";
 import Modal from "../../../components/Modal";
 import api from "../../../api/api";
 import {selectCatModal, close} from "./catSlice";
-import { useSelector, useDispatch } from 'react-redux'
+import {useSelector, useDispatch} from 'react-redux'
 import {openAlert} from "../../../components/alert/ops/alertSlice";
 import {upload} from "../../../api/qiniu.service";
 import {UpdateCat} from "../../../api/cat.service";
 import {setRefresh} from "../../../app/refreshSlice";
+import MenuItem from "@mui/material/MenuItem";
+import {useForm} from "react-hook-form";
 
 
 function CatModal(props) {
     const {openModal, readOnly, data, type} = useSelector(selectCatModal);
     const dispatch = useDispatch();
     const [detail, setDetail] = React.useState(data);
-    const [imgFile, setImgFile] = useState(null);
+    const [preFile, setPreFile] = useState(null);
     const [pageImgFile, setPageImgFile] = useState(null);
     const [imgUri, setImgUri] = useState(data.Preview);
     const [pageImgUri, setPageImgUri] = useState(data.PageImg);
 
     useEffect(() => {
-        imgFile && setImgUri(URL.createObjectURL(imgFile));
-    },[imgFile])
+        preFile && setImgUri(URL.createObjectURL(preFile));
+    }, [preFile])
 
     useEffect(() => {
         pageImgFile && setPageImgUri(URL.createObjectURL(pageImgFile));
-    },[pageImgFile])
+    }, [pageImgFile])
 
     useEffect(() => {
         setDetail(data)
         setImgUri(data.Preview)
         setPageImgUri(data.PageImg)
-    },[data])
+    }, [data])
 
     const handleClose = () => {
         dispatch(close());
@@ -43,52 +45,40 @@ function CatModal(props) {
         const value = event.target.value;
         if (event.target.type === 'file') {
             if (name === 'Preview') {
-                setImgFile(event.target.files[0]);
-            } else  {
+                setPreFile(event.target.files[0]);
+            } else {
                 setPageImgFile(event.target.files[0]);
             }
         } else {
             setDetail({
                 ...detail,
-                [name]:value
+                [name]: value
             })
         }
     };
 
     //保存分类信息
     const handleSave = async () => {
-        const save = (param) => {
-            UpdateCat(param).then(() => {
-                handleClose();
-                dispatch(setRefresh())
-            })
-
-            dispatch(openAlert());
-            setImgFile(null);
-        }
+        let param = Object.assign({}, detail, {});
+        if (!detail.Status) param.Status = "show"
 
         //上传文件到七牛, 获取图片外链
-        imgFile &&  upload(imgFile).then(link => {
-                let param = Object.assign({}, detail, {Preview: link})
-                save(param)
-            })
+        preFile && await upload(preFile).then(link =>  param.Preview = link );
+        pageImgFile && await upload(pageImgFile).then(link => param.PageImg = link);
 
-         //上传文件到七牛, 获取图片外链
-        pageImgFile && upload(pageImgFile).then(link => {
-            let param = Object.assign({}, detail, {PageImg: link})
-            save(param);
+        await UpdateCat(param).then(() => {
+            handleClose();
+            dispatch(setRefresh())
+            dispatch(openAlert());
+            setPreFile(null);
         })
-
-        if (pageImgFile === null && imgFile === null) {
-            save(detail)
-        }
     };
 
     return (
-        <Modal title={type === "add" ? "新增分类" : (type === "show" ? "展示分类": "编辑分类")}
+        <Modal title={type === "add" ? "新增分类" : (type === "show" ? "展示分类" : "编辑分类")}
                maxWidth="md"
                open={openModal}
-               handleClose={()=>{
+               handleClose={() => {
                    setImgUri(null);  //置空, 否则会影响其他modal
                    handleClose()
                }}
@@ -137,7 +127,7 @@ function CatModal(props) {
                 <SelectInputWithHeader
                     name="Status"
                     header="状态"
-                    defaultValue="show"
+                    value={detail.Status || "show"}
                     handleChange={handleInputChange}
                     disabled={readOnly}
                     type="enum"

@@ -9,8 +9,6 @@ import DanmuInput from "./video-play/DanmuInput";
 import PageTipFloatingBar from "../../../components/PageTipFloatingBar";
 import BriefDesc from "./video-play/BriefDesc";
 import Comments from "./comment/Comments";
-import {useSelector} from "react-redux";
-import {selectPlayer} from "./playerSlice";
 import { GetItemFiles} from "../../../api/item.service";
 import {useParams} from "react-router-dom";
 
@@ -20,7 +18,6 @@ function Play(props) {
     const [danmuData, setDanmuData] = useState(null);
     const [item, setItem] = useState(null);
     const [videoSrc, setVideoSrc] = useState(null);
-    // const {itemId} = useSelector(selectPlayer);
     const danmuRef = React.createRef();
     let params = useParams();
     let itemId = params.id;
@@ -48,7 +45,6 @@ function Play(props) {
         setVideoSrc(src);
     }
 
-
     if (!item) return <></>
     return (
         <Box sx={{
@@ -64,7 +60,7 @@ function Play(props) {
                   columnSpacing={{xs: 1, sm: 2, md: 3}}
             >
                 <Grid item xs={12}>
-                    <Title title={"计算机图形学"}/>
+                    <Title title={item.ItemName}/>
                     {/*<VideoTag />*/}
                 </Grid>
 
@@ -82,11 +78,9 @@ function Play(props) {
                 <Grid item xs={4}>
                     <Periods periods={item && item.Main} changeVideoSrc={(src) => changeVideoSrc(src)}/>
                 </Grid>
-
                 <Grid item xs={7}>
                     <Comments/>
                 </Grid>
-
                 <Grid item xs={4}>
                     <BriefDesc/>
                 </Grid>

@@ -6,7 +6,7 @@ import {selectItemModal, close} from "./item-slice";
 import {useSelector, useDispatch} from 'react-redux'
 import {openAlert} from "../../../components/alert/ops/alertSlice";
 import {upload} from "../../../api/qiniu.service";
-import {ListCatName} from "../../../api/cat.service";
+import {ListCatName, UpdateCat} from "../../../api/cat.service";
 import MenuItem from "@mui/material/MenuItem";
 import {UpdateItem} from "../../../api/item.service";
 import AddIcon from '@mui/icons-material/Add';
@@ -17,22 +17,24 @@ import {setRefresh} from "../../../app/refreshSlice";
 
 function ItemModal(props) {
     const {openModal, readOnly, data} = useSelector(selectItemModal);
-    const dispatch = useDispatch();
     const [detail, setDetail] = React.useState(data);
-    const [imgFile, setImgFile] = useState(null);
-    const [imgUri, setImgUri] = useState(data.Preview);
+    const [preFile, setPreFile] = useState(null);
+    const [preUri, setPreUri] = useState(data.Preview);
     const [catNames, setCatNames] = useState(null);
     const [tags, setTags] = useState([]); //todo: 设计键
+    const [catSelect, setCatSelect] = useState(null); //todo: 设计键
     const [showTagInput, setShowTagInput] = useState(false);
     const tagRef = useRef();
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        imgFile && setImgUri(URL.createObjectURL(imgFile));
-    }, [imgFile])
+        preFile && setPreUri(URL.createObjectURL(preFile));
+    }, [preFile])
 
     useEffect(() => {
         setDetail(data)
-        setImgUri(data.Preview)
+        setPreUri(data.Preview)
+        setCatSelect(data && data.Cat && data.Cat.ID)
     }, [data])
 
     React.useEffect(() => {
@@ -45,6 +47,7 @@ function ItemModal(props) {
         dispatch(close())
     }
 
+    //表单元素修改 (有个包我不知当不当用 React Hook Form)
     const handleInputChange = (event) => {
         let name = event.target.name;
         let value = event.target.value;
@@ -52,39 +55,33 @@ function ItemModal(props) {
             value = parseFloat(value)
         }
         if (event.target.type === 'file') {
-            setImgFile(event.target.files[0]);
+            setPreFile(event.target.files[0]);
         } else {
             setDetail({
                 ...detail,
                 [name]: value
-            }) 
+            })
         }
     };
 
     //保存资源信息
     const handleSave = async () => {
-        const save = (param) => {
-            UpdateItem(param).then(() => {
-                handleClose();
-                dispatch(openAlert());
-                setImgFile(null);
-                dispatch(setRefresh())
-            })
-        }
+
+        let param = Object.assign({}, detail, {
+            Tags: tags.toString(),
+            CatId: catSelect
+        });
+        if (!detail.Status) param.Status = "show"
+
         //上传文件到七牛, 获取图片外链
-        if (imgFile) {
-            imgFile && upload(imgFile).then(link => {
-                let param = Object.assign({}, detail,
-                    {
-                        Preview: link,
-                        Tags: tags.toString()
-                    });
-                save(param);
-            })
-        } else {
-            let param = Object.assign({}, detail, { Tags: tags.toString()})
-            save(param);
-        }
+        preFile && await upload(preFile).then(link =>  param.Preview = link );
+
+        await UpdateItem(param).then(() => {
+            handleClose();
+            dispatch(openAlert());
+            setPreFile(null);
+            dispatch(setRefresh())
+        })
     };
 
     return (
@@ -92,7 +89,7 @@ function ItemModal(props) {
                maxWidth="md"
                open={openModal}
                handleClose={() => {
-                   setImgUri(null);  //置空, 否则会影响其他modal
+                   setPreUri(null);  //置空, 否则会影响其他modal
                    handleClose()
                }}
                handleSave={handleSave}>
@@ -113,7 +110,7 @@ function ItemModal(props) {
                 <ImagInputWithHeader
                     header="预览图:"
                     name="Preview"
-                    img={imgUri}
+                    img={preUri}
                     onChange={handleInputChange}/>
             </div>
 
@@ -145,7 +142,7 @@ function ItemModal(props) {
                 <SelectInputWithHeader
                     name="Status"
                     header="状态:"
-                    defaultValue="show"
+                    value={detail.Status || "show"}
                     handleChange={handleInputChange}
                     disabled={readOnly}
                     type="enum"
@@ -154,8 +151,8 @@ function ItemModal(props) {
                 <SelectInputWithHeader
                     name="CatId"
                     header="类别:"
-                    defaultValue={catNames && catNames[0].Title}
-                    handleChange={handleInputChange}
+                    value={catSelect || ""}
+                    handleChange={(e)=>setCatSelect(e.target.value)}
                     disabled={readOnly}>
                     {
                         catNames && catNames.map((item, index) => (
@@ -173,7 +170,6 @@ function ItemModal(props) {
                         return <React.Fragment>
                             <Chip
                                 sx={{
-                                    // color: 'text.secondary',
                                     mr: "15px",
                                     boxShadow: '0 0 2px #CCC5B9',
                                     '& > .MuiChip-deleteIcon:hover': {

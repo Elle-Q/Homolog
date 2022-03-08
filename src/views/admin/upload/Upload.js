@@ -1,4 +1,4 @@
-import React, {createRef, useState} from 'react';
+import React, {createRef, useEffect, useState} from 'react';
 import Box from "@mui/material/Box";
 import Uploader from "../../../components/Uploader";
 import {FormControlLabel, Radio, RadioGroup, Typography} from "@mui/material";
@@ -14,7 +14,7 @@ import FileDetail from "./FileDetail";
 import SearchIcon from '@mui/icons-material/Search';
 import FilesShow from "./FilesShow";
 import {useDispatch, useSelector} from "react-redux";
-import {selectUploadItemResc, setItem, setNewRescFiles, setRescType} from "./uploadSlice";
+import {selectUploadItemResc, setItem, setItemID, setNewRescFiles, setRescType} from "./uploadSlice";
 import {alpha} from "@mui/system";
 import UploadButton from "../../../components/ui/UploadButton";
 import {GetItemFiles, UploadItemFiles} from "../../../api/item.service";
@@ -33,9 +33,16 @@ const iconStyle = {
 }
 
 function Upload(props) {
-    const {newRescFiles, item, rescType} = useSelector(selectUploadItemResc);
+    const {newRescFiles, item, itemID, rescType} = useSelector(selectUploadItemResc);
     const dispatch = useDispatch();
     const itemIDRef = createRef();
+
+    useEffect(() => {
+        GetItemFiles(itemID)
+            .then(item => {
+                dispatch(setItem(item))
+            })
+    }, [itemID])
 
     const handleRscTypeChange = e => {
         dispatch(setRescType(e.target.value))
@@ -74,11 +81,9 @@ function Upload(props) {
 
     // 上传文件
     const onUploadClick = async () => {
-        if ( newRescFiles.length < 1)  return
+        if (newRescFiles.length < 1) return
         let param = new FormData();
         for (let x = 0; x < newRescFiles.length; x++) {
-            console.log(newRescFiles[x])
-            // console.log(file)
             param.append("Files[]", newRescFiles[x]);
         }
         param.append("ItemID", itemIDRef.current.value)
@@ -131,7 +136,7 @@ function Upload(props) {
                     name="item_id"
                     marginRight='0'
                     placeholder="输入item_id"
-                    defaultValue={item&&item.ID}
+                    value={itemID}
                 />
                 <IconButton sx={{
                     ml: '8px',
@@ -141,7 +146,7 @@ function Upload(props) {
                         boxShadow: '0 0 3px #403D39',
                     }
                 }}
-                onClick={handleSearch}
+                            onClick={handleSearch}
                 >
                     <SearchIcon/>
                 </IconButton>
@@ -176,7 +181,7 @@ function Upload(props) {
                     </DragDrop>
                 </div>
                 {/*显示拖拽的文件信息*/}
-                <FilesShow >
+                <FilesShow>
                     <Box sx={{display: "flex", justifyContent: "center", mt: '50px'}}>
                         <UploadButton marginTop="50px" onClick={onUploadClick}/>
                     </Box>

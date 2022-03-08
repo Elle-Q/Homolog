@@ -5,49 +5,59 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import videoList from '../../../../json/videoList.json'
-import styled,{ keyframes} from "styled-components";
+import styled, {keyframes} from "styled-components";
+import {alpha} from "@mui/system";
+import {useTheme} from '@mui/material/styles';
 
 const spin = keyframes`
-        0% { transform: scale(1); }
-        50% { transform: scale(1.2); }
-        100% { transform: scale(1); }
-        
-    `;
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+
+`;
 
 const StyledDiv = styled.div`
-        width:10px;
-        height:10px;
-        background-color:#EB5E28;
-        border-radius: 50%;
-        box-shadow: 0 0 5px #EB5E28;
-        animation: ${spin} 1s linear infinite;
+  width: 10px;
+  height: 10px;
+  background-color: #EB5E28;
+  border-radius: 50%;
+  box-shadow: 0 0 5px #EB5E28;
+  animation: ${spin} 1s linear infinite;
 `
 
 
 function RenderRow(props) {
     const {data, index, style} = props;
     const {list, currentIndex, handleIndexChange} = data;
-    const styles = {...style, right: '0px'};
+    const styles = {...style, right: '0px', paddingTop:'10px'};
 
     return (
         <ListItem style={styles} key={index} component="div" disablePadding>
-            <ListItemButton onClick={() => handleIndexChange(index)}>
-                {index === currentIndex ? <StyledDiv />:<></>}
+            <ListItemButton sx={{borderRadius:'10px'}} onClick={() => handleIndexChange(index)}>
+                {index === currentIndex ? <StyledDiv/> : <></>}
                 <ListItemText style={{
                     color: `${index === currentIndex ? 'text.primary' : '#CCC5B9'}`,
                     transform: `${index === currentIndex ? 'translate(15px) scale(1.1)' : 'scale(1)'}`,
                     transition: 'all 1s ease .2s'
                 }}
-                              primary={`P${index + 1}  ${list[index].Name}`}/>
-                <ListItemText style={{textAlign: 'right', color: '#403D39'}} primary={`${list[index].Bucket}`}/>
+                    primary={`P${index + 1}  ${list[index].Name}`}
+                />
+                {/*<ListItemText style={{textAlign: 'right', color: '#403D39'}} primary={`${list[index].Bucket}`}/>*/}
             </ListItemButton>
         </ListItem>
     );
 }
 
 function Periods(props) {
+    const theme = useTheme();
     const {changeVideoSrc, periods} = props;
-    const [currentPlayIndex,setCerrentPlayIndex] = useState(0);
+    const [currentPlayIndex, setCerrentPlayIndex] = useState(0);
 
     const handleIndexChange = (selectedIndex) => {
         setCerrentPlayIndex(selectedIndex);
@@ -63,9 +73,8 @@ function Periods(props) {
                 height: 500,
                 maxWidth: 360,
                 borderRadius: '10px',
-                backgroundColor: 'background.paper',
+                backgroundColor: alpha(theme.palette.background.paper,0.6),
                 boxShadow: '0 0 5px black',
-                // color:'#403D39'
             }}
         >
             <FixedSizeList
@@ -80,7 +89,7 @@ function Periods(props) {
                     handleIndexChange: handleIndexChange
                 }}
             >
-                 {RenderRow}
+                {RenderRow}
             </FixedSizeList>
         </Box>
     );

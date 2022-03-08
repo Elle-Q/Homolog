@@ -38,11 +38,11 @@ import {getColorFromUserStatus} from "../../../../utils/ToolUtil";
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
     borderRadius: '50px',
-    backgroundColor: alpha(theme.palette.primary.main, 0.15),
+    backgroundColor: alpha(theme.palette.text.third, 0.35),
     '&:hover': {
-        backgroundColor: alpha(theme.palette.primary.main, 0.25),
+        backgroundColor: alpha(theme.palette.text.third, 0.5),
     },
-    border: '1px solid #173A5E',
+    // border: '1px solid #173A5E',
     marginLeft: 0,
     width: '1000px',
     [theme.breakpoints.up('sm')]: {
@@ -121,13 +121,13 @@ function HeaderBar(props) {
                                 paddingLeft: `calc(1em + ${theme.spacing(4)})`,
                                 border: "none",
                                 borderRadius: '50px',
-                                boxShadow: '0 0 5px #3399FF',
+                                boxShadow: '0 0 1px black',
                                 '&:hover': {
-                                    backgroundColor: alpha(theme.palette.primary.main, 0.25),
+                                    // backgroundColor: 'white',
+                                    border: "none",
                                 }
                             }}
                             size="small"
-                            id="free-solo-2-demo"
                             disableClearable
                             options={suggestions}
                             PopperComponent={(props) => (

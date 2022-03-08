@@ -10,6 +10,8 @@ import Divider from "@mui/material/Divider";
 import LoyaltyIcon from '@mui/icons-material/Loyalty';
 import {Link} from "react-router-dom";
 import ByAuthor from "../../../../components/ByAuthor";
+import {alpha} from "@mui/system";
+import {useTheme} from "@mui/material/styles";
 
 
 const Label = props => {
@@ -51,6 +53,7 @@ const Label = props => {
 function BriefDesc(props) {
     const {score} = props;
     const lables = ["懒人", "blender", "建模", "路追", "教程"]
+    const theme = useTheme();
 
     const goCategoryClick = () => {
 
@@ -62,9 +65,8 @@ function BriefDesc(props) {
                 // height: '900px',
                 width: '100%',
                 borderRadius: '10px',
-                backgroundColor: 'background.paper',
+                backgroundColor: alpha(theme.palette.background.paper,0.7),
                 boxShadow: '0 0 5px black',
-                // border: '1px solid #0a0908',
                 padding: '10px',
             }}
         >

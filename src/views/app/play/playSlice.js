@@ -1,6 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit'
 
-export const playerSlice = createSlice({
+export const playSlice = createSlice({
     name: 'player',
     initialState: {
         itemId: null,
@@ -15,8 +15,8 @@ export const playerSlice = createSlice({
     }
 })
 
-export const {setItemId} = playerSlice.actions
+export const {setItemId} = playSlice.actions
 
 export const selectPlayer = state => state.player
 
-export default playerSlice.reducer
+export default playSlice.reducer

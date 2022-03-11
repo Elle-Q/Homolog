@@ -2,7 +2,7 @@ import React, {useRef, useState} from 'react';
 import useWindowDimensions from "../../hook/useWindowDimensions";
 import Box from "@mui/material/Box";
 import {alpha} from "@mui/system";
-import loginBg from '../../assets/bg/login04.jpg'
+import loginBg from '../../assets/bg/login01.jpg'
 import wechat from '../../assets/temp/wechat.jpg'
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
@@ -18,6 +18,7 @@ import {Link} from "@mui/material";
 import {login, signup} from "../../api/auth.service";
 import { selectAuth} from "../../api/authSlice";
 import {useDispatch, useSelector} from "react-redux";
+import blurBg from "../../assets/bg/blur3.jpg";
 
 function Login(props) {
     const {height, width} = useWindowDimensions();
@@ -81,7 +82,8 @@ function Login(props) {
         <div style={{
             height: height,
             width: width,
-            backgroundImage: `url(${loginBg})`,
+            // backgroundImage: `url(${loginBg})`,
+            backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)), url(${loginBg})`,
             backgroundSize: "cover",
         }}>
             <Box sx={{

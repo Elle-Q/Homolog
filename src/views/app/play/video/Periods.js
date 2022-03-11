@@ -4,10 +4,9 @@ import {FixedSizeList} from 'react-window';
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
-import videoList from '../../../../json/videoList.json'
 import styled, {keyframes} from "styled-components";
-import {alpha} from "@mui/system";
 import {useTheme} from '@mui/material/styles';
+import blurBg from "../../../../assets/bg/blur5.jpg";
 
 const spin = keyframes`
   0% {
@@ -35,7 +34,7 @@ const StyledDiv = styled.div`
 function RenderRow(props) {
     const {data, index, style} = props;
     const {list, currentIndex, handleIndexChange} = data;
-    const styles = {...style, right: '0px', paddingTop:'10px'};
+    const styles = {...style, width:'96%', right: '0px', paddingTop:'10px'};
 
     return (
         <ListItem style={styles} key={index} component="div" disablePadding>
@@ -69,11 +68,13 @@ function Periods(props) {
     return (
         <Box
             sx={{
-                width: '80%',
+                ml:'50px',
+                display:"flex",
                 height: 500,
                 maxWidth: 360,
                 borderRadius: '10px',
-                backgroundColor: alpha(theme.palette.background.paper,0.6),
+                // backgroundColor: alpha(theme.palette.background.paper,0.4),
+                backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)), url(${blurBg})`,
                 boxShadow: '0 0 5px black',
             }}
         >

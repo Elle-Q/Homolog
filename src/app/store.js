@@ -6,7 +6,7 @@ import authReducer from "../api/authSlice";
 import uploadReducer from "../views/admin/upload/uploadSlice";
 import confirmReducer from "../components/alert/confirm/confirmSlice";
 import refreshReducer from "./refreshSlice";
-import playerReducer from "../views/app/play/playerSlice";
+import playerReducer from "../views/app/play/playSlice";
 
 export default configureStore({
     reducer: {

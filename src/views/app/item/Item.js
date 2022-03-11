@@ -16,7 +16,7 @@ import AirplayIcon from '@mui/icons-material/Airplay';
 import {GetItem, GetItemFiles} from "../../../api/item.service";
 import {BigLinkButton, CartButton} from "../../../components/ui/CustomButton";
 import {useDispatch} from "react-redux";
-import {setItemId} from "../play/playerSlice";
+import {setItemId} from "../play/playSlice";
 
 const StyledDiv = styled.div`
   width: 100%;

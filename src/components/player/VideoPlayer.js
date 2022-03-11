@@ -2,22 +2,25 @@ import React, {useEffect, useState} from 'react';
 import Player from "./Player";
 import Box from "@mui/material/Box";
 import ControlBar from "./ControlBar";
-import InnerPlayerHeader from "../../views/app/play/video-play/InnerPlayerHeader";
+import InnerPlayerHeader from "../../views/app/play/video/InnerPlayerHeader";
 import Barrage from 'barrage-ui';
 import barageData from '../../json/barrage.json'
 import Hls from "hls.js";
+import DanmuInput from "../../views/app/play/video/DanmuInput";
 
 
 
 
 function VideoPlayer(props) {
 
-    const {videoSrc, danmuData } = props;
+    const {videoSrc} = props;
+    const [danmuData, setDanmuData] = useState(null);
     const [play, setPlay] = useState(false);
     const [visible, setVisible] = useState("hidden");
     const [barrageVisible, setBarrageVisible] = useState(true);
     const playerRef = React.useRef(null);
     const barrageRef = React.useRef(null);
+    const barrageInputRef = React.createRef();
 
     const videoJsOptions = {
         autoplay: false,
@@ -87,6 +90,13 @@ function VideoPlayer(props) {
             barrageRef.current.setData(barageData);
         }
     }
+
+    //发送弹幕
+    const handleDanmuSend = () => {
+        setDanmuData(barrageInputRef.current.value);
+        barrageInputRef.current.value = "";
+    }
+
 
     //listen event
     const handlePlayerReady = (player) => {
@@ -164,6 +174,7 @@ function VideoPlayer(props) {
                         handleRateClick={handleRateClick}
                         toggleShowBarrage={toggleShowBarrage}
             />
+            <DanmuInput ref={barrageInputRef} handleDanmuSend={handleDanmuSend}/>
 
         </Box>
     );

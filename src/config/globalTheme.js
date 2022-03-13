@@ -1,7 +1,6 @@
 import {createTheme} from "@mui/material/styles";
 import darkScrollbar from "@mui/material/darkScrollbar";
 
-//#001E3C #0A1929 #132F4C #173A5E
  export const globalTheme = createTheme({
      palette: {
          primary: {

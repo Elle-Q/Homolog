@@ -88,9 +88,9 @@ function HeaderBar(props) {
 
     return (
         <Box sx={{flexGrow: 1, boxShadow:"none", position:"sticky", zIndex:50, top:0}}>
-            <AppBar position="static">
+            <AppBar position="static" sx={{backgroundColor: alpha('#0A1929', 0.5)}} >
                 <Toolbar sx={{
-                    backgroundColor: 'background.default',
+                    backgroundColor: alpha('#0A1929', 0.5),
                     display: 'inline-flex',
                     minHeight: '64px'
                 }}>

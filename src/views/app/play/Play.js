@@ -10,7 +10,10 @@ import Comments from "./comment/Comments";
 import {GetItemFiles} from "../../../api/item.service";
 import {useParams} from "react-router-dom";
 import Video from "./video/Video";
-import ThreeD from "./3d/ThreeD";
+import TestSphere from "./test/TestSphere";
+import Gtfl from "./3d/Gtfl";
+import ThreeDGlb from "./3d/Glb";
+import Text from "./3d/Text";
 
 
 function Play(props) {
@@ -43,6 +46,8 @@ function Play(props) {
             mr: '13%',
             overflow: "hidden",
         }}>
+            <div style={{position: 'absolute', top: '100px', right: '10px'}} id='gui'/>
+
             <Grid container
                   direction="row"
                   alignItems="flex-start"
@@ -54,9 +59,13 @@ function Play(props) {
                     {/*<VideoTag />*/}
                 </Grid>
 
-                <Grid item xs={11} sx={{position: "relative", display:"flex", mb:'80px'}}>
+                {/*, display:"flex"*/}
+                <Grid item xs={11} sx={{position: "relative", mb:'80px'}}>
                     {/*<Video periods={item && item.Main}/>*/}
-                    <ThreeD />
+                    {/*<TestSphere />*/}
+                    {/*<Gtfl />*/}
+                    <ThreeDGlb />
+                    {/*<Text />*/}
                 </Grid>
 
                 <Grid item xs={7}>
@@ -68,6 +77,7 @@ function Play(props) {
             </Grid>
 
             <PageTipFloatingBar/>
+
 
         </Box>
     );

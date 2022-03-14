@@ -11,6 +11,7 @@ import items from "../../../json/items.json";
 import CategoryCard from "../home/body/subject/CategoryCard";
 import {useParams} from "react-router-dom";
 import {GetCat} from "../../../api/cat.service";
+import {getPopularTags} from "../../../utils/ToolUtil";
 
 function Category(props) {
 
@@ -24,33 +25,6 @@ function Category(props) {
         })
     }, [])
 
-    function getPopularTags() {
-        return (
-            <React.Fragment>
-                <span style={{marginLeft: '50px', marginRight: '10px'}}>热门标签:</span>
-                {
-                    tags.map((k, index) => {
-                        return (
-                            <Button key={index} sx={{
-                                backgroundColor: "transparent",
-                                border: "none",
-                                color: '#CCC5B9',
-                                mr: '15px',
-                                '&::before': {
-                                    content: `'🏷'`,
-                                },
-                                '&:hover': {
-                                    transform: 'scale(1.1)',
-                                    transition: 'all .2s ease  ',
-                                    color: '#3399FF'
-                                }
-                            }}><span style={{marginLeft: '5px', fontSize: '14px'}}> {k.name}({k.cnt})</span></Button>
-                        )
-                    })
-                }
-            </React.Fragment>
-        );
-    }
 
     return (
         <React.Fragment>
@@ -94,8 +68,7 @@ function Category(props) {
                 <Grid item xs={2}/>
                 <Grid item xs={8}>
                     <Divider variant="middle"/>
-
-                    {getPopularTags()}
+                    {getPopularTags(tags, '热门标签:')}
                 </Grid>
                 <Grid item xs={2}/>
             </Grid>

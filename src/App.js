@@ -15,7 +15,6 @@ export const ColorModeContext = React.createContext({
     }
 });
 
-
 function App() {
     useInterceptor();
     const [mode, setMode] = React.useState('light');
@@ -61,15 +60,13 @@ function App() {
         [],
     );
 
-
-
     return (
         <ColorModeContext.Provider value={colorMode}>
             <ThemeProvider theme={app_theme}>
                 <BrowserRouter>
                     <Routes>
                         {routes.map(({path, component}) => (
-                            <Route path={path} element={component} key={path}/>
+                            <Route  path={path} element={component} key={path}/>
                         ))}
                     </Routes>
                 </BrowserRouter>

@@ -10,10 +10,9 @@ import Comments from "./comment/Comments";
 import {GetItemFiles} from "../../../api/item.service";
 import {useParams} from "react-router-dom";
 import Video from "./video/Video";
-import TestSphere from "./test/TestSphere";
 import Gtfl from "./3d/Gtfl";
-import ThreeDGlb from "./3d/Glb";
-import Text from "./3d/Text";
+import Glb from "./3d/Glb";
+import {getPopularTags} from "../../../utils/ToolUtil";
 
 
 function Play(props) {
@@ -39,6 +38,17 @@ function Play(props) {
 
     if (!item) return <></>
 
+    function renderRsc() {
+       switch (rescType) {
+           case 'video' :
+               return <Video periods={item && item.Main}/>
+           case '3d-glb':
+               return  <Glb />
+           case '3d-gltf':
+               return <Gtfl />
+       }
+    }
+
     return (
         <Box sx={{
             width: '74%',
@@ -56,15 +66,14 @@ function Play(props) {
             >
                 <Grid item xs={12}>
                     <Title title={item.ItemName}/>
-                    {/*<VideoTag />*/}
                 </Grid>
 
-                {/*, display:"flex"*/}
-                <Grid item xs={11} sx={{position: "relative", mb:'80px'}}>
+                <Grid item xs={11} sx={{position: "relative", mb:'80px', display:"flex"}}>
+                    {renderRsc()}
                     {/*<Video periods={item && item.Main}/>*/}
                     {/*<TestSphere />*/}
                     {/*<Gtfl />*/}
-                    <ThreeDGlb />
+                    {/*<Glb />*/}
                     {/*<Text />*/}
                 </Grid>
 

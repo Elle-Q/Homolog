@@ -60,7 +60,6 @@ function Text(props) {
             const loader = new FontLoader();
             loader.load('/3d/fonts/helvetiker_bold.typeface.json', function (font) {
 
-                debugger
                 const textGeo = new TextGeometry('HOMOLOG', {
                     font: font,
                     size: 200,

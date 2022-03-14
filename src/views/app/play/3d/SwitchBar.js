@@ -65,10 +65,10 @@ function SwitchBar(props) {
                             height: '90px',
                             borderRadius:'50%',
                             boxShadow: '0 0 5px white',
-                            transition: 'clip-path .4s linear',
+                            transition: 'clip-path .4s ease-in-out',
                             '&:hover': {
                                 transform: 'scale(1.6)',
-                                transition: 'all .4s ease .4s'
+                                transition: 'all .4s ease-in-out '
                             }
                         }}
                     />

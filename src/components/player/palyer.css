@@ -6,7 +6,7 @@
     border-radius: 500px;
     background-position: 55% calc(50% - 0px);
     background-color: transparent;
-    transition: all 2s ease .5s;
+    transition: all 2s cubic-bezier(.175,.885,.32,1.275);
     /*border: none !important;*/
     /*box-shadow: none !important;*/
 }
@@ -21,7 +21,7 @@
     border-color: #fff;
     background-color: transparent;
     transform: scale(1.5);
-    transition: all 1s ease .5s;
+    transition: all 1s cubic-bezier(.175,.885,.32,1.275);
 }
 
 .video-js .vjs-progress-control {

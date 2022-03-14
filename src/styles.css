@@ -27,3 +27,7 @@
     transform: scale(0.9);
     transition: opacity 600ms ease-in, transform 600ms;
 }
+
+/*#root {*/
+/* background-image: linear-gradient(to bottom, #001E3C , #1565c0)*/
+/*}*/

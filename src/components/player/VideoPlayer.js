@@ -8,9 +8,6 @@ import barageData from '../../json/barrage.json'
 import Hls from "hls.js";
 import DanmuInput from "../../views/app/play/video/DanmuInput";
 
-
-
-
 function VideoPlayer(props) {
 
     const {videoSrc} = props;
@@ -55,10 +52,13 @@ function VideoPlayer(props) {
     },[])
 
     useEffect(() => {
-        if (!playerRef.current) return;
-        playerRef.current.pause();
-        playerRef.current.src(videoSrc);
-        playerRef.current.load()
+        // if (!playerRef.current) return;
+        const player = playerRef.current;
+        if (player) {
+            player.pause();
+            player.src(videoSrc);
+            player.load()
+        }
     },[videoSrc])
 
     useEffect(() => {

@@ -6,21 +6,16 @@ import Button from "@mui/material/Button";
 const StyledInputElement = styled('input')`
   width: 92%;
   font-size: 1rem;
-  font-family: IBM Plex Sans, sans-serif;
+  font-family: -apple-system, sans-serif;
   font-weight: 400;
   line-height: 1.4375em;
-  background: #132F4C;
+  background: transparent;
   border: none;
   border-radius: 10px;
   padding: 6px 10px;
   color: white;
-  transition: width 300ms ease;
-
-  &:hover {
-    background: #0A1929;
-    border-color: #173A5E;
-  }
-
+  //transition: width 300ms ease;
+  
   &:focus {
     outline: none;
     width: 90%;
@@ -31,16 +26,16 @@ const StyledInputElement = styled('input')`
 const DanmuBox = styled('div')(({theme}) => ({
     position: "absolute",
     zIndex: 1,
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: '#132F4C',
-    '&:hover': {
-        backgroundColor: alpha(theme.palette.primary.main, 0.25),
-    },
-    border: '1px solid #173A5E',
+    borderRadius: '10px',
+    backgroundImage: 'linear-gradient(to right, #001E3C , #173A5E)',
+    boxShadow: '0 0 20px #173A5E',
     width: '100%',
     top: '530px',
     paddingRight: '10px',
     justifyContent: "flex-end",
+    '&:hover' : {
+        transform: 'scale(1.01)'
+    },
     [theme.breakpoints.up('sm')]: {
         marginRight: theme.spacing(5),
     },
@@ -54,7 +49,7 @@ function DanmuInput(props, ref) {
         <DanmuBox>
             <StyledInputElement ref={ref}
                                 aria-label="danmu input"
-                                placeholder={"不好请别骂   请用鸡蛋砸   文明你我他 :) "} />
+                                placeholder={"讲文明 树新风 :) "} />
             <Button
                 sx={{
                     backgroundColor: "transparent",

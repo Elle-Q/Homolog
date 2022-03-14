@@ -7,6 +7,7 @@ import ListItemText from "@mui/material/ListItemText";
 import styled, {keyframes} from "styled-components";
 import {useTheme} from '@mui/material/styles';
 import blurBg from "../../../../assets/bg/blur5.jpg";
+import {alpha} from "@mui/system";
 
 const spin = keyframes`
   0% {
@@ -24,26 +25,34 @@ const spin = keyframes`
 const StyledDiv = styled.div`
   width: 10px;
   height: 10px;
+  margin-right: 5px;
   background-color: #EB5E28;
   border-radius: 50%;
   box-shadow: 0 0 5px #EB5E28;
-  animation: ${spin} 1s linear infinite;
+  animation: ${spin} 1s cubic-bezier(.175,.885,.32,1.275) infinite;
 `
 
 
 function RenderRow(props) {
     const {data, index, style} = props;
     const {list, currentIndex, handleIndexChange} = data;
-    const styles = {...style, width:'96%', right: '0px', paddingTop:'10px'};
+    const styles = {...style, width:'96%', right: '0px', paddingTop:'10px',overflow: "hidden",};
 
     return (
         <ListItem style={styles} key={index} component="div" disablePadding>
-            <ListItemButton sx={{borderRadius:'10px'}} onClick={() => handleIndexChange(index)}>
+            <ListItemButton sx={{
+                borderRadius:'10px',
+                '&:hover': {
+                    transform: 'translateX(5px) ',
+                    transition: 'all 1s cubic-bezier(.175,.885,.32,1.275)'
+                }
+            }}
+                            onClick={() => handleIndexChange(index)}>
                 {index === currentIndex ? <StyledDiv/> : <></>}
                 <ListItemText style={{
                     color: `${index === currentIndex ? 'text.primary' : '#CCC5B9'}`,
-                    transform: `${index === currentIndex ? 'translate(15px) scale(1.1)' : 'scale(1)'}`,
-                    transition: 'all 1s ease .2s'
+                    transform: `${index === currentIndex ? 'translateX(15px) scale(1.1)' : 'scale(1)'}`,
+                    transition: 'all 1s cubic-bezier(.175,.885,.32,1.275)'
                 }}
                     primary={`P${index + 1}  ${list[index].Name}`}
                 />
@@ -73,9 +82,10 @@ function Periods(props) {
                 height: 500,
                 maxWidth: 360,
                 borderRadius: '10px',
-                // backgroundColor: alpha(theme.palette.background.paper,0.4),
-                backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)), url(${blurBg})`,
-                boxShadow: '0 0 5px black',
+                backgroundColor: "transparent",
+                // backgroundImage: 'linear-gradient(to bottom, #001E3C , #173A5E)'
+                // backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)), url(${blurBg})`,
+                // boxShadow: '0 0 5px black',
             }}
         >
             <FixedSizeList

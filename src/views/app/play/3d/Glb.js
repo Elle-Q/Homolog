@@ -6,7 +6,7 @@ import {DRACOLoader} from "three/examples/jsm/loaders/DRACOLoader";
 import {Init} from "./BaseLoader";
 import BaseCanvas from "./BaseCanvas";
 
-function ThreeDGlb(props) {
+function Glb(props) {
     const [size, setSize] = useState()
 
     useEffect(() => {
@@ -27,7 +27,8 @@ function ThreeDGlb(props) {
 
             const model = gltf.scene;
             model.position.set(1, 1, 0);
-            model.scale.set(.01, .01, .01);
+            model.rotation.set(0, .5, 0);
+            model.scale.set(.008, .008, .008);
             scene.add(model);
 
             mixer = new THREE.AnimationMixer(model);
@@ -65,4 +66,4 @@ function ThreeDGlb(props) {
     );
 }
 
-export default ThreeDGlb;
+export default Glb;

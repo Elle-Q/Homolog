@@ -34,9 +34,9 @@ function Player(props) {
             });
         } else {
             const player = playerRef.current;
-            // player.autoplay(options.autoplay);
-            // player.src(options.sources);
+            onReady(player)
         }
+
     }, [options]);
 
     // Dispose the Video.js player when the functional component unmounts

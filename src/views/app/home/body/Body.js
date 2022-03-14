@@ -28,6 +28,7 @@ function Body(props) {
             mr: '10%',
             mt:'20px',
             overflow: "hidden",
+
         }}>
             <Grid container
                   spacing={5}

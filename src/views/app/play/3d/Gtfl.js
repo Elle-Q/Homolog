@@ -13,14 +13,17 @@ function Gtfl(props) {
     const [rsc, setRsc] = useState('/3d/gltf/helmet/DamagedHelmet.gltf')
 
     useEffect(() => {
-        sceneCur && sceneCur.clear()
+        if (!rsc) return
+
         const {controls, size, scene, renderer, camera, gui} = Init(600)
         setSize(size)
+        sceneCur && sceneCur.clear()
         setSceneCur(scene)
 
         const gltfLoader = new GLTFLoader()
 
         let tl = gsap.timeline()
+
 
         //models
         gltfLoader.load(rsc, (gltf) => {
@@ -40,6 +43,10 @@ function Gtfl(props) {
             renderer.render(scene, camera);
         }
         animate();
+
+        return () => {
+            setRsc(null);
+        };
     }, [rsc])
 
 

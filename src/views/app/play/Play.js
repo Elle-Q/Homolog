@@ -13,6 +13,7 @@ import Video from "./video/Video";
 import Gtfl from "./3d/Gtfl";
 import Glb from "./3d/Glb";
 import {getPopularTags} from "../../../utils/ToolUtil";
+import GLTF from "./3d/GLTF";
 
 
 function Play(props) {
@@ -45,7 +46,7 @@ function Play(props) {
            case '3d-glb':
                return  <Glb />
            case '3d-gltf':
-               return <Gtfl />
+               return <GLTF />
        }
     }
 
@@ -73,6 +74,7 @@ function Play(props) {
                     {/*<Video periods={item && item.Main}/>*/}
                     {/*<TestSphere />*/}
                     {/*<Gtfl />*/}
+                    {/*<GLTF />*/}
                     {/*<Glb />*/}
                     {/*<Text />*/}
                 </Grid>

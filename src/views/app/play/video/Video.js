@@ -19,12 +19,13 @@ function Video(props) {
     }
 
     return (
-        <React.Fragment>
-            <VideoPlayer videoSrc={{
+        <React.Fragment>{
+            videoSrc && <VideoPlayer videoSrc={{
                 type: 'application/x-mpegURL',
-                src:  videoSrc,
+                src: videoSrc,
             }}/>
-            <Periods periods={periods} changeVideoSrc={(src) => changeVideoSrc(src)}/>
+        }
+        <Periods periods={periods} changeVideoSrc={(src) => changeVideoSrc(src)}/>
         </React.Fragment>
     );
 }

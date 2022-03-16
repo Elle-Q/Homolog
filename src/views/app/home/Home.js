@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {HeaderBar} from "./head/HeaderBar";
 import {Route, Routes, useLocation} from "react-router-dom";
 import Play from "../play/Play";
@@ -21,6 +21,8 @@ function Home(props) {
         {path: '/account', name: 'account', component: <Account/>},
     ]
 
+
+    //todo: 我还没想好
     const AnimatedSwitch = () => {
         const location = useLocation();
         return (
@@ -45,7 +47,11 @@ function Home(props) {
         <React.Fragment>
             <CssBaseline/>
             <HeaderBar/>
-            <AnimatedSwitch/>
+            <Routes>
+                {routes.map(({path, component}, index) => (
+                    <Route key={index} path={path} element={component}/>
+                ))}
+            </Routes>
         </React.Fragment>
     );
 }

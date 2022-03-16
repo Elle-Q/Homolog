@@ -34,8 +34,9 @@ import AdminPanelSettingsRoundedIcon from '@mui/icons-material/AdminPanelSetting
 import {useEffect} from "react";
 import {getUser} from '../../../../api/user.service'
 import {getColorFromUserStatus} from "../../../../utils/ToolUtil";
+import useScroll from "../../../../hook/useScroll";
 
-const Search = styled('div')(({ theme }) => ({
+const Search = styled('div')(({theme}) => ({
     position: 'relative',
     borderRadius: '50px',
     backgroundColor: alpha(theme.palette.text.third, 0.35),
@@ -50,7 +51,7 @@ const Search = styled('div')(({ theme }) => ({
     },
 }));
 
-const SearchIconWrapper = styled('div')(({ theme }) => ({
+const SearchIconWrapper = styled('div')(({theme}) => ({
     padding: theme.spacing(0, 2),
     height: '100%',
     position: 'absolute',
@@ -66,10 +67,18 @@ function HeaderBar(props) {
     const navigate = useNavigate();
     const {isLogin, userId, user} = useSelector(selectAuth);
     const colorMode = React.useContext(ColorModeContext);
-    const [showMenu,setShowMenu] = React.useState(false);
+    const [showMenu, setShowMenu] = React.useState(false);
     const dispatch = useDispatch();
+    const scroll = useScroll()
 
     const suggestions = suggetionJson.map((s) => s.label);
+
+
+    useEffect(() => {
+        if (user) return
+        dispatch(getUser(userId))
+    }, [])
+
 
     const enterAccount = (e) => {
         e.preventDefault();
@@ -80,40 +89,43 @@ function HeaderBar(props) {
         }
     };
 
-    useEffect(() => {
-        if (user) return
-        dispatch(getUser(userId))
-    }, [])
-
 
     return (
-        <Box sx={{flexGrow: 1, boxShadow:"none", position:"sticky", zIndex:50, top:0}}>
-            <AppBar position="static" sx={{backgroundColor: alpha('#0A1929', 0.5)}} >
+        <Box sx={{
+            flexGrow: 1,
+            boxShadow: "none",
+            position: "sticky",
+            zIndex: 50,
+            top: 0,
+            transform: `${scroll.direction === 'down' ? 'translateY(-100%)' : ''}`,
+            transition: 'transform 0.6s ease-in-out',
+        }}>
+            <AppBar position="static" sx={{backgroundColor: alpha('#0A1929', 0.5)}}>
                 <Toolbar sx={{
                     backgroundColor: alpha('#0A1929', 0.5),
                     display: 'inline-flex',
                     minHeight: '64px'
                 }}>
-                    <AppLogo title="HOMOLOG" />
+                    <AppLogo title="HOMOLOG"/>
                     <IconButton
                         size="small"
                         edge="start"
                         color="inherit"
                         aria-label="open drawer"
-                        sx={{ ml:20}}
+                        sx={{ml: 20}}
                         onMouseEnter={() => setShowMenu(!showMenu)}
                     >
-                        <img style={{width:25, height:25}} alt ="community" title="分类" src={categoryB}/>
+                        <img style={{width: 25, height: 25}} alt="community" title="分类" src={categoryB}/>
                     </IconButton>
                     {
-                        showMenu && (<div style={{position:'relative'}}>
+                        showMenu && (<div style={{position: 'relative'}}>
                             <MultilevelMenu onMouseLeave={() => setShowMenu(!showMenu)}/>
                         </div>)
                     }
 
                     <Search>
                         <SearchIconWrapper>
-                            <SearchIcon />
+                            <SearchIcon/>
                         </SearchIconWrapper>
 
                         <Autocomplete
@@ -131,11 +143,11 @@ function HeaderBar(props) {
                             disableClearable
                             options={suggestions}
                             PopperComponent={(props) => (
-                                <Popper {...props} element='bottom-start' />
+                                <Popper {...props} element='bottom-start'/>
                             )}
                             PaperComponent={(props) => (
                                 <Paper {...props} sx={{
-                                    backgroundColor:alpha(theme.palette.primary.main, 0.65),
+                                    backgroundColor: alpha(theme.palette.primary.main, 0.65),
                                     color: theme.palette.secondary.light
                                 }}/>
                             )}
@@ -149,7 +161,7 @@ function HeaderBar(props) {
                                         type: 'search',
                                     }}
                                     sx={{
-                                        border:"none",
+                                        border: "none",
                                     }}
                                 />
                             )}
@@ -163,8 +175,8 @@ function HeaderBar(props) {
                                 <WbSunnyIcon fontSize="small"/>}
                         </Button>
 
-                        <Button size="large" >
-                            <img style={{width:20, height:20}} alt ="community" title="社区" src={community}/>
+                        <Button size="large">
+                            <img style={{width: 20, height: 20}} alt="community" title="社区" src={community}/>
                         </Button>
                         <Button size="large" color="inherit"
                                 component={Link} to={"/app/home"}>
@@ -172,7 +184,7 @@ function HeaderBar(props) {
                         </Button>
                         <Button size="large" color="inherit"
                                 component={Link} to={"/app/category/animation"}>
-                            <img style={{width:20, height:20}} alt ="category" title="分类" src={categoryS}/>
+                            <img style={{width: 20, height: 20}} alt="category" title="分类" src={categoryS}/>
                         </Button>
                         <Button size="large" color="inherit">
                             <Badge badgeContent={4} color="error">

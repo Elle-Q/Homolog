@@ -24,7 +24,6 @@ function Gtfl(props) {
 
         let tl = gsap.timeline()
 
-
         //models
         gltfLoader.load(rsc, (gltf) => {
             gltf.scene.rotation.set(6.4, 1.2, 6.3)

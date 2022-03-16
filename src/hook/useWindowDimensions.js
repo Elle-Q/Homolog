@@ -3,8 +3,9 @@ import {useEffect, useState} from "react";
 function getWindowDimensions() {
     const { innerWidth: width, innerHeight: height } = window;
     return {
-        width,
-        height
+        width: width,
+        height: height,
+        aspect: width/height
     };
 }
 

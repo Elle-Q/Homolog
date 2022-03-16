@@ -45,11 +45,7 @@ function Home(props) {
         <React.Fragment>
             <CssBaseline/>
             <HeaderBar/>
-            <Routes>
-                {routes.map(({path, component}, index) => (
-                    <Route key={index} path={path} element={component}/>
-                ))}
-            </Routes>
+            <AnimatedSwitch/>
         </React.Fragment>
     );
 }

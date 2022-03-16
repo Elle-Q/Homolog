@@ -42,7 +42,7 @@ function Body(props) {
                 {
                     subjects && subjects.map((subject, index) => {
                         return (
-                            <Grid item xs={12} key={index}>
+                            <Grid item xs={12} key={index} >
                                 <Subject subject={subject}/>
                             </Grid>
                         )

@@ -30,6 +30,7 @@ import darkScrollbar from "@mui/material/darkScrollbar";
              third: '#000',
              fifth:'#CCC5B9',
              sixth:'#ba2d0b',
+             seventh: '#00a896'
          },
          icon: {
              first:'#e9c46a'

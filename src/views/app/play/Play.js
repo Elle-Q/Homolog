@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react';
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import Title from "./video/Title";
+import TitleHeader from "./TitleHeader";
 import VideoPlayer from "../../../components/player/VideoPlayer";
 import Periods from "./video/Periods";
 import PageTipFloatingBar from "../../../components/PageTipFloatingBar";
@@ -65,7 +65,7 @@ function Play(props) {
                   columnSpacing={{xs: 1, sm: 2, md: 3}}
             >
                 <Grid item xs={12}>
-                    <Title title={item.ItemName}/>
+                    <TitleHeader title={item.ItemName}/>
                 </Grid>
 
                 <Grid item xs={11} sx={{position: "relative", mb:'80px', display:"flex"}}>

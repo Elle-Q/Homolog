@@ -146,9 +146,8 @@ function VideoPlayer(props) {
             sx={{
                 height:'530px',
                 width:'810px',
-                // width:'100%',
                 position:"absolute",
-                borderRadius: '10px',
+                borderRadius: 10,
                 backgroundColor: 'black',
                 zIndex: 1,
             }}

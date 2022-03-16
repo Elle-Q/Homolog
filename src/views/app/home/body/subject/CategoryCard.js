@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import Card from "@mui/material/Card";
-import {useTheme} from "@mui/system";
+import {alpha, useTheme} from "@mui/system";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
@@ -22,10 +22,16 @@ function CategoryCard(props) {
             width:{width},
             minWidth: 200,
             maxWidth: 360,
-            boxShadow: 10,
+            boxShadow: 5,
             textShadow: 10,
-            borderRadius: 3,
+            borderRadius: 10,
+            backgroundColor: alpha('#000', 0.4),
+            '&:hover' : {
+                transform: 'scale(1.03) translateY(-10px)',
+                transition: 'all 100ms ease-in',
+            }
         }}>
+
             <Link to={`/app/item/${item.ID}`} key={item.ID}>
                 <CardMedia
                     component="img"
@@ -36,12 +42,16 @@ function CategoryCard(props) {
                     sx={{
                         boxShadow: 5,
                         borderRadius: 2,
+                        '&:hover': {
+                            filter:' brightness(110%)'
+                        }
                     }}
                 />
             </Link>
+
             <Typography variant="h6" component="div"
-                        color={theme.palette.secondary.light}
-                        sx={{mt: '5px', ml: '15px'}}>
+                        color={theme.palette.text.seventh}
+                        sx={{mt: '5px', ml: '15px', fontWeight:"bold"}}>
                 {item.Name}
             </Typography>
             <CardContent>

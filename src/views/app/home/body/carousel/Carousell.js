@@ -20,7 +20,6 @@ const Button = styled.div`
 `;
 
 const DotIndex = styled.div` {
-  background-color:'red';
   display: flex;
   height:10px;
   width: 100%;
@@ -83,9 +82,9 @@ function Carousell() {
         const dots = [];
         for (let i = 0; i < cats.length; i++) {
             if (index === i) {
-                dots.push(<CircleRoundedIcon key={i} sx={{width: '10px', height: '10px', ml: '5px'}}/>)
+                dots.push(<CircleRoundedIcon key={i} sx={{width: '10px',  height: '10px', ml: '5px'}}/>)
             } else {
-                dots.push(<CircleOutlinedIcon key={i} sx={{width: '10px', height: '10px', ml: '5px'}}/>)
+                dots.push(<CircleOutlinedIcon key={i} sx={{width: '10px',  height: '10px', ml: '5px'}}/>)
             }
         }
         return dots;
@@ -98,18 +97,19 @@ function Carousell() {
                 width:'1200px', //fixme: do with screen size
                 mt: '15px',
                 padding: '0px 15px 5px 15px',
-                boxShadow: 10,
+                // boxShadow: 5,
                 textShadow: 10,
                 borderRadius: 3,
-                borderColor: 'red',
-                border: '1px solid #173A5E',
-                backgroundColor: 'primary.main',
+                // borderColor: 'red',
+                // border: '1px solid #173A5E',
+                // backgroundColor: 'primary.main',
                 position: 'relative', //very important. fuck
                 display: 'flex',
                 alignItems: 'center',
                 flexWrap: "nowrap",
                 overflow: "hidden",
                 justifyContent: "space-between",
+                margin:'1px'
             }}>
 
                 <Button side="prev" onClick={handleClickPrev}>

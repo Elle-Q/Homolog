@@ -4,7 +4,6 @@ import Typography from "@mui/material/Typography";
 import {useTheme} from "@mui/material/styles";
 import CardMedia from "@mui/material/CardMedia";
 import {alpha} from "@mui/system";
-import CardHeader from "@mui/material/CardHeader";
 import { Link } from "react-router-dom";
 import {styled} from '@mui/system';
 
@@ -23,22 +22,22 @@ function ImageCard(props) {
         <Card
             raised={true}
             sx={{
-                backgroundColor: "transparent",
+                backgroundImage: 'linear-gradient( 135deg, #97ABFF 10%, #123597 100%)',
                 boxShadow: "none",
                 ml: '20px',
                 mr: '20px',
-                minWidth: '258px',
+                minWidth: '254px',
                 minHeight: '170px',
+                borderRadius: 5,
                 transform: `translateX(${width}px)`,
-                transition: 'transform 1s ease-in-out',
+                transition: 'transform 1.5s ease-in-out',
+                filter: 'grayscale(100%)',
                 '&:hover' : {
-                    '.MuiCardHeader-root': {
-                        height: '2px',
-                    }
+                    filter: 'grayscale(0%)',
                 }
-            }} >
-            <CardHeader sx={{backgroundColor: alpha(theme.palette.secondary.light, 0.8), height: '5px', padding: 0}}
-            />
+            }}>
+            {/*<CardHeader sx={{backgroundColor: alpha(theme.palette.secondary.light, 0.8), height: '5px', padding: 0}}*/}
+            {/*/>*/}
             <StyledLink to={`/app/category/${item.ID}`} key={item.Title}  >
                 <CardMedia
                     raised="true"
@@ -49,13 +48,16 @@ function ImageCard(props) {
                         width: '258px',
                         height: '150px',
                         boxShadow: 5,
-                        borderRadius: 1,
+                        borderRadius: 5,
+                        '&:hover' : {
+                            transform: `scale(1.02)`,
+                        }
                     }}
                 />
-                <Typography variant="h6" component="div" color={theme.palette.secondary.light} sx={{mt: '5px'}}>
+                <Typography variant="h6" component="div" color='white' sx={{mt: '5px', fontWeight:"bold"}}>
                     {item.Title}
                 </Typography>
-                <Typography color={alpha(theme.palette.primary.contrastText, 0.75)}>
+                <Typography color={alpha(theme.palette.primary.contrastText, 0.75)} sx={{fontSize:'12px'}}>
                     {item.SubTitle}
 
                 </Typography>

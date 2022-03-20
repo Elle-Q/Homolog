@@ -1,7 +1,8 @@
 import api from "./api";
+import {setItem} from "../views/app/play/playSlice";
 
 export const GetItem = (itemId) => {
-    return api.get(`/homo-admin/item/${itemId}`)
+    return api.get(`/homo-app/item/${itemId}`)
         .then(resp => {
             return resp
         })
@@ -10,6 +11,13 @@ export const GetItem = (itemId) => {
 export const GetItemFiles = (itemId) => {
     return api.get(`/homo-admin/item/files/${itemId}`)
         .then(resp => {
+            return resp
+        })
+}
+export const GetItemWithFiles = (itemId) => dispatch => {
+    return api.get(`/homo-app/item/files/${itemId}`)
+        .then(resp => {
+            dispatch(setItem(resp))
             return resp
         })
 }

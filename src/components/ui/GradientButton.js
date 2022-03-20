@@ -15,7 +15,7 @@ const useStyles = makeStyles({
         color: '#fff',
         boxShadow: '0 0 2px #eee',
         borderRadius: '20px',
-        display: 'block',
+        display: 'inline-block',
         fontWeight:"bold",
         fontFamily:'-apple-system',
         '&:hover': {
@@ -28,10 +28,12 @@ const useStyles = makeStyles({
 
 function GradientButton(props) {
     const classes = useStyles();
-    const {name, color} = props
+    const {name, color,width,fontSize} = props
     return (
         <Button className={classes.grad} style={{
-            backgroundImage: `${color}`
+            backgroundImage: `${color}`,
+            width:width,
+            fontSize:fontSize,
         }}>{name}</Button>
     );
 }

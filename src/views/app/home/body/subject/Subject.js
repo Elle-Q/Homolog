@@ -5,13 +5,13 @@ import Stack from "@mui/material/Stack";
 import CategoryCard from "./CategoryCard";
 import AnimationText from "../../../../../components/AnimationText";
 import GradientButton from "../../../../../components/ui/GradientButton";
+import {Link} from "react-router-dom";
 
 function Subject(props) {
     const theme = useTheme();
     const {subject} = props;
 
     if (subject === undefined || subject.Items.length < 1) return <></>
-
 
     return (
         <React.Fragment>
@@ -27,7 +27,9 @@ function Subject(props) {
                     />
                 </div>
                 <div style={{display:'flex', alignItems: 'center',justifyContent:"flex-end"}}>
-                <GradientButton name="更多" color="linear-gradient(to right, #00c6ff 0%, #0072ff  51%, #00c6ff  100%)"/>
+                    <Link to={`/app/category/${subject.CatID}`}>
+                    <GradientButton name="更多" color="linear-gradient(to right, #00c6ff 0%, #0072ff  51%, #00c6ff  100%)"/>
+                    </Link>
                 </div>
             </div>
             <Stack direction='row'

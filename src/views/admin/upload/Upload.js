@@ -17,7 +17,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {selectUploadItemResc, setItem, setItemID, setNewRescFiles, setRescType} from "./uploadSlice";
 import {alpha} from "@mui/system";
 import UploadButton from "../../../components/ui/UploadButton";
-import {GetItemFiles, UploadItemFiles} from "../../../api/item.service";
+import {GetItemFiles, GetItemWithFiles, UploadItemFiles} from "../../../api/item.service";
 import {SimpleInput} from "../../../components/ui/SimpleInput";
 
 const radioStyle = {

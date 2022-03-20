@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import {getStarIcons} from "../../../../utils/ToolUtil";
@@ -12,6 +12,10 @@ import {Link} from "react-router-dom";
 import ByAuthor from "../../../../components/ByAuthor";
 import {alpha} from "@mui/system";
 import {useTheme} from "@mui/material/styles";
+import {useSelector} from "react-redux";
+import {selectPlayer} from "../playSlice";
+import GradientButton from "../../../../components/ui/GradientButton";
+import {ByteToM} from "../../../../utils/MathUtil";
 
 
 const Label = props => {
@@ -29,8 +33,8 @@ const Label = props => {
                 lables && lables.map((key, index) => {
                     return <Chip
                         sx={{
-                            color: 'secondary.light',
-                            m: '2px',
+                            color: 'text.secondary',
+                            m: '4px',
                             boxShadow: '0 0 2px #3399FF',
                             borderColor: 'secondary.light',
                             '& > *:hover': {
@@ -51,11 +55,18 @@ const Label = props => {
 }
 
 function BriefDesc(props) {
-    const {score} = props;
-    const lables = ["懒人", "blender", "建模", "路追", "教程"]
     const theme = useTheme();
+    const lables = ["懒人", "blender", "建模", "路追", "教程"]
+    const {item} = useSelector(selectPlayer);
+    const [ref, setRef] = useState({})
 
-    const goCategoryClick = () => {
+    useEffect(() => {
+        if (item.Refs.length < 1) return
+        setRef(item.Refs[0])
+    }, [])
+
+    //点击tag, 带tag参数跳转到分类页面 (默认分类)
+    const handleTagClick = () => {
 
     }
 
@@ -65,45 +76,47 @@ function BriefDesc(props) {
                 // height: '900px',
                 width: '100%',
                 borderRadius: '10px',
-                backgroundColor: alpha(theme.palette.background.paper,0.4),
+                backgroundColor: alpha(theme.palette.background.paper, 0.4),
                 boxShadow: '0 0 5px black',
                 padding: '10px',
             }}
         >
-            <Typography variant="h6" sx={{mb: '20px'}}>简介 & 相关</Typography>
+            <Typography variant="h6" sx={{mb: '20px', fontWeight:"bold", color:'white'}}>简介 & 下载</Typography>
 
+            <Typography color='#EB5E28 !important'
+                        sx={{ml: '20px'}}>
+                {getStarIcons(item.Scores, '40px', '40px')}({item.DownCnt})
+            </Typography>
 
-            <Typography color='#EB5E28 !important' sx={{ml: '20px'}}> {getStarIcons(4.5, '40px', '40px')}(143)</Typography>
-
-
-            <ByAuthor/>
+            <ByAuthor author={item.Author}/>
 
             <Divider variant="middle"/>
 
-            <Label name='文件格式' value='.blender'/>
-            <Label name='下载格式' value='zip'/>
-            <Label name='文件大小' value='12M'/>
-            <Label name='blender版本推荐' value='2.8+'/>
-            <Label name='分类' value='懒人建模大法'/>
-            <Label name='tags' lables={lables} goCategoryClick={goCategoryClick}/>
+            <div style={{textAlign: 'center'}}>
+                <GradientButton name='下载'
+                                width='180px'
+                                fontSize='22px'
+                                color='LINEAR-gradient(TO RIGHT, #00d2ff 0%, #3a7bd5  51%, #00d2ff  100%)'/>
+            </div>
+
+            <Label name='文件格式' value={ref.Format}/>
+            <Label name='下载格式' value={ref.Format}/>
+            <Label name='文件大小' value={ByteToM(ref.Size)}/>
+            <Label name='blender版本推荐' value={ref.Mark}/>
+            <Label name='tags' lables={item.Tags} goCategoryClick={handleTagClick}/>
 
             <Divider variant="middle"/>
 
             <Paper elevation={1} sx={{width: '100%', height: "auto", mt: '24px'}}>
                 <em style={{color: "#173A5E", marginRight: '15px'}}>描述</em>
 
-                <p style={{color: "#173A5E", marginLeft: '24px'}}>
-                    An invisible connection system; a mystical portal between Illustrator and After Effects.
-
-                    Transfer shapes as you need them without importing, converting or redrawing. The vector workflow you
-                    imagined between apps created by the same company.
-
-                    Work with shapes, not files.
+                <p style={{color: "#173A5E", marginLeft: '24px', overflow: 'hidden', height: '100px'}}>
+                    {item.Desc}
                 </p>
 
                 <div style={{display: 'flex', justifyContent: 'flex-end'}}>
                     <Button sx={{border: "none", backgroundColor: "transparent"}}
-                            component={Link} to={"/app/category"}>
+                            component={Link} to={`/app/category/${item.CatID}`}>
                         <img style={{width: 20, height: 20}} alt="community" title="more" src={more}/>
                     </Button>
                 </div>

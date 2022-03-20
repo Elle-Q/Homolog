@@ -19,7 +19,7 @@ const AvatarLabel = styled.div`
 `;
 
 function ByAuthor(props) {
-    const {author} = props
+    const {author, avatar} = props
     return (
         <AvatarContainer>
             <AvatarLabel>

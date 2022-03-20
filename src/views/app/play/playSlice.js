@@ -4,6 +4,7 @@ export const playSlice = createSlice({
     name: 'player',
     initialState: {
         itemId: null,
+        item: null,
     },
     reducers: {
         setItemId: (state, action) => {
@@ -12,10 +13,17 @@ export const playSlice = createSlice({
                 itemId:action.payload,
             }
         },
+
+        setItem: (state, action) => {
+            return {
+                ...state,
+                item:action.payload,
+            }
+        },
     }
 })
 
-export const {setItemId} = playSlice.actions
+export const {setItemId, setItem} = playSlice.actions
 
 export const selectPlayer = state => state.player
 

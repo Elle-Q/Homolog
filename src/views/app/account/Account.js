@@ -13,6 +13,7 @@ function Account(props) {
     const [defaultBGs, setDefaultBGs] = useState([]);
     const [bgUri, setBgUri] = useState(null);
 
+
     useEffect(() => {
         user && setBgUri(user.BgImag)
     }, [user])

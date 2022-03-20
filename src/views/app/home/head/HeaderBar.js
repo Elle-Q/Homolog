@@ -65,7 +65,7 @@ const SearchIconWrapper = styled('div')(({theme}) => ({
 function HeaderBar(props) {
     const theme = useTheme();
     const navigate = useNavigate();
-    const {isLogin, userId, user} = useSelector(selectAuth);
+    const {isLogin, user} = useSelector(selectAuth);
     const colorMode = React.useContext(ColorModeContext);
     const [showMenu, setShowMenu] = React.useState(false);
     const dispatch = useDispatch();
@@ -75,8 +75,7 @@ function HeaderBar(props) {
 
 
     useEffect(() => {
-        if (user) return
-        dispatch(getUser(userId))
+        dispatch(getUser())
     }, [])
 
 
@@ -183,7 +182,7 @@ function HeaderBar(props) {
                             <HomeIcon fontSize="small"/>
                         </Button>
                         <Button size="large" color="inherit"
-                                component={Link} to={"/app/category/animation"}>
+                                component={Link} to={"/app/category/133"}>
                             <img style={{width: 20, height: 20}} alt="category" title="分类" src={categoryS}/>
                         </Button>
                         <Button size="large" color="inherit">

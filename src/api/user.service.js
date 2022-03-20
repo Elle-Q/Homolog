@@ -40,7 +40,8 @@ class UserService {
 
 const userService = new UserService();
 
-export const getUser = (userId) => (dispatch) => {
+export const getUser = () => (dispatch) => {
+    const userId = JSON.parse(localStorage.getItem("userId"));
     userService.getUser(userId).then(
         resp => {
             dispatch(setUser(resp))

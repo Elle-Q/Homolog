@@ -77,7 +77,7 @@ function Modal(props) {
     const motoRef = React.createRef();
 
     useEffect(() => {
-        setUserDetail(user)
+        user && setUserDetail(user)
     }, [user])
 
     const handleGenderChange = (event) => {

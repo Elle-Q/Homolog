@@ -6,6 +6,7 @@ import helmetPrev  from '../../../../assets/3d/helmet.png'
 import shoePrev  from '../../../../assets/3d/shoe.png'
 import skullPrev  from '../../../../assets/3d/skull.png'
 import chairPrev  from '../../../../assets/3d/chair.png'
+import tokyoPrev  from '../../../../assets/3d/tokyo.png'
 
 function SwitchBar(props) {
 
@@ -16,21 +17,31 @@ function SwitchBar(props) {
             name:'DamagedHelmet',
             prev: helmetPrev,
             url:'/3d/gltf/helmet/DamagedHelmet.gltf',
+            type:'gltf'
         },
         {
             name:'shoe',
             prev: shoePrev,
             url:'/3d/gltf/shoe/MaterialsVariantsShoe.gltf',
+            type:'gltf'
         },
         {
             name:'SheenChair',
             prev: chairPrev,
             url:'/3d/glb/SheenChair.glb',
+            type:'glb'
         },
         {
             name:'skull',
             prev: skullPrev,
             url:'/3d/skull.glb',
+            type:'glb'
+        },
+        {
+            name:'tokyo',
+            prev: tokyoPrev,
+            url:'/3d/glb/LittlestTokyo.glb',
+            type:'glb'
         },
     ]
 
@@ -59,7 +70,7 @@ function SwitchBar(props) {
                         component="img"
                         image={item.prev}
                         alt={item.name}
-                        onClick={() => handleChangeResc(item.url)}
+                        onClick={() => handleChangeResc(item.url, item.type)}
                         sx={{
                             width: '90px',
                             height: '90px',

@@ -13,7 +13,7 @@ import {getStarIcons} from "../../../utils/ToolUtil";
 import styled from "styled-components";
 import PageTipFloatingBar from "../../../components/PageTipFloatingBar";
 import AirplayIcon from '@mui/icons-material/Airplay';
-import {GetItem, GetItemFiles} from "../../../api/item.service";
+import {GetItem, GetItemWithFiles} from "../../../api/item.service";
 import {BigLinkButton, CartButton} from "../../../components/ui/CustomButton";
 import {useDispatch} from "react-redux";
 import {setItemId} from "../play/playSlice";

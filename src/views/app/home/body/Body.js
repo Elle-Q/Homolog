@@ -6,6 +6,7 @@ import Subject from "./subject/Subject";
 import Box from "@mui/material/Box";
 import PageTipFloatingBar from "../../../../components/PageTipFloatingBar";
 import {ListCatsWithItems} from "../../../../api/cat.service";
+import {Footer} from "../footer/Footer";
 
 function Body(props) {
 
@@ -19,14 +20,14 @@ function Body(props) {
             })
         }
         fetchData().catch()
-    },[])
+    }, [])
 
     return (
         <Box sx={{
             width: '80%',
             ml: '10%',
             mr: '10%',
-            mt:'20px',
+            mt: '20px',
             overflow: "hidden",
 
         }}>
@@ -37,12 +38,12 @@ function Body(props) {
                   justify="center"
             >
                 <Grid item xs={12}>
-                    <Carousell />
+                    <Carousell/>
                 </Grid>
                 {
                     subjects && subjects.map((subject, index) => {
                         return (
-                            <Grid item xs={12} key={index} >
+                            <Grid item xs={12} key={index}>
                                 <Subject subject={subject}/>
                             </Grid>
                         )
@@ -50,7 +51,7 @@ function Body(props) {
                 }
             </Grid>
 
-            <PageTipFloatingBar />
+            <PageTipFloatingBar/>
         </Box>
     );
 }

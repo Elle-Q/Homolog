@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Box from "@mui/material/Box";
 import {Stack} from "@mui/material";
 import CardMedia from "@mui/material/CardMedia";
@@ -10,7 +10,13 @@ import tokyoPrev  from '../../../../assets/3d/tokyo.png'
 
 function SwitchBar(props) {
 
-    const {handleChangeResc} = props;
+    const {handleChangeResc, models} = props;
+
+    useEffect(() => {
+
+    })
+
+    if (!models) return <></>
 
     const rescList = [
         {
@@ -34,7 +40,7 @@ function SwitchBar(props) {
         {
             name:'skull',
             prev: skullPrev,
-            url:'/3d/skull.glb',
+            url:'/3d/glb/skull.glb',
             type:'glb'
         },
         {
@@ -63,23 +69,23 @@ function SwitchBar(props) {
                alignItems="center"
         >
             {
-                rescList.map((item, index) => (
+                models.map((item, index) => (
                     <CardMedia
                         key={index}
                         raised="true"
                         component="img"
                         image={item.prev}
                         alt={item.name}
-                        onClick={() => handleChangeResc(item.url, item.type)}
+                        onClick={() => handleChangeResc(item.QnLink, item.Format)}
                         sx={{
                             width: '90px',
                             height: '90px',
                             borderRadius:'50%',
                             boxShadow: '0 0 5px white',
-                            transition: 'clip-path .4s ease-in-out',
+                            transition: 'clip-path .2s ease-in-out',
                             '&:hover': {
-                                transform: 'scale(1.6)',
-                                transition: 'all .4s ease-in-out '
+                                transform: 'scale(1.4)',
+                                transition: 'all .2s ease-in-out '
                             }
                         }}
                     />

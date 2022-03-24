@@ -43,7 +43,6 @@ const Search = styled('div')(({theme}) => ({
     '&:hover': {
         backgroundColor: alpha(theme.palette.text.third, 0.5),
     },
-    // border: '1px solid #173A5E',
     marginLeft: 0,
     width: '1000px',
     [theme.breakpoints.up('sm')]: {
@@ -174,7 +173,7 @@ function HeaderBar(props) {
                                 <WbSunnyIcon fontSize="small"/>}
                         </Button>
 
-                        <Button size="large">
+                        <Button size="large" component={Link} to={"/app/community"}>
                             <img style={{width: 20, height: 20}} alt="community" title="社区" src={community}/>
                         </Button>
                         <Button size="large" color="inherit"
@@ -185,7 +184,8 @@ function HeaderBar(props) {
                                 component={Link} to={"/app/category/133"}>
                             <img style={{width: 20, height: 20}} alt="category" title="分类" src={categoryS}/>
                         </Button>
-                        <Button size="large" color="inherit">
+                        <Button size="large" color="inherit"
+                                component={Link} to={"/app/partner"}>
                             <Badge badgeContent={4} color="error">
                                 <ChatBubbleOutlineIcon fontSize="small"/>
                             </Badge>

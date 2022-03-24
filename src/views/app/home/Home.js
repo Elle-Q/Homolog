@@ -9,16 +9,21 @@ import Item from "../item/Item";
 import CssBaseline from "@mui/material/CssBaseline";
 import {CSSTransition, TransitionGroup} from "react-transition-group";
 import "../../../styles.css";
+import {Footer} from "./footer/Footer";
+import Partner from "../partner/Partner";
+import Community from "../community/Community";
 
 function Home(props) {
 
     const routes = [
-        {path: '/home', name: 'home', component: <Body/>},
-        {path: '/', name: 'home_', component: <Body/>},
+        {path: '/home', name: 'home', component: <React.Fragment> <Body/> <Footer/></React.Fragment>},
+        {path: '/', name: 'home_', component: <React.Fragment> <Body/> <Footer/></React.Fragment>},
         {path: '/play/:id', name: 'play', component: <Play/>},
         {path: '/category/:id', name: 'category', component: <Category/>},
         {path: '/item/:id', name: 'item', component: <Item/>},
         {path: '/account', name: 'account', component: <Account/>},
+        {path: '/partner', name: 'account', component: <Partner/>},
+        {path: '/community', name: 'account', component: <Community/>},
     ]
 
 

@@ -13,7 +13,6 @@ import {CancelButton, OKButton} from "../../../../components/ui/CustomButton";
 import ChangeCircleIcon from '@mui/icons-material/ChangeCircle';
 import IconButton from "@mui/material/IconButton";
 import {useDispatch, useSelector} from "react-redux";
-import {selectAuth} from "../../../../api/authSlice";
 import {updateUser} from "../../../../api/user.service";
 import {getColorFromUserStatus} from "../../../../utils/ToolUtil";
 import {StyledInputElement} from "../../../../components/ui/CustomInput";

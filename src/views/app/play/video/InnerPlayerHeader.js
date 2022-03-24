@@ -23,7 +23,7 @@ function InnerPlayerHeader(props) {
                             fontWeight:'2px',
                             fontFamily: '-apple-system'
                         }}>
-                求佛得来的水印*_*
+                stop taking*_*
             </Typography>
         </Box>
     );

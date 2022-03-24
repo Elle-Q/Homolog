@@ -7,6 +7,7 @@ import uploadReducer from "../views/admin/upload/uploadSlice";
 import confirmReducer from "../components/alert/confirm/confirmSlice";
 import refreshReducer from "./refreshSlice";
 import playerReducer from "../views/app/play/playSlice";
+import loadingReducer from "../components/loading/loading-slice";
 
 export default configureStore({
     reducer: {
@@ -17,7 +18,8 @@ export default configureStore({
         uploadItemResc:uploadReducer,
         confirm: confirmReducer,
         refresh:refreshReducer,
-        player:playerReducer
+        player:playerReducer,
+        loadingModel:loadingReducer
     },
     middleware: getDefaultMiddleware({
         serializableCheck: false

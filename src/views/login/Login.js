@@ -18,9 +18,7 @@ import {Link} from "@mui/material";
 import {login, signup} from "../../api/auth.service";
 import { selectAuth} from "../../api/authSlice";
 import {useDispatch, useSelector} from "react-redux";
-import blurBg from "../../assets/bg/blur3.jpg";
 import BackGround from "./BackGround";
-import Text from "../app/play/3d/Text";
 
 function Login(props) {
     const {height, width} = useWindowDimensions();

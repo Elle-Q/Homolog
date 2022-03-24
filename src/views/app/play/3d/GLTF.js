@@ -1,17 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import {useLoader} from '@react-three/fiber'
-import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader'
 import gsap from "gsap";
-import {DRACOLoader} from "three/examples/jsm/loaders/DRACOLoader";
 import {useGLTF} from "@react-three/drei";
 
 const Model = ({rsc}) => {
     const gltf = useGLTF(rsc)
-    // const gltf = useLoader(GLTFLoader, rsc, (loader) => {
-    //     const dracoLoader = new DRACOLoader();
-    //     dracoLoader.setDecoderPath(rsc);
-    //     loader.setDRACOLoader(dracoLoader);
-    // });
     let tl = gsap.timeline()
 
     //models

@@ -2,8 +2,6 @@ import React, {useEffect, useRef, useState} from 'react';
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import TitleHeader from "./TitleHeader";
-import VideoPlayer from "../../../components/player/VideoPlayer";
-import Periods from "./video/Periods";
 import PageTipFloatingBar from "../../../components/PageTipFloatingBar";
 import BriefDesc from "./video/BriefDesc";
 import Comments from "./comment/Comments";
@@ -35,14 +33,13 @@ function Play(props) {
 
     if (!item) return <></>
 
+    //todo: 根据资源类型展示资源(video, 3d, pdf, materials, textures)
     function renderRsc() {
        switch (rescType) {
            case 'video' :
                return <Video periods={item && item.Main}/>
-           // case '3d-glb':
-           //     return  <Glb />
            case '3d':
-               return <ThreeD />
+               return <ThreeD models={item && item.Main}/>
        }
     }
 
@@ -67,12 +64,6 @@ function Play(props) {
 
                 <Grid item xs={11} sx={{position: "relative", mb:'80px', display:"flex"}}>
                     {renderRsc()}
-                    {/*<Video periods={item && item.Main}/>*/}
-                    {/*<TestSphere />*/}
-                    {/*<Gtfl />*/}
-                    {/*<GLTF />*/}
-                    {/*<Glb />*/}
-                    {/*<Text />*/}
                 </Grid>
 
                 <Grid item xs={7}>

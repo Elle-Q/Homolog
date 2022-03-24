@@ -11,7 +11,9 @@ import {CancelButton, OKButton} from "./ui/CustomButton";
 const ModalDialog = styled(Dialog)(({theme}) => ({
     zIndex:999,
     '& .MuiPaper-root':{
-        backgroundColor: alpha('#0a0908', 0.7),
+        backgroundColor: alpha('#0a0908', 1),
+        boxShadow: '0 0 3px white',
+        borderRadius:'40px',
     },
     '& .MuiDialogContent-root': {
         padding: theme.spacing(2),

@@ -29,5 +29,6 @@ export const LoginAction = {
 export const RscType = {
     video: '视频',
     doc: '文档',
+    three: '3d',
     plugin: '软件&插件',
 }

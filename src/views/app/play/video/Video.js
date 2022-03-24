@@ -1,6 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import VideoPlayer from "../../../../components/player/VideoPlayer";
 import Periods from "./Periods";
+import {useDispatch, useSelector} from "react-redux";
+import {selectLoadingModal} from "../../../../components/loading/loading-slice";
+import Loading from "../../../../components/loading/Loading";
 
 function Video(props) {
     const [videoSrc, setVideoSrc] = useState(null);
@@ -25,7 +28,7 @@ function Video(props) {
                 src: videoSrc,
             }}/>
         }
-        <Periods periods={periods} changeVideoSrc={(src) => changeVideoSrc(src)}/>
+            <Periods periods={periods} changeVideoSrc={(src) => changeVideoSrc(src)}/>
         </React.Fragment>
     );
 }

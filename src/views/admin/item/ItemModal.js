@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {CatStatus} from "../../../utils/constant/constant";
+import {CatStatus, RscType} from "../../../utils/constant/constant";
 import {ImagInputWithHeader, InputWithHeader, SelectInputWithHeader} from "../../../components/ui/CustomInput";
 import Modal from "../../../components/Modal";
 import {selectItemModal, close} from "./item-slice";
@@ -21,7 +21,7 @@ function ItemModal(props) {
     const [preFile, setPreFile] = useState(null);
     const [preUri, setPreUri] = useState(data.Preview);
     const [catNames, setCatNames] = useState(null);
-    const [tags, setTags] = useState([]); //todo: 设计键
+    const [tags, setTags] = useState(detail.Tags); //todo: 设计键
     const [catSelect, setCatSelect] = useState(null); //todo: 设计键
     const [showTagInput, setShowTagInput] = useState(false);
     const tagRef = useRef();
@@ -32,9 +32,11 @@ function ItemModal(props) {
     }, [preFile])
 
     useEffect(() => {
+        debugger
         setDetail(data)
         setPreUri(data.Preview)
         setCatSelect(data && data.Cat && data.Cat.ID)
+        setTags(data.Tags)
     }, [data])
 
     React.useEffect(() => {
@@ -162,6 +164,16 @@ function ItemModal(props) {
                         ))
                     }
                 </SelectInputWithHeader>
+
+                <SelectInputWithHeader
+                    name="Status"
+                    header="资源主文件类型:"
+                    value={detail.Type || "video"}
+                    handleChange={handleInputChange}
+                    disabled={readOnly}
+                    type="enum"
+                    items={RscType}/>
+
             </div>
             <div style={{display: "flex", marginTop: '30px'}}>
                 <span style={{marginRight: '15px', verticalAlign: "bottom"}}>标签:</span>

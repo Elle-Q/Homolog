@@ -56,14 +56,13 @@ const Label = props => {
 
 function BriefDesc(props) {
     const theme = useTheme();
-    const lables = ["懒人", "blender", "建模", "路追", "教程"]
     const {item} = useSelector(selectPlayer);
     const [ref, setRef] = useState({})
 
     useEffect(() => {
         if (item.Refs.length < 1) return
         setRef(item.Refs[0])
-    }, [])
+    }, [item])
 
     //点击tag, 带tag参数跳转到分类页面 (默认分类)
     const handleTagClick = () => {

@@ -13,12 +13,13 @@ import ColoredLabel from "../../../../components/ui/ColoredLabel";
 import ModeCommentOutlinedIcon from '@mui/icons-material/ModeCommentOutlined';
 import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded';
 import {makeStyles} from "@mui/styles";
+import {Link} from "react-router-dom";
 
 const IconLabel = ({icon, label}) => {
     return (
         <React.Fragment>
             {icon}
-            <span style={{fontSize: '12px', fontStyle: 'italic', color: '#CCC5B9', marginRight:'10px' }}>{label}</span>
+            <span style={{fontSize: '12px', fontStyle: 'italic', color: '#CCC5B9', marginRight: '10px'}}>{label}</span>
         </React.Fragment>
     )
 }
@@ -26,7 +27,7 @@ const useStyles = makeStyles({
     icon: {
         width: '20px',
         height: '16px',
-        color:'white',
+        color: 'white',
         '&:hover': {
             color: '#3399ff',
         }
@@ -70,35 +71,39 @@ function IssueCard(props) {
                         </Typography>
                         <Divider/>
                         <CardContent sx={{flex: '1 0 auto'}}>
-                            <Typography component="div" variant="h5" sx={{color: 'white', fontWeight: "bold"}}>
+                            <Typography component="div" sx={{color: 'white', fontSize: '18px',fontWeight: "bold"}}>
                                 {item.Title}
                             </Typography>
-                            <Typography variant="subtitle1" color="text.fifth" component="div">
+                            <Typography  component="div" sx={{color: 'text.fifth', fontSize: '16px'}}>
                                 {item.Content}
                             </Typography>
                         </CardContent>
                         <Box sx={{display: 'flex', pb: 1}}>
-                            <IconLabel icon={<FavoriteBorderRoundedIcon className={classes.icon}/>} label={item.Collects}/>
+                            <IconLabel icon={<FavoriteBorderRoundedIcon className={classes.icon}/>}
+                                       label={item.Collects}/>
                             <IconLabel icon={<ThumbUpOffAltIcon className={classes.icon}/>} label={item.Likes}/>
                             <IconLabel icon={<ThumbDownOffAltIcon className={classes.icon}/>} label={item.Hates}/>
-                            <IconLabel icon={<ModeCommentOutlinedIcon className={classes.icon}/>} label={item.Comments}/>
-                            <span style={{fontSize: '12px', color:'#00a896'}}>#{item.ID}</span>
+                            <IconLabel icon={<ModeCommentOutlinedIcon className={classes.icon}/>}
+                                       label={item.Comments}/>
+                            <span style={{fontSize: '12px', color: '#00a896'}}>#{item.ID}</span>
                         </Box>
                     </Box>
                     {/*//todo: 怎么从富文本中提取图片*/}
-                    <CardMedia
-                        component="img"
-                        sx={{
-                            width: 151,
-                            borderRadius: '15px',
-                            filter: 'grayscale(100%)',
-                            mixBlendMode: 'exclusion',
-                            '&:hover': {
-                                filter: 'grayscale(0%)',
-                            }
-                        }}
-                        image="/animation4.jpg"
-                    />
+                    <Link to='/app/issue'>
+                        <CardMedia
+                            component="img"
+                            sx={{
+                                width: 151,
+                                borderRadius: '15px',
+                                filter: 'grayscale(100%)',
+                                mixBlendMode: 'exclusion',
+                                '&:hover': {
+                                    filter: 'grayscale(0%)',
+                                }
+                            }}
+                            image="/animation4.jpg"
+                        />
+                    </Link>
                 </Card>
             </Grid>
         </Grid>

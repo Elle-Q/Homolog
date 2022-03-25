@@ -10,6 +10,7 @@ import {alpha} from "@mui/system";
 import styled from "styled-components";
 import ColoredLabel from "../../../components/ui/ColoredLabel";
 import PostCard from "./post/PostCard";
+import UserInfoSide from "./user/UserInfoSide";
 
 const StyledA = styled.a`
   line-height: 25px;
@@ -122,31 +123,8 @@ function Community(props) {
                           flexWrap: "wrap"
                       }}
                 >
-                    <Grid item xs={3} sx={{position: "relative", mb: '80px', display: "flex"}}>
+                    <Grid item xs={3} sx={{ pl:'60px' }}>
                         <UserInfoSide />
-                        <div style={{display: "flex"}}>
-                            <Avatar alt="elle"
-                                    src="/avatar/avatar1.jpg"
-                                    sx={{
-                                        width: 296,
-                                        height: 296,
-                                        position: "absolute",
-                                        border: '2px solid #252422',
-                                        boxShadow: '0 0 5px #403D39',
-                                        cursor: "pointer",
-                                        right: '10%',
-                                        top: -60,
-                                    }}
-                            />
-                            <ColoredLabel color='#3399FF' content={'🌈'} shape={'circle'}
-                                          style={{
-                                              fontSize: '12px',
-                                              left: '80%',
-                                              top: 150,
-                                              position: "absolute",
-                                              padding: '5px',
-                                          }}/>
-                        </div>
                     </Grid>
 
                     <Grid item xs={9} sx={{mb: '80px', display: "flex"}}>

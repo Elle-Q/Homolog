@@ -39,9 +39,9 @@ import useScroll from "../../../../hook/useScroll";
 const Search = styled('div')(({theme}) => ({
     position: 'relative',
     borderRadius: '50px',
-    backgroundColor: alpha(theme.palette.text.third, 0.35),
+    backgroundColor: '#edf2f4',
     '&:hover': {
-        backgroundColor: alpha(theme.palette.text.third, 0.5),
+        backgroundColor: alpha('#edf2f4', 0.9),
     },
     marginLeft: 0,
     width: '1000px',
@@ -97,6 +97,9 @@ function HeaderBar(props) {
             top: 0,
             transform: `${scroll.direction === 'down' ? 'translateY(-100%)' : ''}`,
             transition: 'transform 0.6s ease-in-out',
+            '& > *' :{
+                border: "none",
+            }
         }}>
             <AppBar position="static" sx={{backgroundColor: alpha('#0A1929', 0.5)}}>
                 <Toolbar sx={{
@@ -107,11 +110,9 @@ function HeaderBar(props) {
                     <AppLogo title="HOMOLOG"/>
                     <IconButton
                         size="small"
-                        edge="start"
-                        color="inherit"
-                        aria-label="open drawer"
                         sx={{ml: 20}}
                         onMouseEnter={() => setShowMenu(!showMenu)}
+                        onMouseLeave={() => setShowMenu(!showMenu)}
                     >
                         <img style={{width: 25, height: 25}} alt="community" title="分类" src={categoryB}/>
                     </IconButton>
@@ -120,23 +121,12 @@ function HeaderBar(props) {
                             <MultilevelMenu onMouseLeave={() => setShowMenu(!showMenu)}/>
                         </div>)
                     }
-
                     <Search>
                         <SearchIconWrapper>
-                            <SearchIcon/>
+                            <SearchIcon sx={{color:'#3399FF'}}/>
                         </SearchIconWrapper>
 
                         <Autocomplete
-                            sx={{
-                                paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-                                border: "none",
-                                borderRadius: '50px',
-                                boxShadow: '0 0 1px black',
-                                '&:hover': {
-                                    // backgroundColor: 'white',
-                                    border: "none",
-                                }
-                            }}
                             size="small"
                             disableClearable
                             options={suggestions}
@@ -145,8 +135,10 @@ function HeaderBar(props) {
                             )}
                             PaperComponent={(props) => (
                                 <Paper {...props} sx={{
-                                    backgroundColor: alpha(theme.palette.primary.main, 0.65),
-                                    color: theme.palette.secondary.light
+                                    backgroundImage: 'linear-gradient( 109.6deg,  #003f88 11.2%, #004e98 91.2% )',
+                                    color:'white',
+                                    borderRadius:'15px',
+                                    fontWeight:"bold"
                                 }}/>
                             )}
                             freeSolo
@@ -157,9 +149,10 @@ function HeaderBar(props) {
                                     InputProps={{
                                         ...params.InputProps,
                                         type: 'search',
-                                    }}
-                                    sx={{
-                                        border: "none",
+                                        style: {
+                                            paddingLeft:'50px',
+                                            fontWeight:"bold"
+                                        }
                                     }}
                                 />
                             )}

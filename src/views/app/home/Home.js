@@ -12,6 +12,7 @@ import "../../../styles.css";
 import {Footer} from "./footer/Footer";
 import Partner from "../partner/Partner";
 import Community from "../community/Community";
+import Issue from "../community/edit/Issue";
 
 function Home(props) {
 
@@ -22,8 +23,9 @@ function Home(props) {
         {path: '/category/:id', name: 'category', component: <Category/>},
         {path: '/item/:id', name: 'item', component: <Item/>},
         {path: '/account', name: 'account', component: <Account/>},
-        {path: '/partner', name: 'account', component: <Partner/>},
-        {path: '/community', name: 'account', component: <Community/>},
+        {path: '/partner', name: 'partner', component: <Partner/>},
+        {path: '/community', name: 'community', component: <Community/>},
+        {path: '/issue', name: 'issue', component: <Issue/>},
     ]
 
 

@@ -107,7 +107,7 @@ function HeaderBar(props) {
                     display: 'inline-flex',
                     minHeight: '64px'
                 }}>
-                    <AppLogo title="HOMOLOG"/>
+                    <AppLogo title="LEET-ROLL"/>
                     <IconButton
                         size="small"
                         sx={{ml: 20}}

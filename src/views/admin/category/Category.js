@@ -40,7 +40,7 @@ function Category(props) {
             }));
 
     const handleDel = async (id) => {
-        api.post('/homo-admin/cat/delete', {
+        api.post('/leetroll-admin/cat/delete', {
             id: id
         }).then((resp) => {
             if (resp) {

@@ -50,7 +50,7 @@ export default function useInterceptor(props) {
                     originalConfig._retry = true;
 
                     try {
-                        api.post('/homo-app/user/refresh', {
+                        api.post('/leetroll-app/user/refresh', {
                             RefreshToken: TokenService.getLocalRefreshToken()
                         }).then(resp => {
                             // dispatch(refreshToken(AccessToken));

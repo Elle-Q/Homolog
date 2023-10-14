@@ -5,7 +5,7 @@ import TokenService from "./token.service";
 class QiniuService {
     //从后端获取UpToken
     getUpToken() {
-        return api.get("/homo-app/qiniu/token")
+        return api.get("/leetroll-app/qiniu/token")
             .then(resp => {
 
                     return resp

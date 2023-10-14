@@ -4,7 +4,7 @@ import {setAvatar, setBG, setUser} from "./authSlice";
 
 class UserService {
     changeAvatar(userId, avatarLink) {
-        return api.post('/homo-app/user/avatar/update', {
+        return api.post('/leetroll-app/user/avatar/update', {
             UserId: userId,
             Avatar: avatarLink
         })
@@ -14,7 +14,7 @@ class UserService {
     }
 
     changeBG(userId, bgLink) {
-        return api.post('/homo-app/user/bg/update', {
+        return api.post('/leetroll-app/user/bg/update', {
             UserId: userId,
             BgImag: bgLink
         })
@@ -24,14 +24,14 @@ class UserService {
     }
 
     getUser(userId) {
-       return api.get(`/homo-app/user/${userId}`)
+       return api.get(`/leetroll-app/user/${userId}`)
             .then((resp) => {
                 return resp
             });
     }
 
     update(user) {
-        return api.post(`/homo-app/user/update`, user)
+        return api.post(`/leetroll-app/user/update`, user)
             .then((resp) => {
                 return resp
             });

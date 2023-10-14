@@ -49,7 +49,7 @@ function Item(props) {
 
 
     const handleDel = async (id) => {
-        api.post('/homo-admin/item/delete', {
+        api.post('/leetroll-admin/item/delete', {
             id: id
         }).then((resp) => {
             if (resp) {

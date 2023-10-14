@@ -143,7 +143,7 @@ function BackGround(props) {
             }}>
                 <div className='content'>
                     <h1 style={{fontSize: '5rem', color: '#3399ff', ...textStyle}}>
-                        HOMO-LOG
+                        LEET-ROLL
                     </h1>
                     <h2 style={{
                         ...textStyle,

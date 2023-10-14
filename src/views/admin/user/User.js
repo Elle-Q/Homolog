@@ -22,7 +22,7 @@ function User(props) {
     };
 
     React.useEffect(async () =>  {
-       api.get('/homo-admin/user/list').then((data) => {
+       api.get('/leetroll-admin/user/list').then((data) => {
             setUsers(data)
         })
     }, [])

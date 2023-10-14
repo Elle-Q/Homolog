@@ -26,7 +26,7 @@ function HeaderBar(props) {
                     minHeight: '64px',
                     backgroundColor:'secondary.dark'
                 }}>
-                    <AppLogo title="HOMOLOG 管理系统" color='#3399ff'/>
+                    <AppLogo title="leetroll 管理系统" color='#3399ff'/>
                     <Box sx={{flexGrow: 10}}/>
                     <span style={{color: '#999', fontSize: '15px', marginRight: '5px'}}>Admin--elle</span>
                     <CustomBadge

@@ -5,7 +5,7 @@ import api from "./api";
 class AuthService {
     login(username, password) {
         return api
-            .post("/homo-app/user/login", {
+            .post("/leetroll-app/user/login", {
                 UserName:username,
                 Password: password
             })
@@ -32,7 +32,7 @@ class AuthService {
     }
 
     signup(username, phone, password, code) {
-        return api.post('/homo-app/user/signup', {
+        return api.post('/leetroll-app/user/signup', {
             username,
             phone,
             password,

@@ -16,7 +16,6 @@ import PersonIcon from "@mui/icons-material/Person";
 import ShieldIcon from "@mui/icons-material/Shield";
 import {Link} from "@mui/material";
 import {login, signup} from "../../api/auth.service";
-import { selectAuth} from "../../api/authSlice";
 import {useDispatch, useSelector} from "react-redux";
 import BackGround from "./BackGround";
 
@@ -26,7 +25,6 @@ function Login(props) {
     const [type, setType] = useState('name');
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const {isLogin} = useSelector(selectAuth);
     const userNameRef = React.createRef();
     const phoneRef = React.createRef();
     const passRef = React.createRef();
@@ -44,7 +42,6 @@ function Login(props) {
     }
 
     const handleLogin = async () => {
-
         if (action === 'signin') { //登录
             dispatch(
                 login(
@@ -131,13 +128,13 @@ function Login(props) {
                                 </React.Fragment>
                                 :
                                 <React.Fragment>
-                                    <InputWithIcon placeholder="输入昵称..." icon={<PersonIcon fontSize="medium"/>}/>
-                                    <InputWithIcon placeholder="输入手机号..." icon={<PhoneIphoneIcon fontSize="medium"/>}/>
-                                    <InputWithIcon placeholder="输入短信验证码..."
+                                    <InputWithIcon ref={userNameRef} placeholder="输入昵称..." icon={<PersonIcon fontSize="medium"/>}/>
+                                    <InputWithIcon ref={phoneRef} placeholder="输入手机号..." icon={<PhoneIphoneIcon fontSize="medium"/>}/>
+                                    <InputWithIcon ref={codeRef} placeholder="输入短信验证码..."
                                                    type="verify"
                                                    onMSCodeClick={onMSCodeClick}
                                                    icon={<ShieldIcon fontSize="medium"/>}/>
-                                    <InputWithIcon placeholder="输入密码..." type="password"
+                                    <InputWithIcon ref={passRef} placeholder="输入密码..." type="password"
                                                    icon={<VpnKeyIcon fontSize="medium"/>}/>
                                 </React.Fragment>
                         }

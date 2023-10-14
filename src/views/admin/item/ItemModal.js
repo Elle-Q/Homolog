@@ -32,7 +32,6 @@ function ItemModal(props) {
     }, [preFile])
 
     useEffect(() => {
-        debugger
         setDetail(data)
         setPreUri(data.Preview)
         setCatSelect(data && data.Cat && data.Cat.ID)
@@ -70,7 +69,8 @@ function ItemModal(props) {
     const handleSave = async () => {
 
         let param = Object.assign({}, detail, {
-            Tags: tags.toString(),
+            Tags: "",
+            // Tags: tags.toString(),
             CatId: catSelect
         });
         if (!detail.Status) param.Status = "show"

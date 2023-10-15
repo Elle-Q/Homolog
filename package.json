@@ -76,5 +76,8 @@
     "react-redux": "^7.2.6",
     "react-window": "^1.8.6",
     "styled-components": "^5.3.3"
+  },
+  "resolutions": {
+    "react-spring": "9.4.4"
   }
 }

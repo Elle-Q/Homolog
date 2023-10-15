@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
+// import 'react-quill/dist/quill.snow.css';
 import Box from "@mui/material/Box";
 import {makeStyles} from "@mui/styles";
 import {alpha} from "@mui/system";

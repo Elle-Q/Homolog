@@ -38,7 +38,7 @@ import darkScrollbar from "@mui/material/darkScrollbar";
      },
 
      typography: {
-         fontFamily:  "open sans,helvetica neue,Helvetica,Arial,sans-serif" ,
+         fontFamily: '-apple-system',
          fontSize: 14,
          fontWeightLight: 300,
          fontWeightRegular: 400,

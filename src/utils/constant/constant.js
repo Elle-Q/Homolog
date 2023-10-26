@@ -31,4 +31,12 @@ export const RscType = {
     doc: '文档',
     three: '3d',
     plugin: '软件&插件',
+    image: '图片',
+}
+
+export const ItemRescType = {
+    Main: '主图',
+    Preview: '预览图',
+    Attachment: '附件文件',
+    Chapter: '章节',
 }

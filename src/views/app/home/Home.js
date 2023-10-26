@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {HeaderBar} from "./head/HeaderBar";
+import {NavBar} from "./nav/NavBar";
 import {Route, Routes, useLocation} from "react-router-dom";
 import Play from "../play/Play";
 import Body from "./body/Body";
@@ -53,7 +53,7 @@ function Home(props) {
     return (
         <React.Fragment>
             <CssBaseline/>
-            <HeaderBar/>
+            <NavBar/>
             <Routes>
                 {routes.map(({path, component}, index) => (
                     <Route key={index} path={path} element={component}/>

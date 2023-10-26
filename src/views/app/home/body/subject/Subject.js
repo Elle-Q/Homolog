@@ -2,7 +2,7 @@ import React from 'react';
 import {useTheme} from "@mui/system";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
-import CategoryCard from "./CategoryCard";
+import ItemCard from "./ItemCard";
 import AnimationText from "../../../../../components/AnimationText";
 import GradientButton from "../../../../../components/ui/GradientButton";
 import {Link} from "react-router-dom";
@@ -35,10 +35,11 @@ function Subject(props) {
             <Stack direction='row'
                    spacing={2}
                    sx={{mt: '20px'}}
-                   justifyContent="center">
+                   justifyContent="center"
+            >
                 {
                     subject.Items.map((item, index) => {
-                        return <CategoryCard key={index} item={item}/>
+                        return <ItemCard key={index} item={item}/>
                     })
                 }
             </Stack>

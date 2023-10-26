@@ -1,12 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import Grid from "@mui/material/Grid";
-import Carousell from "./carousel/Carousell";
-import Categories from "../../../../json/category.json";
 import Subject from "./subject/Subject";
 import Box from "@mui/material/Box";
-import PageTipFloatingBar from "../../../../components/PageTipFloatingBar";
 import {ListCatsWithItems} from "../../../../api/cat.service";
 import {Footer} from "../footer/Footer";
+import Header from "../header/Header";
 
 function Body(props) {
 
@@ -29,16 +27,14 @@ function Body(props) {
             mr: '10%',
             mt: '20px',
             overflow: "hidden",
-
         }}>
             <Grid container
                   spacing={5}
                   direction="column"
                   alignItems="center"
-                  justify="center"
             >
-                <Grid item xs={12}>
-                    <Carousell/>
+                <Grid item xs={12} justifyItems={"center"} justifyContent={"center"}>
+                    <Header/>
                 </Grid>
                 {
                     subjects && subjects.map((subject, index) => {
@@ -51,7 +47,7 @@ function Body(props) {
                 }
             </Grid>
 
-            <PageTipFloatingBar/>
+            {/*<PageTipFloatingBar/>*/}
         </Box>
     );
 }

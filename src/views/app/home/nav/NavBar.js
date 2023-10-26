@@ -2,7 +2,6 @@ import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
 import Badge from '@mui/material/Badge';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import NotificationsIcon from '@mui/icons-material/Notifications';
@@ -24,8 +23,6 @@ import Paper from "@mui/material/Paper";
 import {Link, useNavigate} from "react-router-dom";
 import community from '../../../../assets/community1.svg'
 import categoryS from '../../../../assets/category_S.svg'
-import categoryB from '../../../../assets/category_B.svg'
-import MultilevelMenu from "../../../../components/MultilevelMenu";
 import AppLogo from "./AppLogo";
 import {CustomBadge} from "../../../../components/ui/CustomBadge";
 import {useDispatch, useSelector} from "react-redux";
@@ -43,7 +40,7 @@ const Search = styled('div')(({theme}) => ({
     '&:hover': {
         backgroundColor: alpha('#edf2f4', 0.9),
     },
-    marginLeft: 0,
+    marginLeft: '10%',
     width: '1000px',
     [theme.breakpoints.up('sm')]: {
         marginRight: theme.spacing(5),
@@ -58,10 +55,9 @@ const SearchIconWrapper = styled('div')(({theme}) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-
 }));
 
-function HeaderBar(props) {
+function NavBar(props) {
     const theme = useTheme();
     const navigate = useNavigate();
     const {isLogin, user} = useSelector(selectAuth);
@@ -97,7 +93,7 @@ function HeaderBar(props) {
             top: 0,
             transform: `${scroll.direction === 'down' ? 'translateY(-100%)' : ''}`,
             transition: 'transform 0.6s ease-in-out',
-            '& > *' :{
+            '& > *': {
                 border: "none",
             }
         }}>
@@ -108,22 +104,9 @@ function HeaderBar(props) {
                     minHeight: '64px'
                 }}>
                     <AppLogo title="LEET-ROLL"/>
-                    <IconButton
-                        size="small"
-                        sx={{ml: 20}}
-                        onMouseEnter={() => setShowMenu(!showMenu)}
-                        onMouseLeave={() => setShowMenu(!showMenu)}
-                    >
-                        <img style={{width: 25, height: 25}} alt="community" title="分类" src={categoryB}/>
-                    </IconButton>
-                    {
-                        showMenu && (<div style={{position: 'relative'}}>
-                            <MultilevelMenu onMouseLeave={() => setShowMenu(!showMenu)}/>
-                        </div>)
-                    }
                     <Search>
                         <SearchIconWrapper>
-                            <SearchIcon sx={{color:'#3399FF'}}/>
+                            <SearchIcon sx={{color: '#3399FF'}}/>
                         </SearchIconWrapper>
 
                         <Autocomplete
@@ -136,9 +119,9 @@ function HeaderBar(props) {
                             PaperComponent={(props) => (
                                 <Paper {...props} sx={{
                                     backgroundImage: 'linear-gradient( 109.6deg,  #003f88 11.2%, #004e98 91.2% )',
-                                    color:'white',
-                                    borderRadius:'15px',
-                                    fontWeight:"bold"
+                                    color: 'white',
+                                    borderRadius: '15px',
+                                    fontWeight: "bold"
                                 }}/>
                             )}
                             freeSolo
@@ -150,8 +133,8 @@ function HeaderBar(props) {
                                         ...params.InputProps,
                                         type: 'search',
                                         style: {
-                                            paddingLeft:'50px',
-                                            fontWeight:"bold"
+                                            paddingLeft: '50px',
+                                            fontWeight: "bold",
                                         }
                                     }}
                                 />
@@ -223,4 +206,4 @@ function HeaderBar(props) {
     );
 }
 
-export {HeaderBar};
+export {NavBar};

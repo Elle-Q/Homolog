@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 import {getStarIcons} from "../../../../../utils/ToolUtil";
 import PriceTag from "../../../../../components/PriceTag";
 
-function CategoryCard(props) {
+function ItemCard(props) {
     const theme = useTheme();
     const {width, item} = props;
     const [collected, setCollected] = useState(false);
@@ -77,4 +77,4 @@ function CategoryCard(props) {
     );
 }
 
-export default CategoryCard;
+export default ItemCard;

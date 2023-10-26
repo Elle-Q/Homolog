@@ -4,17 +4,16 @@ import linkErrIcon from "../../../assets/admin/link_err.svg";
 import Box from "@mui/material/Box";
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 import RemoveRedEyeRoundedIcon from '@mui/icons-material/RemoveRedEyeRounded';
-import {setSelectedFile, setNewRescFiles, selectUploadItemResc} from "./uploadSlice";
+import {selectUploadItemResc} from "./uploadSlice";
 import {useDispatch, useSelector} from "react-redux";
 
 function UploadedFile(props) {
     const {file, error, handleDel, handleView} = props;
-    const {selectedFile} = useSelector(selectUploadItemResc);
 
     const dispatch = useDispatch();
 
     const handleFileLabelClick = (e) => {
-        dispatch(setSelectedFile({file:file}))
+        // dispatch(setSelectedFile({file:file}))
     }
 
     return (

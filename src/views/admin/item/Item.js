@@ -90,7 +90,6 @@ function Item(props) {
                             <StyledTableCell>id</StyledTableCell>
                             <StyledTableCell align="center">名称</StyledTableCell>
                             <StyledTableCell align="center">类别</StyledTableCell>
-                            <StyledTableCell align="center">预览图</StyledTableCell>
                             <StyledTableCell align="center">作者</StyledTableCell>
                             <StyledTableCell align="center">得分</StyledTableCell>
                             <StyledTableCell align="center">下载量</StyledTableCell>
@@ -110,7 +109,6 @@ function Item(props) {
                                     </StyledTableCell>
                                     <StyledTableCell align="center">{row.Name}</StyledTableCell>
                                     <StyledTableCell align="center">{row.Cat.Title}</StyledTableCell>
-                                    <StyledTableCell align="center">{row.Preview}</StyledTableCell>
                                     <StyledTableCell align="center">{row.Author}</StyledTableCell>
                                     <StyledTableCell align="center">{row.Scores}</StyledTableCell>
                                     <StyledTableCell align="center">{row.DownCnt}</StyledTableCell>

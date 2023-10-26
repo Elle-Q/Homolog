@@ -7,7 +7,6 @@ class QiniuService {
     getUpToken() {
         return api.get("/leetroll-app/qiniu/token")
             .then(resp => {
-
                     return resp
                 },
                 err => {

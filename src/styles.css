@@ -28,6 +28,15 @@
     transition: opacity 600ms ease-in, transform 100ms;
 }
 
+input {
+    -webkit-text-fill-color: #ffffff;
+}
+
+/*设置input输入框输入内容后背景颜色变成丑陋的白色*/
+input:-webkit-autofill {
+    transition: background-color 5000s ease-in-out 0s;
+}
+
 /*#root {*/
 /* background-image: linear-gradient(to bottom, #001E3C , #023e8a)*/
 /*}*/

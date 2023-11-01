@@ -54,3 +54,8 @@ export function getColorFromUserStatus(status) {
             return '#FF0000'
     }
 }
+
+export function isVideo(format){
+    format = format.toLowerCase()
+    return format === "video/mp4" || format === "avi" || format === "mkv" || format === "mp4"
+}

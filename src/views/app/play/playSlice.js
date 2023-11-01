@@ -3,27 +3,27 @@ import {createSlice} from '@reduxjs/toolkit'
 export const playSlice = createSlice({
     name: 'player',
     initialState: {
-        itemId: null,
-        item: null,
+        chapterId: null,
+        chapter: null,
     },
     reducers: {
-        setItemId: (state, action) => {
+        setChapterId: (state, action) => {
             return {
                 ...state,
-                itemId:action.payload,
+                chapterId:action.payload,
             }
         },
 
-        setItem: (state, action) => {
+        setChapter: (state, action) => {
             return {
                 ...state,
-                item:action.payload,
+                chapter:action.payload,
             }
         },
     }
 })
 
-export const {setItemId, setItem} = playSlice.actions
+export const {setChapterId, setChapter} = playSlice.actions
 
 export const selectPlayer = state => state.player
 

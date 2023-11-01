@@ -38,5 +38,6 @@ export const ItemRescType = {
     Main: '主图',
     Preview: '预览图',
     Attachment: '附件文件',
-    Chapter: '章节',
+    ChapterMain: '章节主图',
+    Episodes: '章节目录'
 }

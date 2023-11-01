@@ -2,7 +2,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import {CatStatus} from "../../../utils/constant/constant";
 import {InputWithHeader, SelectInputWithHeader} from "../../../components/ui/CustomInput";
 import Modal from "../../../components/Modal";
-import {selectItemModal, close} from "./item-slice";
+import {selectItemModal, close} from "./admin-item-slice";
 import {useSelector, useDispatch} from 'react-redux'
 import {openAlert} from "../../../components/alert/ops/alertSlice";
 import {ListCatName, UpdateCat} from "../../../api/cat.service";

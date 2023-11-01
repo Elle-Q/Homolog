@@ -13,9 +13,8 @@ const StyledInputElement = styled('input')`
   border: none;
   border-radius: 10px;
   padding: 6px 10px;
-  color: white;
   //transition: width 300ms ease;
-  
+
   &:focus {
     outline: none;
     width: 90%;
@@ -24,13 +23,11 @@ const StyledInputElement = styled('input')`
 `;
 
 const DanmuBox = styled('div')(({theme}) => ({
-    position: "absolute",
     zIndex: 1,
     borderRadius: '10px',
-    backgroundImage: 'linear-gradient(to right, #001E3C , #173A5E)',
-    boxShadow: '0 0 20px #173A5E',
+    backgroundColor: 'rgb(65,63,63)',
+    boxShadow: '0 0 3px gray',
     width: '100%',
-    top: '530px',
     paddingRight: '10px',
     justifyContent: "flex-end",
     '&:hover' : {

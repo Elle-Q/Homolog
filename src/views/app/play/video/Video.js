@@ -5,30 +5,24 @@ import {useDispatch, useSelector} from "react-redux";
 import {selectLoadingModal} from "../../../../components/loading/loading-slice";
 import Loading from "../../../../components/loading/Loading";
 
+const videoContainer = {
+    position: "relative",
+    width: '210px',
+    height: '210px',
+    aspectRatio: '4/3',
+    textAlign: 'center',
+    border: "5px dotted #403D39"
+}
+
+
 function Video(props) {
-    const [videoSrc, setVideoSrc] = useState(null);
-    const {periods} = props;
-
-    //设置主文件数据源
-    useEffect(() => {
-        if (periods && periods.length > 0) {
-            setVideoSrc(periods[0].QnLink)
-        }
-    }, [periods])
-
-    //更改视频播放源
-    const changeVideoSrc = (src) => {
-        setVideoSrc(src);
-    }
+    const {src} = props;
 
     return (
-        <React.Fragment>{
-            videoSrc && <VideoPlayer videoSrc={{
-                type: 'application/x-mpegURL',
-                src: videoSrc,
-            }}/>
-        }
-            <Periods periods={periods} changeVideoSrc={(src) => changeVideoSrc(src)}/>
+        <React.Fragment>
+            {
+                src && <VideoPlayer videoSrc={{type: 'application/x-mpegURL', src: src}}/>
+            }
         </React.Fragment>
     );
 }

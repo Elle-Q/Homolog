@@ -7,6 +7,7 @@ import Barrage from 'barrage-ui';
 import barageData from '../../json/barrage.json'
 import Hls from "hls.js";
 import DanmuInput from "../../views/app/play/video/DanmuInput";
+import Stack from "@mui/material/Stack";
 
 function VideoPlayer(props) {
 
@@ -22,6 +23,7 @@ function VideoPlayer(props) {
     const videoJsOptions = {
         autoplay: false,
         height:"auto",
+        aspectRatio: "4:3",
         controls: true,
         responsive: true,
         fluid: true,
@@ -141,28 +143,21 @@ function VideoPlayer(props) {
 
 
     return (
-        <Box
+        <Stack
             id="videoPlayContainer"
             sx={{
-                height:'530px',
-                width:'810px',
-                position:"absolute",
-                borderRadius: 10,
+                width: '80%',
+                borderRadius: '10px',
                 backgroundColor: 'black',
                 zIndex: 1,
+                display: 'flex'
             }}
             onMouseEnter={() => setVisible("visible")}
             onMouseLeave={() => setVisible("hidden")}
         >
-            <InnerPlayerHeader visible={visible}/>
-
-            <Box sx={{margin: '5px 30px '}}>
-                <Player
-                    options={videoJsOptions}
-                    onReady={handlePlayerReady}
-                />
+            <Box sx={{display: 'flex', width:'80%', margin: 'auto'}}>
+                <Player options={videoJsOptions} onReady={handlePlayerReady} />
             </Box>
-
             <ControlBar play={play}
                         togglePlay={togglePlay}
                         visible={visible}
@@ -175,7 +170,7 @@ function VideoPlayer(props) {
             />
             <DanmuInput ref={barrageInputRef} handleDanmuSend={handleDanmuSend}/>
 
-        </Box>
+        </Stack>
     );
 }
 

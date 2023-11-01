@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {open, selectItemModal} from "./item-slice";
+import {open, selectItemModal} from "./admin-item-slice";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import DoNotDisturbOnIcon from "@mui/icons-material/DoNotDisturbOn";

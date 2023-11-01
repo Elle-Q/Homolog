@@ -18,6 +18,7 @@ function SimplePlayer(props) {
     const videoJsOptions = {
         autoplay: false,
         height: "auto",
+        aspectRatio: "4:3",
         controls: true,
         responsive: true,
         fluid: true,
@@ -60,7 +61,7 @@ function SimplePlayer(props) {
             id="videoPlayContainer"
             sx={{
                 ...size,
-                position: "absolute",
+                // position: "absolute",
                 borderRadius: '10px',
                 zIndex: 1,
             }}

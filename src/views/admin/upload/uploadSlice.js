@@ -5,6 +5,7 @@ export const uploadSlice = createSlice({
     initialState: {
         item: null,
         itemID: null,
+        refesh: false,
     },
     reducers: {
 
@@ -22,10 +23,17 @@ export const uploadSlice = createSlice({
             }
         },
 
+        setRefesh: (state, action) => {
+            return {
+                ...state,
+                refesh: action.payload,
+            }
+        },
+
     }
 })
 
-export const {setRescType, setItemID, setItem} = uploadSlice.actions
+export const {setRescType, setItemID,setRefesh, setItem} = uploadSlice.actions
 export const selectUploadItemResc = state => state.uploadItemResc
 
 export default uploadSlice.reducer

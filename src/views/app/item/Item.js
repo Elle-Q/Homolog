@@ -7,21 +7,24 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import {getStarIcons} from "../../../utils/ToolUtil";
 import styled from "styled-components";
 import AirplayIcon from '@mui/icons-material/Airplay';
-import {GetItem, GetItemWithFiles} from "../../../api/item.service";
+import {AppGetItemFiles} from "../../../api/item.service";
 import {BigLinkButton, CartButton} from "../../../components/ui/CustomButton";
-import {useDispatch} from "react-redux";
-import {setItemId} from "../play/playSlice";
 import catBriefInfo from "../../../json/catBriefInfo.json"
 import List from "./list/list";
 import Review from "./review/review";
+import {makeStyles} from "@mui/styles";
+import Cart from "./cart/cart";
+import PrevShow from "./prev/prevShow";
+import ThreeD from "../play/3d/ThreeD";
 
 const Container = styled.div`
   width: 80%;
   margin-left: 10%;
   margin-right: 10%;
+  margin-top: 30px;
   color: white;
   position: absolute;
-  top: 0;
+  top: 70px;
   left: 0;
 
   & span {
@@ -56,36 +59,33 @@ const TabP = styled.p`
     color: #EB5050;
     border-bottom: 3px solid #EB5050;
   }
-
 `
 
 function Item(props) {
     let params = useParams();
     let id = params.id;
-    const dispatch = useDispatch();
     const [item, setItem] = useState({});
     const [tab, setTab] = useState('list');
+    const [cartOpen, setCartOpen] = useState(true);
 
     useEffect(() => {
         const fetch = async () => {
-            await GetItem(id).then((data) => {
+            await AppGetItemFiles(id).then((data) => {
                 setItem(data)
-                dispatch(setItemId(data.ID))
             })
         }
         fetch().catch()
     }, [])
 
-    const tabClick = (tab, id) => {
+    const tabClick = (tab, event) => {
         setTab(tab === '测评' ? "review" : "list");
         let allTabs = document.getElementsByName("tab");
         allTabs.forEach(tab => {
             tab.style.color = 'white';
             tab.style.borderBottom = 'none';
         })
-        let tabSelect = document.getElementById(id);
-        tabSelect.style.borderBottom = '3px solid #EB5050';
-        tabSelect.style.color = '#EB5050';
+        event.target.style.borderBottom = '3px solid #EB5050';
+        event.target.style.color = '#EB5050';
     }
 
     function getTabContent(type) {
@@ -93,16 +93,29 @@ function Item(props) {
         let tabInfo = catBriefInfo[type].tab;
         const ps = [];
         tabInfo.forEach((tab, index) => {
-            let id = "tab-" + index;
-            ps.push(<TabP name={'tab'} id={id} onClick={() => tabClick(tab, id)}>{tab}</TabP>)
+            ps.push(<TabP name={'tab'} id={"tab-".concat(index)} onClick={(event) => tabClick(tab, event)}>{tab}</TabP>)
         })
         return ps
     }
 
+    const toggleCartOpen = open => (e) => {
+        e.stopPropagation()
+        setCartOpen(open)
+    }
+
+    function getPrevArea() {
+        if (item.Type === 'three') {
+            return <ThreeD models={item.Preview}/>
+        } else {
+            return <PrevShow preList={item.Preview}/>
+        }
+    }
+
     return (
         <React.Fragment>
+            <Cart item={item} ></Cart>
             <div style={{width: '100%'}}>
-                <img src={`${item.Preview}`} alt='bg1'style={{width: '100%', opacity: 0.1}}/>
+                <img src={item && item.Main} alt='bg1' style={{width: '100%', opacity: 0.1}}/>
             </div>
             <Container>
                 <Grid container
@@ -111,20 +124,13 @@ function Item(props) {
                       justifyContent="flex-start"
                       rowSpacing={6}
                 >
+                    {/*预览区域*/}
                     <Grid item xs={9} style={{textAlign: 'center', alignItems: 'end'}}>
-                        <img src={`${item.Preview}`} alt='bg1' style={{maxWidth: '1000px', borderRadius: '25px'}}/>
-                        <Stack direction={'row'} spacing={1} style={{justifyContent: "center"}}>
-                            <img src={`${item.Preview}`} alt='bg1' style={{width: '1/4', maxHeight: '100px'}}/>
-                            <img src={`${item.Preview}`} alt='bg1' style={{width: '1/4', maxHeight: '100px'}}/>
-                            <img src={`${item.Preview}`} alt='bg1' style={{width: '1/4', maxHeight: '100px'}}/>
-                            <img src={`${item.Preview}`} alt='bg1' style={{width: '1/4', maxHeight: '100px'}}/>
-                        </Stack>
+                        {getPrevArea()}
                     </Grid>
                     <Grid item xs={3} sx={{height: '800px'}}>
                         <Stack direction='column' spacing={2} sx={{mt: '10px'}}>
-                            <img src={`${item.Preview}`} alt='bg1'
-                                 style={{width: '100%', margin: "auto", borderRadius: '10px'}}/>
-
+                            <img src={item && item.Main} alt='bg1' style={{width: '100%', margin: "auto", borderRadius: '10px'}}/>
                             <Typography variant="h4" component="div">
                                 {item.Name}
                             </Typography>
@@ -134,9 +140,9 @@ function Item(props) {
                             </Typography>
 
                             <Stack>
-                                <span> 作者: elle</span>
+                                <span> 作者: {item.Author}</span>
                                 <span> 章节目录: >></span>
-                                <span> 全部测评: 300+</span>
+                                <span> 全部测评: {item.DownCnt}</span>
                                 <span> 适用软件: blender</span>
                                 <span> 时长: 3: 23: 00</span>
                                 <span> 上传时间: 2023-10-12</span>
@@ -146,8 +152,7 @@ function Item(props) {
                                 {
                                     item.Price === 0 ?
                                         <BigLinkButton icon={<AirplayIcon/>} linkTo={`/app/play/${item.ID}`}/> :
-                                        <CartButton icon={<ShoppingCartIcon sx={{margin: 'auto'}} fontSize="large"/>}
-                                                    money={item.Price}/>
+                                        <CartButton icon={<ShoppingCartIcon fontSize="large"/>} money={item.Price}/>
                                 }
                                 <StarDiv>
                                     {getStarIcons(item.Scores)}
@@ -164,7 +169,7 @@ function Item(props) {
 
                     <Grid item xs={12}>
                         {
-                            tab === 'list' ? <List/> : <Review/>
+                            tab === 'list' ? <List chapters={item.Chapters} /> : <Review/>
                         }
                     </Grid>
                 </Grid>

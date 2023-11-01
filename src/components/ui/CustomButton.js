@@ -26,7 +26,7 @@ export const OKButton = (props) => {
         <Button sx={{
             borderColor:'#252422',
             fontSize:'12px',
-            color:'secondary.light',
+            color:'white',
             width:'80px',
             height:'40px',
             backgroundColor:alpha('#0aa858', 0.5),
@@ -66,10 +66,8 @@ export const CancelButton = (props) => {
 export const CartButton = (props) => {
     const {icon, money} = props
     return (
-        <Typography variant="h5"
-                    component="button"
-                    color="white"
-                    sx={{
+        <Button sx={{
+                        color: 'white',
                         width: '300px',
                         height: '50px',
                         backgroundColor: "red",
@@ -83,14 +81,10 @@ export const CartButton = (props) => {
                             border: "none",
                             cursor: "pointer",
                             color: "red",
-                            '& *': {
-                                transform: 'scale(1.1)',
-                                transition: 'transform 0.4s ease-in-out',
-                            }
                         }
                     }}>
-            {icon} (￥{money})
-        </Typography>
+            {icon} <span style={{color: 'white'}}>(￥{money})</span>
+        </Button>
     )
 }
 

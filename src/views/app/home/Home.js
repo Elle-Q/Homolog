@@ -13,8 +13,15 @@ import {Footer} from "./footer/Footer";
 import Partner from "../partner/Partner";
 import Community from "../community/Community";
 import Issue from "../community/edit/Issue";
+import {useDispatch, useSelector} from "react-redux";
+import {selectShowNavBar, setNavBarShow} from "./navBarSlice";
+import {KeyboardArrowDown, KeyboardArrowUp} from "@mui/icons-material";
+import Box from "@mui/material/Box";
 
 function Home(props) {
+
+    const {show} = useSelector(selectShowNavBar);
+    const dispatch = useDispatch();
 
     const routes = [
         {path: '/home', name: 'home', component: <React.Fragment> <Body/> <Footer/></React.Fragment>},
@@ -50,10 +57,35 @@ function Home(props) {
         );
     };
 
+    const toggleNavBar = () => {
+        let element = document.getElementById("toggleNavBar");
+        if (show) {
+            element.style.top = "-5px"
+        } else {
+            element.style.top = "50px"
+        }
+        dispatch(setNavBarShow(!show))
+    }
+
     return (
         <React.Fragment>
             <CssBaseline/>
-            <NavBar/>
+            {
+                show && <NavBar/>
+            }
+            <Box id="toggleNavBar" sx={{
+                 textAlign: "center", zIndex: 100, width: '100%',height: '25px',
+                backgroundColor: '#111111',
+                color: '#9f9f9f',
+                "&:hover" : {
+                    backgroundColor: '#00a896',
+                }
+            }}  onClick={toggleNavBar}>
+                {
+                    show ? <KeyboardArrowUp sx={{width: '25px', height: '25px'}}/> :  <KeyboardArrowDown sx={{width: '25px', height: '25px'}}/>
+                }
+
+            </Box>
             <Routes>
                 {routes.map(({path, component}, index) => (
                     <Route key={index} path={path} element={component}/>

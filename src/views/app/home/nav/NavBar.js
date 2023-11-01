@@ -32,6 +32,7 @@ import {useEffect} from "react";
 import {getUser} from '../../../../api/user.service'
 import {getColorFromUserStatus} from "../../../../utils/ToolUtil";
 import useScroll from "../../../../hook/useScroll";
+import {selectShowNavBar, setShow} from "../navBarSlice";
 
 const Search = styled('div')(({theme}) => ({
     position: 'relative',
@@ -62,7 +63,6 @@ function NavBar(props) {
     const navigate = useNavigate();
     const {isLogin, user} = useSelector(selectAuth);
     const colorMode = React.useContext(ColorModeContext);
-    const [showMenu, setShowMenu] = React.useState(false);
     const dispatch = useDispatch();
     const scroll = useScroll()
 

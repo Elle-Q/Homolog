@@ -3,30 +3,33 @@ import {createSlice} from '@reduxjs/toolkit'
 export const itemSlice = createSlice({
     name: 'itemModal',
     initialState: {
-        openModal: false,
-        readOnly: true,
-        data: {},
+        openDrawer: false,
+        item: {},
     },
     reducers: {
         close: state => {
             return {
                 ...state,
-                openModal: false
+                openDrawer: false
             }
         },
         open: (state, action) => {
-            const {readOnly, data} = action.payload
             return {
                 ...state,
-                openModal: true,
-                readOnly:readOnly,
-                data:data,
+                openDrawer: true,
+            }
+        },
+        setItem: (state, action) => {
+            return {
+                ...state,
+                openDrawer: true,
+                item: action.payload
             }
         },
     }
 })
 
-export const {close, open} = itemSlice.actions
+export const {close, open,setItem} = itemSlice.actions
 export const selectItemModal = state => state.itemModal
 
 export default itemSlice.reducer

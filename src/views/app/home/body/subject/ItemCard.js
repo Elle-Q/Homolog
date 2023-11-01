@@ -37,7 +37,7 @@ function ItemCard(props) {
                     component="img"
                     height="300"
                     width="300"
-                    image={item.Preview}
+                    image={item.Main}
                     alt="Preview"
                     sx={{
                         boxShadow: 5,

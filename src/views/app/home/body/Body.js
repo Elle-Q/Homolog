@@ -46,8 +46,6 @@ function Body(props) {
                     })
                 }
             </Grid>
-
-            {/*<PageTipFloatingBar/>*/}
         </Box>
     );
 }

@@ -3,12 +3,14 @@ import IconButton from "@mui/material/IconButton";
 import SearchIcon from '@mui/icons-material/Search';
 import {useDispatch, useSelector} from "react-redux";
 import {selectUploadItemResc, setItem} from "./uploadSlice";
-import {GetItemFiles, UploadItemFiles} from "../../../api/item.service";
+import {GetItemFiles} from "../../../api/item.service";
 import {SimpleInput} from "../../../components/ui/SimpleInput";
 import styled from "styled-components";
 import Stack from "@mui/material/Stack";
-import UploadArea from "./UploadArea";
-import {CancelButton, OKButton} from "../../../components/ui/CustomButton";
+import Chapter from "./chapter/Chapter";
+import Regular from "./regular/Regular";
+import {setItemID} from "../../admin/upload/uploadSlice";
+import GradientButton from "../../../components/ui/GradientButton";
 
 const StyledIconButton = styled(IconButton)`
   margin-left: 8px;
@@ -22,13 +24,10 @@ const StyledIconButton = styled(IconButton)`
 `
 
 function Upload(props) {
-    const {itemID, item} = useSelector(selectUploadItemResc);
+    const {itemID, refresh} = useSelector(selectUploadItemResc);
     const dispatch = useDispatch();
     const itemIDRef = createRef();
-    const [main, setMain] = React.useState([]);
-    const [preview, setPreview] = React.useState([]);
-    const [attachment, setAttachment] = React.useState([]);
-    const [chapter, setChapter] = React.useState([]);
+    const [tab, setTab] = useState('regular');
 
     useEffect(() => {
         GetItemFiles(itemID)
@@ -38,39 +37,23 @@ function Upload(props) {
     }, [itemID])
 
 
-    // 上传并保存文件
-    const handleSave = async () => {
-        let param = new FormData();
-        for (let x = 0; x < main.length; x++) {
-            param.append("Main[]", main[x]);
-        }
-        for (let x = 0; x < preview.length; x++) {
-            param.append("Preview[]", preview[x]);
-        }
-        for (let x = 0; x < attachment.length; x++) {
-            param.append("Attachment[]", attachment[x]);
-        }
-        param.append("ItemID", itemIDRef.current.value)
+    useEffect(() => {
+        handleSearch()
+    }, [refresh])
 
-        await UploadItemFiles(param)
-    }
 
     //根据item_id搜索
     const handleSearch = () => {
         GetItemFiles(itemIDRef.current.value)
             .then(item => {
                 dispatch(setItem(item))
+                dispatch(setItemID(item.ID))
             })
     }
 
-    //取消文件上传
-    const handleCancel = () => {
-        //将文件置空
-        setMain([])
-        setPreview([])
-        setAttachment([])
+    const handleTabClick = () => {
+        setTab(tab === '测评' ? "review" : "list");
     }
-
     return (
         <Stack style={{padding: '0px 60px'}} spacing={5}>
             <div style={{display: "flex", justifyContent: "start", marginTop: '50px'}}>
@@ -79,15 +62,18 @@ function Upload(props) {
                 <StyledIconButton onClick={handleSearch}>
                     <SearchIcon/>
                 </StyledIconButton>
-                <div style={{marginLeft: '200px'}}><OKButton handleClick={handleSave}/> <CancelButton
-                    handleClick={handleCancel}/></div>
             </div>
-            <UploadArea name='Main' uploadType='single' uploadFiles={main} setUploadFiles={(file) => setMain(file)}/>
-            <UploadArea name='Preview' uploadType='multi' uploadFiles={preview}
-                        setUploadFiles={(files) => setPreview([...preview, ...files])}/>
-            <UploadArea name='Attachment' uploadType='single' uploadFiles={attachment}
-                        setUploadFiles={(file) => setAttachment(file)}/>
-            {/*<UploadArea name='chapter' resc={chapter} uploadType='single' setResc={(file) => setChapter(file)}/>*/}
+
+            <Stack direction={'row'} style={{justifyContent: 'center', borderBottom: '1px solid grey'}}>
+                <GradientButton name="基础资源" onClick={() => setTab("regular")}/>
+                <GradientButton name="章节资源" onClick={() => setTab("chapter")}/>
+            </Stack>
+
+            {
+                tab === 'regular' ? <Regular/> : <Chapter />
+            }
+
+
         </Stack>
     );
 }

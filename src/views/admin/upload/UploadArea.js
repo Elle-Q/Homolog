@@ -4,13 +4,10 @@ import Stack from "@mui/material/Stack";
 import DragDrop from "../../../components/DragDrop";
 import Uploader from "../../../components/Uploader";
 import styled from "styled-components";
-import {useDispatch, useSelector} from "react-redux";
-import {selectUploadItemResc, setItem} from "./uploadSlice";
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
-import {DeleteFile} from "../../../api/file.service";
-import {openAlert} from "../../../components/alert/ops/alertSlice";
-import {setOpen} from "../../../components/alert/confirm/confirmSlice";
 import AlertDialog from "../../../components/alert/confirm/AlertDialog";
+import SimplePlayer from "../../../components/player/SimplePlayer";
+import {isVideo} from "../../../utils/ToolUtil";
 
 const StyledImg = styled.img`
   width: 200px;
@@ -38,26 +35,25 @@ const fileShowContainer = {
 }
 
 function UploadArea(props) {
-    const {name, uploadFiles, setUploadFiles, uploadType} = props
-    const {item} = useSelector(selectUploadItemResc);
+    const {name, uploadType, setUploadFiles, resc, handleDelete} = props
     const [showList, setShowList] = React.useState([]);
-    const dispatch = useDispatch();
 
     useEffect(() => {
-        let links = []
-        item && item[name].forEach(resc => {
-            links.push({
-                link: resc.QnLink,
-                fileId: resc.ID,
-                bucket: resc.Bucket,
-                key: resc.Key
+        let showLinks = []
+        resc && resc.forEach(data => {
+            showLinks.push({
+                link: data.QnLink,
+                fileId: data.ID,
+                bucket: data.Bucket,
+                key: data.Key,
+                type: data.Format
             })
         })
-        setShowList(links)
-    }, [item])
+        setShowList(showLinks)
+    }, [resc])
 
-    const handleUpload = (event, type) => {
-        handleDrag(event.target.files, type);
+    const handleUpload = (event) => {
+        handleDrag(event.target.files);
     };
 
     //拖拽或者上传文件后, 在页面显示文件 (现在只实现了图片的显示, 后面具体的视频, 压缩包需要采用其他的形式显示)
@@ -70,35 +66,36 @@ function UploadArea(props) {
             files = dragFiles;
         }
         for (let i = 0; i < files.length; i++) {
-            console.log(files[i])
             showFiles.push({
                 link: URL.createObjectURL(files[i]),
                 fileId: files[i].name,
+                type: files[i].type
             })
         }
-        setUploadFiles(files);
         setShowList([...showList, ...showFiles])
+        setUploadFiles(files);
     };
 
-    const handleDelete = (file) => {
+    const handleDel = (file) => {
         //删除的是新上传的文件(还未保存到数据库， 只是提交到了页面)
-        if (!Number.isFinite(file.fileId)) {
-            setUploadFiles(uploadFiles.filter(f => f.name !== file.fileId))
-            setShowList(showList.filter(f => f.link !== file.link))
-            return;
-        }
-        const ops = () => DeleteFile({
-            FileId: file.fileId,
-            Bucket: file.bucket,
-            Key: file.key
-        }).then(r => {
-            dispatch(openAlert());
-            setShowList(showList.filter(f => f.link !== file.link)) //移除页面上显示的元素
-        })
-        dispatch(setOpen({
-            open: true,
-            okHandle: ops
-        }));
+        setShowList(showList.filter(f => f.link !== file.link))
+        handleDelete(file, name)
+    }
+
+
+    function getShowConponent(file, index) {
+        return <div style={fileShowContainer}>
+            {
+                isVideo(file.type) ?
+                    <SimplePlayer videoSrc={{
+                        type: `${file.key ? 'application/x-mpegURL' : 'video/mp4'}`,
+                        src: file.link}}/>
+                    :
+                    <StyledImg key={'show'.concat(index)} src={file.link}/>
+            }
+            <HighlightOffIcon key={'icon'.concat(index)} fontSize="large" sx={deleteIconStyle}
+                              onClick={() => handleDel(file)}/>
+        </div>
     }
 
     return (
@@ -111,19 +108,12 @@ function UploadArea(props) {
             {/*这里好像用gap能够把间隔拉开*/}
             <Stack direction={'row'} gap={2} flexWrap={'wrap'} alignItems={"start"} justifyContent={"start"}>
                 {
-                    showList && showList.map((file, index) => {
-                        return <div style={fileShowContainer}>
-                            <StyledImg key={'show'.concat(index)} src={file.link}/>
-                            <HighlightOffIcon key={'icon'.concat(index)} fontSize="large" sx={deleteIconStyle}
-                                              onClick={() => handleDelete(file)}/>
-                        </div>
-                    })
+                    showList && showList.map((file, index) => getShowConponent(file, index))
                 }
-
                 {
                     showList.length > 0 && uploadType === 'single' ? <React.Fragment/> :
                         <DragDrop handleDropFile={handleDrag} color="#001E3C" width="200px">
-                            <Uploader width="200px" onFileUpload={(event) => handleUpload(event, name)}/>
+                            <Uploader width="200px" onFileUpload={(event) => handleUpload(event)}/>
                         </DragDrop>
                 }
 

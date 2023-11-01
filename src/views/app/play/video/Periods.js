@@ -72,7 +72,7 @@ function Periods(props) {
         changeVideoSrc(periods[selectedIndex].QnLink);
     }
 
-    if (periods.length < 1) return <></>
+    if (periods && periods.length < 1) return <></>
 
     return (
         <Box
@@ -92,7 +92,7 @@ function Periods(props) {
                 height={500}
                 width={360}
                 itemSize={40}
-                itemCount={periods.length}
+                itemCount={periods && periods.length}
                 overscanCount={5}
                 itemData={{
                     list: periods,

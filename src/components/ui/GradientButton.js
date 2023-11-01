@@ -5,8 +5,8 @@ import Button from "@mui/material/Button";
 
 const useStyles = makeStyles({
     grad: {
-        width:'100px',
-        border:'none',
+        width: '100px',
+        border: 'none',
         margin: '10px',
         textAlign: 'center',
         textTransform: 'uppercase',
@@ -16,8 +16,8 @@ const useStyles = makeStyles({
         boxShadow: '0 0 2px #eee',
         borderRadius: '20px',
         display: 'inline-block',
-        fontWeight:"bold",
-        fontFamily:'-apple-system',
+        fontWeight: "bold",
+        fontFamily: '-apple-system',
         '&:hover': {
             backgroundPosition: 'right center',
             color: '#fff',
@@ -28,13 +28,15 @@ const useStyles = makeStyles({
 
 function GradientButton(props) {
     const classes = useStyles();
-    const {name, color,width,fontSize} = props
+    const {name, color="linear-gradient(to right, #00c6ff 0%, #0072ff  51%, #00c6ff  100%)", width, fontSize, onClick} = props
     return (
-        <Button className={classes.grad} style={{
-            backgroundImage: `${color}`,
-            width:width,
-            fontSize:fontSize,
-        }}>{name}</Button>
+        <Button onClick={onClick}
+                className={classes.grad}
+                style={{
+                    backgroundImage: `${color}`,
+                    width: width,
+                    fontSize: fontSize,
+                }}>{name}</Button>
     );
 }
 

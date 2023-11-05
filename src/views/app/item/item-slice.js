@@ -22,7 +22,6 @@ export const itemSlice = createSlice({
         setItem: (state, action) => {
             return {
                 ...state,
-                openDrawer: true,
                 item: action.payload
             }
         },

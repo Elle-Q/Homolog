@@ -1,11 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import Player from "./Player";
 import Box from "@mui/material/Box";
-import ControlBar from "./ControlBar";
-import InnerPlayerHeader from "../../views/app/play/video/InnerPlayerHeader";
-import Barrage from 'barrage-ui';
-import barageData from '../../json/barrage.json'
-import Hls from "hls.js";
 
 
 function SimplePlayer(props) {

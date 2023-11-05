@@ -18,7 +18,7 @@ function CommentLabel(props) {
               columnSpacing={{xs: 1, sm: 2, md: 3}}
               sx={{mt: '30px'}}
         >
-            <Grid item xs={1} style={{width: '10px', paddingLeft: 0}}>
+            <Grid item>
                 <Avatar
                     sx={{width: '50px', height: '50px'}}
                     alt="Elle Qu"

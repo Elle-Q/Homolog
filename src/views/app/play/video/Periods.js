@@ -5,9 +5,10 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import styled, {keyframes} from "styled-components";
-import {useTheme} from '@mui/material/styles';
-import blurBg from "../../../../assets/bg/blur5.jpg";
-import {alpha} from "@mui/system";
+import {useDispatch, useSelector} from "react-redux";
+import {selectPlayer} from "../playSlice";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
 
 const spin = keyframes`
   0% {
@@ -26,83 +27,96 @@ const StyledDiv = styled.div`
   width: 10px;
   height: 10px;
   margin-right: 5px;
-  background-color: #EB5E28;
+  background-color: #ff0a54;
   border-radius: 50%;
-  box-shadow: 0 0 5px #EB5E28;
-  animation: ${spin} 1s cubic-bezier(.175,.885,.32,1.275) infinite;
+  box-shadow: 0 0 5px #ff477e;
+  animation: ${spin} 1s cubic-bezier(.175, .885, .32, 1.275) infinite;
 `
 
+const renderEpisodes = (chapter) => {
 
-function RenderRow(props) {
-    const {data, index, style} = props;
-    const {list, currentIndex, handleIndexChange} = data;
-    const styles = {...style, width:'96%', right: '0px', paddingTop:'10px',overflow: "hidden",};
-
-    return (
-        <ListItem style={styles} key={index} component="div" disablePadding>
-            <ListItemButton sx={{
-                borderRadius:'10px',
-                '&:hover': {
-                    transform: 'translateX(5px) ',
-                    transition: 'all 1s cubic-bezier(.175,.885,.32,1.275)'
+    /*<ListItem style={styles} key={index} component="div" disablePadding>
+        <ListItemButton sx={{
+            borderRadius: '10px',
+            '&:hover': {
+                transform: 'translateX(5px) ',
+                transition: 'all 1s cubic-bezier(.175,.885,.32,1.275)'
+            }
+        }} onClick={() => handleIndexChange(index)}>
+            {index === currentIndex ? <StyledDiv/> : <></>}
+            <ListItemText sx={{
+                color: `${index === currentIndex ? '#ff5c8a' : '#dad6d3'}`,
+                transform: `${index === currentIndex ? 'translateX(15px) scale(1.1)' : 'scale(1)'}`,
+                transition: 'all 1s cubic-bezier(.175,.885,.32,1.275)',
+                "& .MuiTypography-root": {
+                    fontFamily: 'cursive',
                 }
             }}
-                            onClick={() => handleIndexChange(index)}>
-                {index === currentIndex ? <StyledDiv/> : <></>}
-                <ListItemText style={{
-                    color: `${index === currentIndex ? 'text.primary' : '#CCC5B9'}`,
-                    transform: `${index === currentIndex ? 'translateX(15px) scale(1.1)' : 'scale(1)'}`,
-                    transition: 'all 1s cubic-bezier(.175,.885,.32,1.275)'
-                }}
-                    primary={`P${index + 1}  ${list[index].Name}`}
-                />
-                {/*<ListItemText style={{textAlign: 'right', color: '#403D39'}} primary={`${list[index].Bucket}`}/>*/}
-            </ListItemButton>
-        </ListItem>
-    );
+                          primary={`P${index + 1}  ${list[index].Name}`}
+            />
+        </ListItemButton>
+    </ListItem>*/
 }
 
 function Periods(props) {
-    const theme = useTheme();
-    const {changeVideoSrc, periods} = props;
-    const [currentPlayIndex, setCerrentPlayIndex] = useState(0);
+    const {changeVideoSrc} = props;
+    const [curCpIndex, setCurCpIndex] = useState(0);
+    const [curEpiIndex, setCurEpiIndex] = useState(0);
+    let dispatch = useDispatch();
+    const {chapters} = useSelector(selectPlayer);
 
-    const handleIndexChange = (selectedIndex) => {
-        setCerrentPlayIndex(selectedIndex);
-        changeVideoSrc(periods[selectedIndex].QnLink);
+    const handleIndexChange = (cpIndex, epiIndex) => {
+        setCurCpIndex(cpIndex);
+        setCurEpiIndex(epiIndex);
+        changeVideoSrc(chapters[cpIndex].Episodes[epiIndex].QnLink);
     }
 
-    if (periods && periods.length < 1) return <></>
-
     return (
-        <Box
-            sx={{
-                ml:'50px',
-                display:"flex",
-                height: 500,
-                maxWidth: 360,
-                borderRadius: '10px',
-                backgroundColor: "transparent",
-                // backgroundImage: 'linear-gradient(to bottom, #001E3C , #173A5E)'
-                // backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)), url(${blurBg})`,
-                // boxShadow: '0 0 5px black',
-            }}
-        >
-            <FixedSizeList
-                height={500}
-                width={360}
-                itemSize={40}
-                itemCount={periods && periods.length}
-                overscanCount={5}
-                itemData={{
-                    list: periods,
-                    currentIndex: currentPlayIndex,
-                    handleIndexChange: handleIndexChange
-                }}
-            >
-                {RenderRow}
-            </FixedSizeList>
-        </Box>
+        <div style={{overflow:'auto',maxHeight:'800px'}}>
+            {
+                chapters && chapters.map((chapter, cpIndex) => {
+                    return (
+                        <React.Fragment>
+                            <Box display={"flex"} sx={{width: '300px', marginBottom: '10px'}}>
+                                <div style={{height: '30px', width: '5px', backgroundColor: "#ff0a54"}}></div>
+                                <div style={{
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                    opacity: '0.5',
+                                    width: '100%',
+                                    backgroundSize: '100%',
+                                    backgroundImage: `url("http://www.leetroll.com/config/default_bg/bg5.jpg")`
+                                }}>
+                                    <span style={{color: 'white'}}>第{chapter.Chapter}章</span>
+                                </div>
+                            </Box>
+                            <Stack sx={{marginBottom: '50px'}} spacing={1}>
+                                {
+                                    chapter && chapter.Episodes.map((episode, epiIndex) => {
+                                        return (
+                                            <Box display={"flex"} sx={{alignItems: "center"}} onClick={()=>handleIndexChange(cpIndex, epiIndex)}>
+                                                { curCpIndex === cpIndex && curEpiIndex === epiIndex && <StyledDiv/>}
+                                                <Typography sx={{
+                                                    marginLeft: '15px',
+                                                    color: `${curCpIndex === cpIndex && curEpiIndex === epiIndex ? '#ff5c8a':'#dad6d3'}`,
+                                                    fontFamily: 'cursive',
+                                                    '&:hover': {
+                                                        cursor:'pointer',
+                                                        transform: 'scale(1.1)',
+                                                        transition: 'all 1s cubic-bezier(.175,.885,.32,1.275)',
+                                                    }
+                                                }}>{episode.Name}</Typography>
+                                            </Box>
+                                        )
+                                    })
+                                }
+                            </Stack>
+                        </React.Fragment>
+                    )
+                })
+            }
+        </div>
     );
 }
 

@@ -32,7 +32,7 @@ export const upload = (file ) => {
     }
 
     const config = {
-        useCdnDomain: false,
+        useCdnDomain: true,
         region: qiniu.region.as0
     };
 

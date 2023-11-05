@@ -70,7 +70,8 @@ function ItemModal(props) {
     //保存资源信息
     const handleSave = async () => {
         let param = Object.assign({}, detail, {
-            Tags: tags.toString(),
+            // Tags: tags.toString(),
+            Tags: "",
             CatId: catSelect
         });
         if (!detail.Status) param.Status = "show"

@@ -7,26 +7,24 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import {getStarIcons} from "../../../utils/ToolUtil";
 import styled from "styled-components";
 import AirplayIcon from '@mui/icons-material/Airplay';
-import {AppGetItemFiles} from "../../../api/item.service";
+import {AppGetItemFiles, GetItemFiles, listItem} from "../../../api/item.service";
 import {BigLinkButton, CartButton} from "../../../components/ui/CustomButton";
 import catBriefInfo from "../../../json/catBriefInfo.json"
 import List from "./list/list";
-import Review from "./review/review";
-import {makeStyles} from "@mui/styles";
 import Cart from "./cart/cart";
 import PrevShow from "./prev/prevShow";
 import ThreeD from "../play/3d/ThreeD";
+import Comments from "./comment/Comments";
+import {useDispatch} from "react-redux";
+import {setItem} from "./item-slice";
 
 const Container = styled.div`
   width: 80%;
   margin-left: 10%;
   margin-right: 10%;
-  margin-top: 30px;
   color: white;
-  position: absolute;
-  top: 70px;
-  left: 0;
-
+  //position: absolute;
+  
   & span {
     color: grey;
   }
@@ -64,14 +62,15 @@ const TabP = styled.p`
 function Item(props) {
     let params = useParams();
     let id = params.id;
-    const [item, setItem] = useState({});
+    const [data, setData] = useState({});
     const [tab, setTab] = useState('list');
-    const [cartOpen, setCartOpen] = useState(true);
+    let dispatch = useDispatch();
 
     useEffect(() => {
         const fetch = async () => {
             await AppGetItemFiles(id).then((data) => {
-                setItem(data)
+                setData(data)
+                dispatch(setItem(data))
             })
         }
         fetch().catch()
@@ -98,51 +97,41 @@ function Item(props) {
         return ps
     }
 
-    const toggleCartOpen = open => (e) => {
-        e.stopPropagation()
-        setCartOpen(open)
-    }
-
     function getPrevArea() {
-        if (item.Type === 'three') {
-            return <ThreeD models={item.Preview}/>
+        if (data.Type === 'three') {
+            return <ThreeD models={data.Preview}/>
         } else {
-            return <PrevShow preList={item.Preview}/>
+            return <PrevShow preList={data.Preview}/>
         }
     }
-
     return (
-        <React.Fragment>
-            <Cart item={item} ></Cart>
-            <div style={{width: '100%'}}>
-                <img src={item && item.Main} alt='bg1' style={{width: '100%', opacity: 0.1}}/>
-            </div>
+        <div style={{backgroundSize:'100%',width: '100%', backgroundImage: `linear-gradient(to bottom,rgba(0, 0, 0,0.8), rgba(0, 0, 0, 0.8)),url(${data && data.Main})`}}>
+            <Cart item={data}></Cart>
             <Container>
                 <Grid container
                       direction="row"
                       alignItems="flex-start"
                       justifyContent="flex-start"
-                      rowSpacing={6}
                 >
                     {/*预览区域*/}
                     <Grid item xs={9} style={{textAlign: 'center', alignItems: 'end'}}>
                         {getPrevArea()}
                     </Grid>
-                    <Grid item xs={3} sx={{height: '800px'}}>
+                    <Grid item xs={3}>
                         <Stack direction='column' spacing={2} sx={{mt: '10px'}}>
-                            <img src={item && item.Main} alt='bg1' style={{width: '100%', margin: "auto", borderRadius: '10px'}}/>
+                            <img src={data && data.Main} alt='bg1' style={{width: '100%', margin: "auto", borderRadius: '10px'}}/>
                             <Typography variant="h4" component="div">
-                                {item.Name}
+                                {data.Name}
                             </Typography>
 
                             <Typography component="p">
-                                {item.Desc}
+                                {data.Desc}
                             </Typography>
 
                             <Stack>
-                                <span> 作者: {item.Author}</span>
+                                <span> 作者: {data.Author}</span>
                                 <span> 章节目录: >></span>
-                                <span> 全部测评: {item.DownCnt}</span>
+                                <span> 全部测评: {data.DownCnt}</span>
                                 <span> 适用软件: blender</span>
                                 <span> 时长: 3: 23: 00</span>
                                 <span> 上传时间: 2023-10-12</span>
@@ -150,31 +139,31 @@ function Item(props) {
 
                             <Stack sx={{alignItems: 'center'}}>
                                 {
-                                    item.Price === 0 ?
-                                        <BigLinkButton icon={<AirplayIcon/>} linkTo={`/app/play/${item.ID}`}/> :
-                                        <CartButton icon={<ShoppingCartIcon fontSize="large"/>} money={item.Price}/>
+                                    data.Price === 0 ?
+                                        <BigLinkButton icon={<AirplayIcon/>} linkTo={`/app/play/${data.ID}`}/> :
+                                        <CartButton icon={<ShoppingCartIcon fontSize="large"/>} money={data.Price}/>
                                 }
                                 <StarDiv>
-                                    {getStarIcons(item.Scores)}
+                                    {getStarIcons(data.Scores)}
                                 </StarDiv>
                             </Stack>
                         </Stack>
                     </Grid>
 
-                    <Grid item xs={12}>
+                    <Grid item xs={12} sx={{marginTop: '30px'}}>
                         <Stack direction={'row'} style={{justifyContent: 'center', borderBottom: '1px solid grey'}}>
-                            {getTabContent(item.Type)}
+                            {getTabContent(data.Type)}
                         </Stack>
                     </Grid>
 
-                    <Grid item xs={12}>
+                    <Grid item xs={12} sx={{marginTop: '30px'}}>
                         {
-                            tab === 'list' ? <List chapters={item.Chapters} /> : <Review/>
+                            tab === 'list' ? <List /> : <Comments/>
                         }
                     </Grid>
                 </Grid>
             </Container>
-        </React.Fragment>
+        </div>
     );
 }
 

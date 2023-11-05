@@ -4,7 +4,7 @@ export const playSlice = createSlice({
     name: 'player',
     initialState: {
         chapterId: null,
-        chapter: null,
+        chapters: null,
     },
     reducers: {
         setChapterId: (state, action) => {
@@ -14,16 +14,16 @@ export const playSlice = createSlice({
             }
         },
 
-        setChapter: (state, action) => {
+        setChapters: (state, action) => {
             return {
                 ...state,
-                chapter:action.payload,
+                chapters:action.payload,
             }
         },
     }
 })
 
-export const {setChapterId, setChapter} = playSlice.actions
+export const {setChapterId, setChapters} = playSlice.actions
 
 export const selectPlayer = state => state.player
 

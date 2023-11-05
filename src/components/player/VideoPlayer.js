@@ -2,10 +2,8 @@ import React, {useEffect, useState} from 'react';
 import Player from "./Player";
 import Box from "@mui/material/Box";
 import ControlBar from "./ControlBar";
-import InnerPlayerHeader from "../../views/app/play/video/InnerPlayerHeader";
 import Barrage from 'barrage-ui';
 import barageData from '../../json/barrage.json'
-import Hls from "hls.js";
 import DanmuInput from "../../views/app/play/video/DanmuInput";
 import Stack from "@mui/material/Stack";
 
@@ -146,16 +144,16 @@ function VideoPlayer(props) {
         <Stack
             id="videoPlayContainer"
             sx={{
-                width: '80%',
-                borderRadius: '10px',
+                width: '100%',
                 backgroundColor: 'black',
+                borderRadius: '0 0 10px 10px',
                 zIndex: 1,
                 display: 'flex'
             }}
             onMouseEnter={() => setVisible("visible")}
             onMouseLeave={() => setVisible("hidden")}
         >
-            <Box sx={{display: 'flex', width:'80%', margin: 'auto'}}>
+            <Box sx={{display: 'flex', width:'65%', margin: 'auto'}}>
                 <Player options={videoJsOptions} onReady={handlePlayerReady} />
             </Box>
             <ControlBar play={play}

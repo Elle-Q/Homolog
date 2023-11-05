@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 import TitleHeader from "./TitleHeader";
 import PageTipFloatingBar from "../../../components/PageTipFloatingBar";
 import BriefDesc from "./video/BriefDesc";
-import Comments from "./comment/Comments";
+import Comments from "../item/comment/Comments";
 import {GetItemWithFiles} from "../../../api/item.service";
 import {useParams} from "react-router-dom";
 import Video from "./video/Video";

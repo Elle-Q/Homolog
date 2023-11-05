@@ -25,8 +25,9 @@ const StyledInputElement = styled('input')`
 const DanmuBox = styled('div')(({theme}) => ({
     zIndex: 1,
     borderRadius: '10px',
-    backgroundColor: 'rgb(65,63,63)',
-    boxShadow: '0 0 3px gray',
+    backgroundColor: 'rgba(44,44,43,0.8)',
+    // boxShadow: '0 0 3px gray',
+    border: '1px solid #403D39',
     width: '100%',
     paddingRight: '10px',
     justifyContent: "flex-end",

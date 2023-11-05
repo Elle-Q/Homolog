@@ -9,6 +9,7 @@ const CatDiv = styled.div`
   justify-content: center;
   gap: 15px;
 `;
+
 function Header(props) {
 
     const [cats, setCats] = useState([]);
@@ -23,7 +24,7 @@ function Header(props) {
         <CatDiv>
             {
                 cats.map((item, i) => (
-                    <CatCard key={i} item={item}/>
+                    <CatCard key={i} index={i} item={item}/>
                 ))
             }
         </CatDiv>

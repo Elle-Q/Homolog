@@ -10,7 +10,7 @@ const Container = styled.div`
   display: flex;
   align-items: flex-end;
   padding: 35px 30px 35px 0;
-  background: rgba(0, 0, 0, 0.30);
+  background: rgb(65, 63, 63,0.5);
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.30);
   border-radius: 20px;
   min-width: 373px;
@@ -19,7 +19,7 @@ const Container = styled.div`
   & #img-container {
     width: 100px;
     height: 80px;
-    background-color: #00a896;
+    background-color: rgb(201, 201, 201,0.1);
     border-radius: 0 20px 20px 0;
     display: flex;
     justify-content: center;
@@ -37,62 +37,80 @@ const Container = styled.div`
   }
 
   &:hover {
+    background: ${props => props.colors.bgColor};
+
     & #img-container {
-      background-color: #EB5E28;
+      background-color: ${props => props.colors.imgBgColor};
+
       & img {
-        transform:scale(1.15);
+        transform: scale(1.15);
       }
     }
-    
+
     & #icon-container {
-      background-color: #EB5E28;
-      border-color: #EB5E28;
+      background-color: ${props => props.colors.imgBgColor};
+      border-color: ${props => props.colors.imgBgColor};
     }
-    
+
     & #icon {
-      color: black;
+      color: ${props => props.colors.fontColor};
     }
+
+    & #catName {
+      color: ${props => props.colors.fontColor};
+    }
+
   }
 `
+
+const colors = [
+    {fontColor: '#ff5d8f', bgColor: '#fae0e4', imgBgColor: '#ff99ac'},
+    {fontColor: '#0077b6', bgColor: '#caf0f8', imgBgColor: '#00b4d8'},
+    {fontColor: '#fdb833', bgColor: '#fffae5', imgBgColor: '#ffee99'},
+    {fontColor: '#ff8c42', bgColor: '#ffffff', imgBgColor: '#bfbdc1'},
+    {fontColor: '#07beb8', bgColor: '#c4fff9', imgBgColor: '#68d8d6'},
+    {fontColor: '#a06cd5', bgColor: '#f4effa', imgBgColor: '#c8b1e4'},
+];
 
 
 function CatCard(props) {
     const theme = useTheme();
-    const {item} = props;
+    const {item, index} = props;
 
     return (
         <StyledLink to={`/app/category/${item.ID}`} key={item.Title}>
-            <Container>
+            <Container colors={colors[index]}>
                 <div id='img-container'>
                     <img
                         src={item.Preview}
                         alt={item.Title}
                         style={{
-                            width: '36px',
-                            height: '36px',
+                            width: '50px',
+                            height: '50px',
                             transition: 'all 500ms ease',
                         }}>
                     </img>
                 </div>
                 <div style={{
-                    height: '80px',
+                    height: '90px',
                     display: 'flex',
                     flexDirection: 'column',
                     marginLeft: '20px',
                     flexWrap: "wrap",
                     justifyContent: 'center'
                 }}>
-                    <h5 style={{
-                        fontSize: '18px',
-                        color: 'rgba(255,255,255,1)',
+                    <Typography id="catName" sx={{
+                        fontSize: '22px',
+                        color: 'white',
                         margin: '0',
-                    }}>{item.Title}</h5>
+                        fontWeight: 'bold'
+                    }}>{item.Title}</Typography>
 
-                    <Typography color={alpha(theme.palette.primary.contrastText, 0.75)} sx={{fontSize: '12px'}}>
+                    <Typography color={alpha('#CCC5B9', 0.75)} sx={{fontSize: '16px'}}>
                         {item.SubTitle}
                     </Typography>
 
-                    <Typography color={alpha(theme.palette.primary.contrastText, 0.75)} sx={{fontSize: '12px'}}>
+                    <Typography color={alpha('#bbb8b6', 0.75)} sx={{fontSize: '16px'}}>
                         300+
                     </Typography>
                 </div>
@@ -103,8 +121,8 @@ function CatCard(props) {
                     alignItems: 'center',
                     flex: 1,
                 }}>
-                    <div  id="icon-container">
-                        <KeyboardArrowRightIcon id = 'icon' sx={{color:'#00a896'}}/>
+                    <div id="icon-container">
+                        <KeyboardArrowRightIcon id='icon' sx={{color: '#00a896'}}/>
                     </div>
                 </div>
             </Container>

@@ -20,7 +20,7 @@ import darkScrollbar from "@mui/material/darkScrollbar";
          },
          mode:"dark",
          background: {
-             default: '#0A1929',
+             default: '#252422',//0A1929
              paper:'#0a0908'
          },
          text: {

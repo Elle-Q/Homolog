@@ -4,6 +4,7 @@ import {makeStyles} from "@mui/styles";
 import {isVideo} from "../../../../utils/ToolUtil";
 import SimplePlayer from "../../../../components/player/SimplePlayer";
 import Box from "@mui/material/Box";
+import styled from "styled-components";
 
 
 const useStyles = makeStyles({
@@ -32,6 +33,11 @@ const fileShowContainer = {
     }
 }
 
+const ImgContainer = styled.div`
+  width: 100%;
+`
+
+
 function PrevShow(props) {
     const {preList} = props
     const classes = useStyles();
@@ -59,7 +65,7 @@ function PrevShow(props) {
                         type: `${currentPrev.Key ? 'application/x-mpegURL' : 'video/mp4'}`,
                         src: currentPrev.QnLink
                     }}/> :
-                    <img src={currentPrev && currentPrev.QnLink} alt='prevShow' style={{maxHeight: '750px', borderRadius: '25px'}}/>
+                   <div style={{width: '100%'}}><img src={currentPrev && currentPrev.QnLink} alt='prevShow' style={{width: 'auto',maxHeight:'650px', borderRadius: '25px'}}/></div>
             }
 
             <Stack id={"prevList"} direction={'row'} spacing={1} style={{justifyContent: "center"}}>

@@ -7,6 +7,7 @@ import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
 import IconButton from "@mui/material/IconButton";
 import Button from "@mui/material/Button";
+import {ThumbDownButton, ThumbUpButton} from "../../../../components/ui/IconButton";
 
 function CommentLabel(props) {
     const {name, content, createTime, avatar, likeCnt,hateCnt } = props;
@@ -33,28 +34,12 @@ function CommentLabel(props) {
                     <Typography variant="body2" sx={{fontSize: '12px', mt: '5px'}}
                                 color="#999">{createTime}</Typography>
                     <div style={{mt: '5px'}}>
-                        <IconButton sx={{
-                            width: '20px',
-                            height: '16px',
-                            mr: '3px',
-                            '& :hover': {
-                                color: '#3399FF'
-                            }
-                        }}>
-                            <ThumbUpOffAltIcon sx={{width: '20px', height: '16px',}}/>
-                        </IconButton>
+                        <ThumbUpButton width={"20px"} height={"16px"}/>
                         <span style={{fontSize: '12px', width: '20px',color: "#999"}} >{likeCnt}</span>
-                        <IconButton sx={{
-                            width: '20px',
-                            height: '16px',
-                            ml: '10px',
-                            mr: '3px',
-                            '& :hover': {
-                                color: '#3399FF'
-                            }}}>
-                            <ThumbDownOffAltIcon sx={{width: '20px', height: '16px'}}/>
-                        </IconButton>
+
+                        <ThumbDownButton width={"20px"} height={"16px"}/>
                         <span style={{fontSize: '12px', width: '20px',color: "#999"}} >{hateCnt}</span>
+
                         <Button sx={{
                             width:'10px',
                             height:'20px',

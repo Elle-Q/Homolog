@@ -1,5 +1,4 @@
 import React from 'react';
-import {alpha} from "@mui/system";
 import uploadSvg from "../../assets/admin/upload1.svg";
 import IconButton from "@mui/material/IconButton";
 import {Tooltip} from "@mui/material";

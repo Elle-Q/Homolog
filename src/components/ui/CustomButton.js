@@ -64,9 +64,9 @@ export const CancelButton = (props) => {
 }
 
 export const CartButton = (props) => {
-    const {icon, money} = props
+    const {icon, money, onClick} = props
     return (
-        <Button sx={{
+        <Button onClick={onClick} sx={{
                         color: 'white',
                         width: '300px',
                         height: '50px',

@@ -4,19 +4,19 @@ import {useParams} from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import {getStarIcons} from "../../../utils/ToolUtil";
 import styled from "styled-components";
 import AirplayIcon from '@mui/icons-material/Airplay';
-import {AppGetItemFiles, GetItemFiles, listItem} from "../../../api/item.service";
+import {AppGetItemFiles} from "../../../api/item.service";
 import {BigLinkButton, CartButton} from "../../../components/ui/CustomButton";
 import catBriefInfo from "../../../json/catBriefInfo.json"
 import List from "./list/list";
-import Cart from "./cart/cart";
 import PrevShow from "./prev/prevShow";
 import ThreeD from "../play/3d/ThreeD";
 import Comments from "./comment/Comments";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {setItem} from "./item-slice";
+import {ThumbDownButton, ThumbUpButton} from "../../../components/ui/IconButton";
+import {addItem, openCart, selectCart} from "../cart/cart-slice";
 
 const Container = styled.div`
   width: 80%;
@@ -63,7 +63,7 @@ function Item(props) {
     let params = useParams();
     let id = params.id;
     const [data, setData] = useState({});
-    const [tab, setTab] = useState('list');
+    const [tab, setTab] = useState('review');
     let dispatch = useDispatch();
 
     useEffect(() => {
@@ -104,9 +104,14 @@ function Item(props) {
             return <PrevShow preList={data.Preview}/>
         }
     }
+
+    const handleAdd2Cart =() => {
+        dispatch(openCart())
+        dispatch(addItem(data))
+    }
+
     return (
         <div style={{backgroundSize:'100%',width: '100%', backgroundImage: `linear-gradient(to bottom,rgba(0, 0, 0,0.8), rgba(0, 0, 0, 0.8)),url(${data && data.Main})`}}>
-            <Cart item={data}></Cart>
             <Container>
                 <Grid container
                       direction="row"
@@ -141,10 +146,11 @@ function Item(props) {
                                 {
                                     data.Price === 0 ?
                                         <BigLinkButton icon={<AirplayIcon/>} linkTo={`/app/play/${data.ID}`}/> :
-                                        <CartButton icon={<ShoppingCartIcon fontSize="large"/>} money={data.Price}/>
+                                        <CartButton icon={<ShoppingCartIcon fontSize="large"/>} money={data.Price} onClick={handleAdd2Cart}/>
                                 }
                                 <StarDiv>
-                                    {getStarIcons(data.Scores)}
+                                    <ThumbUpButton ></ThumbUpButton>
+                                    <ThumbDownButton></ThumbDownButton>
                                 </StarDiv>
                             </Stack>
                         </Stack>

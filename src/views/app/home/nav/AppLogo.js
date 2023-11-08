@@ -1,21 +1,20 @@
 import React from 'react';
-import IconButton from "@mui/material/IconButton";
-import logo from "../../../../assets/cat.svg";
+import logo from "../../../../assets/logo/logo.png";
 import Typography from "@mui/material/Typography";
+import IconButton from "@mui/material/IconButton";
 
 function AppLogo(props) {
     const {title, color} = props
     return (
        <React.Fragment>
-            <IconButton>
-                <img className="logo" src={logo} style={{width: '50px', height: '50px'}} alt={"logo"}/>
-            </IconButton>
-
+           <img className="logo" src={logo} style={{width: '60px', height: '55px'}} alt={"logo"}/>
             <Typography
-                variant="h6"
+                variant="h4"
                 sx={{
-                    display: {xs: 'none', sm: 'block', fontFamily: '-apple-system'},
-                    color:`${color}`
+                    marginLeft: '15px',
+                    display: {xs: 'none', sm: 'block'},
+                    color:`${color}`,
+                    fontFamily: 'fantasy'
                 }}
             >
                 {title}

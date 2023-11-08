@@ -17,6 +17,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {selectShowNavBar, setNavBarShow} from "./navBarSlice";
 import {KeyboardArrowDown, KeyboardArrowUp} from "@mui/icons-material";
 import Box from "@mui/material/Box";
+import Cart from "../cart/cart";
 
 function Home(props) {
 
@@ -74,18 +75,19 @@ function Home(props) {
                 show && <NavBar/>
             }
             <Box id="toggleNavBar" sx={{
-                 textAlign: "center", zIndex: 100, width: '100%',height: '25px',
-                backgroundColor: '#111111',
+                textAlign: "center",
+                verticalAlign: "center",
+                zIndex: 100, width: '100%', height: '15px',
+                backgroundColor: '#00a896',
                 color: '#9f9f9f',
-                "&:hover" : {
-                    backgroundColor: '#00a896',
-                }
-            }}  onClick={toggleNavBar}>
-                {
-                    show ? <KeyboardArrowUp sx={{width: '25px', height: '25px'}}/> :  <KeyboardArrowDown sx={{width: '25px', height: '25px'}}/>
-                }
-
+                content: '"dd"',
+                "&:hover": {
+                    backgroundColor: '#e82986',
+                },
+            }} onClick={toggleNavBar}>
             </Box>
+            {/*购物车*/}
+            <Cart></Cart>
             <Routes>
                 {routes.map(({path, component}, index) => (
                     <Route key={index} path={path} element={component}/>

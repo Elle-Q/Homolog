@@ -10,6 +10,7 @@ import playerReducer from "../views/app/play/playSlice";
 import loadingReducer from "../components/loading/loading-slice";
 import itemReducer from "../views/app/item/item-slice";
 import navBarReducer from "../views/app/home/navBarSlice";
+import cartReducer from "../views/app/cart/cart-slice";
 
 export default configureStore({
     reducer: {
@@ -23,7 +24,8 @@ export default configureStore({
         refresh:refreshReducer,
         player:playerReducer,
         loadingModel:loadingReducer,
-        navBar:navBarReducer
+        navBar:navBarReducer,
+        cart:cartReducer,
     },
     middleware: getDefaultMiddleware({
         serializableCheck: false

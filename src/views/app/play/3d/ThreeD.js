@@ -68,7 +68,7 @@ function ThreeD(props) {
         gl.shadowMap.type = THREE.PCFShadowMap;
         gl.antialias = true
         gl.setClearAlpha(true)
-        scene.background = new THREE.Color('#25a18e');
+        scene.background = new THREE.Color('#171717');
     }
 
     //switchBar改变3d文件展示
@@ -89,7 +89,7 @@ function ThreeD(props) {
             top: 0,
             left: 0,
             mb: 0,
-            boxShadow: "0 0 2px #3399ff",
+            boxShadow: "0 0 2px #00a896",
             borderRadius: '20px',
             transition: 'width,height .8s,.1s ease-in-out',
         }}>

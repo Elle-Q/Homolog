@@ -36,6 +36,7 @@ function Subject(props) {
                    spacing={2}
                    sx={{mt: '20px'}}
                    justifyContent="center"
+                   display="flex"
             >
                 {
                     subject.Items.map((item, index) => {

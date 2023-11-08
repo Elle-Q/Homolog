@@ -32,7 +32,6 @@ import {useEffect} from "react";
 import {getUser} from '../../../../api/user.service'
 import {getColorFromUserStatus} from "../../../../utils/ToolUtil";
 import useScroll from "../../../../hook/useScroll";
-import {selectShowNavBar, setShow} from "../navBarSlice";
 
 const Search = styled('div')(({theme}) => ({
     position: 'relative',
@@ -42,7 +41,7 @@ const Search = styled('div')(({theme}) => ({
         backgroundColor: alpha('#edf2f4', 0.9),
     },
     marginLeft: '10%',
-    width: '1000px',
+    width: '50%',
     [theme.breakpoints.up('sm')]: {
         marginRight: theme.spacing(5),
     },
@@ -97,6 +96,7 @@ function NavBar(props) {
                 border: "none",
             }
         }}>
+
             <AppBar position="static" sx={{backgroundColor: alpha('#0A1929', 0.5)}}>
                 <Toolbar sx={{
                     backgroundColor: alpha('#0A1929', 0.5),

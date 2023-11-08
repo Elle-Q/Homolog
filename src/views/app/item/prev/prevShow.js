@@ -33,10 +33,6 @@ const fileShowContainer = {
     }
 }
 
-const ImgContainer = styled.div`
-  width: 100%;
-`
-
 
 function PrevShow(props) {
     const {preList} = props

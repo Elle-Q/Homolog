@@ -4,8 +4,9 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import {useDispatch, useSelector} from "react-redux";
-import {close, open, selectItemModal} from "../item-slice";
 import {Link} from "react-router-dom";
+import {selectCart} from "../../cart/cart-slice";
+import {selectItemModal} from "../item-slice";
 
 const Container = styled.div`
   position: relative;
@@ -67,11 +68,18 @@ const BuyButton = styled(Button)({
     }
 })
 
+
 function ChapterCard(props) {
 
     const {chapter, index} = props
     const dispatch = useDispatch();
     const {item} = useSelector(selectItemModal)
+    const {openCart, addItem} = useSelector(selectCart);
+
+    const handleAdd2Cart =() => {
+        dispatch(addItem(item))
+        dispatch(openCart)
+    }
 
     return (
         <Container index={index}>
@@ -106,7 +114,7 @@ function ChapterCard(props) {
                                     <Link to={`/app/play/${item.ID}`} style={{color: '#EB5E28'}}>
                                         <StudyButton>学习观看</StudyButton>
                                     </Link> :
-                                    <BuyButton onClick={() => dispatch(open())}>立即购买</BuyButton>
+                                    <BuyButton onClick={handleAdd2Cart}>立即购买</BuyButton>
                             }
                             <span>13:35:34</span>
                         </Typography>

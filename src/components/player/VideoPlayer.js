@@ -2,11 +2,10 @@ import React, {useEffect, useState} from 'react';
 import Player from "./Player";
 import Box from "@mui/material/Box";
 import ControlBar from "./ControlBar";
-import InnerPlayerHeader from "../../views/app/play/video/InnerPlayerHeader";
 import Barrage from 'barrage-ui';
 import barageData from '../../json/barrage.json'
-import Hls from "hls.js";
 import DanmuInput from "../../views/app/play/video/DanmuInput";
+import Stack from "@mui/material/Stack";
 
 function VideoPlayer(props) {
 
@@ -22,6 +21,7 @@ function VideoPlayer(props) {
     const videoJsOptions = {
         autoplay: false,
         height:"auto",
+        aspectRatio: "4:3",
         controls: true,
         responsive: true,
         fluid: true,
@@ -141,28 +141,21 @@ function VideoPlayer(props) {
 
 
     return (
-        <Box
+        <Stack
             id="videoPlayContainer"
             sx={{
-                height:'530px',
-                width:'810px',
-                position:"absolute",
-                borderRadius: 10,
+                width: '100%',
                 backgroundColor: 'black',
+                borderRadius: '0 0 10px 10px',
                 zIndex: 1,
+                display: 'flex'
             }}
             onMouseEnter={() => setVisible("visible")}
             onMouseLeave={() => setVisible("hidden")}
         >
-            <InnerPlayerHeader visible={visible}/>
-
-            <Box sx={{margin: '5px 30px '}}>
-                <Player
-                    options={videoJsOptions}
-                    onReady={handlePlayerReady}
-                />
+            <Box sx={{display: 'flex', width:'65%', margin: 'auto'}}>
+                <Player options={videoJsOptions} onReady={handlePlayerReady} />
             </Box>
-
             <ControlBar play={play}
                         togglePlay={togglePlay}
                         visible={visible}
@@ -175,7 +168,7 @@ function VideoPlayer(props) {
             />
             <DanmuInput ref={barrageInputRef} handleDanmuSend={handleDanmuSend}/>
 
-        </Box>
+        </Stack>
     );
 }
 

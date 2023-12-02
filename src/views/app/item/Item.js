@@ -1,25 +1,37 @@
 import React, {useEffect, useState} from 'react';
-import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import {Link, useParams} from "react-router-dom";
-import items from "../../../json/items.json";
-import PriceTag from "../../../components/PriceTag";
+import {useParams} from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
-import ByAuthor from "../../../components/ByAuthor";
-import {alpha} from "@mui/system";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import {getStarIcons} from "../../../utils/ToolUtil";
 import styled from "styled-components";
-import PageTipFloatingBar from "../../../components/PageTipFloatingBar";
 import AirplayIcon from '@mui/icons-material/Airplay';
-import {GetItem, GetItemWithFiles} from "../../../api/item.service";
+import {AppGetItemFiles} from "../../../api/item.service";
 import {BigLinkButton, CartButton} from "../../../components/ui/CustomButton";
-import {useDispatch} from "react-redux";
-import {setItemId} from "../play/playSlice";
+import catBriefInfo from "../../../json/catBriefInfo.json"
+import List from "./list/list";
+import PrevShow from "./prev/prevShow";
+import ThreeD from "../play/3d/ThreeD";
+import Comments from "./comment/Comments";
+import {useDispatch, useSelector} from "react-redux";
+import {setItem} from "./item-slice";
+import {ThumbDownButton, ThumbUpButton} from "../../../components/ui/IconButton";
+import {addItem, openCart, selectCart} from "../cart/cart-slice";
 
-const StyledDiv = styled.div`
-  width: 100%;
+const Container = styled.div`
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+  color: white;
+  //position: absolute;
+  
+  & span {
+    color: grey;
+  }
+`
+
+const StarDiv = styled.div`
+  width: 300px;
   min-height: 50px;
   background-color: rgba(19, 47, 76, 0.2);
   border-radius: 10px;
@@ -31,106 +43,133 @@ const StyledDiv = styled.div`
   color: #e9c46a;
 `
 
+const TabP = styled.p`
+  cursor: pointer;
+  width: 110px;
+  height: 30px;
+  margin-bottom: 0;
+  text-align: center;
+  color: white;
+  font-size: 14px;
+  margin-right: 50px;
+
+  &:hover {
+    color: #EB5050;
+    border-bottom: 3px solid #EB5050;
+  }
+`
+
 function Item(props) {
     let params = useParams();
     let id = params.id;
-    const dispatch = useDispatch();
-    const [item, setItem] = useState({});
+    const [data, setData] = useState({});
+    const [tab, setTab] = useState('review');
+    let dispatch = useDispatch();
 
     useEffect(() => {
         const fetch = async () => {
-            await GetItem(id).then((data) => {
-                setItem(data)
-                dispatch(setItemId(data.ID))
+            await AppGetItemFiles(id).then((data) => {
+                setData(data)
+                dispatch(setItem(data))
             })
         }
         fetch().catch()
     }, [])
 
+    const tabClick = (tab, event) => {
+        setTab(tab === '测评' ? "review" : "list");
+        let allTabs = document.getElementsByName("tab");
+        allTabs.forEach(tab => {
+            tab.style.color = 'white';
+            tab.style.borderBottom = 'none';
+        })
+        event.target.style.borderBottom = '3px solid #EB5050';
+        event.target.style.color = '#EB5050';
+    }
+
+    function getTabContent(type) {
+        if (type === undefined) return null;
+        let tabInfo = catBriefInfo[type].tab;
+        const ps = [];
+        tabInfo.forEach((tab, index) => {
+            ps.push(<TabP name={'tab'} id={"tab-".concat(index)} onClick={(event) => tabClick(tab, event)}>{tab}</TabP>)
+        })
+        return ps
+    }
+
+    function getPrevArea() {
+        if (data.Type === 'three') {
+            return <ThreeD models={data.Preview}/>
+        } else {
+            return <PrevShow preList={data.Preview}/>
+        }
+    }
+
+    const handleAdd2Cart =() => {
+        dispatch(openCart())
+        dispatch(addItem(data))
+    }
+
     return (
-        <Box sx={{
-            width: '60%',
-            ml: '20%',
-            mr: '20%',
-            borderRadius: '10px',
-            mt: '20px',
-            boxShadow: '0 0 5px black',
-            backgroundColor: "#0a0908",
-        }}>
-            <Grid container
-                  direction="row"
-                  alignItems="flex-start"
-                  justifyContent="flex-start"
-                  columnSpacing={{xs: 1, sm: 2, md: 3}}
-            >
-                <Grid item style={{textAlign: "center"}} xs={12}>
-                    <img src={`${item.Preview}`} alt='bg1'
-                         style={{
-                             maxWidth: '1000px',
-                             borderRadius: '3px'
-                         }}/>
+        <div style={{backgroundSize:'100%',width: '100%', backgroundImage: `linear-gradient(to bottom,rgba(0, 0, 0,0.8), rgba(0, 0, 0, 0.8)),url(${data && data.Main})`}}>
+            <Container>
+                <Grid container
+                      direction="row"
+                      alignItems="flex-start"
+                      justifyContent="flex-start"
+                >
+                    {/*预览区域*/}
+                    <Grid item xs={9} style={{textAlign: 'center', alignItems: 'end'}}>
+                        {getPrevArea()}
+                    </Grid>
+                    <Grid item xs={3}>
+                        <Stack direction='column' spacing={2} sx={{mt: '10px'}}>
+                            <img src={data && data.Main} alt='bg1' style={{width: '100%', margin: "auto", borderRadius: '10px'}}/>
+                            <Typography variant="h4" component="div">
+                                {data.Name}
+                            </Typography>
+
+                            <Typography component="p">
+                                {data.Desc}
+                            </Typography>
+
+                            <Stack>
+                                <span> 作者: {data.Author}</span>
+                                <span> 章节目录: >></span>
+                                <span> 全部测评: {data.DownCnt}</span>
+                                <span> 适用软件: blender</span>
+                                <span> 时长: 3: 23: 00</span>
+                                <span> 上传时间: 2023-10-12</span>
+                            </Stack>
+
+                            <Stack sx={{alignItems: 'center'}}>
+                                {
+                                    data.Price === 0 ?
+                                        <BigLinkButton icon={<AirplayIcon/>} linkTo={`/app/play/${data.ID}`}/> :
+                                        <CartButton icon={<ShoppingCartIcon fontSize="large"/>} money={data.Price} onClick={handleAdd2Cart}/>
+                                }
+                                <StarDiv>
+                                    <ThumbUpButton ></ThumbUpButton>
+                                    <ThumbDownButton></ThumbDownButton>
+                                </StarDiv>
+                            </Stack>
+                        </Stack>
+                    </Grid>
+
+                    <Grid item xs={12} sx={{marginTop: '30px'}}>
+                        <Stack direction={'row'} style={{justifyContent: 'center', borderBottom: '1px solid grey'}}>
+                            {getTabContent(data.Type)}
+                        </Stack>
+                    </Grid>
+
+                    <Grid item xs={12} sx={{marginTop: '30px'}}>
+                        {
+                            tab === 'list' ? <List /> : <Comments/>
+                        }
+                    </Grid>
                 </Grid>
-
-                <Grid item xs={7} style={{marginLeft: "20px"}}>
-                    <Stack direction='column'
-                           spacing={2}
-                           sx={{mt: '10px'}}
-                    >
-                        <PriceTag height={56} price={item.Price}/>
-                        <Typography variant="h4"
-                                    component="div"
-                                    color="secondary.main"
-                                    sx={{mt: '5px', ml: '15px'}}>
-                            {item.Name}
-                        </Typography>
-
-                        <ByAuthor author={item.Author}/>
-
-                        <Typography variant="h8"
-                                    component="div"
-                                    color="secondary.main"
-                                    sx={{mt: '5px', ml: '15px'}}>
-                            描述
-                        </Typography>
-                        <p style={{color: "rgba(51,153,255,0.7)", marginLeft: '4px'}}>
-                            {item.Desc}
-                        </p>
-                    </Stack>
-                </Grid>
-
-                <Grid item xs={4} style={{marginTop: '40px', marginLeft: '40px',}}>
-
-                    <CartButton icon={<ShoppingCartIcon sx={{marginLeft: '10px'}} fontSize="large"/>}/>
-                    <BigLinkButton icon={<AirplayIcon/>} linkTo={`/app/play/${item.ID}`}/>
-                    <StyledDiv>
-                        {getStarIcons(item.Scores)}
-                    </StyledDiv>
-
-                    <StyledDiv style={{color: "#CCC5B9", padding: '10px'}}>
-                        假如时光已逝
-                        <br/>
-                        鸟儿不再歌唱
-                        <br/>
-                        风儿也吹倦了
-                        <br/>
-                        那就用黑暗的厚幕把我盖上
-                        <br/>
-                        如同黄昏时节你用睡眠的衾被裹住大地
-                        <br/>
-                        又轻轻合上睡莲的花瓣
-                        <br/>
-                        路途未完 行囊已空
-                        <br/>
-                        衣裳破裂污损 人已精疲力竭
-                        <br/>
-                        你驱散了旅客的羞愧和困窘
-                        <br/>
-                    </StyledDiv>
-                </Grid>
-            </Grid>
-
-            <PageTipFloatingBar/>
-        </Box>
+            </Container>
+        </div>
     );
 }
 

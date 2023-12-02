@@ -4,16 +4,7 @@ import Typography from "@mui/material/Typography";
 import {useTheme} from "@mui/material/styles";
 import CardMedia from "@mui/material/CardMedia";
 import {alpha} from "@mui/system";
-import { Link } from "react-router-dom";
-import {styled} from '@mui/system';
-
-const StyledLink = styled(Link)`
-    text-decoration: none;
-
-    &:focus, &:hover, &:visited, &:link, &:active {
-        text-decoration: none;
-    }
-`;
+import {StyledLink} from "../../../../../components/styled/StyledComponent";
 
 function ImageCard(props) {
     const theme = useTheme();

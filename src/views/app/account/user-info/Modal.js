@@ -93,7 +93,7 @@ function Modal(props) {
         })
     };
 
-    const handleSave = () => {
+    const handleSave = (event) => {
         dispatch(updateUser({
             ...userDetail,
             Name: nameRef.current.value,
@@ -101,12 +101,12 @@ function Modal(props) {
             Moto:motoRef.current.value,
         }))
         //关闭侧边栏
-        toggleDrawer(false)()
+        toggleDrawer(false)(event)
     }
 
     const GenderRadio = () => (
         <FormControl component="fieldset" style={{marginLeft: '10px', marginTop: '20px'}}>
-            <FormLabel component="legend" style={{marginBottom: '10px', color: '#403D39'}}>Gender</FormLabel>
+            <FormLabel component="legend" style={{marginBottom: '10px', color: '#403D39'}}>性别</FormLabel>
             <RadioGroup
                 aria-label="gender"
                 name="controlled-radio-buttons-group"
@@ -199,7 +199,7 @@ function Modal(props) {
             </CusInput>
 
             <div style={{marginTop: '30px', padding: '20px'}}>
-                <CancelButton/>
+                <CancelButton handleClick={(event) => toggleDrawer(false)(event)}/>
                 <OKButton handleClick={handleSave}/>
             </div>
 

@@ -1,5 +1,5 @@
 import api from "./api";
-import {setItem} from "../views/app/play/playSlice";
+import {setChapters} from "../views/app/play/playSlice";
 
 export const GetItem = (itemId) => {
     return api.get(`/leetroll-app/item/${itemId}`)
@@ -14,10 +14,26 @@ export const GetItemFiles = (itemId) => {
             return resp
         })
 }
-export const GetItemWithFiles = (itemId) => dispatch => {
+
+export const AppGetItemFiles = (itemId) => {
+    return api.get(`/leetroll-app/item/files/${itemId}`)
+        .then(resp => {
+            return resp
+        })
+}
+//todo： delete
+/*export const GetItemWithFiles = (itemId) => dispatch => {
     return api.get(`/leetroll-app/item/files/${itemId}`)
         .then(resp => {
             dispatch(setItem(resp))
+            return resp
+        })
+}*/
+
+export const GetChapters = (itemId) => dispatch => {
+    return api.get(`/leetroll-app/item/chapter/${itemId}`)
+        .then(resp => {
+            dispatch(setChapters(resp))
             return resp
         })
 }
@@ -38,6 +54,13 @@ export const UpdateItem = (param) => {
 
 export const UploadItemFiles = (param) => {
     return api.post('/leetroll-admin/item/upload', param)
+        .then(resp => {
+            return resp
+        })
+}
+
+export const UploadItemChapters = (param) => {
+    return api.post('/leetroll-admin/chapter/upload', param)
         .then(resp => {
             return resp
         })

@@ -8,3 +8,10 @@ export const DeleteFile = (param) => {
             return resp
         })
 }
+
+export const DeleteChapterFile = (param) => {
+    return api.post('/leetroll-admin/chapter/file/delete', param)
+        .then(resp => {
+            return resp
+        })
+}

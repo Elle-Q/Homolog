@@ -16,7 +16,7 @@ import {selectLoadingModal, setLoading} from "../../../../components/loading/loa
 import Loading from "../../../../components/loading/Loading";
 
 //canvas的高度
-const height = 600
+const height = 700
 
 function ThreeD(props) {
     const {models} = props
@@ -48,7 +48,7 @@ function ThreeD(props) {
             await dispatch(setLoading(true))
         }
         loadingFetch().then( () => {
-                if (models.length < 1) return
+                if (!models || models.length < 1) return
                 const modelComponent = getModelByType(models[0].QnLink, models[0].Format)
                 setModel(modelComponent)
             }
@@ -57,7 +57,7 @@ function ThreeD(props) {
 
     const size = {
         height: `${height}px`,
-        width: `${height * aspect}px`
+        width: `${height+400}px`
     }
 
     //3d场景创建完成的准备工作
@@ -68,7 +68,7 @@ function ThreeD(props) {
         gl.shadowMap.type = THREE.PCFShadowMap;
         gl.antialias = true
         gl.setClearAlpha(true)
-        scene.background = new THREE.Color('#25a18e');
+        scene.background = new THREE.Color('#171717');
     }
 
     //switchBar改变3d文件展示
@@ -88,8 +88,8 @@ function ThreeD(props) {
             zIndex: fullScrren ? 999 : 0,
             top: 0,
             left: 0,
-            mb: '10px',
-            boxShadow: "0 0 2px #3399ff",
+            mb: 0,
+            boxShadow: "0 0 2px #00a896",
             borderRadius: '20px',
             transition: 'width,height .8s,.1s ease-in-out',
         }}>

@@ -7,7 +7,7 @@ import {Link} from "react-router-dom";
 import AirplayIcon from "@mui/icons-material/Airplay";
 
 const StyledDiv = styled.div`
-        width: 100%;
+        width: 300px;
         min-height: 50px;
         background-color: rgba(19,47,76,0.2);
         border-radius: 10px;
@@ -25,13 +25,13 @@ export const OKButton = (props) => {
     return (
         <Button sx={{
             borderColor:'#252422',
-            backgroundColor:"transparent",
             fontSize:'12px',
-            color:'secondary.light',
+            color:'white',
             width:'80px',
-            height:'50px',
+            height:'40px',
+            backgroundColor:alpha('#0aa858', 0.5),
             '&:hover': {
-                backgroundColor:alpha('#0aa858', 0.3),
+                backgroundColor:alpha('#0aa858', 0.9),
                 borderColor:'#252422',
                 fontSize:'14px',
             }
@@ -47,13 +47,13 @@ export const CancelButton = (props) => {
     return (
         <Button sx={{
             borderColor:'#252422',
-            backgroundColor:"transparent",
             fontSize:'12px',
-            color:'text.secondary',
+            color:'secondary.light',
             width:'80px',
-            height:'50px',
+            height:'40px',
+            backgroundColor:alpha('#403D39', 0.3),
             '&:hover': {
-                backgroundColor:alpha('#403D39', 0.3),
+                backgroundColor:alpha('#403D39', 0.9),
                 borderColor:'#252422',
                 fontSize:'14px',
             }
@@ -64,13 +64,11 @@ export const CancelButton = (props) => {
 }
 
 export const CartButton = (props) => {
-    const {icon} = props
+    const {icon, money, onClick} = props
     return (
-        <Typography variant="h5"
-                    component="button"
-                    color="white"
-                    sx={{
-                        width: '100%',
+        <Button onClick={onClick} sx={{
+                        color: 'white',
+                        width: '300px',
                         height: '50px',
                         backgroundColor: "red",
                         border: '1px solid red',
@@ -83,14 +81,10 @@ export const CartButton = (props) => {
                             border: "none",
                             cursor: "pointer",
                             color: "red",
-                            '& *': {
-                                transform: 'scale(1.1)',
-                                transition: 'transform 0.4s ease-in-out',
-                            }
                         }
                     }}>
-            {icon}
-        </Typography>
+            {icon} <span style={{color: 'white'}}>(￥{money})</span>
+        </Button>
     )
 }
 

@@ -1,11 +1,10 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {CatStatus, RscType} from "../../../utils/constant/constant";
-import {ImagInputWithHeader, InputWithHeader, SelectInputWithHeader} from "../../../components/ui/CustomInput";
+import {CatStatus} from "../../../utils/constant/constant";
+import {InputWithHeader, SelectInputWithHeader} from "../../../components/ui/CustomInput";
 import Modal from "../../../components/Modal";
-import {selectItemModal, close} from "./item-slice";
+import {selectItemModal, close} from "./admin-item-slice";
 import {useSelector, useDispatch} from 'react-redux'
 import {openAlert} from "../../../components/alert/ops/alertSlice";
-import {upload} from "../../../api/qiniu.service";
 import {ListCatName, UpdateCat} from "../../../api/cat.service";
 import MenuItem from "@mui/material/MenuItem";
 import {UpdateItem} from "../../../api/item.service";
@@ -14,6 +13,7 @@ import Chip from "@mui/material/Chip";
 import IconButton from "@mui/material/IconButton";
 import {Input} from "@mui/material";
 import {setRefresh} from "../../../app/refreshSlice";
+import CommentInput from "../../../components/CommentInput";
 
 function ItemModal(props) {
     const {openModal, readOnly, data} = useSelector(selectItemModal);
@@ -23,6 +23,7 @@ function ItemModal(props) {
     const [catNames, setCatNames] = useState(null);
     const [tags, setTags] = useState(detail.Tags); //todo: 设计键
     const [catSelect, setCatSelect] = useState(null); //todo: 设计键
+    const [statusSelect, setStatusSelect] = useState(null); //todo: 设计键
     const [showTagInput, setShowTagInput] = useState(false);
     const tagRef = useRef();
     const dispatch = useDispatch();
@@ -35,6 +36,7 @@ function ItemModal(props) {
         setDetail(data)
         setPreUri(data.Preview)
         setCatSelect(data && data.Cat && data.Cat.ID)
+        setStatusSelect(data && data.State)
         setTags(data.Tags)
     }, [data])
 
@@ -67,16 +69,15 @@ function ItemModal(props) {
 
     //保存资源信息
     const handleSave = async () => {
-
         let param = Object.assign({}, detail, {
-            Tags: "",
             // Tags: tags.toString(),
+            Tags: "",
             CatId: catSelect
         });
         if (!detail.Status) param.Status = "show"
 
         //上传文件到七牛, 获取图片外链
-        preFile && await upload(preFile).then(link =>  param.Preview = link );
+        // preFile && await upload(preFile).then(link =>  param.Preview = link );
 
         await UpdateItem(param).then(() => {
             handleClose();
@@ -107,15 +108,6 @@ function ItemModal(props) {
                                  disabled={readOnly}
                                  onChange={handleInputChange}/>
             </div>
-
-            <div style={{display: "flex", marginTop: '30px'}}>
-                <ImagInputWithHeader
-                    header="预览图:"
-                    name="Preview"
-                    img={preUri}
-                    onChange={handleInputChange}/>
-            </div>
-
             <div style={{display: "flex", marginTop: '30px'}}>
                 <InputWithHeader header="作者:"
                                  name="Author"
@@ -144,44 +136,39 @@ function ItemModal(props) {
                 <SelectInputWithHeader
                     name="Status"
                     header="状态:"
-                    value={detail.Status || "show"}
-                    handleChange={handleInputChange}
-                    disabled={readOnly}
-                    type="enum"
-                    items={CatStatus}/>
-
-                <SelectInputWithHeader
-                    name="CatId"
-                    header="类别:"
-                    value={catSelect || ""}
-                    handleChange={(e)=>setCatSelect(e.target.value)}
+                    value={statusSelect || "show"}
+                    handleChange={(e) => setStatusSelect(e.target.value)}
                     disabled={readOnly}>
                     {
-                        catNames && catNames.map((item, index) => (
-                            <MenuItem key={item.ID} value={item.ID}>
-                                {item.Title}
+                        Object.keys(CatStatus).map((value, index) => (
+                            <MenuItem key={index} value={value}>
+                                {CatStatus[value]}
                             </MenuItem>
                         ))
                     }
                 </SelectInputWithHeader>
 
                 <SelectInputWithHeader
-                    name="Status"
-                    header="资源主文件类型:"
-                    value={detail.Type || "video"}
-                    handleChange={handleInputChange}
-                    disabled={readOnly}
-                    type="enum"
-                    items={RscType}/>
+                    name="CatId"
+                    header="属于类别:"
+                    value={catSelect || ""}
+                    handleChange={(e) => setCatSelect(e.target.value)}
+                    disabled={readOnly}>
+                    {
+                        catNames && catNames.map((cat, index) => (
+                            <MenuItem key={cat.ID} value={cat.ID}>
+                                {cat.Title}
+                            </MenuItem>
+                        ))
+                    }
+                </SelectInputWithHeader>
 
             </div>
             <div style={{display: "flex", marginTop: '30px'}}>
                 <span style={{marginRight: '15px', verticalAlign: "bottom"}}>标签:</span>
                 {
                     tags && tags.map((key, index) => {
-                        return <React.Fragment>
-                            <Chip
-                                sx={{
+                        return <Chip sx={{
                                     mr: "15px",
                                     boxShadow: '0 0 2px #CCC5B9',
                                     '& > .MuiChip-deleteIcon:hover': {
@@ -194,7 +181,6 @@ function ItemModal(props) {
                                     setTags(tags.filter(t => t !== key))
                                 }}
                             />
-                        </React.Fragment>
                     })
                 }
                 {

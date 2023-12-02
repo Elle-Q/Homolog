@@ -4,6 +4,7 @@ import {Canvas} from "@react-three/fiber";
 import {OrbitControls} from "@react-three/drei";
 import * as THREE from "three";
 import GLTF from "../play/3d/GLTF";
+import GLB from "../play/3d/GLB";
 
 function Partner(props) {
 
@@ -33,7 +34,7 @@ function Partner(props) {
                     <ambientLight position={[5, 0, 0]} color='white' intensity={2}/>
                     <pointLight position={[-6, 5.08, 1.33]} color={0x60bc} intensity={6}/>
                     <pointLight position={[2.13, -1.7, -2.1]} color={0xff0000} intensity={1.26}/>
-                    <GLTF rsc='/3d/gltf/mirror/mirror.gltf'/>
+                    <GLB rsc='/3d/glb/LittlestTokyo.glb' onComplete={()=>{}}/>
                     <OrbitControls/>
                 </Suspense>
             </Canvas>

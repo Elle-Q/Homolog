@@ -5,19 +5,9 @@ export const uploadSlice = createSlice({
     initialState: {
         item: null,
         itemID: null,
-        selectedFile: null,
-        rescType: 'main',
-        newRescFiles:[]
+        refesh: false,
     },
     reducers: {
-
-        setSelectedFile: (state, action) => {
-            const {file} = action.payload
-            return {
-                ...state,
-                selectedFile: file,
-            }
-        },
 
         setItem: (state, action) => {
             return {
@@ -33,24 +23,17 @@ export const uploadSlice = createSlice({
             }
         },
 
-        setRescType: (state, action) => {
+        setRefesh: (state, action) => {
             return {
                 ...state,
-                rescType: action.payload,
-            }
-        },
-
-        setNewRescFiles: (state, action) => {
-            return {
-                ...state,
-                newRescFiles: action.payload,
+                refesh: action.payload,
             }
         },
 
     }
 })
 
-export const {setSelectedFile, setRescType, setItemID, setItem, setNewRescFiles} = uploadSlice.actions
+export const {setRescType, setItemID,setRefesh, setItem} = uploadSlice.actions
 export const selectUploadItemResc = state => state.uploadItemResc
 
 export default uploadSlice.reducer

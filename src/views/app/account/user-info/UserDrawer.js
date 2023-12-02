@@ -15,6 +15,7 @@ function UserDrawer(props) {
             }}
             open={open}
             onClose={toggleDrawer(false)}
+            onClick={(event) => event.stopPropagation()}
         >
             <InfoModal user={user} toggleDrawer={toggleDrawer}/>
         </Drawer>

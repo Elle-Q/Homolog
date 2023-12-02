@@ -21,20 +21,19 @@ import {css} from "@emotion/react";
 
 
 const override = css`
-      display: block;
-      margin: 0 auto;
-      border-color: white;
-      position: absolute;
-      top: 48%;
-      left: 46%;
-      z-index: 1000;
-    `;
+  display: block;
+  margin: 0 auto;
+  border-color: white;
+  position: absolute;
+  top: 48%;
+  left: 46%;
+  z-index: 1000;
+`;
 
 
 function Loading({loading}) {
     return (
-        <BeatLoader  loading={loading} size={30} color="white" css={override}/>
-
+        <BeatLoader loading={loading} size={30} color="white" css={override}/>
     );
 }
 

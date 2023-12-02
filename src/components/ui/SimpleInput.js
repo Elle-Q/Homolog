@@ -1,7 +1,7 @@
 import React from "react";
 import Input from "@mui/material/Input";
 
-export const SimpleInput = React.forwardRef( (props, ref) => {
+export const SimpleInput = React.forwardRef((props, ref) => {
     const {value, name, placeholder, marginRight} = props;
 
     return (
@@ -19,7 +19,8 @@ export const SimpleInput = React.forwardRef( (props, ref) => {
                     fontSize: '14px',
                     fontFamily: '-apple-system',
                     marginRight: {marginRight},
-                    width: '200px'
+                    width: '200px',
+
                 }}/>
         </React.Fragment>
     )

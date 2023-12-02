@@ -7,7 +7,6 @@ class QiniuService {
     getUpToken() {
         return api.get("/leetroll-app/qiniu/token")
             .then(resp => {
-
                     return resp
                 },
                 err => {
@@ -33,7 +32,7 @@ export const upload = (file ) => {
     }
 
     const config = {
-        useCdnDomain: false,
+        useCdnDomain: true,
         region: qiniu.region.as0
     };
 

@@ -1,11 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import Player from "./Player";
 import Box from "@mui/material/Box";
-import ControlBar from "./ControlBar";
-import InnerPlayerHeader from "../../views/app/play/video/InnerPlayerHeader";
-import Barrage from 'barrage-ui';
-import barageData from '../../json/barrage.json'
-import Hls from "hls.js";
 
 
 function SimplePlayer(props) {
@@ -18,6 +13,7 @@ function SimplePlayer(props) {
     const videoJsOptions = {
         autoplay: false,
         height: "auto",
+        aspectRatio: "4:3",
         controls: true,
         responsive: true,
         fluid: true,
@@ -60,7 +56,7 @@ function SimplePlayer(props) {
             id="videoPlayContainer"
             sx={{
                 ...size,
-                position: "absolute",
+                // position: "absolute",
                 borderRadius: '10px',
                 zIndex: 1,
             }}

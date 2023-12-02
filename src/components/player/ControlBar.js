@@ -11,7 +11,7 @@ import Slider from "@mui/material/Slider";
 import Switch from "@mui/material/Switch";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Typography from "@mui/material/Typography";
-import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
+import PopupState, {bindTrigger, bindMenu} from 'material-ui-popup-state';
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import FullscreenExitIcon from '@mui/icons-material/FullscreenExit';
@@ -74,89 +74,98 @@ function ControlBar({
                 <ReplayRoundedIcon fontSize="medium" sx={{color: 'secondary.light'}}/>
             </Button>
 
-            <Box sx={{width: 80, ml: 40, mr:2}}>
-                <Stack direction="row" alignItems="center">
-                    <VolumeUp/>
-                    <Slider aria-label="Volume"
-                            value={value}
-                            onChange={handleChange}
-                            sx={{color: "secondary.light"}}
-                            size="small"
+            <div style={{display: 'flex', justifyContent: 'end', alignItems: 'center', flex: '1'}}>
+                <Box sx={{width: 80, mr: 2}}>
+                    <Stack direction="row" alignItems="center">
+                        <VolumeUp/>
+                        <Slider aria-label="Volume"
+                                value={value}
+                                onChange={handleChange}
+                                sx={{color: "secondary.light"}}
+                                size="small"
+                        />
+                    </Stack>
+                </Box>
+                <Box sx={{
+                    display: "flex"
+                }}>
+                    <FormControlLabel
+                        size="small"
+                        control={<Switch aria-label='Switch Danmu'
+                                         size="small"
+                                         sx={{
+                                             "& > span.MuiSwitch-track": {backgroundColor: 'white'},
+                                             ".MuiSwitch-switchBase.Mui-checked .MuiSwitch-thumb":
+                                                 {
+                                                     backgroundColor: 'secondary.light',
+                                                     boxShadow: '0 0 5px #3399FF',
+                                                 },
+                                             ".MuiSwitch-thumb":
+                                                 {
+                                                     backgroundColor: 'primary.dark',
+                                                     boxShadow: '0 0 5px #EB5E28',
+                                                 },
+                                         }}
+                                         color="third"
+                                         onChange={toggleShowBarrage}
+                                         checked={barrageVisible}
+                        />}
+                        label={<Typography
+                            style={{
+                                fontSize: '0.8rem',
+                                fontFamily: 'typography.fontFamily'
+                            }}>弹幕</Typography>}
                     />
-                </Stack>
-            </Box>
-            <Box sx={{
-                display:"flex"
-            }}>
-                <FormControlLabel
-                    size="small"
-                    control={<Switch aria-label='Switch Danmu'
-                                     size="small"
-                                     sx={{
-                                         "& > span.MuiSwitch-track": {backgroundColor: 'white'},
-                                         ".MuiSwitch-switchBase.Mui-checked .MuiSwitch-thumb":
-                                             {
-                                                 backgroundColor: 'secondary.light',
-                                                 boxShadow: '0 0 5px #3399FF',
-                                             },
-                                         ".MuiSwitch-thumb":
-                                             {
-                                                 backgroundColor: 'primary.dark',
-                                                 boxShadow: '0 0 5px #EB5E28',
-                                             },
-                                     }}
-                                     color="third"
-                                     onChange={toggleShowBarrage}
-                                     checked={barrageVisible}
-                                     />}
-                    label={<Typography
-                        style={{
+                </Box>
+
+                <Typography
+                    style={{
                         fontSize: '0.8rem',
-                        fontFamily:'typography.fontFamily'
-                        }}>弹幕</Typography>}
-                />
-            </Box>
+                        fontFamily: 'typography.fontFamily'
+                    }}>清晰度</Typography>
 
-            <Typography
-                style={{
-                    fontSize: '0.8rem',
-                    fontFamily:'typography.fontFamily'
-                }}>清晰度</Typography>
+                <PopupState variant="popover" popupId="demo-popup-menu">
+                    {(popupState) => (
+                        <React.Fragment>
+                            <Button sx={{
+                                border: "none",
+                                backgroundColor: "transparent",
+                                color: 'secondary.light',
+                                fontSize: '0.8rem',
+                                mt: '2px',
+                                ml: '10px',
+                                pl: 0,
+                                fontFamily: 'typography.fontFamily'
+                            }} {...bindTrigger(popupState)}>
+                                倍速
+                            </Button>
+                            <Menu {...bindMenu(popupState)}>
+                                <MenuItem onClick={(e) => {
+                                    handleRateClick(e, popupState)
+                                }} data-my-value='0.5'>0.5</MenuItem>
+                                <MenuItem onClick={(e) => {
+                                    handleRateClick(e, popupState)
+                                }} data-my-value='1'>1</MenuItem>
+                                <MenuItem onClick={(e) => {
+                                    handleRateClick(e, popupState)
+                                }} data-my-value='1.5'>1.5</MenuItem>
+                                <MenuItem onClick={(e) => {
+                                    handleRateClick(e, popupState)
+                                }} data-my-value='2'>2</MenuItem>
+                            </Menu>
+                        </React.Fragment>
+                    )}
+                </PopupState>
 
-            <PopupState variant="popover" popupId="demo-popup-menu">
-                {(popupState) => (
-                    <React.Fragment>
-                        <Button sx={{
-                            border:"none",
-                            backgroundColor:"transparent",
-                            color:'secondary.light',
-                            fontSize:'0.8rem',
-                            mt:'2px',
-                            ml:'10px',
-                            pl:0,
-                            fontFamily:'typography.fontFamily'
-                        }} {...bindTrigger(popupState)}>
-                            倍速
-                        </Button>
-                        <Menu {...bindMenu(popupState)}>
-                            <MenuItem onClick={(e)=>{handleRateClick(e,popupState)}} data-my-value='0.5'>0.5</MenuItem>
-                            <MenuItem onClick={(e)=>{handleRateClick(e,popupState)}} data-my-value='1'>1</MenuItem>
-                            <MenuItem onClick={(e)=>{handleRateClick(e,popupState)}} data-my-value='1.5'>1.5</MenuItem>
-                            <MenuItem onClick={(e)=>{handleRateClick(e,popupState)}} data-my-value='2'>2</MenuItem>
-                        </Menu>
-                    </React.Fragment>
-                )}
-            </PopupState>
-
-            <Button sx={{
-                backgroundColor: "inherit",
-                border: "none",
-                display:"flex"
-            }}
-                    onClick={enterFullScreen}>
-                <FullscreenExitIcon fontSize="medium" sx={{color: 'secondary.light'}}/>
-            </Button>
-
+                <Button sx={{
+                    backgroundColor: "inherit",
+                    border: "none",
+                    display: "flex"
+                }}
+                        onClick={enterFullScreen}>
+                    <FullscreenExitIcon fontSize="medium" sx={{color: 'secondary.light'}}/>
+                </Button>
+            </div>
         </Box>
     );
 }

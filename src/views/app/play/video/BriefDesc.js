@@ -60,8 +60,8 @@ function BriefDesc(props) {
     const [ref, setRef] = useState({})
 
     useEffect(() => {
-        if (item.Refs.length < 1) return
-        setRef(item.Refs[0])
+        if (item.Attachment.length < 1) return
+        setRef(item.Attachment[0])
     }, [item])
 
     //点击tag, 带tag参数跳转到分类页面 (默认分类)

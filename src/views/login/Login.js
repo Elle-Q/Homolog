@@ -2,7 +2,6 @@ import React, {useRef, useState} from 'react';
 import useWindowDimensions from "../../hook/useWindowDimensions";
 import Box from "@mui/material/Box";
 import {alpha, rgbToHex} from "@mui/system";
-import loginBg from '../../assets/bg/login01.jpg'
 import wechat from '../../assets/temp/wechat.jpg'
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";

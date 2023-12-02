@@ -5,10 +5,7 @@ import img from '../../../assets/cat_animate3-2.gif'
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import tags from '../../../json/popTags.json';
-import Button from "@mui/material/Button";
 import SideBar from "./SideBar/SideBar";
-import items from "../../../json/items.json";
-import CategoryCard from "../home/body/subject/CategoryCard";
 import {useParams} from "react-router-dom";
 import {GetCat} from "../../../api/cat.service";
 import {getPopularTags} from "../../../utils/ToolUtil";

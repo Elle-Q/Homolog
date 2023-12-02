@@ -6,7 +6,7 @@ import AddIcon from "@mui/icons-material/Add";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import {styled} from "@mui/system";
-import {Controller } from "react-hook-form";
+import {Controller} from "react-hook-form";
 
 export const InputWithHeader = (props) => {
     const {
@@ -78,7 +78,7 @@ export const ImagInputWithHeader = (props) => {
 }
 
 export const SelectInputWithHeader = (props) => {
-    const {header, name, items, value, handleChange, disabled, type} = props;
+    const {header, name, value, handleChange, disabled} = props;
     return (
         <React.Fragment>
             <span style={{marginRight: '15px', verticalAlign: "bottom"}}>{header}</span>
@@ -88,7 +88,7 @@ export const SelectInputWithHeader = (props) => {
                 disabled={disabled}
                 onChange={handleChange}
                 sx={{
-                    mr:'50px',
+                    mr: '50px',
                     border: "1px solid #403D39",
                     fontSize: '14px',
                     variant: 'standard',
@@ -96,16 +96,7 @@ export const SelectInputWithHeader = (props) => {
                         border: `${!disabled ? '1px solid #3399ff' : ''}`
                     }
                 }}>
-                {
-                    type === 'enum' ?
-                        Object.keys(items).map((value, index) => (
-                            <MenuItem key={index} value={value}>
-                                {items[value]}
-                            </MenuItem>
-                        ))
-                        :
-                        props.children
-                }
+                {props.children}
             </Select>
         </React.Fragment>
     )

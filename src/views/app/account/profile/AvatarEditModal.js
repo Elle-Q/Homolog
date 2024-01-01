@@ -20,7 +20,7 @@ function AvatarEditModal(props) {
     const fileRef = createRef();
 
     useEffect(() => {
-        user && setAvatarUri(user.Avatar)
+        user && setAvatarUri(user.avatar)
     }, [user])
 
     useEffect(() => {
@@ -53,11 +53,11 @@ function AvatarEditModal(props) {
     function changeAvatar() {
 
         if (!avatarFile) {
-            dispatch(updateAvatar(user.ID, avatarUri))
+            dispatch(updateAvatar(user.id, avatarUri))
             handleClose()
         } else {
             upload(avatarFile).then((link) => {
-                dispatch(updateAvatar(user.ID, link))
+                dispatch(updateAvatar(user.id, link))
                 handleClose()
             })
         }
@@ -97,7 +97,6 @@ function AvatarEditModal(props) {
                                     marginRight: '10px',
                                     borderRadius: '50%',
                                     cursor:'pointer'
-                                    // transform: `${hovered && 'scale(1.5,1.5)'}`,
                                 }}
                                 src={link}
                                 onClick={defaultAvatarClick(link)}

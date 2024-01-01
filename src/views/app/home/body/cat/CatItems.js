@@ -1,25 +1,22 @@
 import React from 'react';
-import {useTheme} from "@mui/system";
-import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import ItemCard from "./ItemCard";
 import AnimationText from "../../../../../components/AnimationText";
 import GradientButton from "../../../../../components/ui/GradientButton";
 import {Link} from "react-router-dom";
 
-function Subject(props) {
-    const theme = useTheme();
-    const {subject} = props;
+function CatItems(props) {
+    const {cat} = props;
 
-    if (subject === undefined || subject.Items.length < 1) return <></>
+    if (cat === undefined || cat.Items.length < 1) return <></>
 
     return (
         <React.Fragment>
             <div style={{display: 'grid',gridTemplateColumns:'70% 30%'}}>
                 <div style={{gridColumn: 2/3}}>
-                    <AnimationText title={subject.CatTitle}/>
+                    <AnimationText title={cat.CatTitle}/>
                     &nbsp;&nbsp;
-                    <AnimationText title={subject.CatSubTitle}
+                    <AnimationText title={cat.CatSubTitle}
                                    fontSize={15}
                                    spacing={1}
                                    color='white'
@@ -27,7 +24,7 @@ function Subject(props) {
                     />
                 </div>
                 <div style={{display:'flex', alignItems: 'center',justifyContent:"flex-end"}}>
-                    <Link to={`/app/category/${subject.CatID}`}>
+                    <Link to={`/app/category/${cat.CatID}`}>
                     <GradientButton name="更多" color="linear-gradient(to right, #00c6ff 0%, #0072ff  51%, #00c6ff  100%)"/>
                     </Link>
                 </div>
@@ -39,7 +36,7 @@ function Subject(props) {
                    display="flex"
             >
                 {
-                    subject.Items.map((item, index) => {
+                    cat.Items.map((item, index) => {
                         return <ItemCard key={index} item={item}/>
                     })
                 }
@@ -49,4 +46,4 @@ function Subject(props) {
     );
 }
 
-export default Subject;
+export default CatItems;

@@ -9,7 +9,7 @@ import refreshReducer from "./refreshSlice";
 import playerReducer from "../views/app/play/playSlice";
 import loadingReducer from "../components/loading/loading-slice";
 import itemReducer from "../views/app/item/item-slice";
-import navBarReducer from "../views/app/home/navBarSlice";
+import navBarReducer from "../views/app/home/header/NavBarSlice";
 import cartReducer from "../views/app/cart/cart-slice";
 
 export default configureStore({

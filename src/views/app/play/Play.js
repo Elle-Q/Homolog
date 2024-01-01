@@ -12,7 +12,7 @@ import {selectPlayer} from "./playSlice";
 import ThreeD from "./3d/ThreeD";
 import Periods from "./video/Periods";
 import VideoPlayer from "../../../components/player/VideoPlayer";
-import {setNavBarShow, setShow} from "../home/navBarSlice";
+import {setNavBarShow, setShow} from "../home/header/NavBarSlice";
 
 
 function Play(props) {

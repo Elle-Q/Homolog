@@ -1,6 +1,6 @@
 import React from 'react';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import {StyledLink} from "../../../../components/styled/StyledComponent";
+import {StyledLink} from "../../../../../components/styled/StyledComponent";
 import {useTheme} from "@mui/material/styles";
 import {alpha} from "@mui/system";
 import Typography from "@mui/material/Typography";

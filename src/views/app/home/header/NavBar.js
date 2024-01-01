@@ -23,7 +23,7 @@ import Paper from "@mui/material/Paper";
 import {Link, useNavigate} from "react-router-dom";
 import community from '../../../../assets/community1.svg'
 import categoryS from '../../../../assets/category_S.svg'
-import AppLogo from "./AppLogo";
+import Logo from "./Logo";
 import {CustomBadge} from "../../../../components/ui/CustomBadge";
 import {useDispatch, useSelector} from "react-redux";
 import {selectAuth} from "../../../../api/authSlice";
@@ -103,7 +103,7 @@ function NavBar(props) {
                     display: 'inline-flex',
                     minHeight: '64px'
                 }}>
-                    <AppLogo title="LEET-ROLL"/>
+                    <Logo title="LEET-ROLL"/>
                     <Search>
                         <SearchIconWrapper>
                             <SearchIcon sx={{color: '#3399FF'}}/>
@@ -152,36 +152,23 @@ function NavBar(props) {
                         <Button size="large" component={Link} to={"/app/community"}>
                             <img style={{width: 20, height: 20}} alt="community" title="社区" src={community}/>
                         </Button>
-                        <Button size="large" color="inherit"
-                                component={Link} to={"/app/home"}>
+                        <Button size="large" color="inherit" component={Link} to={"/app/home"}>
                             <HomeIcon fontSize="small"/>
                         </Button>
                         <Button size="large" color="inherit"
                                 component={Link} to={"/app/category/133"}>
                             <img style={{width: 20, height: 20}} alt="category" title="分类" src={categoryS}/>
                         </Button>
-                        <Button size="large" color="inherit"
-                                component={Link} to={"/app/partner"}>
+                        <Button size="large" color="inherit" component={Link} to={"/app/partner"}>
                             <Badge badgeContent={4} color="error">
                                 <ChatBubbleOutlineIcon fontSize="small"/>
                             </Badge>
                         </Button>
-                        <Button
-                            size="large"
-                            aria-label="show 17 new notifications"
-                            color="inherit"
-                        >
+                        <Button size="large" color="inherit">
                             <Badge badgeContent={17} color="error">
                                 <NotificationsIcon fontSize="small"/>
                             </Badge>
                         </Button>
-                        {
-                            user && user.Admin &&
-                            <Button size="large" color="inherit"
-                                    component={Link} to={"/admin"}>
-                                <AdminPanelSettingsRoundedIcon fontSize="small"/>
-                            </Button>
-                        }
 
                         <CustomBadge
                             overlap="circular"
@@ -192,12 +179,12 @@ function NavBar(props) {
                             onClick={enterAccount}
                             sx={{
                                 '& .MuiBadge-badge': {
-                                    backgroundColor: user && getColorFromUserStatus(user.Status),
-                                    color: user && getColorFromUserStatus(user.Status),
+                                    backgroundColor: user && getColorFromUserStatus(user.status),
+                                    color: user && getColorFromUserStatus(user.status),
                                 }
                             }}
                         >
-                            <Avatar alt="elle" src={user && user.Avatar}/>
+                            <Avatar alt="elle" src={user && user.avatar}/>
                         </CustomBadge>
                     </Stack>
                 </Toolbar>

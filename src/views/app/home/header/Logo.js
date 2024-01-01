@@ -3,7 +3,7 @@ import logo from "../../../../assets/logo/logo.png";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 
-function AppLogo(props) {
+function Logo(props) {
     const {title, color} = props
     return (
        <React.Fragment>
@@ -24,4 +24,4 @@ function AppLogo(props) {
     );
 }
 
-export default AppLogo;
+export default Logo;

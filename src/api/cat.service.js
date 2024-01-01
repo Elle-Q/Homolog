@@ -28,8 +28,15 @@ export const GetCat = (catId) => {
         });
 }
 
-export const ListCatsWithItems = () => {
+export const ListCatsWith4Items = () => {
     return api.get(`/leetroll-app/category/list/items`)
+        .then((resp) => {
+            return resp
+        });
+}
+
+export const ListCatItems = (catId) => {
+    return api.get(`/leetroll-app/item/allitems/${catId}`)
         .then((resp) => {
             return resp
         });

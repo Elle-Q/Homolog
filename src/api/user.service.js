@@ -1,6 +1,7 @@
 import React from 'react';
 import api from "./api";
-import {setAvatar, setBG, setUser} from "./authSlice";
+import {loginFail, loginSuccess, registerFail, registerSuccess, setAvatar, setBG, setUser} from "./authSlice";
+import {authService} from "./auth.service";
 
 class UserService {
     changeAvatar(userId, avatarLink) {
@@ -23,8 +24,8 @@ class UserService {
             });
     }
 
-    getUser(userId) {
-       return api.get(`/leetroll-app/user/${userId}`)
+    getUser() {
+       return api.get(`/leetroll-app/user/get`)
             .then((resp) => {
                 return resp
             });
@@ -41,8 +42,7 @@ class UserService {
 const userService = new UserService();
 
 export const getUser = () => (dispatch) => {
-    const userId = JSON.parse(localStorage.getItem("userId"));
-    userService.getUser(userId).then(
+    userService.getUser().then(
         resp => {
             dispatch(setUser(resp))
             return resp
@@ -73,6 +73,38 @@ export const updateUser = (user) => (dispatch) => {
         resp => {
             dispatch(setUser(user))
             return resp
+        }
+    )
+}
+
+
+export const signup = (username, phone, password, code) => (dispatch) => {
+    return authService.signup(username, phone, password, code).then(
+        resp => {
+            dispatch(registerSuccess())
+            return Promise.resolve();
+        },
+        err => {
+            dispatch(registerFail())
+            return Promise.reject();
+        }
+    )
+}
+
+export const login = (phone, password) => (dispatch) => {
+    return authService.login(phone, password).then(
+    resp => {
+            userService.getUser().then(
+                resp => {
+                    debugger
+                    dispatch(loginSuccess(resp))
+                    return resp
+                }
+            )
+            return resp;
+        },
+        err => {
+            dispatch(loginFail());
         }
     )
 }

@@ -8,21 +8,20 @@ export default function useInterceptor(props) {
     const dispatch = useDispatch();
 
     const errorHandler = (data) => {
-        switch (data && data.Code) {
+        switch (data && data.code) {
             case 500:
-                dispatch(updateMsg({status: "error", msg: data.Msg}))
+                dispatch(updateMsg({status: "error", msg: data.msg}))
                 break
             case 200:
-                dispatch(updateMsg({status: "success", msg: data.Msg}))
+                dispatch(updateMsg({status: "success", msg: data.msg}))
                 break
-            case 401:
+            case 407:
                 window.location = "/login";
                 break
         }
     }
 
     api.interceptors.request.use(
-
         config => {
             const token = TokenService.getLocalAccessToken();
             if (token) {
@@ -43,17 +42,14 @@ export default function useInterceptor(props) {
         },
         error => {
             const originalConfig = error.config;
-
             if (error.response) {
                 //Access token was expired
                 if (error.response.status === 401 && !originalConfig._retry) {
                     originalConfig._retry = true;
-
                     try {
-                        api.post('/leetroll-app/user/refresh', {
-                            RefreshToken: TokenService.getLocalRefreshToken()
-                        }).then(resp => {
-                            // dispatch(refreshToken(AccessToken));
+                        let param = new FormData();
+                        param.append("refreshToken", TokenService.getLocalRefreshToken());
+                        api.post('/leetroll-app/user/refreshToken', param).then(resp => {
                             TokenService.updateLocalToken(resp);
                             return api(originalConfig);
                         });

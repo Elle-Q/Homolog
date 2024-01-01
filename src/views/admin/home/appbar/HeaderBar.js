@@ -2,7 +2,7 @@ import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import AppLogo from "../../../app/home/nav/AppLogo";
+import Logo from "../../../app/home/header/Logo";
 import {Link} from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import {CustomBadge} from "../../../../components/ui/CustomBadge";
@@ -26,7 +26,7 @@ function HeaderBar(props) {
                     minHeight: '64px',
                     backgroundColor:'secondary.dark'
                 }}>
-                    <AppLogo title="leetroll 管理系统" color='#3399ff'/>
+                    <Logo title="leetroll 管理系统" color='#3399ff'/>
                     <Box sx={{flexGrow: 10}}/>
                     <span style={{color: '#999', fontSize: '15px', marginRight: '5px'}}>Admin--elle</span>
                     <CustomBadge

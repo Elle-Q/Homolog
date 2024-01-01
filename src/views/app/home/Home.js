@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {NavBar} from "./nav/NavBar";
+import {NavBar} from "./header/NavBar";
 import {Route, Routes, useLocation} from "react-router-dom";
 import Play from "../play/Play";
 import Body from "./body/Body";
@@ -14,7 +14,7 @@ import Partner from "../partner/Partner";
 import Community from "../community/Community";
 import Issue from "../community/edit/Issue";
 import {useDispatch, useSelector} from "react-redux";
-import {selectShowNavBar, setNavBarShow} from "./navBarSlice";
+import {selectShowNavBar, setNavBarShow} from "./header/NavBarSlice";
 import {KeyboardArrowDown, KeyboardArrowUp} from "@mui/icons-material";
 import Box from "@mui/material/Box";
 import Cart from "../cart/cart";
@@ -35,28 +35,6 @@ function Home(props) {
         {path: '/community', name: 'community', component: <Community/>},
         {path: '/issue', name: 'issue', component: <Issue/>},
     ]
-
-
-    //todo: 我还没想好
-    const AnimatedSwitch = () => {
-        const location = useLocation();
-        return (
-            <TransitionGroup className="router-wrapper">
-                <CSSTransition
-                    key={location.key}
-                    timeout={2000}
-                    classNames="page"
-                >
-                    <Routes>
-                        {routes.map(({path, component}, index) => (
-                            <Route key={index} path={path} element={component}/>
-                        ))}
-                    </Routes>
-                </CSSTransition>
-
-            </TransitionGroup>
-        );
-    };
 
     const toggleNavBar = () => {
         let element = document.getElementById("toggleNavBar");

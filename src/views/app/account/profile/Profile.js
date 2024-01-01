@@ -43,9 +43,9 @@ const ActionButton = (props) => {
     )
 }
 
-function UserInfoPageShow(props) {
+function Profile(props) {
 
-    const { user} = useSelector(selectAuth);
+    const {user} = useSelector(selectAuth);
     const [drawerOpen, setDrawerOpen] = useState();
     const [openModal, setOpenModal] = useState(false);
     const [avatarUri, setAvatarUri] = useState(null);
@@ -53,7 +53,7 @@ function UserInfoPageShow(props) {
 
 
     useEffect(() => {
-        user && setAvatarUri(user.Avatar)
+        user && setAvatarUri(user.avatar)
     }, [user])
 
     const toggleDrawer = open => (e) => {
@@ -105,7 +105,6 @@ function UserInfoPageShow(props) {
         )
     }
 
-
     return (
         <Box sx={{mb: '20px', textAlign: "center" }}>
             <AvatarWithEdit/>
@@ -116,7 +115,7 @@ function UserInfoPageShow(props) {
             />
 
             <Typography variant="h6" sx={{display: {xs: 'none', sm: 'block'}}}>
-                {user && user.Name}
+                {user && user.name}
             </Typography>
 
             <Typography variant="body" sx={{
@@ -125,11 +124,11 @@ function UserInfoPageShow(props) {
                 fontSize: '14px',
                 textShadow: '1px 1px 2px rgb(0 0 0 / 37%)'
             }}>
-                {user && user.Moto}
+                {user && user.moto}
             </Typography>
 
             <StyledTypography>
-                <RoomOutlinedIcon fontSize="small"/>shanghai, china
+                <RoomOutlinedIcon fontSize="small"/>{user.address}
             </StyledTypography>
 
             <AvatarEditModal
@@ -143,4 +142,4 @@ function UserInfoPageShow(props) {
     );
 }
 
-export default UserInfoPageShow;
+export default Profile;

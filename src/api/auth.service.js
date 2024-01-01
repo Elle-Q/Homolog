@@ -3,23 +3,18 @@ import {loginFail, loginSuccess, registerFail, registerSuccess} from "./authSlic
 import api from "./api";
 
 class AuthService {
-    login(username, password) {
-        return api
-            .post("/leetroll-app/user/login", {
-                UserName:username,
-                Password: password
-            })
+    login(phone, password) {
+        let param = new FormData();
+        param.append("phone", phone);
+        param.append("password", password);
+        return api.post("/leetroll-app/user/login", param)
             .then(resp => {
-                if (resp) {
-                    //设置token
-                    TokenService.setTokens({
-                        AccessToken: resp.AccessToken,
-                        RefreshToken: resp.RefreshToken,
-                    });
-                    //设置User
-                    TokenService.setUser(resp.User.ID);
-                    return resp;
-                }
+                //设置token
+                TokenService.setTokens({
+                    AccessToken: resp.accessToken,
+                    RefreshToken: resp.refreshToken,
+                });
+                return resp;
             },
             err => {
                return Promise.reject(err)
@@ -42,30 +37,3 @@ class AuthService {
 }
 
 export const authService = new AuthService()
-
-export const signup = (username, phone, password, code) => (dispatch) => {
-    return authService.signup(username, phone, password, code).then(
-        resp => {
-            dispatch(registerSuccess())
-            return Promise.resolve();
-        },
-        err => {
-            dispatch(registerFail())
-            return Promise.reject();
-        }
-    )
-}
-
-
-export const login = (username, password) => (dispatch) => {
-    return authService.login(username, password).then(
-        resp => {
-            dispatch(loginSuccess({user:resp.User}));
-            return resp;
-        },
-        err => {
-            dispatch(loginFail());
-        }
-    )
-}
-

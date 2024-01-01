@@ -32,7 +32,6 @@ export const authSlice = createSlice({
             return {
                 ...state,
                 isLogin: true,
-                userId:user.ID,
                 user:user
             }
         },

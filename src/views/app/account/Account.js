@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import Box from "@mui/material/Box";
-import UserInfoPageShow from "./user-info/UserInfoPageShow";
+import Profile from "./profile/Profile";
 import TabBar from "./tab/TabBar";
 import { useSelector} from "react-redux";
 import {selectAuth } from "../../../api/authSlice";
-import BgEditModal from "./user-info/BgEditModal";
+import BgEditModal from "./profile/BgEditModal";
 
 function Account(props) {
 
@@ -15,7 +15,7 @@ function Account(props) {
 
 
     useEffect(() => {
-        user && setBgUri(user.BgImag)
+        user && setBgUri(user.bgImg)
     }, [user])
 
     //点击背景获取默认背景集合
@@ -26,7 +26,7 @@ function Account(props) {
 
     const handleClose = () => {
         setOpenModal(false);
-        setBgUri(user.BgImag)
+        setBgUri(user.bgImg)
     };
 
     const closeModal = () => {
@@ -55,7 +55,7 @@ function Account(props) {
                 }}
                 onClick={onClickBG}
             >
-                <UserInfoPageShow/>
+                <Profile/>
             </Box>
 
             {/*修改背景图像*/}

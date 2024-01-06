@@ -28,7 +28,7 @@ const useStyles = makeStyles({
 
 function GradientButton(props) {
     const classes = useStyles();
-    const {name, color="linear-gradient(to right, #00c6ff 0%, #0072ff  51%, #00c6ff  100%)", width, fontSize, onClick} = props
+    const {name, color="linear-gradient(to right, #00c6ff 0%, #0072ff  51%, #00c6ff 100%)", width, fontSize, onClick} = props
     return (
         <Button onClick={onClick}
                 className={classes.grad}

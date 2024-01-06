@@ -46,7 +46,7 @@ const ActionButton = (props) => {
 function Profile(props) {
 
     const {user} = useSelector(selectAuth);
-    const [drawerOpen, setDrawerOpen] = useState();
+    const [drawerOpen, setDrawerOpen] = useState(false);
     const [openModal, setOpenModal] = useState(false);
     const [avatarUri, setAvatarUri] = useState(null);
     const [defaultAvatars, setDefaultAvatars] = useState([]);
@@ -56,6 +56,7 @@ function Profile(props) {
         user && setAvatarUri(user.avatar)
     }, [user])
 
+    //打开侧边栏用户详情信息
     const toggleDrawer = open => (e) => {
         e.stopPropagation()
         setDrawerOpen(open)
@@ -67,6 +68,7 @@ function Profile(props) {
         authService.logout()
     }
 
+    //toggle头像编辑框
     const handleClose = (e) => {
         e.stopPropagation()
         setOpenModal(false);
@@ -109,7 +111,6 @@ function Profile(props) {
         <Box sx={{mb: '20px', textAlign: "center" }}>
             <AvatarWithEdit/>
             <UserDrawer
-                user={user}
                 toggleDrawer={toggleDrawer}
                 open={drawerOpen}
             />
@@ -128,7 +129,7 @@ function Profile(props) {
             </Typography>
 
             <StyledTypography>
-                <RoomOutlinedIcon fontSize="small"/>{user.address}
+                <RoomOutlinedIcon fontSize="small"/>{user && user.address}
             </StyledTypography>
 
             <AvatarEditModal

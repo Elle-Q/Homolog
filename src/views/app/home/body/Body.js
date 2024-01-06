@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import Grid from "@mui/material/Grid";
 import CatItems from "./cat/CatItems";
 import Box from "@mui/material/Box";
-import {ListCat, ListCatsWith4Items} from "../../../../api/cat.service";
+import {ListAllCat, ListCats, ListCatsWith4Items} from "../../../../api/cat.service";
 import styled from "styled-components";
 import CatCard from "./cat/CatCard";
 
@@ -16,14 +16,21 @@ const CatNav = styled.div`
 function Body(props) {
 
     const [cats, setCats] = useState([]);
+    const [catItems, setCatItems] = useState([]);
 
     //查询所有category分类, 每个分类显示4个item卡片
     useEffect(() => {
-        const fetchData = async () => {
-            await ListCatsWith4Items().then(data => {
+        const fetchCatsData = async () => {
+            await ListAllCat().then(data => {
                 setCats(data)
             })
         }
+        const fetchData = async () => {
+            await ListCatsWith4Items().then(data => {
+                setCatItems(data)
+            })
+        }
+        fetchCatsData().catch()
         fetchData().catch()
     }, [])
 
@@ -43,17 +50,18 @@ function Body(props) {
                 <Grid item xs={12} justifyItems={"center"} justifyContent={"center"}>
                     <CatNav>
                         {
-                            cats.map((item, i) => (
-                                <CatCard key={i} index={i} item={item}/>
+                            cats.map((cat, i) => (
+                                <CatCard key={i} index={i} cat={cat}/>
                             ))
                         }
                     </CatNav>
                 </Grid>
                 {
-                    cats && cats.map((cat, index) => {
+                    catItems && catItems.map((catItem, index) => {
+                        if (catItem.items.length === 0) return (<React.Fragment/>)
                         return (
                             <Grid item xs={12} key={index}>
-                                <CatItems cat={cat}/>
+                                <CatItems catItem={catItem}/>
                             </Grid>
                         )
                     })

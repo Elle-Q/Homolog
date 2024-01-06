@@ -57,24 +57,24 @@ function PrevShow(props) {
     return (
         <React.Fragment>
             {
-                currentPrev && isVideo(currentPrev.Format) ? <SimplePlayer videoSrc={{
-                        type: `${currentPrev.Key ? 'application/x-mpegURL' : 'video/mp4'}`,
-                        src: currentPrev.QnLink
+                currentPrev && isVideo(currentPrev.format) ? <SimplePlayer videoSrc={{
+                        type: `${currentPrev.key ? 'application/x-mpegURL' : 'video/mp4'}`,
+                        src: currentPrev.original
                     }}/> :
-                   <div style={{width: '100%'}}><img src={currentPrev && currentPrev.QnLink} alt='prevShow' style={{width: 'auto',maxHeight:'650px', borderRadius: '25px'}}/></div>
+                   <div style={{width: '100%'}}><img src={currentPrev && currentPrev.original} alt='prevShow' style={{width: 'auto',maxHeight:'650px', borderRadius: '25px'}}/></div>
             }
 
             <Stack id={"prevList"} direction={'row'} spacing={1} style={{justifyContent: "center"}}>
                 {
                     preList && preList.map((prev, index) => {
-                        return isVideo(prev.Format) ?
+                        return isVideo(prev.format) ?
                             <Box sx={fileShowContainer}  onClick={(event) => handlePrevChange(prev, event)}>
                                 <SimplePlayer videoSrc={{
-                                type: `${prev.Key ? 'application/x-mpegURL' : 'video/mp4'}`,
-                                src: prev.QnLink
+                                type: `${prev.key ? 'application/x-mpegURL' : 'video/mp4'}`,
+                                src: prev.origianl
                             }}/></Box>
                             :
-                            <img src={prev.QnLink} alt='smallPrev'
+                            <img src={prev.small} alt='smallPrev'
                                  key={'prev'.concat(index)}
                                  className={classes.prev}
                                  onClick={(event) => handlePrevChange(prev, event)}/>

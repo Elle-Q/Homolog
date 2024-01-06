@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {alpha, styled} from "@mui/material/styles";
 import {Drawer, FormControlLabel, FormLabel, Radio, RadioGroup} from "@mui/material";
 import {CustomBadge} from "../../../../components/ui/CustomBadge";
@@ -15,7 +15,8 @@ import MaleIcon from "@mui/icons-material/Male";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import {updateUser} from "../../../../api/user.service";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {selectAuth} from "../../../../api/authSlice";
 
 const CusInput = styled(TextField)({
     display: "flex",
@@ -65,12 +66,17 @@ const radioStyle = {
 }
 
 function UserDrawer(props) {
-    const {user, toggleDrawer, open} = props;
-    const [userDetail, setUserDetail] = React.useState(user);
+    const {user} = useSelector(selectAuth);
+    const {toggleDrawer, open} = props;
+    const [userDetail, setUserDetail] = React.useState();
     const dispatch = useDispatch();
     const nameRef = React.createRef();
     const phoneRef = React.createRef();
     const motoRef = React.createRef();
+
+    useEffect(() => {
+        setUserDetail(user)
+    }, [user]);
 
     const handleGenderChange = (event) => {
         setUserDetail({
@@ -97,30 +103,30 @@ function UserDrawer(props) {
         toggleDrawer(false)(event)
     }
 
-    // const GenderRadio = () => (
-    //     <FormControl component="fieldset" style={{marginLeft: '10px', marginTop: '20px'}}>
-    //         <FormLabel component="legend" style={{marginBottom: '10px', color: '#403D39'}}>性别</FormLabel>
-    //         <RadioGroup
-    //             value={userDetail.gender}
-    //             onChange={handleGenderChange}
-    //             row={true}
-    //             sx={{
-    //                 textAlign: "center",
-    //                 ml: '35px',
-    //                 '& .MuiRadio-root.Mui-checked': {
-    //                     color: 'white',
-    //                 }
-    //             }}
-    //         >
-    //             <FormControlLabel value="female" control={<Radio sx={radioStyle}/>}
-    //                               label={<FemaleIcon sx={{color: '#ff7096', mr: '10px'}}/>}/>
-    //             <FormControlLabel value="male" control={<Radio sx={radioStyle}/>}
-    //                               label={<MaleIcon sx={{color: '#3399ff'}}/>}/>
-    //         </RadioGroup>
-    //     </FormControl>
-    // )
+    const GenderRadio = () => (
+        <FormControl component="fieldset" style={{marginLeft: '10px', marginTop: '20px'}}>
+            <FormLabel component="legend" style={{marginBottom: '10px', color: '#403D39'}}>性别</FormLabel>
+            <RadioGroup
+                value={userDetail.gender}
+                onChange={handleGenderChange}
+                row={true}
+                sx={{
+                    textAlign: "center",
+                    ml: '35px',
+                    '& .MuiRadio-root.Mui-checked': {
+                        color: 'white',
+                    }
+                }}
+            >
+                <FormControlLabel value="female" control={<Radio sx={radioStyle}/>}
+                                  label={<FemaleIcon sx={{color: '#ff7096', mr: '10px'}}/>}/>
+                <FormControlLabel value="male" control={<Radio sx={radioStyle}/>}
+                                  label={<MaleIcon sx={{color: '#3399ff'}}/>}/>
+            </RadioGroup>
+        </FormControl>
+    )
 
-    if (user==null) return (<React.Fragment />)
+    if (userDetail==null) return (<React.Fragment />)
     return (
         <Drawer PaperProps={{sx: {backgroundColor: alpha('#252422', 0.9)}}}
                 open={open}
@@ -165,11 +171,10 @@ function UserDrawer(props) {
                 </StyledInputElement>
                 <CusInput label="昵称" inputRef={nameRef} defaultValue={userDetail.name} inputProps={inputProps}/>
                 <CusInput label="手机号" inputRef={phoneRef} defaultValue={userDetail.phone} inputProps={inputProps}/>
-                {/*<GenderRadio/>*/}
+                <GenderRadio/>
                 <div style={{marginTop: '30px', color: '#403D39'}}>
                     <span style={{marginLeft: '10px', color: '#403D39', display: 'block'}}>背景图片</span>
-                    <img alt="sm_bg" src={userDetail && userDetail.bgImg}
-                         style={{width: '150px', margin: '10px 10px 0 10px',}}/>
+                    <img alt="sm_bg" src={userDetail && userDetail.bgImg} style={{width: '150px', margin: '10px 10px 0 10px',}}/>
                     <IconButton
                         sx={{
                             color: alpha('#dcddde', 0.5),

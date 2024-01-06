@@ -60,7 +60,7 @@ function AnimationText(props) {
                     fontFamily: '-apple-system',
                     letterSpacing: `${spacing ? spacing : 3}px`,
                     fontSize: `${fontSize}px`,
-                    color: `${color ? color : 'red'}`,
+                    color: `${color ? color : 'rgba(150,103,224,0.58)'}`,
                 }}
             >
             </h1>

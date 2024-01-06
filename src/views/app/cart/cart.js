@@ -30,7 +30,7 @@ function Cart(props) {
 
     useEffect(() => {
         let price = items.reduce(function(acc, item) {
-            return acc + item.Price;
+            return acc + item.price;
         }, 0)
         setTotalPrice(price)
     }, [items]);
@@ -58,14 +58,14 @@ function Cart(props) {
                     return <React.Fragment>
                         <Stack style={{display: 'flex', marginBottom: '20px'}} spacing={2}>
                             <Stack style={{display: 'flex', justifyContent: 'space-between'}} direction={'row'} spacing={1}>
-                                <img src={item.Main} alt='prevShow'
+                                <img src={item.main.small} alt='prevShow'
                                      style={{maxHeight: '100px', marginRight: '10px', borderRadius: '25px'}}/>
                                 <Stack sx={{color: '#6e6d6d', fontSize: '12px', flex: '1'}} spacing={0}>
-                                    <span style={{fontSize: '16px'}}>{item.Name}</span>
-                                    <span> 作者: {item.Author}</span>
+                                    <span style={{fontSize: '16px'}}>{item.name}</span>
+                                    <span> 作者: {item.author}</span>
                                     <span> 适用软件: blender</span>
                                     <span> 总时长: 156分钟</span>
-                                    <span> 价格: <span style={{color: '#e82986'}}>￥{item.Price}</span></span>
+                                    <span> 价格: <span style={{color: '#e82986'}}>￥{item.price}</span></span>
                                 </Stack>
                                 <Tooltip title="从购物车移除">
                                     <IconButton onClick={handleDelCart}>

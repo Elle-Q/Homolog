@@ -41,7 +41,7 @@ export default function useInterceptor(props) {
             return data
         },
         error => {
-            const originalConfig = error.config;
+            const originalConfig = error.response.config;
             if (error.response) {
                 //Access token was expired
                 if (error.response.status === 401 && !originalConfig._retry) {

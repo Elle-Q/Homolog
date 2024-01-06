@@ -9,7 +9,7 @@ import BgEditModal from "./profile/BgEditModal";
 function Account(props) {
 
     const {user} = useSelector(selectAuth);
-    const [openModal, setOpenModal] = useState(false);
+    const [openBgModal, setOpenBgModal] = useState(false);
     const [defaultBGs, setDefaultBGs] = useState([]);
     const [bgUri, setBgUri] = useState(null);
 
@@ -21,16 +21,16 @@ function Account(props) {
     //点击背景获取默认背景集合
     const onClickBG = (e) => {
         e.stopPropagation()
-        setOpenModal(true)
+        setOpenBgModal(true)
     }
 
     const handleClose = () => {
-        setOpenModal(false);
+        setOpenBgModal(false);
         setBgUri(user.bgImg)
     };
 
     const closeModal = () => {
-        setOpenModal(false);
+        setOpenBgModal(false);
     };
 
     const changeBG = (bg) => {
@@ -60,7 +60,7 @@ function Account(props) {
 
             {/*修改背景图像*/}
             <BgEditModal
-                open={openModal}
+                open={openBgModal}
                 user={user}
                 handleClose={handleClose}
                 defaultBGs={defaultBGs}

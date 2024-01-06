@@ -18,14 +18,14 @@ import TimerButton from "./TimerButton";
 import styled from "styled-components";
 
 const SignButton = styled(Button)({
-    backgroundColor: "#3a0ca3",
+    backgroundColor: "rgba(92,96,253,0.62)",
     color: '#dcddde',
     fontSize: '18px',
     width: '100%',
     height: `50px`,
     border: "none",
     '&:hover': {
-        backgroundColor: alpha("#3a0ca3", 0.6),
+        backgroundColor: alpha("#5C60FD9E", 0.6),
     }
 })
 
@@ -74,17 +74,17 @@ function Login(props) {
         <div id="bgBody">
             <Box sx={{
                 padding: '20px 20px 30px 20px',
-                backgroundColor: 'rgba(28,28,28,0.8)',
+                backgroundColor: 'rgba(28,28,28,0.9)',
                 borderRadius: '10px',
                 boxShadow: '0 0 8px #36393f',
             }}>
-                <Typography variant="h5" align="center" color='#fff' sx={{fontFamily: 'cursive'}}>
+                <Typography variant="h4" align="center" color='#fff' sx={{fontFamily: 'cursive'}}>
                     {
-                        action === 'signin' ? '欢迎回来🎉🎉🎉' : '注册账号🎉🎉🎉'
+                        action === 'signin' ? '欢迎回来' : '注册账号'
                     }
                 </Typography>
 
-                <Stack spacing={6} sx={{mt: '10px'}}>
+                <Stack sx={{mt: '5px'}}>
                     {
                         action === 'signin' ?
                             <React.Fragment>
@@ -102,7 +102,7 @@ function Login(props) {
                             </React.Fragment>
                     }
 
-                    <div style={{margin: "40px 40px", marginBottom: "0px", color: '#6e6d6d', fontSize: "14px"}}>
+                    <div style={{margin: "10px 0 10px 40px", color: '#6e6d6d', fontSize: "14px"}}>
                         {action === 'signin' ? '没有账号? ' : '已有账号 '}
                         <Link color="#3399FF" onClick={toggleAction} sx={{cursor: "pointer", fontSize: "16px"}}>
                             {action === 'signin' ? ' 注册' : ' 登录'}

@@ -24,7 +24,7 @@ const Label = props => {
         <div style={{marginBottom: '14px', marginTop: '14px', marginLeft: '10px'}}>
             {
                 name === 'tags' ?
-                    <LoyaltyIcon sx={{color: "icon.first"}}/>
+                    <LoyaltyIcon sx={{color: "svg.first"}}/>
                     :
                     <em style={{color: "#999", marginRight: '15px'}}>{name}:</em>
             }
@@ -110,7 +110,7 @@ function BriefDesc(props) {
                 <em style={{color: "#173A5E", marginRight: '15px'}}>描述</em>
 
                 <p style={{color: "#173A5E", marginLeft: '24px', overflow: 'hidden', height: '100px'}}>
-                    {item.Desc}
+                    {item.desp}
                 </p>
 
                 <div style={{display: 'flex', justifyContent: 'flex-end'}}>

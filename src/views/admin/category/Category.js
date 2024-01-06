@@ -17,7 +17,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {open} from "./catSlice";
 import {openAlert} from "../../../components/alert/ops/alertSlice";
 import api from "../../../api/api";
-import {ListCat} from "../../../api/cat.service";
+import {ListCats} from "../../../api/cat.service";
 import {selectRefresh} from "../../../app/refreshSlice";
 
 function Category(props) {
@@ -26,7 +26,7 @@ function Category(props) {
     const dispatch = useDispatch();
 
     React.useEffect(() => {
-        ListCat().then((data) => {
+        ListCats().then((data) => {
             setCats(data)
         })
     }, [refresh])

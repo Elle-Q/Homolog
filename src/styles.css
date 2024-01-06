@@ -37,6 +37,6 @@ input:-webkit-autofill {
     transition: background-color 5000s ease-in-out 0s;
 }
 
-/*#root {*/
-/* background-image: linear-gradient(to bottom, #001E3C , #023e8a)*/
-/*}*/
+#root {
+    background-image: radial-gradient(circle, #313132, #303131, #303031, #2f3030, #2f2f30, #2c2c2d, #2a2a2b, #272728, #222222, #1c1c1d, #171717, #111111);
+}

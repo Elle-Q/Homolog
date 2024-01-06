@@ -1,7 +1,7 @@
 import api from "./api";
 
-export const ListCat = () => {
-    return api.get('/leetroll-admin/cat/list')
+export const ListCats = () => {
+    return api.get('/leetroll-admin/category/all')
         .then(resp => {
             return resp
         })
@@ -28,15 +28,22 @@ export const GetCat = (catId) => {
         });
 }
 
+export const ListAllCat = () => {
+    return api.get('/leetroll-app/category/all')
+        .then(resp => {
+            return resp
+        })
+}
+
 export const ListCatsWith4Items = () => {
-    return api.get(`/leetroll-app/category/list/items`)
+    return api.get(`/leetroll-app/category/cats-with-4items`)
         .then((resp) => {
             return resp
         });
 }
 
-export const ListCatItems = (catId) => {
-    return api.get(`/leetroll-app/item/allitems/${catId}`)
+export const ListItems = (catId) => {
+    return api.get(`/leetroll-app/search`)
         .then((resp) => {
             return resp
         });

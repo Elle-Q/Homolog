@@ -37,7 +37,7 @@ function InputWithIcon(props, ref) {
                     backgroundColor: alpha('#000', 1),
                     height: `50px`,
                     '&:hover': {
-                        border: '1px solid #3399ff'
+                        border: '1px solid #5C60FD9E'
                     }
                 }}
             />

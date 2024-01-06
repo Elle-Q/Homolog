@@ -6,7 +6,7 @@ import Stack from "@mui/material/Stack";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import styled from "styled-components";
 import AirplayIcon from '@mui/icons-material/Airplay';
-import {AppGetItemFiles} from "../../../api/item.service";
+import {AppGetItemFiles, GetItem} from "../../../api/item.service";
 import {BigLinkButton, CartButton} from "../../../components/ui/CustomButton";
 import catBriefInfo from "../../../json/catBriefInfo.json"
 import List from "./list/list";
@@ -24,7 +24,7 @@ const Container = styled.div`
   margin-right: 10%;
   color: white;
   //position: absolute;
-  
+
   & span {
     color: grey;
   }
@@ -62,13 +62,13 @@ const TabP = styled.p`
 function Item(props) {
     let params = useParams();
     let id = params.id;
-    const [data, setData] = useState({});
+    const [data, setData] = useState();
     const [tab, setTab] = useState('review');
     let dispatch = useDispatch();
 
     useEffect(() => {
         const fetch = async () => {
-            await AppGetItemFiles(id).then((data) => {
+            await GetItem(id).then((data) => {
                 setData(data)
                 dispatch(setItem(data))
             })
@@ -99,19 +99,26 @@ function Item(props) {
 
     function getPrevArea() {
         if (data.Type === 'three') {
-            return <ThreeD models={data.Preview}/>
+            return <ThreeD models={data.previews}/>
         } else {
-            return <PrevShow preList={data.Preview}/>
+            return <PrevShow preList={data.previews}/>
         }
     }
 
-    const handleAdd2Cart =() => {
+    const handleAdd2Cart = () => {
         dispatch(openCart())
         dispatch(addItem(data))
     }
 
+    if (data == null) {
+        return <React.Fragment/>
+    }
     return (
-        <div style={{backgroundSize:'100%',width: '100%', backgroundImage: `linear-gradient(to bottom,rgba(0, 0, 0,0.8), rgba(0, 0, 0, 0.8)),url(${data && data.Main})`}}>
+        <div style={{
+            backgroundSize: '100%',
+            width: '100%',
+            // backgroundImage: `linear-gradient(to bottom,rgba(0, 0, 0,0.8), rgba(0, 0, 0, 0.8)),url(${data && data.main.original})`
+        }}>
             <Container>
                 <Grid container
                       direction="row"
@@ -124,19 +131,20 @@ function Item(props) {
                     </Grid>
                     <Grid item xs={3}>
                         <Stack direction='column' spacing={2} sx={{mt: '10px'}}>
-                            <img src={data && data.Main} alt='bg1' style={{width: '100%', margin: "auto", borderRadius: '10px'}}/>
+                            <img src={data && data.main && data.main.small} alt='bg'
+                                 style={{width: '100%', margin: "auto", borderRadius: '10px', maxHeight: '400px'}}/>
                             <Typography variant="h4" component="div">
-                                {data.Name}
+                                {data.name}
                             </Typography>
 
                             <Typography component="p">
-                                {data.Desc}
+                                {data.desp}
                             </Typography>
 
                             <Stack>
-                                <span> 作者: {data.Author}</span>
+                                <span> 作者: {data.author}</span>
                                 <span> 章节目录: >></span>
-                                <span> 全部测评: {data.DownCnt}</span>
+                                <span> 全部测评: {data.downCnt}</span>
                                 <span> 适用软件: blender</span>
                                 <span> 时长: 3: 23: 00</span>
                                 <span> 上传时间: 2023-10-12</span>
@@ -144,12 +152,13 @@ function Item(props) {
 
                             <Stack sx={{alignItems: 'center'}}>
                                 {
-                                    data.Price === 0 ?
-                                        <BigLinkButton icon={<AirplayIcon/>} linkTo={`/app/play/${data.ID}`}/> :
-                                        <CartButton icon={<ShoppingCartIcon fontSize="large"/>} money={data.Price} onClick={handleAdd2Cart}/>
+                                    data.desp === 0 ?
+                                        <BigLinkButton icon={<AirplayIcon/>} linkTo={`/app/play/${data.id}`}/> :
+                                        <CartButton icon={<ShoppingCartIcon fontSize="large"/>} money={data.price}
+                                                    onClick={handleAdd2Cart}/>
                                 }
                                 <StarDiv>
-                                    <ThumbUpButton ></ThumbUpButton>
+                                    <ThumbUpButton></ThumbUpButton>
                                     <ThumbDownButton></ThumbDownButton>
                                 </StarDiv>
                             </Stack>
@@ -158,13 +167,13 @@ function Item(props) {
 
                     <Grid item xs={12} sx={{marginTop: '30px'}}>
                         <Stack direction={'row'} style={{justifyContent: 'center', borderBottom: '1px solid grey'}}>
-                            {getTabContent(data.Type)}
+                            {getTabContent(data.type)}
                         </Stack>
                     </Grid>
 
                     <Grid item xs={12} sx={{marginTop: '30px'}}>
                         {
-                            tab === 'list' ? <List /> : <Comments/>
+                            tab === 'list' ? <List/> : <Comments/>
                         }
                     </Grid>
                 </Grid>

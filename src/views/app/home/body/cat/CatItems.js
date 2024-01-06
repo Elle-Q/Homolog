@@ -6,17 +6,17 @@ import GradientButton from "../../../../../components/ui/GradientButton";
 import {Link} from "react-router-dom";
 
 function CatItems(props) {
-    const {cat} = props;
+    const {catItem} = props;
 
-    if (cat === undefined || cat.Items.length < 1) return <></>
+    if (catItem === undefined || catItem.items.length < 1) return <></>
 
     return (
         <React.Fragment>
             <div style={{display: 'grid',gridTemplateColumns:'70% 30%'}}>
                 <div style={{gridColumn: 2/3}}>
-                    <AnimationText title={cat.CatTitle}/>
+                    <AnimationText title={catItem.title}/>
                     &nbsp;&nbsp;
-                    <AnimationText title={cat.CatSubTitle}
+                    <AnimationText title={catItem.subTitle}
                                    fontSize={15}
                                    spacing={1}
                                    color='white'
@@ -24,8 +24,8 @@ function CatItems(props) {
                     />
                 </div>
                 <div style={{display:'flex', alignItems: 'center',justifyContent:"flex-end"}}>
-                    <Link to={`/app/category/${cat.CatID}`}>
-                    <GradientButton name="更多" color="linear-gradient(to right, #00c6ff 0%, #0072ff  51%, #00c6ff  100%)"/>
+                    <Link to={`/app/search`}>
+                        <GradientButton name="更多" color="linear-gradient(to right, #8184FF 0%, #595DFD 51%, #8184FF 100%)"/>
                     </Link>
                 </div>
             </div>
@@ -36,7 +36,7 @@ function CatItems(props) {
                    display="flex"
             >
                 {
-                    cat.Items.map((item, index) => {
+                    catItem.items.map((item, index) => {
                         return <ItemCard key={index} item={item}/>
                     })
                 }

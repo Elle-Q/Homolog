@@ -96,8 +96,8 @@ function Community(props) {
     }
 
     return (
-        <React.Fragment>
-            <Box sx={{display: "flex", justifyContent: "center", mt: '20px',}}>
+        <div style={{height: '100vh'}}>
+            <Box sx={{display: "flex", justifyContent: "center", mt: '20px'}}>
                 <ATab name="问题" id='issue'
                       handleClick={handleTabClick}
                       icon={<BugReportRoundedIcon onClick={(e) => e.stopPropagation()}/>}
@@ -145,7 +145,7 @@ function Community(props) {
                     </Grid>
                 </Grid>
             </Box>
-        </React.Fragment>
+        </div>
     );
 }
 

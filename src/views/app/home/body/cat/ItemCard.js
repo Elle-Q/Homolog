@@ -15,7 +15,7 @@ import {useDispatch} from "react-redux";
 
 function ItemCard(props) {
     const theme = useTheme();
-    const {width, item} = props;
+    const {item} = props;
     const [collected, setCollected] = useState(false);
     let dispatch = useDispatch();
 
@@ -38,11 +38,11 @@ function ItemCard(props) {
             }
         }}>
 
-            <Link to={`/app/item/${item.ID}`} key={item.ID}>
+            <Link to={`/app/item/${item.id}`} key={item.id}>
                 <CardMedia
                     component="img"
                     height="60%"
-                    image={item.Main}
+                    image={item.main.small}
                     alt="Preview"
                     sx={{
                         boxShadow: 5,
@@ -57,11 +57,11 @@ function ItemCard(props) {
             <Typography variant="h6" component="div"
                         color={theme.palette.text.seventh}
                         sx={{mt: '5px', ml: '15px', fontWeight:"bold",height: '32px'}}>
-                {item.Name}
+                {item.name}
             </Typography>
             <CardContent>
                 <Typography variant="body2" color="text.secondary" sx={{overflow: "hidden",height: '40px'}}>
-                    {item.Desc}
+                    {item.desc}
                 </Typography>
             </CardContent>
             <Typography component="div"  sx={{ml: '15px', fontSize: '12px', color:"#5b5756"}}>
@@ -80,7 +80,7 @@ function ItemCard(props) {
                 <IconButton aria-label="buy" style={{marginRight:'50%'}}>
                     <ShoppingCartIcon onClick={handleAdd2Cart}/>
                 </IconButton>
-                <PriceTag height={24} price={item.Price}/>
+                <PriceTag height={24} price={item.price}/>
             </CardActions>
         </Card>
     );

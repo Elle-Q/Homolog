@@ -35,7 +35,7 @@ function Admin(props) {
             {/*    backgroundColor:'primary.main',*/}
             {/*}}>*/}
             {/*    <Grid item sx={{display:"flex"}} >*/}
-            {/*        <SideBar />*/}
+            {/*        <sidebar />*/}
             {/*    </Grid>*/}
             {/*    <Grid item sx={{*/}
             {/*        // flexGrow:1,  //very important*/}

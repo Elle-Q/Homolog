@@ -3,7 +3,7 @@ import {NavBar} from "./header/NavBar";
 import {Route, Routes, useLocation} from "react-router-dom";
 import Play from "../play/Play";
 import Body from "./body/Body";
-import Category from "../category/Category";
+import Search from "../search/Search";
 import Account from "../account/Account";
 import Item from "../item/Item";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -28,7 +28,7 @@ function Home(props) {
         {path: '/home', name: 'home', component: <React.Fragment> <Body/> <Footer/></React.Fragment>},
         {path: '/', name: 'home_', component: <React.Fragment> <Body/> <Footer/></React.Fragment>},
         {path: '/play/:id', name: 'play', component: <Play/>},
-        {path: '/category/:id', name: 'category', component: <Category/>},
+        {path: '/search', name: 'search', component: <Search/>},
         {path: '/item/:id', name: 'item', component: <Item/>},
         {path: '/account', name: 'account', component: <Account/>},
         {path: '/partner', name: 'partner', component: <Partner/>},
@@ -52,18 +52,18 @@ function Home(props) {
             {
                 show && <NavBar/>
             }
-            <Box id="toggleNavBar" sx={{
-                textAlign: "center",
-                verticalAlign: "center",
-                zIndex: 100, width: '100%', height: '15px',
-                backgroundColor: '#00a896',
-                color: '#9f9f9f',
-                content: '"dd"',
-                "&:hover": {
-                    backgroundColor: '#e82986',
-                },
-            }} onClick={toggleNavBar}>
-            </Box>
+            {/*<Box id="toggleNavBar" sx={{*/}
+            {/*    textAlign: "center",*/}
+            {/*    verticalAlign: "center",*/}
+            {/*    zIndex: 100, width: '100%', height: '15px',*/}
+            {/*    backgroundColor: '#00a896',*/}
+            {/*    color: '#9f9f9f',*/}
+            {/*    content: '"dd"',*/}
+            {/*    "&:hover": {*/}
+            {/*        backgroundColor: '#e82986',*/}
+            {/*    },*/}
+            {/*}} onClick={toggleNavBar}>*/}
+            {/*</Box>*/}
             {/*购物车*/}
             <Cart></Cart>
             <Routes>

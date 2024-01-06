@@ -50,9 +50,9 @@ import darkScrollbar from "@mui/material/darkScrollbar";
              styleOverrides: {
                  root: {
                      fontSize: '1rem',
-                     border: '1px solid #173A5E',
+                     border: '1px solid #4f518c',
                      borderRadius: '10px',
-                     backgroundColor:'#001E3C',
+                     backgroundColor:'rgba(44,44,43,0.8)',
                      minWidth:"42px"
                  },
              },

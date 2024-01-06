@@ -22,9 +22,9 @@
     margin: 0;
     padding: 0;
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
-    background-image: url("../../assets/bg/login02.jpg");
+    background-image: url("../../assets/bg/login.svg");
     background-size: cover;
     font-family: cursive;
     /*animation: bgAnimation 30s linear infinite;*/

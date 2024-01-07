@@ -18,6 +18,8 @@ class TokenService {
     }
 
     setTokens(tokens) {
+        console.log("---------save to local--------- ", tokens)
+        localStorage.setItem("test", "elle")
         localStorage.setItem("tokens", JSON.stringify(tokens))
     }
 

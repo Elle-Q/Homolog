@@ -96,7 +96,6 @@ export const login = (phone, password) => (dispatch) => {
     resp => {
             userService.getUser().then(
                 resp => {
-                    debugger
                     dispatch(loginSuccess(resp))
                     return resp
                 }

@@ -5,10 +5,10 @@ import Home from "./views/app/home/Home";
 import {BrowserRouter, Route, Routes, useLocation} from "react-router-dom";
 import Admin from "./views/admin/home/Admin";
 import {adminTheme} from "./config/adminTheme";
-import useInterceptor from "./hook/useInterceptor";
 import AlertLog from "./components/alert/ops/AlertLog";
 import Login from "./views/login/Login";
 import "./styles.css";
+import "./api/api";
 
 export const ColorModeContext = React.createContext({
     toggleColorMode: () => {
@@ -16,9 +16,7 @@ export const ColorModeContext = React.createContext({
 });
 
 function App() {
-    useInterceptor();
     const [mode, setMode] = React.useState('light');
-
     const app_theme = React.useMemo(
         () =>
             createTheme(globalTheme, {

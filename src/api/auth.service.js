@@ -9,7 +9,6 @@ class AuthService {
         param.append("password", password);
         return api.post("/leetroll-app/user/login", param)
             .then(resp => {
-                console.log("---------from back--------- ", resp)
                 //设置token
                 TokenService.setTokens({
                     AccessToken: resp.accessToken,

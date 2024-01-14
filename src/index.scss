@@ -1,0 +1,36 @@
+
+body {
+    background-image: radial-gradient(circle, #3f3f41, #3b3b3c, #363638, #323233, #2e2e2f, #2a2a2b, #262627, #222223, #1e1e1f, #1a1a1a, #161616, #111111);
+    font-family: Figtree,sans-serif;
+}
+
+/*设置input输入框输入内容后背景颜色变成丑陋的白色*/
+input:-webkit-autofill {
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+/* 整个滚动条 */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+/* 滚动条上的滚动滑块 */
+::-webkit-scrollbar-thumb {
+    background-color: #595DFD;
+    background-image: -webkit-linear-gradient(45deg,
+            rgba(255, 255, 255, 0.4) 25%,
+            transparent 25%,
+            transparent 50%,
+            rgba(255, 255, 255, 0.4) 50%,
+            rgba(255, 255, 255, 0.4) 75%,
+            transparent 75%,
+            transparent);
+    border-radius: 32px;
+}
+
+/* 滚动条轨道 */
+::-webkit-scrollbar-track {
+    background-color: #dbeffd;
+    border-radius: 32px;
+}

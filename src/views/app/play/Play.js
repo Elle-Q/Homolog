@@ -1,18 +1,11 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect,useState} from 'react';
 import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import TitleHeader from "./TitleHeader";
-import PageTipFloatingBar from "../../../components/PageTipFloatingBar";
-import BriefDesc from "./video/BriefDesc";
-import Comments from "../item/comment/Comments";
-import {GetChapters, GetItemWithFiles} from "../../../api/item.service";
+import {GetChapters} from "../../../api/item.service";
 import {useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {selectPlayer} from "./playSlice";
-import ThreeD from "./3d/ThreeD";
 import Periods from "./video/Periods";
 import VideoPlayer from "../../../components/player/VideoPlayer";
-import {setNavBarShow, setShow} from "../home/header/NavBarSlice";
 
 
 function Play(props) {
@@ -25,7 +18,6 @@ function Play(props) {
     //获取当页的资源信息
     useEffect(() => {
         dispatch(GetChapters(itemId))
-        dispatch(setNavBarShow(false))
     }, [])
 
     useEffect(() => {

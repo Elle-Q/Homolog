@@ -17,7 +17,7 @@ import CustomSpeedDial from "../../../components/CustomSpeedDial";
 import ItemModal from "./ItemModal";
 import api from "../../../api/api";
 import {openAlert} from "../../../components/alert/ops/alertSlice";
-import {selectRefresh} from "../../../app/refreshSlice";
+import {selectRefresh} from "../../../store/refreshSlice";
 import LinkToButton from "../../../components/ui/LinkToButton";
 import {setItemID} from "../upload/uploadSlice";
 

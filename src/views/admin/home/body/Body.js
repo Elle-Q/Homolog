@@ -17,9 +17,9 @@ function Body(props) {
                 <Route path="/content/config" element={<Config/>}/>
                 <Route path="/content/item" element={<Item/>}/>
                 <Route path="/content/upload" element={<Upload/>}/>
-                {/*<Route path="play" element={<Play/>}/>*/}
-                {/*<Route path="search/:cat" element={<Search/>}/>*/}
-                {/*<Route path="account" element={<Account/>}/>*/}
+                {/*<Index path="play" element={<Play/>}/>*/}
+                {/*<Index path="search/:cat-card" element={<Search/>}/>*/}
+                {/*<Index path="account" element={<Account/>}/>*/}
             </Routes>
         </Box>
     );

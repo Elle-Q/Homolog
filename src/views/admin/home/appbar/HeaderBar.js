@@ -2,7 +2,7 @@ import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import Logo from "../../../app/home/header/Logo";
+import Logo from "../../../app/home/navbar/logo";
 import {Link} from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import {CustomBadge} from "../../../../components/ui/CustomBadge";

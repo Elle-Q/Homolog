@@ -2,7 +2,6 @@ import React from 'react';
 import Box from "@mui/material/Box";
 import Sort from "./Sort";
 import Divider from "@mui/material/Divider";
-import PriceFilter from "./PriceFilter";
 import {alpha} from "@mui/system";
 import FileFormatFilter from "./FileFormatFilter";
 

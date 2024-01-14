@@ -75,7 +75,7 @@ function BriefDesc(props) {
                 // height: '900px',
                 width: '100%',
                 borderRadius: '10px',
-                backgroundColor: alpha(theme.palette.background.paper, 0.4),
+                backgroundColor: alpha('#0a0908', 0.4),
                 boxShadow: '0 0 5px black',
                 padding: '10px',
             }}

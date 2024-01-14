@@ -1,0 +1,16 @@
+.body-container {
+  width: 80%;
+  overflow: hidden;
+  margin: auto;
+}
+
+.cat-container {
+  width: 90%;
+  margin: 50px auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+

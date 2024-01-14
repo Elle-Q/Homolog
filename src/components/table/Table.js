@@ -6,8 +6,8 @@ import TableRow from "@mui/material/TableRow";
 
 export const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
-        backgroundColor: theme.palette.primary.main,
-        color: theme.palette.secondary.light,
+        backgroundColor: '#001E3C',
+        color: '#3399ff',
         fontSize: 18,
     },
     [`&.${tableCellClasses.body}`]: {

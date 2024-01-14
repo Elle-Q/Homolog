@@ -1,0 +1,11 @@
+.subject-header {
+  display: grid;
+  grid-template-columns:70% 30%;
+}
+
+.btn-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+

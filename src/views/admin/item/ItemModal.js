@@ -12,7 +12,7 @@ import AddIcon from '@mui/icons-material/Add';
 import Chip from "@mui/material/Chip";
 import IconButton from "@mui/material/IconButton";
 import {Input} from "@mui/material";
-import {setRefresh} from "../../../app/refreshSlice";
+import {setRefresh} from "../../../store/refreshSlice";
 import CommentInput from "../../../components/CommentInput";
 
 function ItemModal(props) {

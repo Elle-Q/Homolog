@@ -5,7 +5,6 @@ const useStyles = makeStyles({
     fade: {
         opacity: '1 !important',
         transform: 'translateY(0px) !important',
-        // color:'white',
         '&:hover': {
             color: '#00a896'
         }
@@ -60,7 +59,7 @@ function AnimationText(props) {
                     fontFamily: '-apple-system',
                     letterSpacing: `${spacing ? spacing : 3}px`,
                     fontSize: `${fontSize}px`,
-                    color: `${color ? color : 'rgba(150,103,224,0.58)'}`,
+                    color: `${color ? color : 'white'}`,
                 }}
             >
             </h1>

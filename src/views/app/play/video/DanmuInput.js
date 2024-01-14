@@ -6,7 +6,6 @@ import Button from "@mui/material/Button";
 const StyledInputElement = styled('input')`
   width: 92%;
   font-size: 1rem;
-  font-family: -apple-system, sans-serif;
   font-weight: 400;
   line-height: 1.4375em;
   background: transparent;

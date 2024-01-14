@@ -8,7 +8,7 @@ import {useSelector, useDispatch} from 'react-redux'
 import {openAlert} from "../../../components/alert/ops/alertSlice";
 import {upload} from "../../../api/qiniu.service";
 import {UpdateCat} from "../../../api/cat.service";
-import {setRefresh} from "../../../app/refreshSlice";
+import {setRefresh} from "../../../store/refreshSlice";
 import MenuItem from "@mui/material/MenuItem";
 import {useForm} from "react-hook-form";
 

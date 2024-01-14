@@ -40,7 +40,7 @@ function UserInfoSide(props) {
         <React.Fragment>
             <div style={{position: "relative", height: '250px'}}>
                 <Avatar alt="elle"
-                        src={user && user.Avatar}
+                        src={user && user.avatar}
                         sx={{
                             width: 296,
                             height: 296,
@@ -64,10 +64,10 @@ function UserInfoSide(props) {
 
             <div>
                 <Typography component="div" variant="h4" sx={{color: 'white', fontWeight: "bold"}}>
-                    {user.Name}
+                    {user.name}
                 </Typography>
                 <Typography component="div" variant="h6" sx={{color: '#8B949E'}}>
-                    {user.Moto}
+                    {user.moto}
                 </Typography>
             </div>
 

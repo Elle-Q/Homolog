@@ -66,17 +66,16 @@ export const CancelButton = (props) => {
 export const CartButton = (props) => {
     const {icon, money, onClick} = props
     return (
-        <Button onClick={onClick} sx={{
-                        color: 'white',
+        <div onClick={onClick} style={{
+                        color: 'red',
                         width: '300px',
                         height: '50px',
-                        backgroundColor: "red",
-                        border: '1px solid red',
+                        border: '1px solid #3b3b39',
                         borderRadius: '10px',
-                        boxShadow: '0 0 5px #EB5E28',
+                        // boxShadow: '0 0 5px #EB5E28',
                         '&:hover': {
-                            backgroundColor: alpha('#132f4c', 0.2),
-                            boxShadow: '0 0 5px #001E3C',
+                            // backgroundColor: alpha('#132f4c', 0.2),
+                            // boxShadow: '0 0 5px #001E3C',
                             fontSize: '30px',
                             border: "none",
                             cursor: "pointer",
@@ -84,7 +83,7 @@ export const CartButton = (props) => {
                         }
                     }}>
             {icon} <span style={{color: 'white'}}>(￥{money})</span>
-        </Button>
+        </div>
     )
 }
 

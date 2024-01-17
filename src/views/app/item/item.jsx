@@ -63,7 +63,7 @@ function Item() {
 
     //点击下载源文件
     const handleDownload= () => {
-        window.location.href = data.main.original
+        window.location.href = data.attachment.link
     }
 
     if (data == null) {
@@ -79,7 +79,7 @@ function Item() {
                 {/*上右 详情信息区域*/}
                 <Grid item xs={3}>
                     <Stack direction='column' spacing={2} sx={{mt: '10px'}}>
-                        <img src={data && data.main && data.main.small} alt="bg" className="main-img"/>
+                        <img src={data && data.main && data.main.link} alt="bg" className="main-img"/>
 
                         <Typography variant="h4" component="div"> {data.name}  </Typography>
                         <Typography component="p"> {data.desp} </Typography>
@@ -101,7 +101,7 @@ function Item() {
                                 {
                                     data.price === 0 ?
                                         <IconButton onClick={handleDownload}><DownloadIcon fontSize="large" sx={{color:"red"}}/> </IconButton> :
-                                        <IconButton onClick={handleAdd2Cart}><ShoppingCartIcon fontSize="large" sx={{color:"red"}}/>(￥ {data.price}) </IconButton>
+                                        <IconButton onClick={handleAdd2Cart}><ShoppingCartIcon fontSize="large" sx={{color:"red"}}/>(￥{data.price}) </IconButton>
                                 }
                             </div>
                             <div className="icon-container">
@@ -113,9 +113,9 @@ function Item() {
                 </Grid>
 
                 <Grid item xs={12} sx={{marginTop: '30px'}}>
-                    <Stack direction={'row'} style={{justifyContent: 'center', borderBottom: '1px solid grey'}}>
-                        {getTabContent(data.type)}
-                    </Stack>
+                    {/*<Stack direction={'row'} style={{justifyContent: 'center', borderBottom: '1px solid grey'}}>*/}
+                    {/*    {getTabContent(data.type)}*/}
+                    {/*</Stack>*/}
                 </Grid>
 
                 <Grid item xs={12} sx={{marginTop: '30px'}}>

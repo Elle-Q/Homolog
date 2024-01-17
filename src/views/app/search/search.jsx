@@ -13,29 +13,25 @@ import Soft from "../../../assets/menu/soft.svg";
 import InfiniteScroll from "react-infinite-scroller";
 import {useSelector} from "react-redux";
 import {selectSearch} from "../../../store/Search";
+import SearchBar from "./searchbar/SearchBar";
 
 function Search() {
 
     const {doSearch, keyword} = useSelector(selectSearch);
     const [list, setList] = useState([]);
-    const [page, setPage] = useState(0);
+    const [page, setPage] = useState(1);
     const [totalSize, setTotalSize] = useState(1);
     const [hasMore, setHasMore] = useState(false);
+    const [cat, setCat] = useState(null);
+    const [metric, setMetric] = useState(null);
 
     useEffect(() => {
-        ListItems(0, keyword).then((items) => {
-            setList(items)
-            setPage(page + 1);
-            TotalSize(keyword).then((size) => {
-                setTotalSize(size)
-                setHasMore(items.length < size)
-            })
-        })
-    }, [doSearch]);
+        search()
+    }, [doSearch, cat, metric]);
 
     const loadMoreItems = () => {
         if (list.length >= totalSize) return
-        ListItems(page, keyword).then((data) => {
+        ListItems(page, keyword, cat, metric).then((data) => {
             let newList = [...list, ...data]
             setList(newList)
             setPage(page + 1);
@@ -44,33 +40,31 @@ function Search() {
 
     };
 
+    const search = () => {
+        ListItems(1, keyword, cat, metric).then((items) => {
+            setList(items)
+            TotalSize(keyword, cat, metric).then((size) => {
+                setTotalSize(size)
+                setHasMore(items.length < size)
+            })
+        })
+        setPage(2);
+    }
+
+    const handleClickNavCat = (cat) => {
+        setCat(cat)
+    }
+
+    const handleClickMetric = (metric) => {
+        setMetric(metric)
+    }
+
     return (
         <div className="search-container">
-            {/*<SearchBar/>*/}
-            <div className="nav-container">
-                <Stack direction="row" spacing={1}>
-                    <div className="nav-cat">
-                        <IconButton> <img alt="icon" src={Three}/> </IconButton>
-                        <span>模型</span>
-                    </div>
-                    <div className="nav-cat">
-                        <IconButton> <img alt="icon" src={Texture}/> </IconButton>
-                        <span>贴图</span>
-                    </div>
-                    <div className="nav-cat">
-                        <IconButton> <img alt="icon" src={Book}/> </IconButton>
-                        <span>文档</span>
-                    </div>
-                    <div className="nav-cat">
-                        <IconButton> <img alt="icon" src={Video}/> </IconButton>
-                        <span>教程</span>
-                    </div>
-                    <div className="nav-cat">
-                        <IconButton> <img alt="icon" src={Soft}/> </IconButton>
-                        <span>软件</span>
-                    </div>
-                </Stack>
-            </div>
+            <SearchBar
+                handleClickNavCat={handleClickNavCat}
+                handleClickMetric={handleClickMetric}
+            />
             <div className="filter-container">
                 <span>{totalSize}个资源 </span>
                 <IconButton><FilterListIcon fontSize="small"/>过滤</IconButton>

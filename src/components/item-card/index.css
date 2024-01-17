@@ -3,12 +3,11 @@
   flex-direction: column;
   width: 23%;
   border-radius: 20px !important;
-  background-color: #252525 !important;
+  background-color: #323232 !important;
   justify-content: space-between; }
   .item-card:hover {
     border: 2px solid #464545; }
     .item-card:hover img {
-      filter: brightness(110%);
       transform: scale(1.2);
       transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
   .item-card .text {

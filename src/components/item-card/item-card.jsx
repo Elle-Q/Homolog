@@ -23,11 +23,16 @@ function ItemCard(props) {
         dispatch(addItem(item))
     }
 
+    //点击下载源文件
+    const handleDownload= () => {
+        window.location.href = item.attachment.link
+    }
+
     return (
         <div className="item-card">
             <Link to={`/item/${item.id}`} key={item.id}>
                 <div className="img-container">
-                    <img src={item.main.small} alt="item"/>
+                    <img src={item.main && item.main.link} alt="item"/>
                 </div>
             </Link>
 
@@ -38,14 +43,14 @@ function ItemCard(props) {
                 </IconButton>
                 <IconButton aria-label="buy" style={{marginRight: '40%'}}>
                     {
-                        item.price === 0 ? <DownloadIcon fontSize="small"/>
+                        item.price === 0 ? <DownloadIcon fontSize="small" onClick={handleDownload}/>
                             :
                             <ShoppingCartIcon fontSize="small" onClick={handleAdd2Cart}
                                               sx={{color: `${added ? '#ff0a54' : 'white'}`}}/>
                     }
 
                 </IconButton>
-                <PriceTag height={24} price={item.price}/>
+                <PriceTag price={item.price}/>
             </Stack>
         </div>
     );

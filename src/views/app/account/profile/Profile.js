@@ -32,7 +32,7 @@ const ActionButton = (props) => {
                         position: "relative",
                         left: `${name === 'logout' ? 30 : 70}px`,
                         top: `${name === 'logout' && 80}px`,
-                        backgroundColor: alpha('#252422', 0.5),
+                        backgroundColor: alpha('#484846', 0.5),
                         '&:hover': {
                             transform: 'scale(1.3)',
                             transition: 'all .2s ease .2s'
@@ -89,7 +89,7 @@ function Profile(props) {
     const AvatarWithEdit = () => {
         return (
             <div style={{marginBottom: '100px'}}>
-                <Avatar alt="elle"
+                <Avatar alt="avatar"
                         src={avatarUri}
                         sx={{
                             width: 120,
@@ -101,8 +101,8 @@ function Profile(props) {
                         }}
                         onClick={onClickAvatar}
                 />
-                <ActionButton icon={<EditIcon/>} name="edit" onClick={toggleDrawer(true)}/>
-                <ActionButton icon={<LogoutIcon/>} name="logout" onClick={logout}/>
+                <ActionButton icon={<EditIcon sx={{color: "white"}}/>} name="edit" onClick={toggleDrawer(true)}/>
+                <ActionButton icon={<LogoutIcon sx={{color: "white"}}/>} name="logout" onClick={logout}/>
             </div>
         )
     }

@@ -10,15 +10,17 @@ import Divider from "@mui/material/Divider";
 import Button from "@mui/material/Button";
 import styled from "styled-components";
 import {closeCart, selectCart} from "./cart-slice";
-import {sum} from "lodash/math";
 
 const PayButton = styled(Button)`
   color: white;
   width: 120px;
   height: 40px;
-
+  border: 1px solid #1f1f1f;
+  background-color: #171717;
+  border-radius: 8px;
+  
   &:hover {
-    background-color: alpha('#403D39', 0.2);
+    background-color: #252525;
   }
 
 `
@@ -58,7 +60,7 @@ function Cart(props) {
                     return <React.Fragment>
                         <Stack style={{display: 'flex', marginBottom: '20px'}} spacing={2}>
                             <Stack style={{display: 'flex', justifyContent: 'space-between'}} direction={'row'} spacing={1}>
-                                <img src={item.main.small} alt='prevShow'
+                                <img src={item.main.link} alt='prevShow'
                                      style={{maxHeight: '100px', marginRight: '10px', borderRadius: '25px'}}/>
                                 <Stack sx={{color: '#6e6d6d', fontSize: '12px', flex: '1'}} spacing={0}>
                                     <span style={{fontSize: '16px'}}>{item.name}</span>

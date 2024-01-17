@@ -25,7 +25,7 @@ function Subject(props) {
                     />
                 </div>
                 <div className="btn-container">
-                    <Link to={`/app/search`}>
+                    <Link to={`/search`}>
                         <GradientButton name="更多" color="linear-gradient(to right, #8184FF 0%, #595DFD 51%, #8184FF 100%)"/>
                     </Link>
                 </div>

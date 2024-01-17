@@ -31,7 +31,6 @@ function AvatarEditModal(props) {
     //点击任意默认头像, 设置头像预览
     const defaultAvatarClick = (link) => {
         return (e) => {
-            e.stopPropagation()
             setAvatarUri(link)
             setAvatarFile(null)
         }
@@ -49,9 +48,12 @@ function AvatarEditModal(props) {
         setAvatarFile(files[0])
     }
 
+    const handleUploadAvatar =  (event) => {
+        fileRef.current.click()
+    }
+
     //修改头像(上传七牛, 更新数据库)
     function changeAvatar() {
-
         if (!avatarFile) {
             dispatch(updateAvatar(user.id, avatarUri))
             handleClose()
@@ -61,12 +63,11 @@ function AvatarEditModal(props) {
                 handleClose()
             })
         }
-
     }
 
     return (
         <AvatarModal title="修改头像"
-                     maxWidth="sm"
+                     maxWidth="md"
                      open={open}
                      handleClose={handleClose}
                      handleSave={changeAvatar}
@@ -116,7 +117,7 @@ function AvatarEditModal(props) {
                            ref={fileRef}
                            onChange={onAvatarChange}
                            style={{display: 'none',}}/>
-                    <IconButton onClick={() => fileRef.current.click()}
+                    <IconButton onClick={handleUploadAvatar}
                                 sx={{
                                     width: '200px',
                                     height: '50px',

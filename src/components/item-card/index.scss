@@ -4,14 +4,13 @@
   flex-direction: column;
   width: 23%;
   border-radius: 20px !important;
-  background-color: #252525 !important;
+  background-color: #323232 !important;
   justify-content: space-between;
 
   &:hover {
     border: 2px solid rgb(70, 69, 69);
 
     & img {
-      filter: brightness(110%);
       transform: scale(1.2);
       transition: all 1s cubic-bezier(.175,.885,.32,1.275);
     }

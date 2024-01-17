@@ -1,18 +1,6 @@
 .search-container {
   width: 85%;
   margin: auto; }
-  .search-container .nav-container {
-    border-bottom: 1px solid #2e2e2f;
-    margin-top: 10px;
-    margin-bottom: 10px; }
-    .search-container .nav-container .nav-cat:hover {
-      border-bottom: 1px solid #868cea; }
-      .search-container .nav-container .nav-cat:hover span {
-        color: #fff; }
-    .search-container .nav-container .nav-cat span {
-      color: #ccc;
-      font-size: 12px;
-      font-weight: 600; }
   .search-container .filter-container {
     display: flex;
     justify-content: space-between;

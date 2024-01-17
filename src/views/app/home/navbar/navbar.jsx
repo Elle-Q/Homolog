@@ -50,6 +50,7 @@ function NavBar(props) {
         if(event.nativeEvent.keyCode === 13){
             dispatch(setKeyword(event.target.value))
             dispatch(toggleSearch());
+            navigate('/search')
         }
     }
 

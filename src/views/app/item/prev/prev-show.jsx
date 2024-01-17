@@ -16,7 +16,7 @@ const useStyles = makeStyles({
         '&:hover': {
             filter: 'grayscale(90%)',
             transform: 'scale(1.1)',
-            border: '5px solid white',
+            border: '1px solid white',
         }
     }
 })
@@ -28,7 +28,7 @@ const fileShowContainer = {
     '&:hover': {
         filter: 'grayscale(90%)',
         transform: 'scale(1.1)',
-        border: '5px solid white',
+        border: '1px solid white',
     }
 }
 
@@ -49,7 +49,7 @@ function PrevShow(props) {
         for (let i = 0; i < element.children.length; i++) {
             element.children[i].style.border = '0px';
         }
-        event.target.style.border = '5px solid white';
+        event.target.style.border = '2px solid white';
         event.target.style.borderRadius = '5px';
     }
 
@@ -58,10 +58,10 @@ function PrevShow(props) {
             {
                 currentPrev && isVideo(currentPrev.format) ? <SimplePlayer videoSrc={{
                         type: `${currentPrev.key ? 'application/x-mpegURL' : 'video/mp4'}`,
-                        src: currentPrev.original
+                        src: currentPrev.link
                     }}/> :
                     <div style={{width: '100%'}}>
-                        <img src={currentPrev && currentPrev.original} alt='prevShow'
+                        <img src={currentPrev && currentPrev.link} alt='prevShow'
                              style={{
                                  width: 'auto',
                                  maxHeight: '650px',
@@ -78,10 +78,10 @@ function PrevShow(props) {
                             <Box sx={fileShowContainer} onClick={(event) => handlePrevChange(prev, event)}>
                                 <SimplePlayer videoSrc={{
                                     type: `${prev.key ? 'application/x-mpegURL' : 'video/mp4'}`,
-                                    src: prev.origianl
+                                    src: prev.link
                                 }}/></Box>
                             :
-                            <img src={prev.small} alt='smallPrev'
+                            <img src={prev.link} alt='smallPrev'
                                  key={'prev'.concat(index)}
                                  className={classes.prev}
                                  onClick={(event) => handlePrevChange(prev, event)}/>

@@ -42,12 +42,12 @@ export const ListCatsWith4Items = () => {
         });
 }
 
-export const ListItems = (pageNumber, keyword, cat, metric) => {
+export const ListItems = (pageNumber, keyword, catId, metric) => {
     let params = {
         pageNumber: pageNumber,
         pageSize: 12,
         keyword: keyword,
-        cat: cat,
+        catId: catId,
         metric: metric,
     }
     return api.get(`/leetroll-app/search/query`, {params: params})
@@ -56,10 +56,10 @@ export const ListItems = (pageNumber, keyword, cat, metric) => {
         });
 }
 
-export const TotalSize = (keyword, cat, metric) => {
+export const TotalSize = (keyword, catId, metric) => {
     let params = {
         keyword: keyword,
-        cat: cat,
+        catId: catId,
         metric: metric,
     }
     return api.get(`/leetroll-app/search/size`, {params: params})
@@ -68,9 +68,9 @@ export const TotalSize = (keyword, cat, metric) => {
         });
 }
 
-export const ListMetrics = (cat) => {
+export const ListMetrics = (catId) => {
     let params = {
-        cat: cat
+        catId: catId
     }
     return api.get(`/leetroll-app/category/metrics`, {params: params})
         .then((resp) => {

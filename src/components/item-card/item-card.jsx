@@ -3,7 +3,7 @@ import IconButton from "@mui/material/IconButton";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import {Link} from "react-router-dom";
 import PriceTag from "../PriceTag";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import {addItem, openCart} from "../../views/app/cart/cart-slice";
 import {useDispatch} from "react-redux";
 import "../../views/app/home/body/subject/subject.scss"
@@ -24,14 +24,26 @@ function ItemCard(props) {
     }
 
     //点击下载源文件
-    const handleDownload= () => {
+    const handleDownload = () => {
         window.location.href = item.attachment.link
+    }
+
+    const getClass = () => {
+        if (item.type === 'hdri') {
+            return 'hdri-container'
+        } else if (item.type === 'doc') {
+            return 'doc-container'
+        } else if (item.type === 'model') {
+            return 'model-container'
+        } else {
+            return 'normal-container'
+        }
     }
 
     return (
         <div className="item-card">
             <Link to={`/item/${item.id}`} key={item.id}>
-                <div className="img-container">
+                <div className={getClass()}>
                     <img src={item.main && item.main.link} alt="item"/>
                 </div>
             </Link>
@@ -45,8 +57,8 @@ function ItemCard(props) {
                     {
                         item.price === 0 ? <DownloadIcon fontSize="small" onClick={handleDownload}/>
                             :
-                            <ShoppingCartIcon fontSize="small" onClick={handleAdd2Cart}
-                                              sx={{color: `${added ? '#ff0a54' : 'white'}`}}/>
+                            <AddShoppingCartIcon fontSize="small" onClick={handleAdd2Cart}
+                                                 sx={{color: `${added ? '#ff0a54' : 'white'}`}}/>
                     }
 
                 </IconButton>

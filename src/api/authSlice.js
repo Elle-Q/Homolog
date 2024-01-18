@@ -1,27 +1,16 @@
 import {createSlice} from '@reduxjs/toolkit'
 
 const tokens = JSON.parse(localStorage.getItem("tokens"))
-const userId = JSON.parse(localStorage.getItem("userId"))
 
 export const authSlice = createSlice({
     name: 'auth',
 
-    initialState: (tokens && userId)
-        ? {isLogin: true,userId: userId,user:null}
-        : {isLogin: false, userId: null,user:null},
+    initialState: tokens
+        ? {isLogin: true,user:null}
+        : {isLogin: false, user:null},
 
     reducers: {
         registerSuccess: (state, action) => {
-            const {userId} = action.payload;
-
-            return {
-                ...state,
-                isLogin: false,
-                userId: userId
-            }
-        },
-        registerFail: (state, action) => {
-            const {msg} = action.payload;
             return {
                 ...state,
                 isLogin: false,
@@ -36,18 +25,15 @@ export const authSlice = createSlice({
             }
         },
         loginFail: (state, action) => {
-            const {msg} = action.payload;
             return {
                 ...state,
                 isLogin: false,
-                userId: null
             }
         },
         logout: (state) => {
             return {
                 ...state,
                 isLogin: false,
-                userId: null,
                 user:null
             }
         },
@@ -62,7 +48,7 @@ export const authSlice = createSlice({
                 ...state,
                 user: {
                     ...state.user,
-                    Avatar:action.payload
+                    avatar:action.payload
                 }
             }
         },
@@ -71,14 +57,14 @@ export const authSlice = createSlice({
                 ...state,
                 user: {
                     ...state.user,
-                    BgImag:action.payload
+                    bgImg:action.payload
                 }
             }
         },
     }
 })
 
-export const {loginSuccess, loginFail, logout, registerSuccess, registerFail, setUser, setAvatar, setBG} = authSlice.actions
+export const {loginSuccess, loginFail, logout, registerSuccess, setUser, setAvatar, setBG} = authSlice.actions
 
 export const selectAuth = state => state.auth
 

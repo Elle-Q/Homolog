@@ -3,7 +3,7 @@ import Grid from "@mui/material/Grid";
 import {useParams} from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import {GetItem} from "../../../api/item.service";
 import catBriefInfo from "../../../json/catBriefInfo.json"
 import List from "./list/list";
@@ -76,6 +76,7 @@ function Item() {
                 <Grid item xs={9} direction="column" style={{textAlign: 'center', justifyContent: 'space-between', display: "flex"}}>
                     <PrevShow preList={data.previews}/>
                 </Grid>
+                {/*<Grid item xs={1} />*/}
                 {/*上右 详情信息区域*/}
                 <Grid item xs={3}>
                     <Stack direction='column' spacing={2} sx={{mt: '10px'}}>
@@ -85,8 +86,9 @@ function Item() {
                         <Typography component="p"> {data.desp} </Typography>
 
                         <Stack>
+                            <span> 价格: ￥{data.price}</span>
                             <span> 作者: {data.author}</span>
-                            <span> 资源类型: 贴图</span>
+                            <span> 资源类型: {data.type}</span>
                             <span> 适用软件: blender</span>
                         </Stack>
 
@@ -101,7 +103,9 @@ function Item() {
                                 {
                                     data.price === 0 ?
                                         <IconButton onClick={handleDownload}><DownloadIcon fontSize="large" sx={{color:"red"}}/> </IconButton> :
-                                        <IconButton onClick={handleAdd2Cart}><ShoppingCartIcon fontSize="large" sx={{color:"red"}}/>(￥{data.price}) </IconButton>
+                                        <IconButton onClick={handleAdd2Cart}><AddShoppingCartIcon fontSize="large" sx={{color:"red"}}/>
+                                        <span style={{fontSize: '14px'}}>加入购物车</span>
+                                        </IconButton>
                                 }
                             </div>
                             <div className="icon-container">

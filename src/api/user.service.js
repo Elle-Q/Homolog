@@ -6,8 +6,8 @@ import {authService} from "./auth.service";
 class UserService {
     changeAvatar(userId, avatarLink) {
         return api.post('/leetroll-app/user/avatar/update', {
-            UserId: userId,
-            Avatar: avatarLink
+            id: userId,
+            avatar: avatarLink
         })
             .then((resp) => {
                return resp;
@@ -16,8 +16,8 @@ class UserService {
 
     changeBG(userId, bgLink) {
         return api.post('/leetroll-app/user/bg/update', {
-            UserId: userId,
-            BgImag: bgLink
+            id: userId,
+            bgImg: bgLink
         })
             .then((resp) => {
                 return resp;
@@ -83,10 +83,6 @@ export const signup = (username, phone, password, code) => (dispatch) => {
         resp => {
             dispatch(registerSuccess())
             return Promise.resolve();
-        },
-        err => {
-            dispatch(registerFail())
-            return Promise.reject();
         }
     )
 }

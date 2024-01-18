@@ -20,7 +20,7 @@ export const cartSlice = createSlice({
             }
         },
         addItem: (state, action) => {
-            if (state.items.filter(item => item.ID === action.payload.ID).length > 0) return
+            if (state.items.filter(item => item.id === action.payload.id).length > 0) return
             return {
                 ...state,
                 items: [...state.items, action.payload]

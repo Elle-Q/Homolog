@@ -7,7 +7,7 @@
   justify-content: space-between; }
   .item-card:hover {
     border: 2px solid #464545; }
-    .item-card:hover img {
+    .item-card:hover .normal-container > img {
       transform: scale(1.2);
       transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
   .item-card .text {
@@ -20,17 +20,36 @@
     padding: 8px;
     font-weight: bold;
     color: #ccc; }
-
-.img-container {
-  width: 100%;
-  aspect-ratio: 1;
-  border-radius: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center; }
-  .img-container img {
-    width: 80%;
-    height: 80%;
-    border-radius: 20px; }
+  .item-card .normal-container {
+    width: 100%;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    aspect-ratio: 1; }
+    .item-card .normal-container > img {
+      width: 80%;
+      height: 80%;
+      border-radius: 20px; }
+  .item-card .hdri-container {
+    width: 100%;
+    display: flex; }
+    .item-card .hdri-container > img {
+      width: 100%;
+      border-radius: 20px; }
+  .item-card .doc-container {
+    width: 100%;
+    display: flex;
+    aspect-ratio: 0.8; }
+    .item-card .doc-container > img {
+      width: 100%;
+      border-radius: 20px; }
+  .item-card .model-container {
+    width: 100%;
+    display: flex;
+    aspect-ratio: 1.5; }
+    .item-card .model-container > img {
+      width: 100%;
+      border-radius: 20px; }
 
 /*# sourceMappingURL=index.css.map */

@@ -1,4 +1,3 @@
-import React from 'react';
 
 export function StringToDate(dateString) {
     if (dateString === undefined) return null;

@@ -10,9 +10,9 @@
   &:hover {
     border: 2px solid rgb(70, 69, 69);
 
-    & img {
+    & .normal-container > img {
       transform: scale(1.2);
-      transition: all 1s cubic-bezier(.175,.885,.32,1.275);
+      transition: all 1s cubic-bezier(.175, .885, .32, 1.275);
     }
   }
 
@@ -32,19 +32,51 @@
     color: #ccc
   }
 
-}
-
-.img-container {
-  width: 100%;
-  aspect-ratio: 1;
-  border-radius: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  img {
-    width: 80%;
-    height: 80%;
+  .normal-container {
+    width: 100%;
     border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    aspect-ratio: 1;
+
+    > img {
+      width: 80%;
+      height: 80%;
+      border-radius: 20px;
+    }
+  }
+
+  .hdri-container {
+    width: 100%;
+    display: flex;
+
+    > img {
+      width: 100%;
+      border-radius: 20px;
+    }
+  }
+
+  .doc-container {
+    width: 100%;
+    display: flex;
+    aspect-ratio: 0.8;
+
+    > img {
+      width: 100%;
+      border-radius: 20px;
+    }
+  }
+
+  .model-container {
+    width: 100%;
+    display: flex;
+    aspect-ratio: 1.5;
+
+    > img {
+      width: 100%;
+      border-radius: 20px;
+    }
   }
 }
+

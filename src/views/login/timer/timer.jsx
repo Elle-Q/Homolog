@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import Button from "@mui/material/Button";
 
 function Timer(props) {
-    const {onClick} = props
+    const {handleClickSend} = props
     const [timer, setTimer] = useState(10);
     const [start, setStart] = useState(false);
 
@@ -21,11 +21,12 @@ function Timer(props) {
         if (start) return
         setStart(true)
         setTimer(10)
+        handleClickSend()
     }
 
     return (
         <Button sx={{
-            backgroundColor: "transparent",
+            backgroundColor: "rgba(49,47,46,0.4)",
             color: '#3399ff',
             fontSize: '18px',
             marginLeft: '10px',

@@ -67,6 +67,7 @@ function Modal(props) {
             open={open}
             fullWidth={true}
             maxWidth={maxWidth}
+            onClick={(event)=>{event.stopPropagation()}}
         >
             <ModalDialogTitle id="dialog-title" onClose={handleClose}>
                 <span style={{color: '#3399ff', fontSize: '18px', marginLeft: '5px', textAlign: "center"}}>{title}</span>

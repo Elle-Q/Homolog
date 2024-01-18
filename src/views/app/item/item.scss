@@ -1,7 +1,7 @@
 .item-container {
-  width: 80%;
-  margin-left: 10%;
-  margin-right: 10%;
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
   color: white;
 
   & span {
@@ -17,6 +17,7 @@
     margin: auto;
     border-radius: 10px;
     max-height: 300px;
+    max-width: 500px;
   }
 
   .icon-container {

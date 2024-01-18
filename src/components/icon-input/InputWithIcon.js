@@ -4,7 +4,7 @@ import IconButton from "@mui/material/IconButton";
 import {alpha} from "@mui/system";
 
 function InputWithIcon(props, ref) {
-    const {onChange, placeholder, icon, type} = props
+    const {onChange, placeholder, icon, type, value} = props
     return (
         <div style={{
             marginTop: '30px',
@@ -25,6 +25,7 @@ function InputWithIcon(props, ref) {
                 onChange={onChange}
                 placeholder={placeholder}
                 inputRef={ref}
+                value={value}
                 sx={{
                     color:'#dcddde',
                     marginLeft: '5px',

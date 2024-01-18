@@ -70,7 +70,6 @@ function Profile(props) {
 
     //toggle头像编辑框
     const handleClose = (e) => {
-        e.stopPropagation()
         setOpenModal(false);
     };
 

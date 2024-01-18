@@ -6,34 +6,40 @@ import Texture from "../../../../assets/menu/texture.svg";
 import Doc from "../../../../assets/menu/book.svg";
 import Tutorial from "../../../../assets/menu/video.svg";
 import Soft from "../../../../assets/menu/soft.svg";
+import Image from "../../../../assets/menu/image.svg";
 import './searchbar.scss'
 import {ListMetrics} from "../../../../api/cat.service";
 
 const navCats = [
     {
         'name': '模型',
-        'cat': 'model',
-        'icon': Model
+        'icon': Model,
+        'id': 7
     },
     {
         'name': '贴图',
-        'cat': 'texture',
-        'icon': Texture
+        'icon': Texture,
+        'id': 1
     },
     {
         'name': '文档',
-        'cat': 'doc',
-        'icon': Doc
+        'icon': Doc,
+        'id': 5
     },
     {
         'name': '教程',
-        'cat': 'tutorial',
-        'icon': Tutorial
+        'icon': Tutorial,
+        'id': 3
     },
     {
         'name': '软件',
-        'cat': 'soft',
-        'icon': Soft
+        'icon': Soft,
+        'id': 2
+    },
+    {
+        'name': '纯图片',
+        'icon': Image,
+        'id': 6
     },
 ]
 
@@ -42,22 +48,22 @@ function SearchBar(props) {
     const {handleClickNavCat, handleClickMetric} = props
 
     const [metrics, setMetrics] = useState([])
-    const [cat, setCat] = useState(null);
+    const [catId, setCatId] = useState(null);
 
     useEffect(() => {
-        ListMetrics(cat).then((metrics) => {
+        ListMetrics(catId).then((metrics) => {
             setMetrics(metrics)
         })
-    }, [cat]);
+    }, [catId]);
 
-    const handleNavCatClick = (event, catName) => {
+    const handleNavCatClick = (event, catId) => {
         let elements = document.getElementsByClassName("nav-cat");
         for (let i = 0; i < elements.length; i++) {
             elements[i].style.borderBottom = 'none';
         }
         event.target.closest('div').style.borderBottom = '3px solid #595DFD';
-        setCat(catName);
-        handleClickNavCat(catName)
+        setCatId(catId);
+        handleClickNavCat(catId)
     }
 
     const handleMetricClick = (event, metric) => {
@@ -75,7 +81,7 @@ function SearchBar(props) {
                 <Stack direction="row" spacing={1}>
                     {
                         navCats.map((navCat, index) => (
-                            <div className="nav-cat" onClick={(event) => handleNavCatClick(event, navCat.cat)}
+                            <div className="nav-cat" onClick={(event) => handleNavCatClick(event, navCat.id)}
                                  key={index}>
                                 <IconButton> <img alt="icon" src={navCat.icon}/> </IconButton>
                                 <span>{navCat.name}</span>

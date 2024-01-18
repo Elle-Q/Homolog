@@ -16,6 +16,8 @@ import {useDispatch} from "react-redux";
 import './login.scss'
 import Timer from "./timer/timer";
 import styled from "styled-components";
+import {SendSmsCode} from "../../api/sms.service";
+import {isPhone, varifyPsw} from "../../utils/VarifyUtil";
 
 const SignButton = styled(Button)({
     backgroundColor: "rgba(92,96,253,0.62)",
@@ -31,19 +33,22 @@ const SignButton = styled(Button)({
 
 function Login(props) {
     const [action, setAction] = useState('signin');//register
+    const [phone, setPhone] = useState("");
+    const [password, setPassword] = useState("")
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const userNameRef = React.createRef();
     const phoneRef = React.createRef();
     const passRef = React.createRef();
     const codeRef = React.createRef();
+    const [message, setMessage] = useState("")
 
     const handleLogin = async () => {
         if (action === 'signin') { //登录
             dispatch(login(
-                    phoneRef.current.value,
-                    passRef.current.value
-                )).then(() => {
+                phoneRef.current.value,
+                passRef.current.value
+            )).then(() => {
                 navigate('/'); //跳转到首页
             })
         } else { // 注册
@@ -53,13 +58,17 @@ function Login(props) {
                     phoneRef.current.value,
                     passRef.current.value,
                     codeRef.current.value,
-                ))
+                ));
+            setPhone(phoneRef.current.value);
+            setPassword(passRef.current.value);
+            toggleAction()
         }
     }
 
     //todo: 验证手机号， 发送短信获取短信验证码
-    const onMSCodeClick = () => {
-        codeRef.current.value = '1122'
+    const handleClickSendSms = () => {
+        SendSmsCode(phoneRef.current.value).then(code => {
+        })
     }
 
     function toggleAction() {
@@ -67,6 +76,24 @@ function Login(props) {
             setAction("signup")
         } else {
             setAction("signin")
+        }
+    }
+
+    const phoneVerify = (event) => {
+        let val = event.target.value;
+        if (!isPhone(val)) {
+            setMessage("手机号码格式不正确")
+        } else {
+            setMessage("")
+        }
+    }
+
+    const pswVerify = (event) => {
+        let val = event.target.value;
+        if (!varifyPsw(val)) {
+            setMessage("密码必须8位以上")
+        } else {
+            setMessage("")
         }
     }
 
@@ -88,20 +115,32 @@ function Login(props) {
                     {
                         action === 'signin' ?
                             <React.Fragment>
-                                <InputWithIcon ref={phoneRef} placeholder="输入手机号" icon={<PhoneIphoneIcon fontSize="small"/>}/>
-                                <InputWithIcon ref={passRef} placeholder="输入密码" type="password" icon={<VpnKeyIcon fontSize="small"/>}/>
+                                <InputWithIcon ref={phoneRef} placeholder="输入手机号"
+                                               onChange={phoneVerify}
+                                               value={phone}
+                                               icon={<PhoneIphoneIcon fontSize="small"/>}/>
+                                <InputWithIcon ref={passRef} placeholder="输入密码"
+                                               type="password"
+                                               value={password}
+                                               icon={<VpnKeyIcon fontSize="small"/>}/>
                             </React.Fragment>
                             :
                             <React.Fragment>
-                                <InputWithIcon ref={userNameRef} placeholder="输入昵称" icon={<PersonIcon fontSize="small"/>}/>
-                                <InputWithIcon ref={phoneRef} placeholder="输入手机号" icon={<PhoneIphoneIcon fontSize="small"/>}/>
-                                <InputWithIcon ref={codeRef} placeholder="输入短信验证码" type="verify" icon={<ShieldIcon fontSize="small"/>}>
-                                    <Timer sendMSCode={onMSCodeClick}></Timer>
+                                <InputWithIcon ref={userNameRef} placeholder="输入昵称"
+                                               icon={<PersonIcon fontSize="small"/>}/>
+                                <InputWithIcon ref={phoneRef} placeholder="输入手机号"
+                                               onChange={phoneVerify}
+                                               icon={<PhoneIphoneIcon fontSize="small"/>}/>
+                                <InputWithIcon ref={codeRef} placeholder="输入短信验证码" type="verify"
+                                               icon={<ShieldIcon fontSize="small"/>}>
+                                    <Timer handleClickSend={handleClickSendSms}></Timer>
                                 </InputWithIcon>
-                                <InputWithIcon ref={passRef} placeholder="输入密码" type="password" icon={<VpnKeyIcon fontSize="small"/>}/>
+                                <InputWithIcon ref={passRef} placeholder="输入密码" type="password"
+                                               onChange={pswVerify}
+                                               icon={<VpnKeyIcon fontSize="small"/>}/>
                             </React.Fragment>
                     }
-
+                    <label style={{color: 'red', marginLeft: '40px', fontSize: '14px'}}>{message}</label>
                     <div style={{margin: "10px 0 10px 40px", color: '#6e6d6d', fontSize: "14px"}}>
                         {action === 'signin' ? '没有账号? ' : '已有账号 '}
                         <Link color="#3399FF" onClick={toggleAction} sx={{cursor: "pointer", fontSize: "16px"}}>

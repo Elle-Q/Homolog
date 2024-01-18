@@ -71,7 +71,7 @@ function PrevShow(props) {
                     </div>
             }
 
-            <Stack id={"prevList"} direction={'row'} spacing={1} style={{justifyContent: "center"}}>
+            <Stack id={"prevList"} direction={'row'} spacing={1} style={{justifyContent: "center", flexWrap: 'wrap'}}>
                 {
                     preList && preList.map((prev, index) => {
                         return isVideo(prev.format) ?

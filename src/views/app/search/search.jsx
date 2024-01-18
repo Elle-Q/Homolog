@@ -4,12 +4,6 @@ import ItemCard from "../../../components/item-card/item-card";
 import "./search.scss"
 import IconButton from "@mui/material/IconButton";
 import FilterListIcon from '@mui/icons-material/FilterList';
-import Stack from "@mui/material/Stack";
-import Three from "../../../assets/menu/3d.svg";
-import Texture from "../../../assets/menu/texture.svg";
-import Book from "../../../assets/menu/book.svg";
-import Video from "../../../assets/menu/video.svg";
-import Soft from "../../../assets/menu/soft.svg";
 import InfiniteScroll from "react-infinite-scroller";
 import {useSelector} from "react-redux";
 import {selectSearch} from "../../../store/Search";
@@ -22,16 +16,16 @@ function Search() {
     const [page, setPage] = useState(1);
     const [totalSize, setTotalSize] = useState(1);
     const [hasMore, setHasMore] = useState(false);
-    const [cat, setCat] = useState(null);
+    const [catId, setCatId] = useState(null);
     const [metric, setMetric] = useState(null);
 
     useEffect(() => {
         search()
-    }, [doSearch, cat, metric]);
+    }, [doSearch, catId, metric]);
 
     const loadMoreItems = () => {
         if (list.length >= totalSize) return
-        ListItems(page, keyword, cat, metric).then((data) => {
+        ListItems(page, keyword, catId, metric).then((data) => {
             let newList = [...list, ...data]
             setList(newList)
             setPage(page + 1);
@@ -41,9 +35,9 @@ function Search() {
     };
 
     const search = () => {
-        ListItems(1, keyword, cat, metric).then((items) => {
+        ListItems(1, keyword, catId, metric).then((items) => {
             setList(items)
-            TotalSize(keyword, cat, metric).then((size) => {
+            TotalSize(keyword, catId, metric).then((size) => {
                 setTotalSize(size)
                 setHasMore(items.length < size)
             })
@@ -51,8 +45,9 @@ function Search() {
         setPage(2);
     }
 
-    const handleClickNavCat = (cat) => {
-        setCat(cat)
+    const handleClickNavCat = (catId) => {
+        setCatId(catId);
+        setMetric(null)
     }
 
     const handleClickMetric = (metric) => {

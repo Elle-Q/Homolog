@@ -1,5 +1,4 @@
 import TokenService from './token.service'
-import {loginFail, loginSuccess, registerFail, registerSuccess} from "./authSlice";
 import api from "./api";
 
 class AuthService {
@@ -26,9 +25,9 @@ class AuthService {
         window.location = "/app";
     }
 
-    signup(username, phone, password, code) {
-        return api.post('/leetroll-app/user/signup', {
-            username,
+    signup(name, phone, password, code) {
+        return api.post('/leetroll-app/user/register', {
+            name,
             phone,
             password,
             code

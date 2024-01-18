@@ -10,17 +10,16 @@ function Account(props) {
 
     const {user} = useSelector(selectAuth);
     const [openBgModal, setOpenBgModal] = useState(false);
-    const [defaultBGs, setDefaultBGs] = useState([]);
     const [bgUri, setBgUri] = useState(null);
 
 
     useEffect(() => {
+        debugger
         user && setBgUri(user.bgImg)
     }, [user])
 
     //点击背景获取默认背景集合
     const onClickBG = (e) => {
-        e.stopPropagation()
         setOpenBgModal(true)
     }
 
@@ -63,7 +62,6 @@ function Account(props) {
                 open={openBgModal}
                 user={user}
                 handleClose={handleClose}
-                defaultBGs={defaultBGs}
                 previewBG={changeBG}
                 closeModal={closeModal}
             />

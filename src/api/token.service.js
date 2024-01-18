@@ -23,7 +23,6 @@ class TokenService {
 
     removeAuth() {
         localStorage.removeItem("tokens");
-        localStorage.removeItem("userId")
     }
 
 }

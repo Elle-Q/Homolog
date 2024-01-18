@@ -34,7 +34,6 @@ function NavBar(props) {
 
 
     const enterAccount = (e) => {
-        e.preventDefault();
         if (isLogin) {
             navigate('/account')
         } else {

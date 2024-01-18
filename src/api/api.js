@@ -1,10 +1,13 @@
 import axios from "axios";
 import TokenService from "./token.service";
 
-const instance = axios.create();
+const request = axios.create();
 
 const errorHandler = (data) => {
     switch (data && data.code) {
+        case -1:
+            alert(data.msg)
+            break
         case 500:
             break
         case 200:
@@ -15,7 +18,7 @@ const errorHandler = (data) => {
     }
 }
 
-instance.interceptors.request.use(
+request.interceptors.request.use(
     config => {
         const token = TokenService.getLocalAccessToken();
         if (token) {
@@ -28,7 +31,7 @@ instance.interceptors.request.use(
     });
 
 // Add a response interceptor
-instance.interceptors.response.use(
+request.interceptors.response.use(
     resp=> {
         errorHandler(resp.data);
         return resp.data.data
@@ -42,9 +45,9 @@ instance.interceptors.response.use(
                 try {
                     let param = new FormData();
                     param.append("refreshToken", TokenService.getLocalRefreshToken());
-                    instance.post('/leetroll-app/user/refreshToken', param).then(resp => {
+                    request.post('/leetroll-app/user/refreshToken', param).then(resp => {
                         TokenService.updateLocalToken(resp);
-                        return instance(originalConfig);
+                        return request(originalConfig);
                     });
 
                 } catch (_err) {
@@ -56,4 +59,4 @@ instance.interceptors.response.use(
     })
 
 
-export default instance;
+export default request;

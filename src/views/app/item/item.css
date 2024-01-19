@@ -12,7 +12,7 @@
     margin: auto;
     border-radius: 10px;
     max-height: 300px;
-    max-width: 500px; }
+    width: 100%; }
   .item-container .icon-container {
     border: 1px solid #3b3b39;
     width: 100%;

@@ -64,9 +64,8 @@ function PrevShow(props) {
                         <img src={currentPrev && currentPrev.link} alt='prevShow'
                              style={{
                                  width: 'auto',
-                                 maxHeight: '650px',
+                                 maxHeight: '550px',
                                  borderRadius: '25px',
-                                 margin: '20px'
                              }}/>
                     </div>
             }

@@ -79,7 +79,7 @@ function Item() {
                 {/*<Grid item xs={1} />*/}
                 {/*上右 详情信息区域*/}
                 <Grid item xs={3}>
-                    <Stack direction='column' spacing={2} sx={{mt: '10px'}}>
+                    <Stack direction='column' spacing={2} sx={{mt: '10px', ml: '20px'}}>
                         <img src={data && data.main && data.main.link} alt="bg" className="main-img"/>
 
                         <Typography variant="h4" component="div"> {data.name}  </Typography>

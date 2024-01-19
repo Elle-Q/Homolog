@@ -12,12 +12,13 @@ import PersonIcon from "@mui/icons-material/Person";
 import ShieldIcon from "@mui/icons-material/Shield";
 import {Link} from "@mui/material";
 import {login, signup} from "../../api/user.service";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import './login.scss'
 import Timer from "./timer/timer";
 import styled from "styled-components";
 import {SendSmsCode} from "../../api/sms.service";
 import {isPhone, varifyPsw} from "../../utils/VarifyUtil";
+import {selectAuth} from "../../api/authSlice";
 
 const SignButton = styled(Button)({
     backgroundColor: "rgba(92,96,253,0.62)",
@@ -32,6 +33,7 @@ const SignButton = styled(Button)({
 })
 
 function Login(props) {
+    const {isLogin} = useSelector(selectAuth);
     const [action, setAction] = useState('signin');//register
     const [phone, setPhone] = useState("");
     const [password, setPassword] = useState("")
@@ -45,11 +47,8 @@ function Login(props) {
 
     const handleLogin = async () => {
         if (action === 'signin') { //登录
-            dispatch(login(
-                phoneRef.current.value,
-                passRef.current.value
-            )).then(() => {
-                navigate('/'); //跳转到首页
+            dispatch(login(phone, password)).then((hasLogin) => {
+                if (hasLogin) navigate('/');//跳转到首页
             })
         } else { // 注册
             dispatch(
@@ -97,6 +96,15 @@ function Login(props) {
         }
     }
 
+    const handlePhoneChange = (event) => {
+        phoneVerify(event)
+        setPhone(event.target.value)
+    }
+
+    const handlePswChange = (event) => {
+        pswVerify(event)
+        setPassword(event.target.value)
+    }
     return (
         <div id="bgBody">
             <Box sx={{
@@ -115,13 +123,14 @@ function Login(props) {
                     {
                         action === 'signin' ?
                             <React.Fragment>
-                                <InputWithIcon ref={phoneRef} placeholder="输入手机号"
-                                               onChange={phoneVerify}
+                                <InputWithIcon placeholder="输入手机号"
+                                               onChange={handlePhoneChange}
                                                value={phone}
                                                icon={<PhoneIphoneIcon fontSize="small"/>}/>
-                                <InputWithIcon ref={passRef} placeholder="输入密码"
+                                <InputWithIcon placeholder="输入密码"
                                                type="password"
                                                value={password}
+                                               onChange={handlePswChange}
                                                icon={<VpnKeyIcon fontSize="small"/>}/>
                             </React.Fragment>
                             :

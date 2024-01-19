@@ -8,15 +8,14 @@ class AuthService {
         param.append("password", password);
         return api.post("/leetroll-app/user/login", param)
             .then(resp => {
-                //设置token
-                TokenService.setTokens({
-                    AccessToken: resp.accessToken,
-                    RefreshToken: resp.refreshToken,
-                });
+                if (resp != null) {
+                    //设置token
+                    TokenService.setTokens({
+                        AccessToken: resp.accessToken,
+                        RefreshToken: resp.refreshToken,
+                    });
+                }
                 return resp;
-            },
-            err => {
-               return Promise.reject(err)
             })
     }
 

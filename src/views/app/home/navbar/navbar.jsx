@@ -10,8 +10,6 @@ import Logo from "./logo";
 import {CustomBadge} from "../../../../components/ui/CustomBadge";
 import {useDispatch, useSelector} from "react-redux";
 import {selectAuth} from "../../../../api/authSlice";
-import {useEffect} from "react";
-import {getUser} from '../../../../api/user.service'
 import {getColorFromUserStatus} from "../../../../utils/ToolUtil";
 import useScroll from "../../../../hook/useScroll";
 import {openCart} from "../../cart/cart-slice";
@@ -23,22 +21,12 @@ import "./navbar.scss"
 
 function NavBar(props) {
     const navigate = useNavigate();
-    const {isLogin, user} = useSelector(selectAuth);
+    const {user} = useSelector(selectAuth);
     const dispatch = useDispatch();
     const scroll = useScroll()
 
-
-    useEffect(() => {
-        dispatch(getUser())
-    }, [])
-
-
     const enterAccount = (e) => {
-        if (isLogin) {
-            navigate('/account')
-        } else {
-            navigate('/login');
-        }
+        navigate('/account')
     };
 
     const handleOpenCart = () => {
@@ -85,7 +73,7 @@ function NavBar(props) {
                                 }
                             }}
                         >
-                            <Avatar alt="elle" src={user && user.avatar}/>
+                            <Avatar alt="avatar" src={user && user.avatar}/>
                         </CustomBadge>
                     </Stack>
                 </Toolbar>

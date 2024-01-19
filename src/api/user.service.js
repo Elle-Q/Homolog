@@ -2,6 +2,7 @@ import React from 'react';
 import api from "./api";
 import {loginFail, loginSuccess, registerFail, registerSuccess, setAvatar, setBG, setUser} from "./authSlice";
 import {authService} from "./auth.service";
+import {useNavigate} from "react-router-dom";
 
 class UserService {
     changeAvatar(userId, avatarLink) {
@@ -10,7 +11,7 @@ class UserService {
             avatar: avatarLink
         })
             .then((resp) => {
-               return resp;
+                return resp;
             });
     }
 
@@ -25,7 +26,7 @@ class UserService {
     }
 
     getUser() {
-       return api.get(`/leetroll-app/user/get`)
+        return api.get(`/leetroll-app/user/get`)
             .then((resp) => {
                 return resp
             });
@@ -89,17 +90,17 @@ export const signup = (username, phone, password, code) => (dispatch) => {
 
 export const login = (phone, password) => (dispatch) => {
     return authService.login(phone, password).then(
-    resp => {
-            userService.getUser().then(
-                resp => {
-                    dispatch(loginSuccess(resp))
-                    return resp
-                }
-            )
-            return resp;
-        },
-        err => {
-            dispatch(loginFail());
+        resp => {
+            if (resp === null) {
+                dispatch(loginFail());
+            } else {
+                userService.getUser().then(
+                    resp => {
+                        dispatch(loginSuccess(resp))
+                    }
+                )
+            }
+            return resp != null
         }
     )
 }

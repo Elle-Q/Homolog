@@ -5,9 +5,7 @@ const tokens = JSON.parse(localStorage.getItem("tokens"))
 export const authSlice = createSlice({
     name: 'auth',
 
-    initialState: tokens
-        ? {isLogin: true,user:null}
-        : {isLogin: false, user:null},
+    initialState: {isLogin: false,user:null},
 
     reducers: {
         registerSuccess: (state, action) => {
@@ -17,11 +15,10 @@ export const authSlice = createSlice({
             }
         },
         loginSuccess: (state, action) => {
-            const {user} = action.payload;
             return {
                 ...state,
                 isLogin: true,
-                user:user
+                user:action.payload
             }
         },
         loginFail: (state, action) => {

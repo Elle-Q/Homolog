@@ -2,21 +2,22 @@ import React, {useEffect, useState} from 'react';
 import Box from "@mui/material/Box";
 import Profile from "./profile/Profile";
 import TabBar from "./tab/TabBar";
-import { useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {selectAuth } from "../../../api/authSlice";
 import BgEditModal from "./profile/BgEditModal";
+import {getUser} from "../../../api/user.service";
 
 function Account(props) {
 
     const {user} = useSelector(selectAuth);
     const [openBgModal, setOpenBgModal] = useState(false);
     const [bgUri, setBgUri] = useState(null);
-
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        debugger
-        user && setBgUri(user.bgImg)
-    }, [user])
+        dispatch(getUser())
+        setBgUri(user.bgImg)
+    }, [])
 
     //点击背景获取默认背景集合
     const onClickBG = (e) => {
@@ -25,7 +26,6 @@ function Account(props) {
 
     const handleClose = () => {
         setOpenBgModal(false);
-        setBgUri(user.bgImg)
     };
 
     const closeModal = () => {

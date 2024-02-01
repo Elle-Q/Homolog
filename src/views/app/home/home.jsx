@@ -11,6 +11,7 @@ import {NavBar} from "./navbar/navbar";
 import Cart from "../cart/cart";
 import {Route, Routes} from "react-router-dom";
 import Item from "../item/item.jsx";
+import Help from "./help/help";
 
 function Home(props) {
 
@@ -72,6 +73,7 @@ function Home(props) {
                 ))}
             </Routes>
             <Footer/>
+            <Help/>
         </div>
     );
 }

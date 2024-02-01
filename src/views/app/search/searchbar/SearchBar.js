@@ -9,6 +9,7 @@ import Soft from "../../../../assets/menu/soft.svg";
 import Image from "../../../../assets/menu/image.svg";
 import './searchbar.scss'
 import {ListMetrics} from "../../../../api/cat.service";
+import {useLocation, useNavigate} from "react-router-dom";
 
 const navCats = [
     {
@@ -45,10 +46,11 @@ const navCats = [
 
 
 function SearchBar(props) {
-    const {handleClickNavCat, handleClickMetric} = props
+    const {catId} = props
 
     const [metrics, setMetrics] = useState([])
-    const [catId, setCatId] = useState(null);
+    const navigate = useNavigate();
+    const location = useLocation();
 
     useEffect(() => {
         ListMetrics(catId).then((metrics) => {
@@ -62,8 +64,7 @@ function SearchBar(props) {
             elements[i].style.borderBottom = 'none';
         }
         event.target.closest('div').style.borderBottom = '3px solid #595DFD';
-        setCatId(catId);
-        handleClickNavCat(catId)
+        navigate("/search?catId="+catId);
     }
 
     const handleMetricClick = (event, metric) => {
@@ -72,7 +73,7 @@ function SearchBar(props) {
             elements[i].style.borderBottom = 'none';
         }
         event.target.closest('div').style.borderBottom = '3px solid #595DFD';
-        handleClickMetric(metric)
+        navigate(location.pathname+"?catId="+catId+"&metric="+metric);
     }
 
     return (

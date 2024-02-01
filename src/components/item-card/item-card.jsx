@@ -25,7 +25,7 @@ function ItemCard(props) {
 
     //点击下载源文件
     const handleDownload = () => {
-        window.location.href = item.attachment.link
+        window.location.href = item.attachments[0].link
     }
 
     const getClass = () => {

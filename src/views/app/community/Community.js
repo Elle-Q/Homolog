@@ -2,13 +2,11 @@ import React, {useEffect, useState} from 'react';
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import {Divider, Stack} from "@mui/material";
-import Avatar from "@mui/material/Avatar";
 import IssueCard from "./issue/IssueCard";
 import BugReportRoundedIcon from '@mui/icons-material/BugReportRounded';
 import PsychologyIcon from '@mui/icons-material/Psychology';
 import {alpha} from "@mui/system";
 import styled from "styled-components";
-import ColoredLabel from "../../../components/ui/ColoredLabel";
 import PostCard from "./post/PostCard";
 import UserInfoSide from "./user/UserInfoSide";
 
@@ -84,8 +82,6 @@ const items = [
 function Community(props) {
 
     const [selected, setSelected] = useState("issue");
-    const [issues, setIssues] = useState([]);
-    const [posts, setPosts] = useState([]);
 
     useEffect(() => {
 

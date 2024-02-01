@@ -1,8 +1,6 @@
-import React from 'react';
 import api from "./api";
-import {loginFail, loginSuccess, registerFail, registerSuccess, setAvatar, setBG, setUser} from "./authSlice";
+import {loginFail, loginSuccess, registerSuccess, setAvatar, setBG, setUser} from "./authSlice";
 import {authService} from "./auth.service";
-import {useNavigate} from "react-router-dom";
 
 class UserService {
     changeAvatar(userId, avatarLink) {
@@ -46,6 +44,8 @@ export const getUser = () => (dispatch) => {
     userService.getUser().then(
         resp => {
             dispatch(setUser(resp))
+            dispatch(setAvatar(resp.avatar))
+            dispatch(setBG(resp.bgImg))
             return resp
         }
     )

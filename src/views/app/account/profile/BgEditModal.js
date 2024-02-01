@@ -1,7 +1,7 @@
-import React, {createRef, useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {default as AvatarModal} from "../../../../components/Modal";
 import { updateBG} from "../../../../api/user.service";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {ImageList} from "@mui/material";
 import {getDefaultBG} from "../../../../api/config.service";
 
@@ -31,7 +31,7 @@ function BgEditModal(props) {
 
     //更新数据库
     function changeBG() {
-        dispatch(updateBG(user.ID, bgUri))
+        dispatch(updateBG(user.id, bgUri))
         closeModal()
     }
 
@@ -40,7 +40,7 @@ function BgEditModal(props) {
                      maxWidth="md"
                      open={open}
                      handleClose={handleClose}
-                     handleSave={changeBG}
+                     handleOK={changeBG}
         >
             <ImageList cols={3} rowHeight={164}>
                 {

@@ -20,9 +20,10 @@ import IconButton from "@mui/material/IconButton";
 function Item() {
     let params = useParams();
     let id = params.id;
-    const [data, setData] = useState();
-    const [tab, setTab] = useState('review');
     let dispatch = useDispatch();
+    const [data, setData] = useState(null);
+    const [tab, setTab] = useState('review');
+    const [applyFor, setApplyFor] = useState(null);
 
     useEffect(() => {
         const fetch = async () => {
@@ -62,8 +63,21 @@ function Item() {
     }
 
     //点击下载源文件
-    const handleDownload= () => {
-        window.location.href = data.attachment.link
+    const handleDownload = () => {
+        if (applyFor == null) {
+            window.location.href = data.attachments[0].link
+        }
+    }
+
+    //获取资源的部分描述信息
+    const getMark = () => {
+        if (!data || !data.mark) return
+        let json = JSON.parse(data.mark)
+        let spans = []
+        Object.keys(json).forEach(key => {
+            spans.push(<span>{key}:{json[key]}</span>)
+        });
+        return spans
     }
 
     if (data == null) {
@@ -73,23 +87,26 @@ function Item() {
         <div className="item-container">
             <Grid container direction="row">
                 {/*上左 预览区域*/}
-                <Grid item xs={9} direction="column" style={{textAlign: 'center', justifyContent: 'space-between', display: "flex"}}>
+                <Grid item xs={9} direction="column"
+                      style={{textAlign: 'center', justifyContent: 'space-between', display: "flex"}}>
                     <PrevShow preList={data.previews}/>
                 </Grid>
-                {/*<Grid item xs={1} />*/}
                 {/*上右 详情信息区域*/}
                 <Grid item xs={3}>
                     <Stack direction='column' spacing={2} sx={{mt: '10px', ml: '20px'}}>
-                        <img src={data && data.main && data.main.link} alt="bg" className="main-img"/>
-
-                        <Typography variant="h4" component="div"> {data.name}  </Typography>
+                        <div style={{width: '100%'}}>
+                            <img src={data && data.main && data.main.link} alt="bg" className="main-img"/>
+                        </div>
+                        <Typography component="h4"> {data.name} </Typography>
                         <Typography component="p"> {data.desp} </Typography>
 
                         <Stack>
                             <span> 价格: ￥{data.price}</span>
                             <span> 作者: {data.author}</span>
                             <span> 资源类型: {data.type}</span>
-                            <span> 适用软件: blender</span>
+                            {
+                                getMark()
+                            }
                         </Stack>
 
                         <Stack className="behave-area">
@@ -102,9 +119,12 @@ function Item() {
                             <div className="icon-container">
                                 {
                                     data.price === 0 ?
-                                        <IconButton onClick={handleDownload}><DownloadIcon fontSize="large" sx={{color:"red"}}/> </IconButton> :
-                                        <IconButton onClick={handleAdd2Cart}><AddShoppingCartIcon fontSize="large" sx={{color:"red"}}/>
-                                        <span style={{fontSize: '14px'}}>加入购物车</span>
+                                        <IconButton onClick={handleDownload}><DownloadIcon fontSize="large"
+                                                                                           sx={{color: "red"}}/>
+                                        </IconButton> :
+                                        <IconButton onClick={handleAdd2Cart}><AddShoppingCartIcon fontSize="large"
+                                                                                                  sx={{color: "red"}}/>
+                                            <span style={{fontSize: '14px'}}>加入购物车</span>
                                         </IconButton>
                                 }
                             </div>

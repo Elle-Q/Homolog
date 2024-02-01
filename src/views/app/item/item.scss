@@ -1,6 +1,7 @@
 .item-container {
   width: 90%;
   margin-left: 5%;
+  margin-top: 10px;
   margin-right: 5%;
   color: white;
 
@@ -14,11 +15,9 @@
   }
 
   .main-img {
-    margin: auto;
     border-radius: 10px;
     max-height: 300px;
-    //max-width: 500px;
-    width: 100%;
+    max-width: 100%;
   }
 
   .icon-container {

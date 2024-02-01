@@ -1,6 +1,7 @@
 .item-container {
   width: 90%;
   margin-left: 5%;
+  margin-top: 10px;
   margin-right: 5%;
   color: white; }
   .item-container span {
@@ -9,10 +10,9 @@
     font-size: 12px;
     color: #5b5756; }
   .item-container .main-img {
-    margin: auto;
     border-radius: 10px;
     max-height: 300px;
-    width: 100%; }
+    max-width: 100%; }
   .item-container .icon-container {
     border: 1px solid #3b3b39;
     width: 100%;

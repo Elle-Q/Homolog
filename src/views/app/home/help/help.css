@@ -1,0 +1,28 @@
+.help-fab {
+  position: fixed !important;
+  bottom: 5%;
+  left: 2%;
+  color: white !important;
+  z-index: 999;
+  background-color: #595DFD !important;
+  box-shadow: 0 0 4px #595DFD !important; }
+  .help-fab:hover {
+    color: white !important;
+    background-color: #595DFD !important; }
+  .help-fab .help-icon:hover {
+    animation: scaleAnimation 5s infinite alternate; }
+@keyframes scaleAnimation {
+  0% {
+    transform: rotate(0deg); }
+  100% {
+    transform: rotate(360deg); } }
+.help-container {
+  position: fixed;
+  left: 5%;
+  top: 20%;
+  height: 70vh;
+  width: 20vw;
+  background-color: white;
+  border-radius: 15px; }
+
+/*# sourceMappingURL=help.css.map */

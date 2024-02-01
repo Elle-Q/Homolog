@@ -2,15 +2,12 @@ import React, {createRef, useEffect, useState} from 'react';
 import {CatStatus} from "../../../utils/constant/constant";
 import {ImagInputWithHeader, InputWithHeader, SelectInputWithHeader} from "../../../components/ui/CustomInput";
 import Modal from "../../../components/Modal";
-import api from "../../../api/api";
 import {selectCatModal, close} from "./catSlice";
 import {useSelector, useDispatch} from 'react-redux'
 import {openAlert} from "../../../components/alert/ops/alertSlice";
 import {upload} from "../../../api/qiniu.service";
 import {UpdateCat} from "../../../api/cat.service";
 import {setRefresh} from "../../../store/refreshSlice";
-import MenuItem from "@mui/material/MenuItem";
-import {useForm} from "react-hook-form";
 
 
 function CatModal(props) {
@@ -82,7 +79,7 @@ function CatModal(props) {
                    setImgUri(null);  //置空, 否则会影响其他modal
                    handleClose()
                }}
-               handleSave={handleSave}>
+               handleOK={handleSave}>
             <div style={{display: "flex"}}>
                 <InputWithHeader header="标题"
                                  name="Title"

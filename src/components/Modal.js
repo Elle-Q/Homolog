@@ -58,12 +58,11 @@ const ModalDialogTitle = (props) => {
 
 
 function Modal(props) {
-    const {title, children, open, handleClose, handleSave, maxWidth} = props;
+    const {title, children, open, handleClose, handleOK, maxWidth} = props;
 
     return (
         <ModalDialog
             onClose={handleClose}
-            aria-labelledby="dialog-title"
             open={open}
             fullWidth={true}
             maxWidth={maxWidth}
@@ -76,7 +75,7 @@ function Modal(props) {
                 {children}
             </DialogContent>
             <DialogActions sx={{justifyContent: "center", mt: '30px'}}>
-                <OKButton handleClick={handleSave}/>
+                <OKButton handleClick={handleOK}/>
                 <CancelButton handleClick={handleClose}/>
             </DialogActions>
         </ModalDialog>

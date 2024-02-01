@@ -74,7 +74,7 @@ function CatCard(props) {
     const {cat, index} = props;
 
     return (
-        <StyledLink to={`/search`} key={cat.title} style={{width: '30%'}}>
+        <StyledLink to={`/search?catId=${cat.id}`} key={cat.title} style={{width: '30%'}}>
             <Container colors={colors[index]}>
                 <div id='img-container'>
                     <img

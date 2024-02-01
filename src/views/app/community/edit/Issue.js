@@ -1,11 +1,9 @@
 import React, {useEffect, useRef, useState} from 'react';
 import ReactQuill from 'react-quill';
-// import 'react-quill/dist/quill.snow.css';
 import Box from "@mui/material/Box";
 import {makeStyles} from "@mui/styles";
 import {alpha} from "@mui/system";
-import {Input} from "@mui/material";
-import {StyledInputElement, StyledSingleInputElement} from "../../../../components/ui/CustomInput";
+import {StyledSingleInputElement} from "../../../../components/ui/CustomInput";
 
 const useStyles = makeStyles({
     quill: {

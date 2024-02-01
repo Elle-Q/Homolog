@@ -39,7 +39,7 @@ function PageTipFloatingBar(props) {
                 }
             }
             }
-            >
+        >
             {actions.map((action) => (
                 <SpeedDialAction
                     key={action.name}

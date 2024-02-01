@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {ListItems, TotalSize, totalSize} from "../../../api/cat.service";
+import {ListItems, TotalSize} from "../../../api/cat.service";
 import ItemCard from "../../../components/item-card/item-card";
 import "./search.scss"
 import IconButton from "@mui/material/IconButton";
@@ -8,16 +8,19 @@ import InfiniteScroll from "react-infinite-scroller";
 import {useSelector} from "react-redux";
 import {selectSearch} from "../../../store/Search";
 import SearchBar from "./searchbar/SearchBar";
+import {useSearchParams} from "react-router-dom";
 
 function Search() {
+    let [params] = useSearchParams();
 
     const {doSearch, keyword} = useSelector(selectSearch);
     const [list, setList] = useState([]);
     const [page, setPage] = useState(1);
     const [totalSize, setTotalSize] = useState(1);
     const [hasMore, setHasMore] = useState(false);
-    const [catId, setCatId] = useState(null);
-    const [metric, setMetric] = useState(null);
+
+    const catId = params.get("catId");
+    const metric = params.get("metric");
 
     useEffect(() => {
         search()
@@ -45,21 +48,9 @@ function Search() {
         setPage(2);
     }
 
-    const handleClickNavCat = (catId) => {
-        setCatId(catId);
-        setMetric(null)
-    }
-
-    const handleClickMetric = (metric) => {
-        setMetric(metric)
-    }
-
     return (
         <div className="search-container">
-            <SearchBar
-                handleClickNavCat={handleClickNavCat}
-                handleClickMetric={handleClickMetric}
-            />
+            <SearchBar catId={catId}/>
             <div className="filter-container">
                 <span>{totalSize}个资源 </span>
                 <IconButton><FilterListIcon fontSize="small"/>过滤</IconButton>

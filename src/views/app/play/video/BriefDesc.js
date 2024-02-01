@@ -4,7 +4,7 @@ import Typography from "@mui/material/Typography";
 import {getStarIcons} from "../../../../utils/ToolUtil";
 import Paper from "@mui/material/Paper";
 import Chip from "@mui/material/Chip";
-import more from "../../../../assets/more.svg";
+import more from "../../../../assets/icons/more.svg";
 import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
 import LoyaltyIcon from '@mui/icons-material/Loyalty';

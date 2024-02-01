@@ -36,7 +36,7 @@ export const OKButton = (props) => {
                 fontSize:'14px',
             }
         }} autoFocus onClick={handleClick}>
-            保存
+            OK
         </Button>
     )
 }
@@ -48,7 +48,7 @@ export const CancelButton = (props) => {
         <Button sx={{
             borderColor:'#252422',
             fontSize:'12px',
-            color:'secondary.light',
+            color:'white',
             width:'80px',
             height:'40px',
             backgroundColor:alpha('#403D39', 0.3),

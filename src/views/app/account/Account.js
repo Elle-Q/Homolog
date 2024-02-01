@@ -16,8 +16,11 @@ function Account(props) {
 
     useEffect(() => {
         dispatch(getUser())
-        setBgUri(user.bgImg)
     }, [])
+
+    useEffect(() => {
+        user && setBgUri(user.bgImg)
+    }, [user])
 
     //点击背景获取默认背景集合
     const onClickBG = (e) => {

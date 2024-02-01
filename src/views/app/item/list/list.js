@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import Stack from "@mui/material/Stack";
 import ChapterCard from "./chapterCard";
 import Typography from "@mui/material/Typography";

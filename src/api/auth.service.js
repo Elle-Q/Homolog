@@ -6,7 +6,7 @@ class AuthService {
         let param = new FormData();
         param.append("phone", phone);
         param.append("password", password);
-        return api.post("/leetroll-app/user/login", param)
+        return api.post("/leetroll-app/login", param)
             .then(resp => {
                 if (resp != null) {
                     //设置token
@@ -25,7 +25,7 @@ class AuthService {
     }
 
     signup(name, phone, password, code) {
-        return api.post('/leetroll-app/user/register', {
+        return api.post('/leetroll-app/register', {
             name,
             phone,
             password,

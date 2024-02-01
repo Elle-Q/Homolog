@@ -13,6 +13,7 @@ const errorHandler = (data) => {
         case 200:
             break
         case 407:
+        case 401:
             window.location = "/login";
             break
     }
@@ -45,7 +46,7 @@ request.interceptors.response.use(
                 try {
                     let param = new FormData();
                     param.append("refreshToken", TokenService.getLocalRefreshToken());
-                    request.post('/leetroll-app/user/refreshToken', param).then(resp => {
+                    request.post('/leetroll-app/refreshToken', param).then(resp => {
                         TokenService.updateLocalToken(resp);
                         return request(originalConfig);
                     });

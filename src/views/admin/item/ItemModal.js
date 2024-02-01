@@ -5,7 +5,7 @@ import Modal from "../../../components/Modal";
 import {selectItemModal, close} from "./admin-item-slice";
 import {useSelector, useDispatch} from 'react-redux'
 import {openAlert} from "../../../components/alert/ops/alertSlice";
-import {ListCatName, UpdateCat} from "../../../api/cat.service";
+import {ListCatName} from "../../../api/cat.service";
 import MenuItem from "@mui/material/MenuItem";
 import {UpdateItem} from "../../../api/item.service";
 import AddIcon from '@mui/icons-material/Add';
@@ -13,7 +13,6 @@ import Chip from "@mui/material/Chip";
 import IconButton from "@mui/material/IconButton";
 import {Input} from "@mui/material";
 import {setRefresh} from "../../../store/refreshSlice";
-import CommentInput from "../../../components/CommentInput";
 
 function ItemModal(props) {
     const {openModal, readOnly, data} = useSelector(selectItemModal);
@@ -95,7 +94,7 @@ function ItemModal(props) {
                    setPreUri(null);  //置空, 否则会影响其他modal
                    handleClose()
                }}
-               handleSave={handleSave}>
+               handleOK={handleSave}>
             <div style={{display: "flex"}}>
                 <InputWithHeader header="名称:"
                                  name="Name"

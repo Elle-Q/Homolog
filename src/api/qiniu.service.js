@@ -1,6 +1,5 @@
 import * as qiniu from 'qiniu-js'
 import api from "./api";
-import TokenService from "./token.service";
 
 class QiniuService {
     //从后端获取UpToken

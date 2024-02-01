@@ -60,11 +60,11 @@ function PrevShow(props) {
                         type: `${currentPrev.key ? 'application/x-mpegURL' : 'video/mp4'}`,
                         src: currentPrev.link
                     }}/> :
-                    <div style={{width: '100%'}}>
+                    <div>
                         <img src={currentPrev && currentPrev.link} alt='prevShow'
                              style={{
                                  width: 'auto',
-                                 maxHeight: '550px',
+                                 maxHeight: '650px',
                                  borderRadius: '25px',
                              }}/>
                     </div>

@@ -70,7 +70,7 @@ function AvatarEditModal(props) {
                      maxWidth="md"
                      open={open}
                      handleClose={handleClose}
-                     handleSave={changeAvatar}
+                     handleOK={changeAvatar}
         >
 
             <div style={{display: "flex", justifyContent: "center"}}>

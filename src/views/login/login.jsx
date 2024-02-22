@@ -11,7 +11,8 @@ import VpnKeyIcon from "@mui/icons-material/VpnKey";
 import PersonIcon from "@mui/icons-material/Person";
 import ShieldIcon from "@mui/icons-material/Shield";
 import {Link} from "@mui/material";
-import {login, signup} from "../../api/user.service";
+import UserService from "../../api/user.service";
+import AuthService, {authService} from "../../api/auth.service";
 import {useDispatch} from "react-redux";
 import './login.scss'
 import Timer from "./timer/timer";
@@ -19,6 +20,7 @@ import styled from "styled-components";
 import {SendSmsCode} from "../../api/sms.service";
 import {isPhone, varifyPsw} from "../../utils/VarifyUtil";
 import Agreement from "./agreement/agreement";
+import {loginFail, loginSuccess, registerSuccess} from "../../api/authSlice";
 
 const SignButton = styled(Button)({
     backgroundColor: "rgba(92,96,253,0.62)",
@@ -52,17 +54,30 @@ function Login(props) {
             return
         }
         if (action === 'signin') { //登录
-            dispatch(login(phone, password)).then((hasLogin) => {
-                if (hasLogin) navigate('/');//跳转到首页
-            })
+            AuthService.login(phone, password).then(
+                resp => {
+                    if (resp === null) {
+                        dispatch(loginFail());
+                    } else {
+                        UserService.getUser().then(
+                            resp => {
+                                dispatch(loginSuccess(resp));
+                                navigate('/');
+                            }
+                        )
+                    }
+                }
+            )
         } else { // 注册
-            dispatch(
-                signup(
-                    userNameRef.current.value,
-                    phoneRef.current.value,
-                    passRef.current.value,
-                    codeRef.current.value,
-                ));
+            AuthService.signup(
+                userNameRef.current.value,
+                phoneRef.current.value,
+                passRef.current.value,
+                codeRef.current.value,).then(
+                () => {
+                    dispatch(registerSuccess())
+                }
+            )
             setPhone(phoneRef.current.value);
             setPassword(passRef.current.value);
             toggleAction()
@@ -162,7 +177,12 @@ function Login(props) {
                             {action === 'signin' ? ' 注册' : ' 登录'}
                         </Link>
                     </div>
-                    <Agreement handleAgree={() => setAgree(!agree)} agree={agree}/>
+                    <div style={{marginLeft: "30px"}}>
+                        <Agreement handleAgree={() => setAgree(!agree)}
+                                   agree={agree}
+                                   label={'我已阅读并同意登录协议'}
+                                   type={'login_agreement'}/>
+                    </div>
                     <SignButton onClick={handleLogin}>
                         {
                             action === 'signin' ? '登录' : '注册'

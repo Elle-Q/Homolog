@@ -12,7 +12,7 @@ import AddIcon from '@mui/icons-material/Add';
 import Chip from "@mui/material/Chip";
 import IconButton from "@mui/material/IconButton";
 import {Input} from "@mui/material";
-import {setRefresh} from "../../../store/refreshSlice";
+import {setRefresh} from "../../../store/refresh-slice";
 
 function ItemModal(props) {
     const {openModal, readOnly, data} = useSelector(selectItemModal);

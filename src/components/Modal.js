@@ -8,7 +8,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import {CancelButton, OKButton} from "./ui/CustomButton";
 
-const ModalDialog = styled(Dialog)(({theme}) => ({
+export const ModalDialog = styled(Dialog)(({theme}) => ({
     zIndex:999,
     '& .MuiPaper-root':{
         backgroundColor: alpha('#0a0908', 0.9),
@@ -57,7 +57,7 @@ const ModalDialogTitle = (props) => {
 
 
 
-function Modal(props) {
+export function Modal(props) {
     const {title, children, open, handleClose, handleOK, maxWidth} = props;
 
     return (
@@ -82,4 +82,3 @@ function Modal(props) {
     );
 }
 
-export default Modal;

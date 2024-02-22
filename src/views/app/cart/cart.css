@@ -1,0 +1,23 @@
+.cart-span {
+  background-color: #595dfd;
+  color: #ffffff;
+  font-family: cursive;
+  font-size: 36px;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 0 100% 0 0; }
+
+.cart-button {
+  color: #595DFD !important;
+  width: 200px;
+  height: 40px;
+  background-color: rgba(89, 93, 253, 0.2) !important;
+  border-radius: 8px  !important; }
+  .cart-button:hover {
+    background-color: #252525 !important; }
+
+.cart-button-wrapper {
+  text-align: center;
+  margin-top: 10px; }
+
+/*# sourceMappingURL=cart.css.map */

@@ -3,7 +3,7 @@ import Button from "@mui/material/Button";
 
 function Timer(props) {
     const {handleClickSend} = props
-    const [timer, setTimer] = useState(10);
+    const [timer, setTimer] = useState(60);
     const [start, setStart] = useState(false);
 
     useEffect(() => {
@@ -20,7 +20,7 @@ function Timer(props) {
     const SendMSCode = () => {
         if (start) return
         setStart(true)
-        setTimer(10)
+        setTimer(60)
         handleClickSend()
     }
 

@@ -6,7 +6,7 @@ import IconButton from "@mui/material/IconButton";
 import FilterListIcon from '@mui/icons-material/FilterList';
 import InfiniteScroll from "react-infinite-scroller";
 import {useSelector} from "react-redux";
-import {selectSearch} from "../../../store/Search";
+import {selectSearch} from "../../../store/search";
 import SearchBar from "./searchbar/SearchBar";
 import {useSearchParams} from "react-router-dom";
 

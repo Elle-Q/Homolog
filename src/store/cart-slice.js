@@ -4,7 +4,6 @@ export const cartSlice = createSlice({
     name: 'cart',
     initialState: {
         open: false,
-        items: [],
     },
     reducers: {
         closeCart: state => {
@@ -19,17 +18,11 @@ export const cartSlice = createSlice({
                 open: true,
             }
         },
-        addItem: (state, action) => {
-            if (state.items.filter(item => item.id === action.payload.id).length > 0) return
-            return {
-                ...state,
-                items: [...state.items, action.payload]
-            }
-        },
+
     }
 })
 
-export const {closeCart, openCart,addItem} = cartSlice.actions
+export const {closeCart, openCart} = cartSlice.actions
 export const selectCart = state => state.cart
 
 export default cartSlice.reducer

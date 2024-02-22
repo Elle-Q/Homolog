@@ -1,20 +1,21 @@
 import React, {useEffect, useState} from 'react';
-import Modal from "../../../components/Modal";
+import {Modal} from "../../../components/Modal";
 import {Checkbox} from "@mui/material";
 import {pink} from "@mui/material/colors";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import Markdown from 'react-markdown'
 import {getAgreement} from "../../../api/config.service";
 import './agreement.scss'
+import {fontSize} from "@mui/system";
 
 function Agreement(props) {
-    const {handleAgree, agree} = props
+    const {handleAgree, agree, type, label} = props
     const [openAgreement, setOpenAgreement] = useState(false)
     const [agreement, setAgreement] = useState("")
 
     useEffect(() => {
-        //获取默认背景
-        getAgreement().then(resp => {
+        //获取协议内容
+        getAgreement(type).then(resp => {
             setAgreement(resp)
         })
     }, []);
@@ -30,8 +31,7 @@ function Agreement(props) {
 
     return (
         <React.Fragment>
-            <div
-                style={{marginLeft: "30px", color: '#6e6d6d', fontSize: "14px", display: 'flex', alignItems: 'center'}}>
+            <div style={{color: '#6e6d6d', fontSize: "14px", display: 'flex', alignItems: 'center'}}>
                 <Checkbox
                     checked={agree}
                     onChange={handleAgree}
@@ -43,7 +43,7 @@ function Agreement(props) {
                         },
                     }}
                 />
-                同意协议
+                <span style={{fontSize:'12px'}}>{label}</span>
                 <HelpOutlineIcon sx={{
                     width: '14px',
                     verticalAlign: 'top',

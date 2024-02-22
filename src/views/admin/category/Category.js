@@ -18,7 +18,7 @@ import {open} from "./catSlice";
 import {openAlert} from "../../../components/alert/ops/alertSlice";
 import api from "../../../api/api";
 import {ListCats} from "../../../api/cat.service";
-import {selectRefresh} from "../../../store/refreshSlice";
+import {selectRefresh} from "../../../store/refresh-slice";
 
 function Category(props) {
     const [cats, setCats] = useState([]);

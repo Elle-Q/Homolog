@@ -18,9 +18,11 @@ export const getDefaultBG = () => {
         });
 }
 
-export const getAgreement = () => {
-    let name = 'agreement'
-    return api.get(`/leetroll-app/config/${name}`)
+export const getAgreement = (type) => {
+    let params = {
+        type: type
+    }
+    return api.get(`/leetroll-app/config/agreement`,{params: params})
         .then((resp) => {
             return resp
         });

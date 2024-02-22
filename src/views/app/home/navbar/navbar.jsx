@@ -12,8 +12,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {selectAuth} from "../../../../api/authSlice";
 import {getColorFromUserStatus} from "../../../../utils/ToolUtil";
 import useScroll from "../../../../hook/useScroll";
-import {openCart} from "../../cart/cart-slice";
-import {setKeyword, toggleSearch} from "../../../../store/Search";
+import {openCart} from "../../../../store/cart-slice";
+import {setKeyword, toggleSearch} from "../../../../store/search";
 
 import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 import SearchIcon from '@mui/icons-material/Search';
@@ -41,6 +41,7 @@ function NavBar(props) {
         }
     }
 
+    console.log("-----------------", user)
     return (
         <div className="navbar-container" style={{transform: `${scroll.direction === 'down' ? 'translateY(-100%)' : ''}`}}>
             <AppBar position="static" sx={{backgroundColor: '#252422'}}>

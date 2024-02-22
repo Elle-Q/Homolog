@@ -7,7 +7,7 @@ import {useSelector, useDispatch} from 'react-redux'
 import {openAlert} from "../../../components/alert/ops/alertSlice";
 import {upload} from "../../../api/qiniu.service";
 import {UpdateCat} from "../../../api/cat.service";
-import {setRefresh} from "../../../store/refreshSlice";
+import {setRefresh} from "../../../store/refresh-slice";
 
 
 function CatModal(props) {

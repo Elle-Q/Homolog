@@ -3,8 +3,8 @@ import Avatar from "@mui/material/Avatar";
 import DragDrop from "../../../../components/DragDrop";
 import IconButton from "@mui/material/IconButton";
 import {alpha} from "@mui/material/styles";
-import {default as AvatarModal} from "../../../../components/Modal";
-import {updateAvatar} from "../../../../api/user.service";
+import {Modal as AvatarModal} from "../../../../components/Modal";
+import UserService from "../../../../api/user.service";
 import {upload} from "../../../../api/qiniu.service";
 import {useDispatch, useSelector} from "react-redux";
 import {selectAuth} from "../../../../api/authSlice";
@@ -52,15 +52,22 @@ function AvatarEditModal(props) {
         fileRef.current.click()
     }
 
-    //修改头像(上传七牛, 更新数据库)
+    //修改头像
     function changeAvatar() {
         if (!avatarFile) {
-            dispatch(updateAvatar(user.id, avatarUri))
-            handleClose()
+            UserService.changeAvatar(user.id, avatarUri).then(
+                () => {
+                    handleClose()
+                }
+            )
+
         } else {
             upload(avatarFile).then((link) => {
-                dispatch(updateAvatar(user.id, link))
-                handleClose()
+                UserService.changeAvatar(user.id, avatarUri).then(
+                    () => {
+                        handleClose()
+                    }
+                )
             })
         }
     }

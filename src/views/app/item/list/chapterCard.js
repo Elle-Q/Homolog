@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import {useDispatch, useSelector} from "react-redux";
 import {Link} from "react-router-dom";
-import {selectCart} from "../../cart/cart-slice";
+import {selectCart} from "../../../../store/cart-slice";
 import {selectItemModal} from "../item-slice";
 
 const Container = styled.div`

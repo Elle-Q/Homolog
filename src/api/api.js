@@ -42,6 +42,7 @@ request.interceptors.response.use(
         if (error.response) {
             //Access token was expired
             if (error.response.status === 401 && !originalConfig._retry) {
+                debugger
                 originalConfig._retry = true;
                 try {
                     let param = new FormData();

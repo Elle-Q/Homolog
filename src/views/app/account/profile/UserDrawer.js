@@ -14,9 +14,9 @@ import FemaleIcon from "@mui/icons-material/Female";
 import MaleIcon from "@mui/icons-material/Male";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
-import {updateUser} from "../../../../api/user.service";
+import UserService from "../../../../api/user.service";
 import {useDispatch, useSelector} from "react-redux";
-import {selectAuth} from "../../../../api/authSlice";
+import {selectAuth, setUser} from "../../../../api/authSlice";
 
 const CusInput = styled(TextField)({
     display: "flex",
@@ -93,12 +93,18 @@ function UserDrawer(props) {
     };
 
     const handleSave = (event) => {
-        dispatch(updateUser({
+        let user = {
             ...userDetail,
             name: nameRef.current.value,
             phone: phoneRef.current.value,
             moto: motoRef.current.value,
-        }))
+        }
+        UserService.update(user).then(
+            resp => {
+                dispatch(setUser(user))
+                return resp
+            }
+        )
         //关闭侧边栏
         toggleDrawer(false)(event)
     }

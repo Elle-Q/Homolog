@@ -5,12 +5,12 @@ import alertReducer from "../components/alert/ops/alertSlice";
 import authReducer from "../api/authSlice";
 import uploadReducer from "../views/admin/upload/uploadSlice";
 import confirmReducer from "../components/alert/confirm/confirmSlice";
-import refreshReducer from "./refreshSlice";
+import refreshReducer from "./refresh-slice";
 import playerReducer from "../views/app/play/playSlice";
 import loadingReducer from "../components/loading/loading-slice";
 import itemReducer from "../views/app/item/item-slice";
-import cartReducer from "../views/app/cart/cart-slice";
-import searchReducer from "./Search";
+import cartReducer from "./cart-slice";
+import searchReducer from "./search";
 
 export default configureStore({
     reducer: {

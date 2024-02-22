@@ -11,7 +11,7 @@ import PrevShow from "./prev/prev-show";
 import {useDispatch} from "react-redux";
 import {setItem} from "./item-slice";
 import {ThumbDownButton, ThumbUpButton} from "../../../components/ui/IconButton";
-import {addItem, openCart} from "../cart/cart-slice";
+import {openCart} from "../../../store/cart-slice";
 import DownloadIcon from '@mui/icons-material/Download';
 import "./item.scss"
 import IconButton from "@mui/material/IconButton";
@@ -59,7 +59,6 @@ function Item() {
     //加入购物车
     const handleAdd2Cart = () => {
         dispatch(openCart())
-        dispatch(addItem(data))
     }
 
     //点击下载源文件

@@ -33,33 +33,16 @@ export const authSlice = createSlice({
             }
         },
         setUser: (state, action) => {
+            debugger
             return {
                 ...state,
                 user:action.payload
             }
         },
-        setAvatar: (state, action) => {
-            return {
-                ...state,
-                user: {
-                    ...state.user,
-                    avatar:action.payload
-                }
-            }
-        },
-        setBG: (state, action) => {
-            return {
-                ...state,
-                user: {
-                    ...state.user,
-                    bgImg:action.payload
-                }
-            }
-        },
     }
 })
 
-export const {loginSuccess, loginFail, logout, registerSuccess, setUser, setAvatar, setBG} = authSlice.actions
+export const {loginSuccess, loginFail, logout, registerSuccess, setUser} = authSlice.actions
 
 export const selectAuth = state => state.auth
 

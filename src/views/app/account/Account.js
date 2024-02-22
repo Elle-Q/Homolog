@@ -3,9 +3,9 @@ import Box from "@mui/material/Box";
 import Profile from "./profile/Profile";
 import TabBar from "./tab/TabBar";
 import {useDispatch, useSelector} from "react-redux";
-import {selectAuth } from "../../../api/authSlice";
+import {selectAuth, setUser} from "../../../api/authSlice";
 import BgEditModal from "./profile/BgEditModal";
-import {getUser} from "../../../api/user.service";
+import UserService from "../../../api/user.service";
 
 function Account(props) {
 
@@ -15,7 +15,9 @@ function Account(props) {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getUser())
+        UserService.getUser().then(resp => {
+            dispatch(setUser(resp))
+        })
     }, [])
 
     useEffect(() => {

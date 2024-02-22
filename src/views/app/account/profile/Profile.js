@@ -7,7 +7,7 @@ import {alpha, styled} from '@mui/material/styles';
 import EditIcon from '@mui/icons-material/Edit';
 import IconButton from "@mui/material/IconButton";
 import LogoutIcon from '@mui/icons-material/Logout';
-import {authService} from "../../../../api/auth.service";
+import AuthService from "../../../../api/auth.service";
 import {useSelector} from "react-redux";
 import {selectAuth} from "../../../../api/authSlice";
 import {getDefaultAvatar} from "../../../../api/config.service";
@@ -65,7 +65,7 @@ function Profile(props) {
     //注销账号
     const logout = async (e) => {
         e.stopPropagation()
-        authService.logout()
+        AuthService.logout()
     }
 
     //toggle头像编辑框

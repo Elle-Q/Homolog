@@ -27,6 +27,7 @@ function Body(props) {
 
     return (
         <div className="body-container">
+            {/*<div className="carousel"></div>*/}
             <div className="cat-container">
                 {
                     cats.map((cat, i) => (

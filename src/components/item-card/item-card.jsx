@@ -4,23 +4,27 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import {Link} from "react-router-dom";
 import PriceTag from "../PriceTag";
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import {addItem, openCart} from "../../views/app/cart/cart-slice";
-import {useDispatch} from "react-redux";
+import {openCart} from "../../store/cart-slice";
+import {useDispatch, useSelector} from "react-redux";
 import "../../views/app/home/body/subject/subject.scss"
 import Stack from "@mui/material/Stack";
 import './index.scss'
 import DownloadIcon from '@mui/icons-material/Download';
+import {addItem2Cart} from "../../api/cart.service";
+import {selectAuth} from "../../api/authSlice";
 
 function ItemCard(props) {
     const {item} = props;
     const [collected, setCollected] = useState(false);
     const [added, setAdded] = useState(false);
+    const {user} = useSelector(selectAuth);
     let dispatch = useDispatch();
 
     const handleAdd2Cart = () => {
         setAdded(!added)
-        dispatch(openCart())
-        dispatch(addItem(item))
+        addItem2Cart(7, item.id).then(resp => {
+            dispatch(openCart())
+        })
     }
 
     //点击下载源文件
@@ -53,7 +57,7 @@ function ItemCard(props) {
                 <IconButton onClick={() => setCollected(!collected)}>
                     <FavoriteIcon fontSize="small" sx={{color: `${collected ? '#ff0a54' : 'white'}`}}/>
                 </IconButton>
-                <IconButton aria-label="buy" style={{marginRight: '40%'}}>
+                <IconButton style={{marginRight: '40%'}}>
                     {
                         item.price === 0 ? <DownloadIcon fontSize="small" onClick={handleDownload}/>
                             :

@@ -25,6 +25,7 @@ import {countCart} from "../../../../api/cart.service";
 import {countOrder} from "../../../../api/order.service";
 import {selectOrder} from "../../../../store/order-slice";
 import UserService from "../../../../api/user.service";
+import {ListCatsWith4Items} from "../../../../api/cat.service";
 
 function NavBar(props) {
     const navigate = useNavigate();

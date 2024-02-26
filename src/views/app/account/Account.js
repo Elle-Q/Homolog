@@ -12,7 +12,7 @@ function Account(props) {
     const [user, setUser] = useState({})
 
     useEffect(() => {
-        UserService.getUser().then((resp) => {
+        UserService.getUser().then(resp=> {
             setUser(resp)
         })
     }, [])

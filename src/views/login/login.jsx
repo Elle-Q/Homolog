@@ -59,12 +59,8 @@ function Login(props) {
                     if (resp === null) {
                         dispatch(loginFail());
                     } else {
-                        UserService.getUser().then(
-                            resp => {
-                                dispatch(loginSuccess(resp));
-                                navigate('/');
-                            }
-                        )
+                        fetchUser()
+                        dispatch(loginSuccess());
                     }
                 }
             )
@@ -82,6 +78,12 @@ function Login(props) {
             setPassword(passRef.current.value);
             toggleAction()
         }
+    }
+
+    const fetchUser = async () => {
+        await UserService.getUser().then(()=> {
+            navigate('/');
+        });
     }
 
     //todo: 验证手机号， 发送短信获取短信验证码

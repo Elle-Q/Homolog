@@ -37,27 +37,24 @@ request.interceptors.response.use(
         errorHandler(resp.data);
         return resp.data.data
     },
-    error => {
-        const originalConfig = error.response.config;
+    async error => {
         if (error.response) {
+            const originalConfig = error.response.config;
             //Access token was expired
-            if (error.response.status === 401 && !originalConfig._retry) {
-                debugger
-                originalConfig._retry = true;
+            if (error.response.status === 401) {
                 try {
                     let param = new FormData();
                     param.append("refreshToken", TokenService.getLocalRefreshToken());
-                    request.post('/leetroll-app/refreshToken', param).then(resp => {
+                    await request.post('/leetroll-app/refreshToken', param).then(resp => {
                         TokenService.updateLocalToken(resp);
-                        return request(originalConfig);
                     });
-
+                    return request(originalConfig);
                 } catch (_err) {
                     return Promise.reject(_err);
                 }
             }
+            return Promise.reject(error);
         }
-        return Promise.reject(error);
     })
 
 

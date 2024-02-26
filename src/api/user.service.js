@@ -34,7 +34,10 @@ class UserService {
     }
 
     getLocalUser() {
-        return JSON.parse(localStorage.getItem("user"));
+        let localUser = localStorage.getItem("user")
+        if (localUser) {
+            return JSON.parse(localUser)
+        }
     }
 
     update(user) {
@@ -43,6 +46,10 @@ class UserService {
                 localStorage.setItem("user", JSON.stringify(user))
                 return resp
             });
+    }
+
+    removeUser() {
+        localStorage.removeItem("user");
     }
 }
 

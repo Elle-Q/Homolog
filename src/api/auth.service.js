@@ -1,5 +1,6 @@
 import TokenService from './token.service'
 import api from "./api";
+import UserService from "./user.service";
 
 class AuthService {
     login(phone, password) {
@@ -21,6 +22,7 @@ class AuthService {
 
     logout() {
         TokenService.removeAuth();
+        UserService.removeUser()
         window.location = "/app";
     }
 

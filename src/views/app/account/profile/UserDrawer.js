@@ -15,8 +15,6 @@ import MaleIcon from "@mui/icons-material/Male";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import UserService from "../../../../api/user.service";
-import {useDispatch, useSelector} from "react-redux";
-import {selectAuth, setUser} from "../../../../api/authSlice";
 
 const CusInput = styled(TextField)({
     display: "flex",
@@ -66,10 +64,8 @@ const radioStyle = {
 }
 
 function UserDrawer(props) {
-    const {user} = useSelector(selectAuth);
-    const {toggleDrawer, open} = props;
+    const {toggleDrawer, open, user} = props;
     const [userDetail, setUserDetail] = React.useState();
-    const dispatch = useDispatch();
     const nameRef = React.createRef();
     const phoneRef = React.createRef();
     const motoRef = React.createRef();
@@ -100,13 +96,12 @@ function UserDrawer(props) {
             moto: motoRef.current.value,
         }
         UserService.update(user).then(
-            resp => {
-                dispatch(setUser(user))
-                return resp
+            () => {
+                //关闭侧边栏
+                toggleDrawer(false)(event)
             }
         )
-        //关闭侧边栏
-        toggleDrawer(false)(event)
+
     }
 
     const GenderRadio = () => (

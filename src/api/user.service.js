@@ -1,24 +1,26 @@
 import api from "./api";
-import {loginFail, loginSuccess, registerSuccess, setAvatar, setBG, setUser} from "./authSlice";
-import {authService} from "./auth.service";
 
 class UserService {
-    changeAvatar(userId, avatarLink) {
+    changeAvatar(avatarLink) {
         return api.post('/leetroll-app/user/avatar/update', {
-            id: userId,
             avatar: avatarLink
         })
             .then((resp) => {
+                const user = JSON.parse(localStorage.getItem("user"));
+                user.avatar = avatarLink
+                localStorage.setItem("user", JSON.stringify(user))
                 return resp;
             });
     }
 
-    changeBG(userId, bgLink) {
+    changeBG(bgLink) {
         return api.post('/leetroll-app/user/bg/update', {
-            id: userId,
             bgImg: bgLink
         })
             .then((resp) => {
+                const user = JSON.parse(localStorage.getItem("user"));
+                user.bgImg = bgLink
+                localStorage.setItem("user", JSON.stringify(user))
                 return resp;
             });
     }
@@ -26,13 +28,19 @@ class UserService {
     getUser() {
         return api.get(`/leetroll-app/user/get`)
             .then((resp) => {
+                localStorage.setItem("user", JSON.stringify(resp))
                 return resp
             });
+    }
+
+    getLocalUser() {
+        return JSON.parse(localStorage.getItem("user"));
     }
 
     update(user) {
         return api.post(`/leetroll-app/user/update`, user)
             .then((resp) => {
+                localStorage.setItem("user", JSON.stringify(user))
                 return resp
             });
     }

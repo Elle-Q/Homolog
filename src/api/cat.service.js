@@ -21,13 +21,6 @@ export const ListCatName = () => {
         })
 }
 
-export const GetCat = (catId) => {
-    return api.get(`/leetroll-app/category/${catId}`)
-        .then((resp) => {
-            return resp
-        });
-}
-
 export const ListAllCat = () => {
     return api.get('/leetroll-app/category/all')
         .then(resp => {

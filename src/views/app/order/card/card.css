@@ -1,0 +1,72 @@
+@charset "UTF-8";
+.order-card-container {
+  background-color: #2F2F2F;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: end;
+  border-radius: 8px;
+  position: relative; }
+  .order-card-container * span {
+    margin-right: 20px;
+    margin-left: 20px;
+    color: #7b7b7b;
+    font-size: 12px; }
+
+.order-card-body {
+  border-radius: 0 0 8px 8px;
+  padding: 20px; }
+  .order-card-body > hr {
+    height: 30px;
+    background-color: #413f3f;
+    align-self: center; }
+  .order-card-body > span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #1bbc9b; }
+  .order-card-body .count-down::before {
+    content: '⌚'; }
+  .order-card-body .cell {
+    text-align: center;
+    font-size: 12px;
+    width: 250px; }
+    .order-card-body .cell > button {
+      margin-right: 5px;
+      font-size: 12px;
+      color: #595DFD !important;
+      background-color: rgba(89, 93, 253, 0.2) !important;
+      border-radius: 8px !important; }
+      .order-card-body .cell > button:hover {
+        background-color: #252525 !important; }
+
+.order-detail-body {
+  padding: 5px 50px; }
+  .order-detail-body * img {
+    width: auto;
+    height: 40px;
+    border-radius: 5px; }
+  .order-detail-body > hr {
+    height: 15px;
+    background-color: #413f3f;
+    align-self: center; }
+  .order-detail-body > span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #7b7b7b;
+    width: 80px;
+    overflow: hidden; }
+  .order-detail-body .MuiIconButton-root {
+    background-color: #413f3f;
+    padding: 4px;
+    font-size: 12px;
+    color: #ffffff;
+    margin-right: 5px; }
+  .order-detail-body .cell {
+    font-size: 12px;
+    align-self: center;
+    width: 80px;
+    overflow: hidden; }
+
+/*# sourceMappingURL=card.css.map */

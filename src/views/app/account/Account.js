@@ -2,21 +2,18 @@ import React, {useEffect, useState} from 'react';
 import Box from "@mui/material/Box";
 import Profile from "./profile/Profile";
 import TabBar from "./tab/TabBar";
-import {useDispatch, useSelector} from "react-redux";
-import {selectAuth, setUser} from "../../../api/authSlice";
 import BgEditModal from "./profile/BgEditModal";
 import UserService from "../../../api/user.service";
 
 function Account(props) {
 
-    const {user} = useSelector(selectAuth);
     const [openBgModal, setOpenBgModal] = useState(false);
     const [bgUri, setBgUri] = useState(null);
-    const dispatch = useDispatch();
+    const [user, setUser] = useState({})
 
     useEffect(() => {
-        UserService.getUser().then(resp => {
-            dispatch(setUser(resp))
+        UserService.getUser().then((resp) => {
+            setUser(resp)
         })
     }, [])
 
@@ -65,7 +62,6 @@ function Account(props) {
             {/*修改背景图像*/}
             <BgEditModal
                 open={openBgModal}
-                user={user}
                 handleClose={handleClose}
                 previewBG={changeBG}
                 closeModal={closeModal}

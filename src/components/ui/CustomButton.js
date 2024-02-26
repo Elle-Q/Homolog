@@ -29,7 +29,7 @@ export const OKButton = (props) => {
             color:'white',
             width:'80px',
             height:'40px',
-            backgroundColor:alpha('#0aa858', 0.5),
+            backgroundColor:alpha('#0aa858', 0.8),
             '&:hover': {
                 backgroundColor:alpha('#0aa858', 0.9),
                 borderColor:'#252422',

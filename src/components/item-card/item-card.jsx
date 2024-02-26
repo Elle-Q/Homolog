@@ -5,24 +5,22 @@ import {Link} from "react-router-dom";
 import PriceTag from "../PriceTag";
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import {openCart} from "../../store/cart-slice";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import "../../views/app/home/body/subject/subject.scss"
 import Stack from "@mui/material/Stack";
 import './index.scss'
 import DownloadIcon from '@mui/icons-material/Download';
 import {addItem2Cart} from "../../api/cart.service";
-import {selectAuth} from "../../api/authSlice";
 
 function ItemCard(props) {
     const {item} = props;
     const [collected, setCollected] = useState(false);
     const [added, setAdded] = useState(false);
-    const {user} = useSelector(selectAuth);
     let dispatch = useDispatch();
 
     const handleAdd2Cart = () => {
         setAdded(!added)
-        addItem2Cart(7, item.id).then(resp => {
+        addItem2Cart(item.id).then(resp => {
             dispatch(openCart())
         })
     }

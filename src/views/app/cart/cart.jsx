@@ -1,44 +1,85 @@
 import React, {useEffect, useState} from 'react';
-import {Drawer} from "@mui/material";
+import {Checkbox, Drawer, FormControlLabel} from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
-import Stack from "@mui/material/Stack";
-import Tooltip from "@mui/material/Tooltip";
-import IconButton from "@mui/material/IconButton";
-import DeleteIcon from "@mui/icons-material/Delete";
 import Divider from "@mui/material/Divider";
 import Button from "@mui/material/Button";
 import {closeCart, selectCart} from "../../../store/cart-slice";
-import Pay from "./pay";
+import Pay from "./pay/pay";
 import './cart.scss'
-import {selectAuth} from "../../../api/authSlice";
-import {getCart} from "../../../api/cart.service";
+import {delItem, getCart} from "../../../api/cart.service";
+import {setOpen} from "../../../components/alert/confirm/confirmSlice";
+import CartItem from "./cart_item/cart_item";
 
 
-function Cart(props) {
+function Cart() {
     const {open} = useSelector(selectCart);
     const dispatch = useDispatch();
     const [items, setItems] = useState([])
     const [totalPrice, setTotalPrice] = useState(0)
     const [isPaying, setIsPaying] = useState(false)
+    const [refresh, setRefresh] = useState(false)
     const [title, setTitle] = useState('购物车')
-    const {user} = useSelector(selectAuth);
 
     useEffect(() => {
-        getCart(7).then(resp => {
-            setItems(resp);
-            let price = resp.reduce(function (acc, item) {
-                return acc + item.price;
-            }, 0)
-            setTotalPrice(price)
+        getCart().then(resp => {
+            let data = resp.map(item => {
+                return {...item, checked: false}
+            })
+            setItems(data);
         })
-    }, [open]);
+    }, [open, refresh]);
+
+    useEffect(() => {
+        computePrice()
+    }, [items])
+
+    useEffect(() => {
+        setTitle(isPaying ? '支付' : '购物车')
+    }, [isPaying])
+
+    const computePrice = () => {
+        let price = items.filter(item => item.checked).reduce(function (acc, item) {
+            return acc + item.price;
+        }, 0)
+        setTotalPrice(price)
+    }
 
     const togglePaying = () => {
         setIsPaying(!isPaying)
-        setTitle(isPaying ? '购物车' : '支付')
+        setRefresh(!refresh)
     }
 
-    function handleDelItem() {
+    const handleSelectItem = (event, item) => {
+        items.forEach(i => {
+            if (i.id === item.id) {
+                i.checked = event.target.checked
+            }
+        })
+        setItems(items)
+        computePrice()
+    }
+
+    const closeCartDrawer = () => {
+        setIsPaying(false)
+        dispatch(closeCart())
+    }
+
+    //刪除购物车条目
+    function handleDelItem(id) {
+        let ops = () => {
+            delItem(id).then(() => {
+                let newItems = items.filter(item => item.id !== id);
+                setItems(newItems);
+            })
+        }
+        dispatch(setOpen({
+            open: true,
+            okHandle: ops
+        }));
+    }
+
+    const getSelectedItems = () => {
+        return items.filter(item => item.checked)
     }
 
     return (
@@ -46,7 +87,7 @@ function Cart(props) {
             anchor='right'
             PaperProps={{sx: {backgroundColor: "rgba(49,47,46,0.9)", width: '23%'}}}
             open={open}
-            onClose={() => dispatch(closeCart())}
+            onClose={closeCartDrawer}
         >
             <div>
                 <span className={'cart-span'}>{title}</span>
@@ -55,39 +96,24 @@ function Cart(props) {
             <div style={{padding: '10px'}}>
                 {
                     isPaying ?
-                        <Pay togglePaying={togglePaying} totalPrice={totalPrice}></Pay>
+                        <Pay togglePaying={togglePaying}
+                             items={getSelectedItems()}></Pay>
                         :
                         <React.Fragment>
                             {items && items.map(item => {
-                                return <Stack style={{display: 'flex', marginBottom: '20px'}} spacing={2} key={item.id}>
-                                    <Stack style={{display: 'flex', justifyContent: 'space-between'}}
-                                           direction={'row'}
-                                           spacing={1}>
-                                        <img src={item.main.link} alt='prevShow'
-                                             style={{
-                                                 maxHeight: '100px',
-                                                 marginRight: '10px',
-                                                 borderRadius: '25px'
-                                             }}/>
-                                        <Stack sx={{color: '#6e6d6d', fontSize: '12px', flex: '1'}} spacing={0}>
-                                            <span style={{fontSize: '16px'}}>{item.name}</span>
-                                            <span> 作者: {item.author}</span>
-                                            <span> 适用软件: blender</span>
-                                            <span> 价格: <span style={{color: '#e82986'}}>￥{item.price}</span></span>
-                                        </Stack>
-                                        <Tooltip title="从购物车移除">
-                                            <IconButton onClick={handleDelItem}>
-                                                <DeleteIcon sx={{color: '#ffffff'}} fontSize='medium'/>
-                                            </IconButton>
-                                        </Tooltip>
-                                    </Stack>
-                                </Stack>
+                                return <FormControlLabel
+                                    key={item.id}
+                                    label={<CartItem item={item} handleDelItem={handleDelItem}/>}
+                                    control={<Checkbox onChange={(event) => handleSelectItem(event,item)}
+                                                       size="small"
+                                                       sx={{'& .MuiSvgIcon-root': {color: '#e82986'}}}/>}
+                                >
+                                </FormControlLabel>
                             })}
-
-                            { totalPrice > 0 &&
+                            {totalPrice > 0 &&
                                 <div className={'cart-button-wrapper'}>
                                     <Button className={'cart-button'}
-                                            onClick={togglePaying}> 去支付(￥{totalPrice})
+                                            onClick={() => setIsPaying(true)}> 去支付(￥{totalPrice})
                                     </Button>
                                 </div>
                             }

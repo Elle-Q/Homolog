@@ -15,6 +15,7 @@ import {openCart} from "../../../store/cart-slice";
 import DownloadIcon from '@mui/icons-material/Download';
 import "./item.scss"
 import IconButton from "@mui/material/IconButton";
+import {addItem2Cart} from "../../../api/cart.service";
 
 
 function Item() {
@@ -58,13 +59,14 @@ function Item() {
 
     //加入购物车
     const handleAdd2Cart = () => {
-        dispatch(openCart())
+        addItem2Cart(id).then(resp => {
+            dispatch(openCart())
+        })
     }
 
     //点击下载源文件
     const handleDownload = () => {
         if (applyFor == null) {
-            window.location.href = data.attachments[0].link
         }
     }
 

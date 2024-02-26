@@ -117,7 +117,7 @@ function Login(props) {
     }
 
     const handlePhoneChange = (event) => {
-        phoneVerify(event)
+        // phoneVerify(event)
         setPhone(event.target.value)
     }
 

@@ -8,11 +8,10 @@ import EditIcon from '@mui/icons-material/Edit';
 import IconButton from "@mui/material/IconButton";
 import LogoutIcon from '@mui/icons-material/Logout';
 import AuthService from "../../../../api/auth.service";
-import {useSelector} from "react-redux";
-import {selectAuth} from "../../../../api/authSlice";
 import {getDefaultAvatar} from "../../../../api/config.service";
 import UserDrawer from "./UserDrawer";
 import AvatarEditModal from "./AvatarEditModal";
+import UserService from "../../../../api/user.service";
 
 const StyledTypography = styled(Typography)({
     color: '#bbb',
@@ -45,16 +44,17 @@ const ActionButton = (props) => {
 
 function Profile(props) {
 
-    const {user} = useSelector(selectAuth);
     const [drawerOpen, setDrawerOpen] = useState(false);
     const [openModal, setOpenModal] = useState(false);
     const [avatarUri, setAvatarUri] = useState(null);
     const [defaultAvatars, setDefaultAvatars] = useState([]);
-
+    const [user, setUser] = useState({})
 
     useEffect(() => {
-        user && setAvatarUri(user.avatar)
-    }, [user])
+        let localUser = UserService.getLocalUser()
+        setUser(localUser)
+        setAvatarUri(localUser.avatar)
+    }, [])
 
     //打开侧边栏用户详情信息
     const toggleDrawer = open => (e) => {
@@ -81,7 +81,6 @@ function Profile(props) {
         getDefaultAvatar().then(resp => {
             setDefaultAvatars(resp)
         })
-
     }
 
     //带有编辑和注销按钮的头像结合体!(结合体! 哈哈`)
@@ -112,6 +111,7 @@ function Profile(props) {
             <UserDrawer
                 toggleDrawer={toggleDrawer}
                 open={drawerOpen}
+                user={user}
             />
 
             <Typography variant="h6" sx={{display: {xs: 'none', sm: 'block'}}}>
@@ -135,6 +135,7 @@ function Profile(props) {
                 user={user}
                 open={openModal}
                 handleClose={handleClose}
+                handleOk={(link) => setAvatarUri(link)}
                 defaultAvatars={defaultAvatars}
             />
 

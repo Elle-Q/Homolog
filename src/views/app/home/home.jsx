@@ -12,6 +12,7 @@ import Cart from "../cart/cart.jsx";
 import {Route, Routes} from "react-router-dom";
 import Item from "../item/item.jsx";
 import Help from "./help/help";
+import Order from "../order/order";
 
 function Home(props) {
 
@@ -25,6 +26,11 @@ function Home(props) {
             path: '/*',
             name: 'home',
             component: <Body/>
+        },
+        {
+            path: '/order',
+            name: 'order',
+            component: <Order/>
         },
         {
             path: '/play/:id',

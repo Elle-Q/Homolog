@@ -3,7 +3,7 @@ import {createSlice} from '@reduxjs/toolkit'
 export const authSlice = createSlice({
     name: 'auth',
 
-    initialState: {isLogin: false,user:null},
+    initialState: {isLogin: false},
 
     reducers: {
         registerSuccess: (state, action) => {
@@ -16,7 +16,6 @@ export const authSlice = createSlice({
             return {
                 ...state,
                 isLogin: true,
-                user:action.payload
             }
         },
         loginFail: (state, action) => {
@@ -29,20 +28,12 @@ export const authSlice = createSlice({
             return {
                 ...state,
                 isLogin: false,
-                user:null
-            }
-        },
-        setUser: (state, action) => {
-            debugger
-            return {
-                ...state,
-                user:action.payload
             }
         },
     }
 })
 
-export const {loginSuccess, loginFail, logout, registerSuccess, setUser} = authSlice.actions
+export const {loginSuccess, loginFail, logout, registerSuccess} = authSlice.actions
 
 export const selectAuth = state => state.auth
 

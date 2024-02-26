@@ -7,6 +7,7 @@ import DISCORD from '../../../../assets/icons/discord.svg';
 import BILIBILI from '../../../../assets/icons/bilibili.svg';
 import WEGROUP from '../../../../assets/images/wechat_group_official.jpg';
 import './footer.scss'
+import {Link} from "@mui/material";
 
 function Footer(props) {
 
@@ -14,6 +15,10 @@ function Footer(props) {
 
     const toggleWeHidden = () => {
         setWeHidden(!weHidden)
+    }
+
+    const handleToBili = () => {
+        window.open("https://space.bilibili.com/313143248", '_blank');
     }
 
     return (
@@ -34,7 +39,7 @@ function Footer(props) {
                         <div>鄂ICP备2023024143号</div>
                     </div>
 
-                    <Divider orientation="vertical" sx={{backgroundColor: '#403D39'}} flexItem />
+                    <Divider orientation="vertical" sx={{backgroundColor: '#403D39'}} flexItem/>
                     <div>联系方式:</div>
                     <div className={'footer-icon'} onMouseEnter={toggleWeHidden} onMouseLeave={toggleWeHidden}>
                         <div className={'footer-pop'} hidden={weHidden}>
@@ -47,7 +52,7 @@ function Footer(props) {
                         <img alt="discord" title="discord" src={DISCORD}/>
                     </div>
 
-                    <div className={'footer-icon'}>
+                    <div className={'footer-icon'} onClick={handleToBili}>
                         <img alt="bilibili" title="bilibili" src={BILIBILI}/>
                     </div>
                 </Stack>

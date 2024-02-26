@@ -3,6 +3,7 @@ import Subject from "./subject/subject";
 import {ListAllCat, ListCatsWith4Items} from "../../../../api/cat.service";
 import CatCard from "./cat-card/cat-card";
 import "./body.scss"
+import Carousel from "./carousel/carousel";
 
 function Body(props) {
 
@@ -26,21 +27,27 @@ function Body(props) {
     }, [])
 
     return (
-        <div className="body-container">
-            {/*<div className="carousel"></div>*/}
-            <div className="cat-container">
+        <React.Fragment>
+            <div className={'home-header'} style={{}}>
+                <div className="carousel">
+                    <Carousel/>
+                </div>
+                <div className="cat-container">
+                    {
+                        cats.map((cat, i) => (
+                            <CatCard key={i} index={i} cat={cat}/>
+                        ))
+                    }
+                </div>
+            </div>
+            <div className="home-body">
                 {
-                    cats.map((cat, i) => (
-                        <CatCard key={i} index={i} cat={cat}/>
-                    ))
+                    catItems && catItems.map((catItem, index) => {
+                        return (<Subject key={index} subject={catItem}/>)
+                    })
                 }
             </div>
-            {
-                catItems && catItems.map((catItem, index) => {
-                    return (<Subject subject={catItem}/>)
-                })
-            }
-        </div>
+        </React.Fragment>
     );
 }
 

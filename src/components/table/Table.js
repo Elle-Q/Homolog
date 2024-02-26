@@ -4,11 +4,11 @@ import Switch from "@mui/material/Switch";
 import {alpha} from "@mui/system";
 import TableRow from "@mui/material/TableRow";
 
-export const StyledTableCell = styled(TableCell)(({ theme }) => ({
+export const StyledTableCell = styled(TableCell)(({theme}) => ({
     [`&.${tableCellClasses.head}`]: {
-        backgroundColor: '#001E3C',
-        color: '#3399ff',
-        fontSize: 18,
+        backgroundColor: 'rgb(44,44,43)',
+        color: '#ffffff',
+        fontSize: 12,
     },
     [`&.${tableCellClasses.body}`]: {
         fontSize: 14,
@@ -19,7 +19,7 @@ export const StyledTableCell = styled(TableCell)(({ theme }) => ({
     },
 }));
 
-export const StyledSwitch = styled(Switch)(({ theme }) => ({
+export const StyledSwitch = styled(Switch)(({theme}) => ({
     '& .MuiSwitch-switchBase.Mui-checked': {
         color: '#0aa858',
         '&:hover': {
@@ -31,9 +31,11 @@ export const StyledSwitch = styled(Switch)(({ theme }) => ({
     },
 }));
 
-export const StyledTableRow = styled(TableRow)(({ theme }) => ({
+export const StyledTableRow = styled(TableRow)(({theme}) => ({
+    color: '#7b7b7b',
+
     '&:nth-of-type(odd)': {
-        backgroundColor: theme.palette.action.hover,
+        backgroundColor: '#2f2f2f',
     },
     // hide last border
     '&:last-child td, &:last-child th': {
@@ -41,6 +43,6 @@ export const StyledTableRow = styled(TableRow)(({ theme }) => ({
     },
 
     '&:hover': {
-        backgroundColor:alpha('#403D39', 0.2)
+        backgroundColor: alpha('#2f2f2f', 0.2)
     }
 }));

@@ -25,18 +25,31 @@
     -webkit-transform: scaleY(0.5); }
 
 .search-bar {
+  display: flex;
   margin: 0 5%;
-  background-color: white;
   width: 100%;
   height: 45px;
-  border-radius: 20px;
-  text-align: center;
-  letter-spacing: 0.094em;
-  outline: none;
-  font-family: cursive;
-  font-size: 18px;
-  border: 0 none; }
+  font-family: cursive; }
   .search-bar:active {
     border: 0; }
+  .search-bar > input {
+    width: 95%;
+    height: 100%;
+    border: 0 none;
+    font-size: 18px;
+    outline: none;
+    border-radius: 20px 0 0 20px;
+    text-align: center;
+    letter-spacing: 0.094em;
+    background-color: #0e0d0d;
+    color: white;
+    font-family: cursive; }
+  .search-bar .search-button {
+    background-color: #595DFD;
+    color: white;
+    width: 5%;
+    border-radius: 0 20px 0 0; }
+    .search-bar .search-button:hover {
+      background-color: #575af5; }
 
 /*# sourceMappingURL=navbar.css.map */

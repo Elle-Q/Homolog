@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Avatar from "@mui/material/Avatar";
 import ColoredLabel from "../../../../components/ui/ColoredLabel";
 import Typography from "@mui/material/Typography";
@@ -9,8 +9,7 @@ import {Divider} from "@mui/material";
 import {makeStyles} from "@mui/styles";
 import Box from "@mui/material/Box";
 import medal01 from '../../../../assets/medals/01.svg'
-import { useSelector} from "react-redux";
-import {selectAuth} from "../../../../api/authSlice";
+import UserService from "../../../../api/user.service";
 
 const useStyles = makeStyles({
     icon: {
@@ -32,14 +31,16 @@ const useStyles = makeStyles({
 
 function UserInfoSide(props) {
     const classes = useStyles()
-    const {user} = useSelector(selectAuth);
+    const [user, setUser] = useState({})
 
-    if (!user) return <></>
+    useEffect(() => {
+        setUser(UserService.getLocalUser)
+    }, []);
 
     return (
         <React.Fragment>
             <div style={{position: "relative", height: '250px'}}>
-                <Avatar alt="elle"
+                <Avatar alt="avatar"
                         src={user && user.avatar}
                         sx={{
                             width: 296,

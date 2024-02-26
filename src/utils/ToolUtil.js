@@ -15,7 +15,6 @@ export function getStarIcons(score, width, height){
     return stars;
 }
 
-
 export function getPopularTags(tags, name) {
     return (
         <React.Fragment>
@@ -52,6 +51,26 @@ export function getColorFromUserStatus(status) {
             return '#252422'
         case 'busy':
             return '#FF0000'
+    }
+}
+
+export function getOrderStatus(status) {
+    switch (status) {
+        case 'open':
+            return {
+                color: '#e9c46a',
+                text: '待支付'
+            }
+        case 'canceled':
+            return {
+                color: '#e82986',
+                text: '已取消'
+            }
+        case 'closed':
+            return {
+                color: '#00a896',
+                text: '已完成'
+            }
     }
 }
 

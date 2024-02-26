@@ -7,15 +7,15 @@ import "./cat-card.scss"
 const Container = styled.div`
   display: flex;
   align-items: flex-end;
-  padding: 35px 30px 35px 0;
+  padding: 25px 10px 25px 0;
   background: rgb(65, 63, 63, 0.5);
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.30);
   border-radius: 20px;
   width: 100%;
 
   & #img-container {
-    width: 100px;
-    height: 80px;
+    width: 50px;
+    height: 50px;
     background-color: rgb(201, 201, 201, 0.1);
     border-radius: 0 20px 20px 0;
     display: flex;
@@ -24,8 +24,8 @@ const Container = styled.div`
   }
 
   & #icon-wrapper {
-    width: 40px;
-    height: 30px;
+    width: 30px;
+    height: 20px;
     border: 1px solid rgba(89, 93, 253, 0.44);
     border-radius: 0 10px 0 0;
     display: flex;
@@ -87,7 +87,6 @@ function CatCard(props) {
                     <span>{cat.subTitle}</span>
                     <span>300+ </span>
                 </div>
-
                 <div className="icon-container">
                     <div id="icon-wrapper">
                         <KeyboardArrowRightIcon id='icon'/>

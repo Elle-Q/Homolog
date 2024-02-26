@@ -9,9 +9,9 @@ function Logo(props) {
 
     return (
        <div style={{width: '20%', display: "flex", cursor: 'pointer'}} onClick={() => navigate("/")}>
-           <img className="logo" src={logo} style={{width: '40px', height: '35px'}} alt={"logo"}/>
+           <img className="logo" src={logo} style={{width: '50px', height: '45px'}} alt={"logo"}/>
             <Typography
-                variant="h6"
+                variant="h4"
                 sx={{
                     marginLeft: '15px',
                     display: {xs: 'none', sm: 'block'},

@@ -4,12 +4,11 @@
   left: 2%;
   color: white !important;
   z-index: 999;
-  background-color: #595DFD !important;
-  box-shadow: 0 0 4px #595DFD !important;
+  background-color: rgb(23, 23, 23) !important;
+  box-shadow: 0 0 4px rgb(23, 23, 23) !important;
 
   &:hover {
-    color: white !important;
-    background-color: #595DFD !important;
+    color: #e82986 !important;
   }
 
   .help-icon:hover {

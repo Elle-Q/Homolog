@@ -6,22 +6,18 @@ import {alpha} from "@mui/material/styles";
 import {Modal as AvatarModal} from "../../../../components/Modal";
 import UserService from "../../../../api/user.service";
 import {upload} from "../../../../api/qiniu.service";
-import {useDispatch, useSelector} from "react-redux";
-import {selectAuth} from "../../../../api/authSlice";
 
 function AvatarEditModal(props) {
-    const {open, handleClose,defaultAvatars, } = props;
-    const {user} = useSelector(selectAuth);
-
+    const {open, handleClose, handleOk, defaultAvatars} = props;
     const [avatarUri, setAvatarUri] = useState(null);
     const [avatarFile, setAvatarFile] = useState(null);
 
-    const dispatch = useDispatch();
     const fileRef = createRef();
 
     useEffect(() => {
-        user && setAvatarUri(user.avatar)
-    }, [user])
+        let user = UserService.getLocalUser();
+        setAvatarUri(user.avatar)
+    }, [])
 
     useEffect(() => {
         avatarFile && setAvatarUri(URL.createObjectURL(avatarFile));
@@ -48,14 +44,15 @@ function AvatarEditModal(props) {
         setAvatarFile(files[0])
     }
 
-    const handleUploadAvatar =  (event) => {
+    const handleUploadAvatar = (event) => {
         fileRef.current.click()
     }
 
     //修改头像
     function changeAvatar() {
+        handleOk(avatarUri)
         if (!avatarFile) {
-            UserService.changeAvatar(user.id, avatarUri).then(
+            UserService.changeAvatar(avatarUri).then(
                 () => {
                     handleClose()
                 }
@@ -63,7 +60,7 @@ function AvatarEditModal(props) {
 
         } else {
             upload(avatarFile).then((link) => {
-                UserService.changeAvatar(user.id, avatarUri).then(
+                UserService.changeAvatar(avatarUri).then(
                     () => {
                         handleClose()
                     }
@@ -77,11 +74,12 @@ function AvatarEditModal(props) {
                      maxWidth="md"
                      open={open}
                      handleClose={handleClose}
+                     handleCancel={handleClose}
                      handleOK={changeAvatar}
         >
 
             <div style={{display: "flex", justifyContent: "center"}}>
-                <Avatar alt="elle"
+                <Avatar alt="avatar"
                         src={avatarUri}
                         sx={{
                             width: 120,
@@ -104,7 +102,7 @@ function AvatarEditModal(props) {
                                     height: '55px',
                                     marginRight: '10px',
                                     borderRadius: '50%',
-                                    cursor:'pointer'
+                                    cursor: 'pointer'
                                 }}
                                 src={link}
                                 onClick={defaultAvatarClick(link)}

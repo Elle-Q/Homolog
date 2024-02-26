@@ -1,17 +1,15 @@
 import React, {useEffect, useState} from "react";
 import {Modal as AvatarModal} from "../../../../components/Modal";
 import UserService from "../../../../api/user.service";
-import {useDispatch} from "react-redux";
 import {ImageList} from "@mui/material";
 import {getDefaultBG} from "../../../../api/config.service";
+import {useSelector} from "react-redux";
 
 function BgEditModal(props) {
-    const {open, user, handleClose, previewBG, closeModal} = props;
+    const {open, handleClose, previewBG, closeModal} = props;
 
     const [bgUri, setBGUri] = useState(null);
-    const dispatch = useDispatch();
     const [defaultBGs, setDefaultBGs] = useState([]);
-
 
     useEffect(() => {
         //获取默认背景
@@ -29,9 +27,14 @@ function BgEditModal(props) {
         }
     }
 
+    const handleCancel = (link) => {
+        // previewBG(user.bgImg);
+        handleClose()
+    }
+
     //更新数据库
     function changeBG() {
-        UserService.changeBG(user.id, bgUri).then(() => closeModal())
+        UserService.changeBG(bgUri).then(() => closeModal())
     }
 
     return (
@@ -39,6 +42,7 @@ function BgEditModal(props) {
             maxWidth="md"
             open={open}
             handleClose={handleClose}
+            handleCancel={handleCancel}
             handleOK={changeBG}
         >
             <ImageList cols={3} rowHeight={164}>

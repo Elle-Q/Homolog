@@ -35,9 +35,10 @@ class UserService {
 
     getLocalUser() {
         let localUser = localStorage.getItem("user")
-        if (localUser) {
+        if (localUser && localUser !== 'undefined') {
             return JSON.parse(localUser)
         }
+        return {}
     }
 
     update(user) {

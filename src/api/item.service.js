@@ -2,7 +2,7 @@ import api from "./api";
 import {setChapters} from "../views/app/play/playSlice";
 
 export const GetItem = (itemId) => {
-    return api.get(`/leetroll-app/item/${itemId}`)
+    return api.get(`/leetroll-app/item/get/${itemId}`)
         .then(resp => {
             return resp
         })
@@ -14,21 +14,6 @@ export const GetItemFiles = (itemId) => {
             return resp
         })
 }
-
-export const AppGetItemFiles = (itemId) => {
-    return api.get(`/leetroll-app/item/files/${itemId}`)
-        .then(resp => {
-            return resp
-        })
-}
-//todo： delete
-/*export const GetItemWithFiles = (itemId) => dispatch => {
-    return api.get(`/leetroll-app/item/files/${itemId}`)
-        .then(resp => {
-            dispatch(setItem(resp))
-            return resp
-        })
-}*/
 
 export const GetChapters = (itemId) => dispatch => {
     return api.get(`/leetroll-app/item/chapter/${itemId}`)

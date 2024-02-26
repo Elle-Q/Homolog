@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import {alpha} from "@mui/system";
 
 function ColoredLabel(props) {
-    const {color, content, shape, style} = props
+    const {color="#ffffff", content, style} = props
 
     return (
         <Box sx={{

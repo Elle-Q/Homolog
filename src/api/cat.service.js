@@ -1,7 +1,7 @@
 import api from "./api";
 
-export const ListCat = () => {
-    return api.get('/leetroll-admin/cat/list')
+export const ListCats = () => {
+    return api.get('/leetroll-admin/category/all')
         .then(resp => {
             return resp
         })
@@ -21,15 +21,51 @@ export const ListCatName = () => {
         })
 }
 
-export const GetCat = (catId) => {
-    return api.get(`/leetroll-app/category/${catId}`)
+export const ListAllCat = () => {
+    return api.get('/leetroll-app/category/all')
+        .then(resp => {
+            return resp
+        })
+}
+
+export const ListCatsWith4Items = () => {
+    return api.get(`/leetroll-app/category/cats-with-4items`)
         .then((resp) => {
             return resp
         });
 }
 
-export const ListCatsWithItems = () => {
-    return api.get(`/leetroll-app/category/list/items`)
+export const ListItems = (pageNumber, keyword, catId, metric) => {
+    let params = {
+        pageNumber: pageNumber,
+        pageSize: 12,
+        keyword: keyword,
+        catId: catId,
+        metric: metric,
+    }
+    return api.get(`/leetroll-app/search/query`, {params: params})
+        .then((resp) => {
+            return resp
+        });
+}
+
+export const TotalSize = (keyword, catId, metric) => {
+    let params = {
+        keyword: keyword,
+        catId: catId,
+        metric: metric,
+    }
+    return api.get(`/leetroll-app/search/size`, {params: params})
+        .then((resp) => {
+            return resp
+        });
+}
+
+export const ListMetrics = (catId) => {
+    let params = {
+        catId: catId
+    }
+    return api.get(`/leetroll-app/category/metrics`, {params: params})
         .then((resp) => {
             return resp
         });

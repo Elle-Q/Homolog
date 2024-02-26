@@ -1,39 +1,34 @@
 import TokenService from './token.service'
-import {loginFail, loginSuccess, registerFail, registerSuccess} from "./authSlice";
 import api from "./api";
+import UserService from "./user.service";
 
 class AuthService {
-    login(username, password) {
-        return api
-            .post("/leetroll-app/user/login", {
-                UserName:username,
-                Password: password
-            })
+    login(phone, password) {
+        let param = new FormData();
+        param.append("phone", phone);
+        param.append("password", password);
+        return api.post("/leetroll-app/login", param)
             .then(resp => {
-                if (resp) {
+                if (resp != null) {
                     //设置token
                     TokenService.setTokens({
-                        AccessToken: resp.AccessToken,
-                        RefreshToken: resp.RefreshToken,
+                        AccessToken: resp.accessToken,
+                        RefreshToken: resp.refreshToken,
                     });
-                    //设置User
-                    TokenService.setUser(resp.User.ID);
-                    return resp;
                 }
-            },
-            err => {
-               return Promise.reject(err)
+                return resp;
             })
     }
 
     logout() {
         TokenService.removeAuth();
+        UserService.removeUser()
         window.location = "/app";
     }
 
-    signup(username, phone, password, code) {
-        return api.post('/leetroll-app/user/signup', {
-            username,
+    signup(name, phone, password, code) {
+        return api.post('/leetroll-app/register', {
+            name,
             phone,
             password,
             code
@@ -41,31 +36,4 @@ class AuthService {
     }
 }
 
-export const authService = new AuthService()
-
-export const signup = (username, phone, password, code) => (dispatch) => {
-    return authService.signup(username, phone, password, code).then(
-        resp => {
-            dispatch(registerSuccess())
-            return Promise.resolve();
-        },
-        err => {
-            dispatch(registerFail())
-            return Promise.reject();
-        }
-    )
-}
-
-
-export const login = (username, password) => (dispatch) => {
-    return authService.login(username, password).then(
-        resp => {
-            dispatch(loginSuccess({user:resp.User}));
-            return resp;
-        },
-        err => {
-            dispatch(loginFail());
-        }
-    )
-}
-
+export default new AuthService()

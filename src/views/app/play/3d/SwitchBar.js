@@ -2,11 +2,6 @@ import React, {useEffect} from 'react';
 import Box from "@mui/material/Box";
 import {Stack} from "@mui/material";
 import CardMedia from "@mui/material/CardMedia";
-import helmetPrev  from '../../../../assets/3d/helmet.png'
-import shoePrev  from '../../../../assets/3d/shoe.png'
-import skullPrev  from '../../../../assets/3d/skull.png'
-import chairPrev  from '../../../../assets/3d/chair.png'
-import tokyoPrev  from '../../../../assets/3d/tokyo.png'
 
 function SwitchBar(props) {
 
@@ -17,39 +12,6 @@ function SwitchBar(props) {
     })
 
     if (!models) return <></>
-
-    const rescList = [
-        {
-            name:'DamagedHelmet',
-            prev: helmetPrev,
-            url:'/3d/gltf/helmet/DamagedHelmet.gltf',
-            type:'gltf'
-        },
-        {
-            name:'shoe',
-            prev: shoePrev,
-            url:'/3d/gltf/shoe/MaterialsVariantsShoe.gltf',
-            type:'gltf'
-        },
-        {
-            name:'SheenChair',
-            prev: chairPrev,
-            url:'/3d/glb/SheenChair.glb',
-            type:'glb'
-        },
-        {
-            name:'skull',
-            prev: skullPrev,
-            url:'/3d/glb/skull.glb',
-            type:'glb'
-        },
-        {
-            name:'tokyo',
-            prev: tokyoPrev,
-            url:'/3d/glb/LittlestTokyo.glb',
-            type:'glb'
-        },
-    ]
 
     return (
         <Box sx={{

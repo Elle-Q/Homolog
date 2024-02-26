@@ -4,7 +4,7 @@ import Typography from "@mui/material/Typography";
 import {getStarIcons} from "../../../../utils/ToolUtil";
 import Paper from "@mui/material/Paper";
 import Chip from "@mui/material/Chip";
-import more from "../../../../assets/more.svg";
+import more from "../../../../assets/icons/more.svg";
 import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
 import LoyaltyIcon from '@mui/icons-material/Loyalty';
@@ -24,7 +24,7 @@ const Label = props => {
         <div style={{marginBottom: '14px', marginTop: '14px', marginLeft: '10px'}}>
             {
                 name === 'tags' ?
-                    <LoyaltyIcon sx={{color: "icon.first"}}/>
+                    <LoyaltyIcon sx={{color: "svg.first"}}/>
                     :
                     <em style={{color: "#999", marginRight: '15px'}}>{name}:</em>
             }
@@ -75,7 +75,7 @@ function BriefDesc(props) {
                 // height: '900px',
                 width: '100%',
                 borderRadius: '10px',
-                backgroundColor: alpha(theme.palette.background.paper, 0.4),
+                backgroundColor: alpha('#0a0908', 0.4),
                 boxShadow: '0 0 5px black',
                 padding: '10px',
             }}
@@ -110,7 +110,7 @@ function BriefDesc(props) {
                 <em style={{color: "#173A5E", marginRight: '15px'}}>描述</em>
 
                 <p style={{color: "#173A5E", marginLeft: '24px', overflow: 'hidden', height: '100px'}}>
-                    {item.Desc}
+                    {item.desp}
                 </p>
 
                 <div style={{display: 'flex', justifyContent: 'flex-end'}}>

@@ -1,78 +1,56 @@
-import React from 'react';
 import api from "./api";
-import {setAvatar, setBG, setUser} from "./authSlice";
 
 class UserService {
-    changeAvatar(userId, avatarLink) {
+    changeAvatar(avatarLink) {
         return api.post('/leetroll-app/user/avatar/update', {
-            UserId: userId,
-            Avatar: avatarLink
+            avatar: avatarLink
         })
             .then((resp) => {
-               return resp;
-            });
-    }
-
-    changeBG(userId, bgLink) {
-        return api.post('/leetroll-app/user/bg/update', {
-            UserId: userId,
-            BgImag: bgLink
-        })
-            .then((resp) => {
+                const user = JSON.parse(localStorage.getItem("user"));
+                user.avatar = avatarLink
+                localStorage.setItem("user", JSON.stringify(user))
                 return resp;
             });
     }
 
-    getUser(userId) {
-       return api.get(`/leetroll-app/user/${userId}`)
+    changeBG(bgLink) {
+        return api.post('/leetroll-app/user/bg/update', {
+            bgImg: bgLink
+        })
             .then((resp) => {
+                const user = JSON.parse(localStorage.getItem("user"));
+                user.bgImg = bgLink
+                localStorage.setItem("user", JSON.stringify(user))
+                return resp;
+            });
+    }
+
+    getUser() {
+        return api.get(`/leetroll-app/user/get`)
+            .then((resp) => {
+                localStorage.setItem("user", JSON.stringify(resp))
                 return resp
             });
+    }
+
+    getLocalUser() {
+        let localUser = localStorage.getItem("user")
+        if (localUser) {
+            return JSON.parse(localUser)
+        }
     }
 
     update(user) {
         return api.post(`/leetroll-app/user/update`, user)
             .then((resp) => {
+                localStorage.setItem("user", JSON.stringify(user))
                 return resp
             });
     }
+
+    removeUser() {
+        localStorage.removeItem("user");
+    }
 }
 
-const userService = new UserService();
-
-export const getUser = () => (dispatch) => {
-    const userId = JSON.parse(localStorage.getItem("userId"));
-    userService.getUser(userId).then(
-        resp => {
-            dispatch(setUser(resp))
-            return resp
-        }
-    )
-}
-
-export const updateAvatar = (userId, link) => (dispatch) => {
-    userService.changeAvatar(userId, link).then(
-        resp => {
-            dispatch(setAvatar(link))
-            return resp
-        }
-    )
-}
-
-export const updateBG = (userId, link) => (dispatch) => {
-    userService.changeBG(userId, link).then(
-        resp => {
-            dispatch(setBG(link))
-            return resp
-        }
-    )
-}
-
-export const updateUser = (user) => (dispatch) => {
-    userService.update(user).then(
-        resp => {
-            dispatch(setUser(user))
-            return resp
-        }
-    )
-}
+export default new UserService();

@@ -14,12 +14,12 @@ const InputBox = styled('div')(({theme}) => ({
     marginTop:'10px',
     height: '100px',
     justifyContent: "flex-end",
-    background: alpha(theme.palette.background.paper, 0.5),
+    background: alpha('#0a0908', 0.5),
     [theme.breakpoints.up('sm')]: {
         marginRight: theme.spacing(5),
     },
     '&:hover': {
-        backgroundColor: alpha(theme.palette.background.paper, 0.7),
+        backgroundColor: alpha('#0a0908', 0.7),
     },
     '&:focus': {
         outline: 'none',

@@ -8,7 +8,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import {CancelButton, OKButton} from "./ui/CustomButton";
 
-const ModalDialog = styled(Dialog)(({theme}) => ({
+export const ModalDialog = styled(Dialog)(({theme}) => ({
     zIndex:999,
     '& .MuiPaper-root':{
         backgroundColor: alpha('#0a0908', 0.9),
@@ -57,16 +57,16 @@ const ModalDialogTitle = (props) => {
 
 
 
-function Modal(props) {
-    const {title, children, open, handleClose, handleSave, maxWidth} = props;
+export function Modal(props) {
+    const {title, children, open, handleClose, handleOK, handleCancel, maxWidth} = props;
 
     return (
         <ModalDialog
             onClose={handleClose}
-            aria-labelledby="dialog-title"
             open={open}
             fullWidth={true}
             maxWidth={maxWidth}
+            onClick={(event)=>{event.stopPropagation()}}
         >
             <ModalDialogTitle id="dialog-title" onClose={handleClose}>
                 <span style={{color: '#3399ff', fontSize: '18px', marginLeft: '5px', textAlign: "center"}}>{title}</span>
@@ -75,11 +75,10 @@ function Modal(props) {
                 {children}
             </DialogContent>
             <DialogActions sx={{justifyContent: "center", mt: '30px'}}>
-                <OKButton handleClick={handleSave}/>
-                <CancelButton handleClick={handleClose}/>
+                <OKButton handleClick={handleOK}/>
+                <CancelButton handleClick={handleCancel}/>
             </DialogActions>
         </ModalDialog>
     );
 }
 
-export default Modal;

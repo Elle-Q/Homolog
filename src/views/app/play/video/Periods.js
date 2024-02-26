@@ -1,11 +1,7 @@
 import React, {useState} from 'react';
 import Box from "@mui/material/Box";
-import {FixedSizeList} from 'react-window';
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
 import styled, {keyframes} from "styled-components";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {selectPlayer} from "../playSlice";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
@@ -62,7 +58,6 @@ function Periods(props) {
     const {changeVideoSrc} = props;
     const [curCpIndex, setCurCpIndex] = useState(0);
     const [curEpiIndex, setCurEpiIndex] = useState(0);
-    let dispatch = useDispatch();
     const {chapters} = useSelector(selectPlayer);
 
     const handleIndexChange = (cpIndex, epiIndex) => {

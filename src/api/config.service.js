@@ -1,7 +1,5 @@
 import api from "./api";
 
-// const api = require("./api");
-
 export const getDefaultAvatar = () => {
     let name = 'default_avatar'
     return api.get(`/leetroll-app/config/${name}`)
@@ -17,3 +15,21 @@ export const getDefaultBG = () => {
             return resp
         });
 }
+
+export const getAgreement = (type) => {
+    let params = {
+        type: type
+    }
+    return api.get(`/leetroll-app/config/agreement`,{params: params})
+        .then((resp) => {
+            return resp
+        });
+}
+
+export const getCarousel = () => {
+    return api.get(`/leetroll-app/config/carousel`)
+        .then((resp) => {
+            return resp
+        });
+}
+

@@ -2,11 +2,8 @@ import React, {useRef} from "react";
 import Input from "@mui/material/Input";
 import IconButton from "@mui/material/IconButton";
 import {alpha} from "@mui/material/styles";
-import AddIcon from "@mui/icons-material/Add";
 import Select from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
 import {styled} from "@mui/system";
-import {Controller} from "react-hook-form";
 
 export const InputWithHeader = (props) => {
     const {

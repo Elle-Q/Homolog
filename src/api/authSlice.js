@@ -1,85 +1,39 @@
 import {createSlice} from '@reduxjs/toolkit'
 
-const tokens = JSON.parse(localStorage.getItem("tokens"))
-const userId = JSON.parse(localStorage.getItem("userId"))
-
 export const authSlice = createSlice({
     name: 'auth',
 
-    initialState: (tokens && userId)
-        ? {isLogin: true,userId: userId,user:null}
-        : {isLogin: false, userId: null,user:null},
+    initialState: {isLogin: false},
 
     reducers: {
         registerSuccess: (state, action) => {
-            const {userId} = action.payload;
-
-            return {
-                ...state,
-                isLogin: false,
-                userId: userId
-            }
-        },
-        registerFail: (state, action) => {
-            const {msg} = action.payload;
             return {
                 ...state,
                 isLogin: false,
             }
         },
         loginSuccess: (state, action) => {
-            const {user} = action.payload;
             return {
                 ...state,
                 isLogin: true,
-                userId:user.ID,
-                user:user
             }
         },
         loginFail: (state, action) => {
-            const {msg} = action.payload;
             return {
                 ...state,
                 isLogin: false,
-                userId: null
             }
         },
         logout: (state) => {
             return {
                 ...state,
                 isLogin: false,
-                userId: null,
-                user:null
-            }
-        },
-        setUser: (state, action) => {
-            return {
-                ...state,
-                user:action.payload
-            }
-        },
-        setAvatar: (state, action) => {
-            return {
-                ...state,
-                user: {
-                    ...state.user,
-                    Avatar:action.payload
-                }
-            }
-        },
-        setBG: (state, action) => {
-            return {
-                ...state,
-                user: {
-                    ...state.user,
-                    BgImag:action.payload
-                }
             }
         },
     }
 })
 
-export const {loginSuccess, loginFail, logout, registerSuccess, registerFail, setUser, setAvatar, setBG} = authSlice.actions
+export const {loginSuccess, loginFail, logout, registerSuccess} = authSlice.actions
 
 export const selectAuth = state => state.auth
 

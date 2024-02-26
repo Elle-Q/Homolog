@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {useFrame, useLoader} from '@react-three/fiber'
+import React from 'react';
+import {useFrame} from '@react-three/fiber'
 import gsap from "gsap";
 import * as THREE from "three";
 import {useGLTF} from "@react-three/drei";

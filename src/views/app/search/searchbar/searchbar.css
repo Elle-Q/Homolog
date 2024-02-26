@@ -1,0 +1,33 @@
+.navcat-container {
+  border-bottom: 1px solid #2e2e2f;
+  margin-top: 10px;
+  margin-bottom: 10px; }
+  .navcat-container .nav-cat:hover {
+    border-bottom: 1px solid #868cea; }
+    .navcat-container .nav-cat:hover span {
+      color: #fff; }
+  .navcat-container .nav-cat span {
+    color: #ccc;
+    font-size: 12px;
+    font-weight: 600; }
+
+.metric-container {
+  display: flex;
+  flex-direction: column;
+  width: 12%;
+  border-radius: 8px !important;
+  background-color: #323232 !important;
+  padding: 10px;
+  color: #ccc;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer; }
+  .metric-container:hover {
+    border: 1px solid #5b5756; }
+  .metric-container img {
+    border-radius: 8px !important;
+    width: 100% !important;
+    height: 100px;
+    margin-bottom: 5px; }
+
+/*# sourceMappingURL=searchbar.css.map */

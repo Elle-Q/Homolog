@@ -1,5 +1,4 @@
 import React from 'react';
-import monkey from "../assets/monkey.svg";
 import SpeedDialAction from "@mui/material/SpeedDialAction";
 import SpeedDial from "@mui/material/SpeedDial";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
@@ -40,7 +39,7 @@ function PageTipFloatingBar(props) {
                 }
             }
             }
-            icon={<img alt="tips" src={monkey} style={{width: 60, height: 60}}/>}>
+        >
             {actions.map((action) => (
                 <SpeedDialAction
                     key={action.name}

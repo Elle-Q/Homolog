@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import gsap from "gsap";
 import {useGLTF} from "@react-three/drei";
 

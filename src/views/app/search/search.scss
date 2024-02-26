@@ -1,0 +1,37 @@
+
+.search-container {
+  width: 85%;
+  margin: auto;
+
+
+  .filter-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    margin-top: 20px;
+
+    span {
+      color: #fff;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    button {
+      color: #fff;
+      font-size: 12px;
+      font-weight: 600;
+      background-color: #2e2e2f;
+      border-radius: 8px;
+      padding: 0 12px;
+    }
+  }
+
+  .body-container {
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 10px;
+    display: flex;
+    justify-content: center;
+  }
+
+}

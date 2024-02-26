@@ -1,0 +1,14 @@
+.order-container {
+  width: 80%;
+  margin: auto;
+
+  & .header {
+    margin-top: 50px;
+    padding: 0 10%;
+
+    > span {
+      color: #D1D1D1;
+      font-size: 24px;
+    }
+  }
+}

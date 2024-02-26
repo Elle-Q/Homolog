@@ -1,0 +1,27 @@
+.search-container {
+  width: 85%;
+  margin: auto; }
+  .search-container .filter-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    margin-top: 20px; }
+    .search-container .filter-container span {
+      color: #fff;
+      font-size: 14px;
+      font-weight: 500; }
+    .search-container .filter-container button {
+      color: #fff;
+      font-size: 12px;
+      font-weight: 600;
+      background-color: #2e2e2f;
+      border-radius: 8px;
+      padding: 0 12px; }
+  .search-container .body-container {
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 10px;
+    display: flex;
+    justify-content: center; }
+
+/*# sourceMappingURL=search.css.map */

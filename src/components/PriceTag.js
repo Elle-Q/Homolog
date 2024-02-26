@@ -1,26 +1,24 @@
 import React from 'react';
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
 
 
 function PriceTag(props) {
-    const {height, price} = props;
-    let borderColor = price===0?'#00a896':'#fdce71'
+    const {price} = props;
+    let borderColor = price===0?'#00a896':'#fb8500'
     return (
-        <Box style={{
+        <div style={{
             display:"flex",
             backgroundColor:"transparent",
             alignItems:"center",
             justifyContent:"center",
             borderTopLeftRadius:3,
             borderBottomLeftRadius:3,
-            height: `${height}px`,
-            fontWeight:700,
-            border: `${height/2}px solid ${borderColor}`,
-            borderRight: '18px solid transparent',
+            height: '24px',
+            borderWidth: '12px',
+            borderStyle: 'solid',
+            borderColor: `${borderColor} transparent ${borderColor} ${borderColor}`
         }}>
-            <span style={{color:"black",fontSize:18, marginRight:'10px'}} >{price === 0 ? 'free': `￥${price}`}</span>
-        </Box>
+            <span style={{color:"#fcfbfb",fontSize:14, marginRight:'10px'}} >{price === 0 ? 'free': `￥${price}`}</span>
+        </div>
     );
 }
 

@@ -2,7 +2,6 @@ import React from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {selectConfirm, setOpen} from "./confirmSlice";
 import {Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from "@mui/material";
-import Button from "@mui/material/Button";
 import {CancelButton, OKButton} from "../../ui/CustomButton";
 
 function AlertDialog(props) {

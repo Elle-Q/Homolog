@@ -22,7 +22,7 @@ function CommentLabel(props) {
             <Grid item>
                 <Avatar
                     sx={{width: '50px', height: '50px'}}
-                    alt="Elle Qu"
+                    alt="avatar"
                     src={avatar}
                 />
             </Grid>

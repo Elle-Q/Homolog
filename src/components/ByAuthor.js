@@ -27,7 +27,7 @@ function ByAuthor(props) {
                 <Avatar
                     sx={{width: '60px', height: '60px'}}
                     style={{marginRight: "14px"}}
-                    alt="Elle Qu"
+                    alt="avatar"
                     src="/avatar/avatar1.jpg"
                 />
                 <Typography variant="body2" sx={{fontSize: '20px'}} color="text.fifth"> {author}</Typography>

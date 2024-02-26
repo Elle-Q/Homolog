@@ -3,10 +3,9 @@ import Box from "@mui/material/Box";
 import {Canvas} from "@react-three/fiber";
 import {OrbitControls} from "@react-three/drei";
 import * as THREE from "three";
-import GLTF from "../play/3d/GLTF";
 import GLB from "../play/3d/GLB";
 
-function Partner(props) {
+function Partner() {
 
     const doOnCanvasCreate = ({ gl,  scene}) => {
         gl.setPixelRatio(Math.min(window.devicePixelRatio, 2))

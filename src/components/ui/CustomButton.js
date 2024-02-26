@@ -29,14 +29,14 @@ export const OKButton = (props) => {
             color:'white',
             width:'80px',
             height:'40px',
-            backgroundColor:alpha('#0aa858', 0.5),
+            backgroundColor:alpha('#0aa858', 0.8),
             '&:hover': {
                 backgroundColor:alpha('#0aa858', 0.9),
                 borderColor:'#252422',
                 fontSize:'14px',
             }
         }} autoFocus onClick={handleClick}>
-            保存
+            OK
         </Button>
     )
 }
@@ -48,7 +48,7 @@ export const CancelButton = (props) => {
         <Button sx={{
             borderColor:'#252422',
             fontSize:'12px',
-            color:'secondary.light',
+            color:'white',
             width:'80px',
             height:'40px',
             backgroundColor:alpha('#403D39', 0.3),
@@ -66,17 +66,16 @@ export const CancelButton = (props) => {
 export const CartButton = (props) => {
     const {icon, money, onClick} = props
     return (
-        <Button onClick={onClick} sx={{
-                        color: 'white',
+        <div onClick={onClick} style={{
+                        color: 'red',
                         width: '300px',
                         height: '50px',
-                        backgroundColor: "red",
-                        border: '1px solid red',
+                        border: '1px solid #3b3b39',
                         borderRadius: '10px',
-                        boxShadow: '0 0 5px #EB5E28',
+                        // boxShadow: '0 0 5px #EB5E28',
                         '&:hover': {
-                            backgroundColor: alpha('#132f4c', 0.2),
-                            boxShadow: '0 0 5px #001E3C',
+                            // backgroundColor: alpha('#132f4c', 0.2),
+                            // boxShadow: '0 0 5px #001E3C',
                             fontSize: '30px',
                             border: "none",
                             cursor: "pointer",
@@ -84,7 +83,7 @@ export const CartButton = (props) => {
                         }
                     }}>
             {icon} <span style={{color: 'white'}}>(￥{money})</span>
-        </Button>
+        </div>
     )
 }
 

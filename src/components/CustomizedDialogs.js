@@ -26,7 +26,6 @@ const BootstrapDialogTitle = (props) => {
             {children}
             {onClose ? (
                 <IconButton
-                    aria-label="close"
                     onClick={onClose}
                     sx={{
                         position: 'absolute',

@@ -1,36 +1,37 @@
 import React, {useEffect, useState} from 'react';
 import Box from "@mui/material/Box";
-import UserInfoPageShow from "./user-info/UserInfoPageShow";
+import Profile from "./profile/Profile";
 import TabBar from "./tab/TabBar";
-import { useSelector} from "react-redux";
-import {selectAuth } from "../../../api/authSlice";
-import BgEditModal from "./user-info/BgEditModal";
+import BgEditModal from "./profile/BgEditModal";
+import UserService from "../../../api/user.service";
 
 function Account(props) {
 
-    const {user} = useSelector(selectAuth);
-    const [openModal, setOpenModal] = useState(false);
-    const [defaultBGs, setDefaultBGs] = useState([]);
+    const [openBgModal, setOpenBgModal] = useState(false);
     const [bgUri, setBgUri] = useState(null);
-
+    const [user, setUser] = useState({})
 
     useEffect(() => {
-        user && setBgUri(user.BgImag)
+        UserService.getUser().then(resp=> {
+            setUser(resp)
+        })
+    }, [])
+
+    useEffect(() => {
+        user && setBgUri(user.bgImg)
     }, [user])
 
     //点击背景获取默认背景集合
     const onClickBG = (e) => {
-        e.stopPropagation()
-        setOpenModal(true)
+        setOpenBgModal(true)
     }
 
     const handleClose = () => {
-        setOpenModal(false);
-        setBgUri(user.BgImag)
+        setOpenBgModal(false);
     };
 
     const closeModal = () => {
-        setOpenModal(false);
+        setOpenBgModal(false);
     };
 
     const changeBG = (bg) => {
@@ -55,15 +56,13 @@ function Account(props) {
                 }}
                 onClick={onClickBG}
             >
-                <UserInfoPageShow/>
+                <Profile/>
             </Box>
 
             {/*修改背景图像*/}
             <BgEditModal
-                open={openModal}
-                user={user}
+                open={openBgModal}
                 handleClose={handleClose}
-                defaultBGs={defaultBGs}
                 previewBG={changeBG}
                 closeModal={closeModal}
             />

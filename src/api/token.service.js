@@ -12,8 +12,8 @@ class TokenService {
 
     updateLocalToken(token) {
         let tokens = JSON.parse(localStorage.getItem("tokens"));
-        tokens.AccessToken = token?.AccessToken;
-        tokens.RefreshToken = token?.RefreshToken;
+        tokens.AccessToken = token?.accessToken;
+        tokens.RefreshToken = token?.refreshToken;
         localStorage.setItem("tokens", JSON.stringify(tokens))
     }
 
@@ -23,12 +23,8 @@ class TokenService {
 
     removeAuth() {
         localStorage.removeItem("tokens");
-        localStorage.removeItem("userId")
     }
 
-    setUser(userId) {
-        localStorage.setItem("userId", JSON.stringify(userId))
-    }
 }
 
 export default new TokenService();

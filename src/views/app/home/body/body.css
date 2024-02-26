@@ -1,0 +1,30 @@
+.home-body {
+  width: 80%;
+  overflow: hidden;
+  margin: auto; }
+
+.home-header {
+  width: 85%;
+  overflow: hidden;
+  display: flex;
+  margin: 20px auto auto; }
+
+.carousel {
+  width: 60%;
+  overflow: hidden;
+  margin: auto;
+  border: 1px solid rgba(44, 44, 43, 0.8);
+  height: 350px;
+  box-shadow: inset 0 0 50px #171717;
+  border-radius: 10px; }
+
+.cat-container {
+  width: 40%;
+  margin: 50px auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 15px; }
+
+/*# sourceMappingURL=body.css.map */

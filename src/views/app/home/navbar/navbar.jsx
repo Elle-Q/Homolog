@@ -37,17 +37,17 @@ function NavBar(props) {
     const scroll = useScroll()
     const [user, setUser] = useState({})
 
-    // useEffect(() => {
-    //     countCart().then(resp => {
-    //         setCartCount(resp);
-    //     })
-    // }, [open]);
-    //
-    // useEffect(() => {
-    //     countOrder().then(resp => {
-    //         setOrderCount(resp);
-    //     })
-    // }, [refresh]);
+    useEffect(() => {
+        countCart().then(resp => {
+            setCartCount(resp);
+        })
+    }, [open]);
+
+    useEffect(() => {
+        countOrder().then(resp => {
+            setOrderCount(resp);
+        })
+    }, [refresh]);
 
     useEffect(() => {
         setUser(UserService.getLocalUser())

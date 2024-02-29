@@ -52,6 +52,7 @@ class UserService {
     removeUser() {
         localStorage.removeItem("user");
     }
+
 }
 
 export default new UserService();

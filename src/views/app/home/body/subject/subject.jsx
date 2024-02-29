@@ -13,7 +13,7 @@ function Subject(props) {
 
     return (
         <React.Fragment>
-            <div className="subject-header" >
+            <div className="subject-header">
                 <div>
                     <AnimationText title={subject.title}/>
                     &nbsp;&nbsp;
@@ -26,20 +26,21 @@ function Subject(props) {
                 </div>
                 <div className="btn-container">
                     <Link to={`/search?catId=${subject.id}`}>
-                        <GradientButton name="更多" color="linear-gradient(to right, #8184FF 0%, #595DFD 51%, #8184FF 100%)"/>
+                        <GradientButton name="更多"
+                                        color="linear-gradient(to right, #8184FF 0%, #595DFD 51%, #8184FF 100%)"/>
                     </Link>
                 </div>
             </div>
             <Stack
-                   direction='row'
-                   spacing={2}
-                   sx={{mt: '20px'}}
-                   justifyContent="center"
-                   display="flex"
+                direction='row'
+                spacing={2}
+                sx={{mt: '20px'}}
+                justifyContent="center"
+                display="flex"
             >
                 {
                     subject.items.map((item, index) => {
-                        return <ItemCard key={index} item={item}/>
+                        return <ItemCard key={index} item={item} width="23%"/>
                     })
                 }
             </Stack>

@@ -41,6 +41,7 @@
         background-color: #252525 !important; }
 
 .order-detail-body {
+  margin-left: 50px;
   padding: 5px 50px; }
   .order-detail-body * img {
     width: auto;

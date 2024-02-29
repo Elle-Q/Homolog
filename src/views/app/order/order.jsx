@@ -3,18 +3,19 @@ import './order.scss'
 import {listOrder} from "../../../api/order.service";
 import Card from "./card/card";
 import Stack from "@mui/material/Stack";
-import {useDispatch} from "react-redux";
-import {setRefresh} from "../../../store/order-slice";
+import {useDispatch, useSelector} from "react-redux";
+import {selectOrder, setRefresh} from "../../../store/order-slice";
 
 function Order(props) {
     const [orders, setOrders] = useState([])
+    const {refresh} = useSelector(selectOrder);
     const dispatch = useDispatch();
 
     useEffect(() => {
         listOrder().then(resp => {
             setOrders(resp);
         })
-    }, []);
+    }, [refresh]);
 
     const cancelOrder = (id) => {
         let newOrders = orders.filter(order => order.order.id !== id)

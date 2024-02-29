@@ -6,7 +6,7 @@ import refreshReducer from "./refresh-slice";
 import playerReducer from "../views/app/play/playSlice";
 import loadingReducer from "../components/loading/loading-slice";
 import itemReducer from "../views/app/item/item-slice";
-import cartReducer from "./cart-slice";
+import siderReducer from "./sider-slice";
 import searchReducer from "./search";
 import orderReducer from "./order-slice";
 
@@ -19,7 +19,7 @@ export default configureStore({
         refresh:refreshReducer,
         player:playerReducer,
         loadingModel:loadingReducer,
-        cart:cartReducer,
+        sider:siderReducer,
         search: searchReducer,
         order: orderReducer,
     },

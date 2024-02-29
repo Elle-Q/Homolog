@@ -1,8 +1,19 @@
 import api from "./api";
 import {setChapters} from "../views/app/play/playSlice";
 
-export const getCart = (userId) => {
-    return api.get(`/leetroll-app/cart/get`)
+export const listCart = () => {
+    return api.get(`/leetroll-app/cart/list`)
+        .then(resp => {
+            return resp
+        })
+}
+
+export const pageCart = (pageNumber) => {
+    let params = {
+        pageNumber: pageNumber,
+        pageSize: 12,
+    }
+    return api.get(`/leetroll-app/cart/page`, {params: params})
         .then(resp => {
             return resp
         })

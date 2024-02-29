@@ -11,7 +11,7 @@ import {CustomBadge} from "../../../../components/ui/CustomBadge";
 import {useDispatch, useSelector} from "react-redux";
 import {getColorFromUserStatus} from "../../../../utils/ToolUtil";
 import useScroll from "../../../../hook/useScroll";
-import {openCart, selectCart} from "../../../../store/cart-slice";
+import {openSider, selectSider, setShow} from "../../../../store/sider-slice";
 import {setKeyword, toggleSearch} from "../../../../store/search";
 
 import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
@@ -25,12 +25,11 @@ import {countCart} from "../../../../api/cart.service";
 import {countOrder} from "../../../../api/order.service";
 import {selectOrder} from "../../../../store/order-slice";
 import UserService from "../../../../api/user.service";
-import {ListCatsWith4Items} from "../../../../api/cat.service";
 
 function NavBar(props) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const {open} = useSelector(selectCart);
+    const {open} = useSelector(selectSider);
     const {refresh} = useSelector(selectOrder);
     const [cartCount, setCartCount] = useState(0)
     const [orderCount, setOrderCount] = useState(0)
@@ -58,7 +57,8 @@ function NavBar(props) {
     };
 
     const handleOpenCart = () => {
-        dispatch(openCart())
+        dispatch(openSider())
+        dispatch(setShow('cart'))
     }
 
     const handleEnter = (event) => {

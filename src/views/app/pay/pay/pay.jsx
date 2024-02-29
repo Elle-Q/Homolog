@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import Button from "@mui/material/Button";
-import '../cart.scss'
+import '../../cart/cart.scss'
 import {FormControlLabel, Radio, RadioGroup} from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import wepay from '../../../../assets/icons/wepay.svg'
@@ -12,30 +12,27 @@ import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import {createOrder} from "../../../../api/order.service";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {setRefresh} from "../../../../store/order-slice";
+import {selectSider, setShow} from "../../../../store/sider-slice";
 
 function Pay(props) {
-    const {togglePaying, items} = props
 
-    const [payType, setPayType] = useState('wepay')
+    const {order} = useSelector(selectSider);
+    const [orderDetail, setOrderDetail] = useState({})
     const [agree, setAgree] = useState(false)
     const [openPayCode, setOpenPayCode] = useState(false)
-    const [totalPrice, setTotalPrice] = useState(0)
     const dispatch = useDispatch();
 
     useEffect(() => {
-        let price = items.reduce(function (acc, item) {
-            return acc + item.price;
-        }, 0)
-        setTotalPrice(price)
-    }, [items])
+        setOrderDetail(order)
+    }, [order])
 
     //支付有效时间 5分钟
     const validTime = +new Date() + 5 * 60 * 1000
 
     const handlePayTypeChange = (event) => {
-        setPayType(event.target.value)
+        setOrderDetail({...orderDetail, payType: event.target.value})
     }
 
     //支付
@@ -43,7 +40,7 @@ function Pay(props) {
         const nowTime = +new Date();
         const times = validTime - nowTime;
 
-        if (times<=0) {
+        if (times <= 0) {
             alert("支付超时, 请回购物车重新结算")
             return;
         }
@@ -53,7 +50,7 @@ function Pay(props) {
             return;
         }
         //生成订单
-        createOrder(items).then(resp => {
+        createOrder(order).then(resp => {
             dispatch(setRefresh())
             setOpenPayCode(true)
         })
@@ -65,7 +62,7 @@ function Pay(props) {
             <div>
                 <span>支付方式:</span>
                 <RadioGroup
-                    value={payType}
+                    value={orderDetail.payType}
                     onChange={handlePayTypeChange}
                     row={true}
                     sx={{
@@ -82,21 +79,21 @@ function Pay(props) {
                 >
                     <FormControlLabel value="wepay" control={<Radio/>}
                                       label={
-                                          <IconButton onClick={() => setPayType('wepay')}>
+                                          <IconButton>
                                               <img alt="icon" src={wepay}/>
                                           </IconButton>}/>
                     <FormControlLabel value="alipay" control={<Radio/>}
                                       label={
-                                          <IconButton onClick={() => setPayType('alipay')}>
+                                          <IconButton>
                                               <img alt="icon" src={alipay}/>
                                           </IconButton>}/>
                 </RadioGroup>
             </div>
 
-            <Divider />
-            <p>金额: ￥{totalPrice}</p>
+            <Divider/>
+            <p>金额: ￥{orderDetail.totalPrice}</p>
             <p>优惠: -￥0</p>
-            <p>应付金额: <span style={{fontSize: '18px', color: 'white'}}>￥{totalPrice}</span></p>
+            <p>应付金额: <span style={{fontSize: '18px', color: 'white'}}>￥{orderDetail.totalPrice}</span></p>
 
             <Agreement handleAgree={() => setAgree(!agree)}
                        agree={agree}
@@ -110,11 +107,14 @@ function Pay(props) {
                     {/*(<Timer expire={validTime}/>)*/}
                 </Button>
             </div>
-            <div className={'cart-button-wrapper'}>
-                <Button className={'cart-button'}
-                        onClick={togglePaying}> 回到购物车
-                </Button>
-            </div>
+
+            {
+                !order.id && <div className={'cart-button-wrapper'}>
+                    <Button className={'cart-button'}
+                            onClick={() => dispatch(setShow("cart"))}> 回到购物车
+                    </Button>
+                </div>
+            }
 
             <Divider sx={{mt: '50px', mb: '50px'}}/>
             <IconButton><ErrorOutlineIcon sx={{color: '#d85038'}}/></IconButton>

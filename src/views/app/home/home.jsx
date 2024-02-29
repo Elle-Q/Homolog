@@ -13,6 +13,7 @@ import {Route, Routes} from "react-router-dom";
 import Item from "../item/item.jsx";
 import Help from "./help/help";
 import Order from "../order/order";
+import Sidebar from "./sidebar/sidebar";
 
 function Home(props) {
 
@@ -72,7 +73,7 @@ function Home(props) {
     return (
         <div>
             <NavBar/>
-            <Cart/>
+            <Sidebar/>
             <Routes>
                 {routes.map(({path, component}) => (
                     <Route path={path} element={component} key={path}/>

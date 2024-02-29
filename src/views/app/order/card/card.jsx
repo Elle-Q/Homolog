@@ -15,7 +15,7 @@ import {setOpen} from "../../../../components/alert/confirm/confirmSlice";
 import {useDispatch} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {addItem2Cart} from "../../../../api/cart.service";
-import {openCart} from "../../../../store/cart-slice";
+import {openSider, setData, setShow} from "../../../../store/sider-slice";
 
 function Card(props) {
     const {data, cancelOrder} = props;
@@ -38,7 +38,9 @@ function Card(props) {
         setShowDetail(!showDetail)
     }
     const handleGoPay = () => {
-
+        dispatch(openSider())
+        dispatch(setShow('pay'))
+        dispatch(setData(order))
     }
 
     const handleCancelOrder = () => {
@@ -59,7 +61,7 @@ function Card(props) {
 
     const handleReadd2Cart = (itemId) => {
         addItem2Cart(itemId).then(resp => {
-            dispatch(openCart())
+            dispatch(openSider())
         })
     }
 

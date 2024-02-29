@@ -1,7 +1,7 @@
 import api from "./api";
 
-export const createOrder = (items) => {
-    return api.post(`/leetroll-app/order/add`, items)
+export const createOrder = (order) => {
+    return api.post(`/leetroll-app/order/edit`, order)
         .then(resp => {
             return resp
         })

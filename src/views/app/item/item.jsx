@@ -10,21 +10,23 @@ import List from "./list/list";
 import PrevShow from "./prev/prev-show";
 import {useDispatch} from "react-redux";
 import {setItem} from "./item-slice";
-import {ThumbDownButton, ThumbUpButton} from "../../../components/ui/IconButton";
-import {openCart} from "../../../store/cart-slice";
+import {ThumbUpButton} from "../../../components/ui/IconButton";
+import {openSider} from "../../../store/sider-slice";
 import DownloadIcon from '@mui/icons-material/Download';
 import "./item.scss"
 import IconButton from "@mui/material/IconButton";
 import {addItem2Cart} from "../../../api/cart.service";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import {toggleAtion} from "../../../api/action.service";
 
 
 function Item() {
     let params = useParams();
     let id = params.id;
-    let dispatch = useDispatch();
+
     const [data, setData] = useState(null);
     const [tab, setTab] = useState('review');
-    const [applyFor, setApplyFor] = useState(null);
+    let dispatch = useDispatch();
 
     useEffect(() => {
         const fetch = async () => {
@@ -60,14 +62,13 @@ function Item() {
     //加入购物车
     const handleAdd2Cart = () => {
         addItem2Cart(id).then(resp => {
-            dispatch(openCart())
+            dispatch(openSider())
         })
     }
 
     //点击下载源文件
     const handleDownload = () => {
-        if (applyFor == null) {
-        }
+
     }
 
     //获取资源的部分描述信息
@@ -79,6 +80,30 @@ function Item() {
             spans.push(<span>{key}:{json[key]}</span>)
         });
         return spans
+    }
+
+    const handleLike = () => {
+        toggleAtion(data.id, 'like').then(resp => {
+            let newData = {...data, liked: resp}
+            if (resp) {
+                newData = {...newData, liked: data.liked+1}
+            } else {
+                newData = {...newData, liked: data.liked-1}
+            }
+            setData(newData)
+        })
+    }
+
+    const handleCollect = () => {
+        toggleAtion(data.id, 'collect').then(resp => {
+            let newData = {...data, collected: resp}
+            if (resp) {
+                newData = {...newData, collectCnt: data.collectCnt+1}
+            } else {
+                newData = {...newData, collectCnt: data.collectCnt-1}
+            }
+            setData(newData)
+        })
     }
 
     if (data == null) {
@@ -111,9 +136,9 @@ function Item() {
                         </Stack>
 
                         <Stack className="behave-area">
-                            <span> 有255人觉得该资源很赞 </span>
-                            <span> 有550人下载了该资源 </span>
-                            <span> 有550人收藏了该资源 </span>
+                            <span> 有{data.likeCnt}人觉得该资源很赞 </span>
+                            <span> 有{data.downCnt}人下载了该资源 </span>
+                            <span> 有{data.collectCnt}人收藏了该资源 </span>
                         </Stack>
 
                         <Stack sx={{alignItems: 'center'}}>
@@ -130,8 +155,10 @@ function Item() {
                                 }
                             </div>
                             <div className="icon-container">
-                                <ThumbUpButton></ThumbUpButton>
-                                <ThumbDownButton></ThumbDownButton>
+                                <ThumbUpButton onClick={handleLike} color={`${data.liked ? '#595DFD': 'white'}`}></ThumbUpButton>
+                                <IconButton onClick={handleCollect}>
+                                    <FavoriteIcon fontSize="small" sx={{color: `${data.collected ? '#ff0a54' : 'white'}`}}/>
+                                </IconButton>
                             </div>
                         </Stack>
                     </Stack>

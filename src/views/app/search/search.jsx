@@ -65,7 +65,7 @@ function Search() {
                 <div className="body-container">
                     {
                         list && list.map(item => (
-                            <ItemCard item={item}/>
+                            <ItemCard key={item.id} item={item} width="23%"/>
                         ))
                     }
                 </div>

@@ -1,0 +1,7 @@
+.account-tab-container {
+  flex-wrap: wrap;
+  gap: 10px;
+  display: flex;
+  justify-content: start; }
+
+/*# sourceMappingURL=tab.css.map */

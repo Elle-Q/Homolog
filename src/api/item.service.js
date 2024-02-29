@@ -8,13 +8,6 @@ export const GetItem = (itemId) => {
         })
 }
 
-export const GetItemFiles = (itemId) => {
-    return api.get(`/leetroll-admin/item/files/${itemId}`)
-        .then(resp => {
-            return resp
-        })
-}
-
 export const GetChapters = (itemId) => dispatch => {
     return api.get(`/leetroll-app/item/chapter/${itemId}`)
         .then(resp => {
@@ -23,30 +16,24 @@ export const GetChapters = (itemId) => dispatch => {
         })
 }
 
-export const listItem = () => {
-    return api.get('/leetroll-admin/item/list')
-        .then(resp => {
+export const ListActionItems = (pageNumber, action) => {
+    let params = {
+        pageNumber: pageNumber,
+        pageSize: 12,
+        action: action,
+    }
+    return api.get(`/leetroll-app/item/listByAction`, {params: params})
+        .then((resp) => {
             return resp
-        })
+        });
 }
 
-export const UpdateItem = (param) => {
-    return api.post('/leetroll-admin/item/update', param)
-        .then(resp => {
+export const TotalActionSize = (action) => {
+    let params = {
+        action: action,
+    }
+    return api.get(`/leetroll-app/item/countByAction`, {params: params})
+        .then((resp) => {
             return resp
-        })
-}
-
-export const UploadItemFiles = (param) => {
-    return api.post('/leetroll-admin/item/upload', param)
-        .then(resp => {
-            return resp
-        })
-}
-
-export const UploadItemChapters = (param) => {
-    return api.post('/leetroll-admin/chapter/upload', param)
-        .then(resp => {
-            return resp
-        })
+        });
 }

@@ -1,13 +1,14 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Box from "@mui/material/Box";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import {styled, useTheme} from '@mui/material/styles';
-import Piece from "./piece-exhit/Piece";
+import Piece from "./piece/Piece";
 import Cart from "./cart/Cart";
 import Collect from "./collect/Collect";
-import Follow from "./follow/Follow";
 import Like from "./like/Like";
+import {TotalActionSize} from "../../../../api/item.service";
+import {countCart} from "../../../../api/cart.service";
 
 function TabPanel(props) {
     const {children, value, index, ...other} = props;
@@ -19,7 +20,10 @@ function TabPanel(props) {
             id={`full-width-tabpanel-${index}`}
             aria-labelledby={`full-width-tab-${index}`}
             {...other}
-            style={{backgroundColor: '#111'}}
+            style={{
+                backgroundColor: '#111',
+                padding: '30px'
+            }}
         >
             {value === index && (
                 children
@@ -52,11 +56,11 @@ const StyledTab = styled((props) => <Tab disableRipple {...props} />)(
         marginRight: theme.spacing(1),
         color: 'rgba(255, 255, 255, 0.7)',
         '&.Mui-selected': {
-            color: '#3399ff',
+            color: '#595DFD',
             backgroundColor: '#111',
         },
         '&:hover': {
-            color: '#3399ff',
+            color: '#595DFD',
         },
         '&.Mui-focusVisible': {
             backgroundColor: 'rgba(100, 95, 228, 0.32)',
@@ -67,6 +71,22 @@ const StyledTab = styled((props) => <Tab disableRipple {...props} />)(
 function TabBar(props) {
     const theme = useTheme();
     const [value, setValue] = React.useState(0);
+    const [pieces, setPieces] = useState([])
+    const [carts, setCarts] = useState([])
+    const [collects, setCollects] = useState([])
+    const [likes, setLikes] = useState([])
+
+    useEffect(() => {
+        TotalActionSize('like').then(resp => {
+            setLikes(resp)
+        })
+        countCart().then(resp => {
+            setCarts(resp)
+        })
+        TotalActionSize('collect').then(resp => {
+            setCollects(resp)
+        })
+    }, []);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -78,31 +98,23 @@ function TabBar(props) {
                         onChange={handleChange}
                         centered
             >
-                <StyledTab label="作品(8)"/>
-                <StyledTab label="购物车(0)"/>
-                <StyledTab label="收藏(21)"/>
-                <StyledTab label="喜欢(1012)"/>
-                <StyledTab label="关注(2)"/>
-                <StyledTab label="粉丝(998)"/>
+                <StyledTab label={`购物车(${carts})`}/>
+                <StyledTab label={`收藏(${collects})`}/>
+                <StyledTab label={`喜欢(${likes})`}/>
+                <StyledTab label={`作品(${pieces})`}/>
             </StyledTabs>
 
             <TabPanel value={value} index={0} dir={theme.direction}>
-                <Piece/>
-            </TabPanel>
-            <TabPanel value={value} index={1} dir={theme.direction}>
                 <Cart/>
             </TabPanel>
-            <TabPanel value={value} index={2} dir={theme.direction}>
+            <TabPanel value={value} index={1} dir={theme.direction}>
                 <Collect/>
             </TabPanel>
-            <TabPanel value={value} index={3} dir={theme.direction}>
+            <TabPanel value={value} index={2} dir={theme.direction}>
                 <Like/>
             </TabPanel>
-            <TabPanel value={value} index={4} dir={theme.direction}>
-                <Follow/>
-            </TabPanel>
-            <TabPanel value={value} index={5} dir={theme.direction}>
-                <Follow/>
+            <TabPanel value={value} index={3} dir={theme.direction}>
+                <Piece/>
             </TabPanel>
         </Box>
     );

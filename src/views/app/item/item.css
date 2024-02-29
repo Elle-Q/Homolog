@@ -26,8 +26,6 @@
     cursor: pointer; }
     .item-container .icon-container:hover {
       background-color: #2a2a2b; }
-    .item-container .icon-container button {
-      color: #ffffff; }
   .item-container .tab {
     cursor: pointer;
     width: 110px;

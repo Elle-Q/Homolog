@@ -24,12 +24,7 @@ function Home(props) {
             component: <Body/>
         },
         {
-            path: '/*',
-            name: 'home',
-            component: <Body/>
-        },
-        {
-            path: '/order',
+            path: '/order/*',
             name: 'order',
             component: <Order/>
         },

@@ -15,11 +15,6 @@ function Index() {
             component: <Home/>
         },
         {
-            path: '/*',
-            name: 'home',
-            component: <Home/>
-        },
-        {
             path: '/login',
             name: 'login',
             component: <Login/>
@@ -32,9 +27,8 @@ function Index() {
             {/*提示组件*/}
             <AlertDialog title="删除?" note="删除后不可恢复, 请谨慎操作*_*"/>
             <Routes>
-                {routes.map(({path, component}) => (
-                    <Route path={path} element={component} key={path}/>
-                ))}
+                <Route path="/*" element={<Home/>} key='/'/>
+                <Route path="/login" element={<Login/>} key='/login'/>
             </Routes>
         </div>
     );

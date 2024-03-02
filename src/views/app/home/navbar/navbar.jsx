@@ -44,7 +44,7 @@ function NavBar(props) {
 
     useEffect(() => {
         countOrder().then(resp => {
-            setOrderCount(resp);
+            setOrderCount(resp.open);
         })
     }, [refresh]);
 
@@ -82,10 +82,10 @@ function NavBar(props) {
                         </IconButton>
                     </div>
                     <Stack direction="row" spacing={2} sx={{width: '20%', alignItems: 'center'}}>
-                        <Link color="inherit" to={"/home"}>
+                        <Link color="inherit" to={"/"}>
                             <HomeIcon fontSize="medium"/>
                         </Link>
-                        <Link color="inherit" to={"/order"}>
+                        <Link color="inherit" to={"/order/open"}>
                             <Badge badgeContent={orderCount} color="success">
                                 <PaidIcon fontSize="medium"/>
                             </Badge>

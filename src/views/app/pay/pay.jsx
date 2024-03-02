@@ -1,20 +1,19 @@
 import React, {useEffect, useState} from 'react';
 import Button from "@mui/material/Button";
-import '../../cart/cart.scss'
+import '../cart/cart.scss'
 import {FormControlLabel, Radio, RadioGroup} from "@mui/material";
 import IconButton from "@mui/material/IconButton";
-import wepay from '../../../../assets/icons/wepay.svg'
-import alipay from '../../../../assets/icons/alipay.svg'
-import wepayCode from '../../../../assets/images/wepay_code.jpg'
+import wepay from '../../../assets/icons/wepay.svg'
+import alipay from '../../../assets/icons/alipay.svg'
 import Divider from "@mui/material/Divider";
-import Agreement from "../../../login/agreement/agreement";
-import Dialog from "@mui/material/Dialog";
-import DialogTitle from "@mui/material/DialogTitle";
+import Agreement from "../../login/agreement/agreement";
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
-import {createOrder} from "../../../../api/order.service";
 import {useDispatch, useSelector} from "react-redux";
-import {setRefresh} from "../../../../store/order-slice";
-import {selectSider, setShow} from "../../../../store/sider-slice";
+import {setRefresh} from "../../../store/order-slice";
+import {closeSider, selectSider, setShow} from "../../../store/sider-slice";
+import {createOrder} from "../../../api/pay.service";
+import {checkOrderStatus} from "../../../api/order.service";
+import Qrcode from "./qrcode/qrcode";
 
 function Pay(props) {
 
@@ -22,17 +21,26 @@ function Pay(props) {
     const [orderDetail, setOrderDetail] = useState({})
     const [agree, setAgree] = useState(false)
     const [openPayCode, setOpenPayCode] = useState(false)
+    const [payCodeUri, setPayCodeUri] = useState("")
+    const [timer, setTimer] = useState("")
     const dispatch = useDispatch();
 
     useEffect(() => {
-        setOrderDetail(order)
+        setOrderDetail(order.order)
+        clearInterval(timer)
     }, [order])
 
     //支付有效时间 5分钟
     const validTime = +new Date() + 5 * 60 * 1000
 
     const handlePayTypeChange = (event) => {
-        setOrderDetail({...orderDetail, payType: event.target.value})
+        setOrderDetail({...orderDetail, payChannel: event.target.value})
+    }
+
+    const handleCloseQr = () => {
+        debugger
+        setOpenPayCode(false)
+        clearInterval(timer)
     }
 
     //支付
@@ -49,12 +57,27 @@ function Pay(props) {
             alert("请先同意用户购买协议!")
             return;
         }
-        //生成订单
-        createOrder(order).then(resp => {
+
+        //新增或更新订单
+        createOrder(orderDetail, order.details).then(resp => {
             dispatch(setRefresh())
             setOpenPayCode(true)
-        })
+            setPayCodeUri(resp.payQrCode)
 
+            let check_timer = setInterval(() => {
+                console.log("checking....", resp.batchCode)
+                checkOrderStatus(resp.batchCode).then(completed => {
+                    if (completed) {
+                        dispatch(setRefresh())
+                        dispatch(closeSider())
+                        setOpenPayCode(false)
+                        clearInterval(timer)
+                    }
+                })
+            }, 1000)
+
+            setTimer(check_timer)
+        })
     }
 
     return (
@@ -62,7 +85,7 @@ function Pay(props) {
             <div>
                 <span>支付方式:</span>
                 <RadioGroup
-                    value={orderDetail.payType}
+                    value={orderDetail.payChannel}
                     onChange={handlePayTypeChange}
                     row={true}
                     sx={{
@@ -128,12 +151,8 @@ function Pay(props) {
                 <li>版权说明： 未经书面授权或签订书面合同，不得以任何形式发行、发布、传播、复制、出租、转售、汇编该素材。
                 </li>
             </ul>
-            <Dialog open={openPayCode} onClose={() => setOpenPayCode(false)}>
-                <DialogTitle sx={{m: 0, p: 2, fontSize: '14px'}}>
-                    收款方：滚石网络科技
-                </DialogTitle>
-                <img src={wepayCode} alt='pay-code'/>
-            </Dialog>
+
+            <Qrcode uri={payCodeUri} open={openPayCode} handleClose={handleCloseQr}/>
         </div>
     );
 }

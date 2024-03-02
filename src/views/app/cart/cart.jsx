@@ -59,12 +59,14 @@ function Cart() {
     }
 
     const handleGoPay = () => {
-        let order = {
-            payType: 'wepay', //默认微信支付
+        let orderVO = {
+            order: {
+                payType: 'wepay', //默认微信支付
+                totalPrice: totalPrice
+            },
             details: items.filter(item => item.checked),
-            totalPrice: totalPrice
         }
-        dispatch(setData(order))
+        dispatch(setData(orderVO))
         dispatch(setShow("pay"))
     }
 

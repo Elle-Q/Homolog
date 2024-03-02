@@ -4,7 +4,7 @@ import {Drawer} from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
 import {closeSider, selectSider} from "../../../../store/sider-slice";
 import Cart from "../../cart/cart";
-import Pay from "../../pay/pay/pay";
+import Pay from "../../pay/pay";
 
 function Sidebar(props) {
     const dispatch = useDispatch();

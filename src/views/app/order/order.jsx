@@ -1,40 +1,39 @@
 import React, {useEffect, useState} from 'react';
 import './order.scss'
-import {listOrder} from "../../../api/order.service";
-import Card from "./card/card";
-import Stack from "@mui/material/Stack";
-import {useDispatch, useSelector} from "react-redux";
-import {selectOrder, setRefresh} from "../../../store/order-slice";
+import {NavLink, Route, Routes} from "react-router-dom";
+import Tab from "./tab/tab";
+import {countOrder} from "../../../api/order.service";
 
 function Order(props) {
-    const [orders, setOrders] = useState([])
-    const {refresh} = useSelector(selectOrder);
-    const dispatch = useDispatch();
+
+    const [closedCnt, setClosedCnt] = useState(0)
+    const [openCnt, seOpenCnt] = useState(0)
 
     useEffect(() => {
-        listOrder().then(resp => {
-            setOrders(resp);
+        countOrder().then(resp => {
+            setClosedCnt(resp.closed);
+            seOpenCnt(resp.open);
         })
-    }, [refresh]);
+    }, []);
 
-    const cancelOrder = (id) => {
-        let newOrders = orders.filter(order => order.order.id !== id)
-        dispatch(setRefresh())
-        setOrders(newOrders)
+    const sty = {
+        marginLeft: '30px',
+        color: 'grey',
+        fontSize: '12px',
+        textDecoration: 'none',
     }
 
     return (
         <div className="order-container">
             <div className="header">
                 <span>订单交易</span>
+                <NavLink to="/order/open" style={sty}>进行中 ({openCnt})</NavLink>
+                <NavLink to="/order/complete" style={sty}>已完成 ({closedCnt})</NavLink>
             </div>
-            <Stack spacing={2} sx={{alignItems:'center', marginTop: '20px'}}>
-                {
-                    orders.map(order => {
-                        return <Card key={order.id} data={order} cancelOrder={() => cancelOrder(order.order.id)}></Card>
-                    })
-                }
-            </Stack>
+            <Routes>
+                <Route path="/open" element={<Tab status="ongoing"/>} key="/open"/>
+                <Route path="/complete" element={<Tab status="closed" key="/complete"/>}/>
+            </Routes>
         </div>
     );
 }

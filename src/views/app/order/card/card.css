@@ -27,9 +27,16 @@
     color: #1bbc9b; }
   .order-card-body .count-down::before {
     content: '⌚'; }
+  .order-card-body .text-cell {
+    text-align: center;
+    width: 250px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column; }
   .order-card-body .cell {
     text-align: center;
-    font-size: 12px;
     width: 250px; }
     .order-card-body .cell > button {
       margin-right: 5px;

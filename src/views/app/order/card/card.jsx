@@ -40,7 +40,7 @@ function Card(props) {
     const handleGoPay = () => {
         dispatch(openSider())
         dispatch(setShow('pay'))
-        dispatch(setData(order))
+        dispatch(setData(data))
     }
 
     const handleCancelOrder = () => {
@@ -100,22 +100,29 @@ function Card(props) {
                 <span>￥{order.totalPrice}</span>
 
                 <Divider orientation="vertical" flexItem/>
-                <div className="cell">
-                    <p style={{margin: '0', color: '#f02d2d'}}>等待付款</p>
-                    <span className="count-down">23:59:04</span>
+                <div className="text-cell">
+                    {
+                        order.status !== 'closed' ?
+                        <React.Fragment>
+                            <p style={{margin: '0', color: '#f02d2d'}}>等待付款</p>
+                            <span className="count-down">23:59:04</span>
+                        </React.Fragment>
+                            :
+                            <p style={{color: '#7b7b7b'}}>付款成功</p>
+                    }
                 </div>
 
                 <Divider orientation="vertical" flexItem/>
-                <div className="cell">
+                <div className="text-cell">
                     <p style={{margin: '0', color: '#7b7b7b'}}>付款时间</p>
-                    <span>-</span>
+                    <span>{order.payTime ? order.payTime : '-'}</span>
                 </div>
 
                 <Divider orientation="vertical" flexItem/>
                 <div className="cell">
-                    <Button onClick={handleGoPay}>立即支付</Button>
-                    <Button onClick={handleCancelOrder}>取消订单</Button>
-                    <Button onClick={handleHelp}>申请售后</Button>
+                    {order.status === 'open' && <Button onClick={handleGoPay}>立即支付</Button>}
+                    {order.status !== 'closed' && <Button onClick={handleCancelOrder}>取消订单</Button>}
+                    {order.status === 'closed' && <Button onClick={handleHelp}>申请售后</Button>}
                 </div>
             </Stack>
 

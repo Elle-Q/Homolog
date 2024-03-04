@@ -8,19 +8,6 @@ import CssBaseline from "@mui/material/CssBaseline";
 import AlertDialog from "../components/alert/confirm/AlertDialog";
 function Index() {
 
-    const routes = [
-        {
-            path: '/',
-            name: 'home',
-            component: <Home/>
-        },
-        {
-            path: '/login',
-            name: 'login',
-            component: <Login/>
-        }
-    ]
-
     return (
         <div>
             <CssBaseline/>

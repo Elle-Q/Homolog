@@ -3,7 +3,7 @@ import React from 'react';
 
 function PriceTag(props) {
     const {price} = props;
-    let borderColor = price===0?'#00a896':'#fb8500'
+    let borderColor = price===0?'#00a896':'#595DFD'
     return (
         <div style={{
             display:"flex",

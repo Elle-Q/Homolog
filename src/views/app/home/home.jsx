@@ -8,7 +8,6 @@ import Partner from "../partner/Partner";
 import Community from "../community/Community";
 import Issue from "../community/edit/Issue";
 import {NavBar} from "./navbar/navbar";
-import Cart from "../cart/cart.jsx";
 import {Route, Routes} from "react-router-dom";
 import Item from "../item/item.jsx";
 import Help from "./help/help";

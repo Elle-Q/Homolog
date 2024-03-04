@@ -15,6 +15,7 @@ import MaleIcon from "@mui/icons-material/Male";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import UserService from "../../../../api/user.service";
+import AvatarBadge from "../../../../components/avatar-badge/avatar-badge";
 
 const CusInput = styled(TextField)({
     display: "flex",
@@ -127,7 +128,7 @@ function UserDrawer(props) {
         </FormControl>
     )
 
-    if (userDetail==null) return (<React.Fragment />)
+    if (userDetail == null) return (<React.Fragment/>)
     return (
         <Drawer PaperProps={{sx: {backgroundColor: alpha('#252422', 0.9)}}}
                 open={open}
@@ -135,30 +136,12 @@ function UserDrawer(props) {
                 onClick={(event) => event.stopPropagation()}
         >
             <div style={{padding: '20px'}}>
-                <CustomBadge
-                    overlap="circular"
-                    anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}
-                    variant="dot"
-                    sx={{
-                        mb: '10px',
-                        '& .MuiBadge-badge': {
-                            width: '12px',
-                            height: '12px',
-                            borderRadius: '50%',
-                            backgroundColor: getColorFromUserStatus(userDetail.status),
-                            color: getColorFromUserStatus(userDetail.status),
-                            boxShadow: `0 0 0 3px #000`,
-                        }
-                    }}
-                >
-                    <Avatar alt="avatar" src={userDetail.avatar}
-                            sx={{
-                                width: 120,
-                                height: 120,
-                                ml: '50px',
-                            }}/>
-                </CustomBadge>
-
+                <div style={{marginLeft: '50px'}}>
+                    <AvatarBadge user={userDetail} size={{
+                        width: 12,
+                        height: 12,
+                    }}/>
+                </div>
                 <StyledInputElement
                     style={{
                         display: 'flex',
@@ -175,7 +158,8 @@ function UserDrawer(props) {
                 <GenderRadio/>
                 <div style={{marginTop: '30px', color: '#403D39'}}>
                     <span style={{marginLeft: '10px', color: '#403D39', display: 'block'}}>背景图片</span>
-                    <img alt="sm_bg" src={userDetail && userDetail.bgImg} style={{width: '150px', margin: '10px 10px 0 10px',}}/>
+                    <img alt="sm_bg" src={userDetail && userDetail.bgImg}
+                         style={{width: '150px', margin: '10px 10px 0 10px',}}/>
                     <IconButton
                         sx={{
                             color: alpha('#dcddde', 0.5),

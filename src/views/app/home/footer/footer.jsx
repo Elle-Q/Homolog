@@ -7,7 +7,6 @@ import DISCORD from '../../../../assets/icons/discord.svg';
 import BILIBILI from '../../../../assets/icons/bilibili.svg';
 import WEGROUP from '../../../../assets/images/wechat_group_official.jpg';
 import './footer.scss'
-import {Link} from "@mui/material";
 
 function Footer(props) {
 

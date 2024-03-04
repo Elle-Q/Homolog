@@ -32,7 +32,7 @@ function Order(props) {
             </div>
             <Routes>
                 <Route path="/open" element={<Tab status="ongoing"/>} key="/open"/>
-                <Route path="/complete" element={<Tab status="closed" key="/complete"/>}/>
+                <Route path="/complete" element={<Tab status="closed"/>} key="/complete"/>
             </Routes>
         </div>
     );

@@ -12,7 +12,7 @@ const Container = styled.div`
   position: relative;
   width: 50%;
   height: 400px;
-  margin-left: ${props => props.index % 2 == 0 ? 200 : 500}px;
+  margin-left: ${props => props.index % 2 === 0 ? 200 : 500}px;
   background-color: rgb(23, 23, 23, 0.6);
   margin-top: 80px;
   border-radius: 20px;

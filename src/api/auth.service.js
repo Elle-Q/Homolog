@@ -34,6 +34,21 @@ class AuthService {
             code
         })
     }
+
+    welogin() {
+        return api.get('/leetroll-app/welogin')
+    }
+
+    checkLoginStatus = (code) => {
+        let params = {
+            code: code
+        }
+        return api.get(`/leetroll-app/check-auth`, {params: params})
+            .then(resp => {
+                return resp
+            })
+    }
+
 }
 
 export default new AuthService()

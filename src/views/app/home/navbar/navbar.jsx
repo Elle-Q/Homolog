@@ -4,12 +4,9 @@ import Toolbar from '@mui/material/Toolbar';
 import HomeIcon from '@mui/icons-material/Home';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Stack from "@mui/material/Stack";
-import Avatar from "@mui/material/Avatar";
 import {Link, useNavigate} from "react-router-dom";
-import Logo from "./logo";
-import {CustomBadge} from "../../../../components/ui/CustomBadge";
+import Logo from "./logo/logo";
 import {useDispatch, useSelector} from "react-redux";
-import {getColorFromUserStatus} from "../../../../utils/ToolUtil";
 import useScroll from "../../../../hook/useScroll";
 import {openSider, selectSider, setShow} from "../../../../store/sider-slice";
 import {setKeyword, toggleSearch} from "../../../../store/search";
@@ -25,6 +22,8 @@ import {countCart} from "../../../../api/cart.service";
 import {countOrder} from "../../../../api/order.service";
 import {selectOrder} from "../../../../store/order-slice";
 import UserService from "../../../../api/user.service";
+import AvatarBadge from "../../../../components/avatar-badge/avatar-badge";
+import MiniProfile from "./mini-profile/mini-profile";
 
 function NavBar(props) {
     const navigate = useNavigate();
@@ -33,6 +32,7 @@ function NavBar(props) {
     const {refresh} = useSelector(selectOrder);
     const [cartCount, setCartCount] = useState(0)
     const [orderCount, setOrderCount] = useState(0)
+    const [showMiniProfile, setShowMiniProfile] = useState(false)
     const scroll = useScroll()
     const [user, setUser] = useState({})
 
@@ -51,10 +51,6 @@ function NavBar(props) {
     useEffect(() => {
         setUser(UserService.getLocalUser())
     }, []);
-
-    const enterAccount = (e) => {
-        navigate('/account')
-    };
 
     const handleOpenCart = () => {
         dispatch(openSider())
@@ -98,21 +94,10 @@ function NavBar(props) {
                         <Link color="inherit" to={"/community"}>
                             <SupervisorAccountIcon fontSize="medium"/>
                         </Link>
-                        <CustomBadge
-                            overlap="circular"
-                            anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}
-                            variant="dot"
-                            onClick={enterAccount}
-                            sx={{
-                                cursor: 'pointer',
-                                '& .MuiBadge-badge': {
-                                    backgroundColor: user && getColorFromUserStatus(user.status),
-                                    color: user && getColorFromUserStatus(user.status),
-                                }
-                            }}
-                        >
-                            <Avatar alt="avatar" src={user && user.avatar}/>
-                        </CustomBadge>
+                        <div style={{position: 'relative'}}>
+                            <AvatarBadge handleMouseOver={()=>setShowMiniProfile(true)} user={user} size={{width: 5, height: 5}}/>
+                            <MiniProfile user={user} show={showMiniProfile} handleClose={()=>setShowMiniProfile(false)}/>
+                        </div>
                     </Stack>
                 </Toolbar>
             </AppBar>

@@ -22,12 +22,13 @@ function Pay(props) {
     const [agree, setAgree] = useState(false)
     const [openPayCode, setOpenPayCode] = useState(false)
     const [payCodeUri, setPayCodeUri] = useState("")
+    const [payChannel, setPayChannel] = useState("")
     const [timer, setTimer] = useState("")
     const dispatch = useDispatch();
 
     useEffect(() => {
         setOrderDetail(order.order)
-        clearInterval(timer)
+        setPayChannel(order.order.payChannel ? order.order.payChannel:'wepay')
     }, [order])
 
     //支付有效时间 5分钟
@@ -38,7 +39,6 @@ function Pay(props) {
     }
 
     const handleCloseQr = () => {
-        debugger
         setOpenPayCode(false)
         clearInterval(timer)
     }
@@ -75,7 +75,6 @@ function Pay(props) {
                     }
                 })
             }, 1000)
-
             setTimer(check_timer)
         })
     }
@@ -85,7 +84,7 @@ function Pay(props) {
             <div>
                 <span>支付方式:</span>
                 <RadioGroup
-                    value={orderDetail.payChannel}
+                    value={payChannel}
                     onChange={handlePayTypeChange}
                     row={true}
                     sx={{
@@ -106,6 +105,7 @@ function Pay(props) {
                                               <img alt="icon" src={wepay}/>
                                           </IconButton>}/>
                     <FormControlLabel value="alipay" control={<Radio/>}
+                                      disabled={true}
                                       label={
                                           <IconButton>
                                               <img alt="icon" src={alipay}/>

@@ -36,7 +36,7 @@ function Item() {
             })
         }
         fetch().catch()
-    }, [])
+    }, [id])
 
     const tabClick = (tab, event) => {
         setTab(tab === '测评' ? "review" : "list");

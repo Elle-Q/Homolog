@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Box from "@mui/material/Box";
 import {alpha} from "@mui/system";
 import Stack from "@mui/material/Stack";
@@ -12,7 +12,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import ShieldIcon from "@mui/icons-material/Shield";
 import {Link} from "@mui/material";
 import UserService from "../../api/user.service";
-import AuthService, {authService} from "../../api/auth.service";
+import AuthService from "../../api/auth.service";
 import {useDispatch} from "react-redux";
 import './login.scss'
 import Timer from "./timer/timer";
@@ -21,6 +21,10 @@ import {SendSmsCode} from "../../api/sms.service";
 import {isPhone, varifyPsw} from "../../utils/VarifyUtil";
 import Agreement from "./agreement/agreement";
 import {loginFail, loginSuccess, registerSuccess} from "../../api/authSlice";
+import Qrcode from "./qrcode/qrcode";
+import {checkOrderStatus} from "../../api/order.service";
+import {setRefresh} from "../../store/order-slice";
+import {closeSider} from "../../store/sider-slice";
 
 const SignButton = styled(Button)({
     backgroundColor: "rgba(92,96,253,0.62)",
@@ -47,6 +51,22 @@ function Login(props) {
     const codeRef = React.createRef();
     const [message, setMessage] = useState("")
     const [agree, setAgree] = useState(false)
+    const [loginQrUri, setLoginQrUri] = useState("")
+    const [timer, setTimer] = useState()
+
+    useEffect(() => {
+        AuthService.welogin().then(resp => {
+            setLoginQrUri(resp.qrUrl)
+            /*let check_timer = setInterval(() => {
+                console.log("checking login status....", resp.code)
+                AuthService.checkLoginStatus(resp.code).then(resp => {
+                    console.log(resp)
+                })
+            }, 1000)
+            setTimer(check_timer)*/
+        })
+        return () => clearInterval(timer)
+    }, []);
 
     const handleLogin = async () => {
         if (!agree) {
@@ -81,7 +101,7 @@ function Login(props) {
     }
 
     const fetchUser = async () => {
-        await UserService.getUser().then(()=> {
+        await UserService.getUser().then(() => {
             navigate('/');
         });
     }
@@ -132,17 +152,19 @@ function Login(props) {
         <div id="bgBody">
             <Box sx={{
                 padding: '20px 20px 30px 20px',
-                backgroundColor: 'rgba(28,28,28,0.9)',
+                backgroundColor: 'rgba(28,28,28,0.8)',
                 borderRadius: '10px',
                 boxShadow: '0 0 8px #36393f',
+                flexDirection: 'row',
+                display: 'flex'
             }}>
-                <Typography variant="h4" align="center" color='#fff' sx={{fontFamily: 'cursive'}}>
-                    {
-                        action === 'signin' ? '欢迎回来' : '注册账号'
-                    }
-                </Typography>
-
                 <Stack sx={{mt: '5px'}}>
+                    <Typography variant="h4" align="center" color='#fff' sx={{fontFamily: 'cursive'}}>
+                        {
+                            action === 'signin' ? '欢迎回来' : '注册账号'
+                        }
+                    </Typography>
+
                     {
                         action === 'signin' ?
                             <React.Fragment>
@@ -191,7 +213,22 @@ function Login(props) {
                         }
                     </SignButton>
                 </Stack>
-
+                {
+                    action === 'signin' &&
+                    <div style={{
+                        display: 'flex',
+                        justifyContent: 'flex-end',
+                        alignItems: 'center',
+                        marginLeft: '20px',
+                        flexDirection: 'column',
+                        color: '#d7d5d5',
+                        gap: 4,
+                        fontSize: '14px'
+                    }}>
+                        <img src={loginQrUri} style={{width: '250px'}}></img>
+                        <span>微信扫码登录</span>
+                    </div>
+                }
             </Box>
 
         </div>

@@ -4,11 +4,19 @@ import {ListAllCat, ListCatsWith4Items} from "../../../../api/cat.service";
 import CatCard from "./cat-card/cat-card";
 import "./body.scss"
 import Carousel from "./carousel/carousel";
+import {getCarousel} from "../../../../api/config.service";
 
 function Body(props) {
 
     const [cats, setCats] = useState([]);
     const [catItems, setCatItems] = useState([]);
+    const [slides, setSlides] = useState([])
+
+    useEffect(() => {
+        getCarousel().then(resp => {
+            setSlides(resp);
+        })
+    }, []);
 
     //查询所有category分类, 每个分类显示4个item卡片
     useEffect(() => {
@@ -30,7 +38,16 @@ function Body(props) {
         <React.Fragment>
             <div className={'home-header'} style={{}}>
                 <div className="carousel">
-                    <Carousel/>
+                    <Carousel autoSlide={true}>
+                        {
+                            slides.map((item, index) => (
+                                <img style={{cursor: 'pointer'}}
+                                     key={index} src={item}
+                                     alt='carousel-item'
+                                />
+                            ))
+                        }
+                    </Carousel>
                 </div>
                 <div className="cat-container">
                     {

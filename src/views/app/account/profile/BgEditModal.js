@@ -3,7 +3,6 @@ import {Modal as AvatarModal} from "../../../../components/Modal";
 import UserService from "../../../../api/user.service";
 import {ImageList} from "@mui/material";
 import {getDefaultBG} from "../../../../api/config.service";
-import {useSelector} from "react-redux";
 
 function BgEditModal(props) {
     const {open, handleClose, previewBG, closeModal} = props;

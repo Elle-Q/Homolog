@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {makeStyles} from "@mui/styles";
 
 const useStyles = makeStyles({
@@ -21,39 +21,12 @@ const useStyles = makeStyles({
 function AnimationText(props) {
     const classes = useStyles();
     const {title, fontSize, color, spacing, display} = props;
-    const [content, setContent] = useState("")
-    const [len, setLen] = useState(-1)
     const titleRef = React.createRef()
-
-    /*useEffect(() => {
-        const interval = setInterval(() => {
-            if (!titleRef.current) return
-            setLen(len+1)
-            if (len === title.length) {
-                clearInterval(interval);
-            } else {
-                const span = titleRef.current.children[len];
-                span.classList.add(classes.fade)
-            }
-        }, 200);
-        return () => clearInterval(interval);
-    }, []);
-
-
-    useEffect(() => {
-        const split = title.split("")
-        let innerHtml = "";
-        for (let i = 0; i < split.length; i++) {
-            innerHtml += `<span class=${classes.span}> ${split[i]} </span>`
-        }
-        setContent(innerHtml)
-    }, [title])*/
 
     return (
         <div style={{display:'inline-block'}}>
             <h1
                 ref={titleRef}
-                // dangerouslySetInnerHTML={{__html: content}}
                 style={{
                     display: `${display ? display : 'flex'}`,
                     fontFamily: '-apple-system',

@@ -68,18 +68,21 @@ function ItemCard(props) {
                     <IconButton onClick={handleCollect}>
                         <FavoriteIcon fontSize="small" sx={{color: `${collected ? '#ff0a54' : 'white'}`}}/>
                     </IconButton>
-                    <IconButton>
-                        {
-                            item.price === 0 ? <DownloadIcon fontSize="small" onClick={handleDownload}/>
-                                :
-                                <AddShoppingCartIcon fontSize="small" onClick={handleAdd2Cart}
-                                                     sx={{color: `${added ? '#ff0a54' : 'white'}`}}/>
-                        }
-
-                    </IconButton>
+                    {
+                        item.price === 0 ?
+                            <IconButton onClick={handleDownload}>
+                                <DownloadIcon fontSize="small"/>
+                            </IconButton>
+                            :
+                            <IconButton onClick={handleAdd2Cart}>
+                                <AddShoppingCartIcon fontSize="small" sx={{color: `${added ? '#ff0a54' : 'white'}`}}/>
+                            </IconButton>
+                    }
                 </div>
                 <span style={{fontSize: '10px', color: '#7b7b7b'}}>已有{item.downCnt}人下载</span>
-                <PriceTag price={item.price}/>
+                {
+                    item.price !==0 && <PriceTag price={item.price}/>
+                }
             </Stack>
         </Box>
     );

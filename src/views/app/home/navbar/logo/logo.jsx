@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from "../../../../assets/logo/logo.png";
+import logo from "../../../../../assets/logo/logo.png";
 import Typography from "@mui/material/Typography";
 import {useNavigate} from "react-router-dom";
 

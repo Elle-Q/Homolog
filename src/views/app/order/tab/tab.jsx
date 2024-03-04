@@ -16,7 +16,7 @@ function Tab(props) {
         listOrder(status).then(resp => {
             setOrders(resp);
         })
-    }, [refresh]);
+    }, [refresh, status]);
 
     const cancelOrder = (id) => {
         let newOrders = orders.filter(order => order.order.id !== id)
@@ -28,7 +28,7 @@ function Tab(props) {
         <Stack spacing={2} sx={{alignItems:'center', marginTop: '20px'}}>
             {
                 orders.map(order => {
-                    return <Card key={order.id} data={order} cancelOrder={() => cancelOrder(order.order.id)}></Card>
+                    return <Card key={order.order.id} data={order} cancelOrder={() => cancelOrder(order.order.id)}></Card>
                 })
             }
         </Stack>

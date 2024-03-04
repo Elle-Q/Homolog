@@ -3,7 +3,7 @@ import Grid from "@mui/material/Grid";
 import {GetChapters} from "../../../api/item.service";
 import {useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {selectPlayer} from "./playSlice";
+import {selectPlayer, setChapters} from "./playSlice";
 import Periods from "./video/Periods";
 import VideoPlayer from "../../../components/player/VideoPlayer";
 
@@ -12,13 +12,15 @@ function Play(props) {
     let params = useParams();
     let itemId = params.id;
     const [src, setSrc] = useState(null);
-    let dispatch = useDispatch();
     const {chapters} = useSelector(selectPlayer);
+    let dispatch = useDispatch();
 
     //获取当页的资源信息
     useEffect(() => {
-        dispatch(GetChapters(itemId))
-    }, [])
+      GetChapters(itemId).then(resp => {
+          dispatch(setChapters(resp))
+      })
+    }, [itemId])
 
     useEffect(() => {
         if (chapters && chapters.length > 0 && chapters[0].Episodes.length > 0) {

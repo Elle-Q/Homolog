@@ -1,5 +1,4 @@
 import api from "./api";
-import {setChapters} from "../views/app/play/playSlice";
 
 export const GetItem = (itemId) => {
     return api.get(`/leetroll-app/item/get/${itemId}`)
@@ -8,10 +7,9 @@ export const GetItem = (itemId) => {
         })
 }
 
-export const GetChapters = (itemId) => dispatch => {
+export const GetChapters = (itemId) => {
     return api.get(`/leetroll-app/item/chapter/${itemId}`)
         .then(resp => {
-            dispatch(setChapters(resp))
             return resp
         })
 }

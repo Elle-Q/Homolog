@@ -56,7 +56,6 @@ function SimplePlayer(props) {
             id="videoPlayContainer"
             sx={{
                 ...size,
-                // position: "absolute",
                 borderRadius: '10px',
                 zIndex: 1,
             }}

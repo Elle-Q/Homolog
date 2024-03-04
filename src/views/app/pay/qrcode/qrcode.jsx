@@ -10,6 +10,7 @@ let imageSettings = {
     width: 34,
     excavate: true,
 }
+
 function Qrcode(props) {
 
     const {uri, open, handleClose} = props
@@ -18,18 +19,26 @@ function Qrcode(props) {
         <Dialog open={open}
                 onClose={handleClose}>
 
-            <div style={{backgroundImage: `url(${PayBg})`, backgroundSize: '250px', borderRadius: '20px', padding:' 0 0 0 200px'}}>
-                <p style={{fontSize: '14px', color: 'white', fontWeight: 'bold', textAlign: 'center'}}>收款方：滚石网络科技</p>
-                <QRCodeSVG
-                    value={uri}
-                    size={256}
-                    bgColor='transparent'
-                    fgColor='#fff'
-                    includeMargin={false}
-                    level={"L"}
-                    imageSettings={imageSettings}
-                    style={{padding: '0 15px'}}
-                />
+            <div style={{borderRadius: '20px', display: 'flex'}}>
+                <img alt="paybg" src={PayBg} style={{width: '256px', borderRadius: ' 20px 0 0 20px'}}/>
+                <div style={{backgroundColor: 'black', borderRadius: '0 20px 20px 0'}}>
+                    <p style={{
+                        fontSize: '14px',
+                        color: 'white',
+                        fontWeight: 'bold',
+                        textAlign: 'center'
+                    }}>收款方：滚石网络科技</p>
+                    <QRCodeSVG
+                        value={uri}
+                        size={256}
+                        bgColor='transparent'
+                        fgColor='#fff'
+                        includeMargin={false}
+                        level={"L"}
+                        imageSettings={imageSettings}
+                        style={{padding: '0 15px'}}
+                    />
+                </div>
             </div>
         </Dialog>
     );

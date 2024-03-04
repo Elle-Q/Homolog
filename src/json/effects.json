@@ -1,0 +1,139 @@
+[
+  {
+    "intro": "./effects/Hydro Blast/intro.png",
+    "loop": "./effects/Hydro Blast/loop.png"
+  },
+  {
+    "intro": "./effects/Shatter/intro.png",
+    "loop": "./effects/Shatter/loop.png"
+  },
+  {
+    "intro": "./effects/Magic Hearts/intro.png",
+    "loop": "./effects/Magic Hearts/loop.png"
+  },
+  {
+    "intro": "./effects/Sakura Dreams/intro.png",
+    "loop": "./effects/Sakura Dreams/loop.png"
+  },
+  {
+    "intro": "./effects/Power Surge/intro.png",
+    "loop": "./effects/Power Surge/loop.png"
+  },
+  {
+    "intro3": "./effects/Shuriken Strike/intro.png",
+    "loop3": "./effects/Shuriken Strike/loop.png"
+  },
+  {
+    "intro": "./effects/Mystic Vines/intro.png",
+    "loop": "./effects/Mystic Vines/loop.png",
+    "intro-glow": "./effects/Mystic Vines/intro-glow.png"
+  },
+  {
+    "loop": "./effects/Pixie Dust/loop.png"
+  },
+  {
+    "intro": "./effects/Discord-Os/intro.png",
+    "loop": "./effects/Discord-Os/loop.png"
+  },
+  {
+    "intro": "./effects/Breakfast Plate/intro.png",
+    "loop": "./effects/Breakfast Plate/loop.png"
+  },
+  {
+    "intro": "./effects/Ghoulish Graffiti/intro.png",
+    "loop": "./effects/Ghoulish Graffiti/loop.png"
+  },
+  {
+    "intro": "./effects/Dark Omens/intro.png",
+    "loop": "./effects/Dark Omens/loop.png"
+  },
+  {
+    "intro": "./effects/Zombie Slime/intro.png",
+    "loop": "./effects/Zombie Slime/loop.png"
+  },
+  {
+    "intro-branch": "./effects/Fall Foliage/intro-branch.png",
+    "intro-leaves": "./effects/Fall Foliage/intro-leaves.png",
+    "loop": "./effects/Fall Foliage/loop.png"
+  },
+  {
+    "intro": "./effects/Lillypad Life/intro.png",
+    "loop": "./effects/Lillypad Life/loop.png"
+  },
+  {
+    "intro": "./effects/Deck the halls/intro.png",
+    "loop": "./effects/Deck the halls/loop.png"
+  },
+  {
+    "intro": "./effects/Snowy Shenanigans/intro.png",
+    "loop": "./effects/Snowy Shenanigans/loop.png"
+  },
+  {
+    "intro-claw": "./effects/Goozilla/intro-claw.png",
+    "intro-slime": "./effects/Goozilla/intro-slime.png",
+    "loop": "./effects/Goozilla/loop.png"
+  },
+  {
+    "intro": "./effects/Heartzilla/intro.png",
+    "loop": "./effects/Heartzilla/loop.png"
+  },
+  {
+    "intro-monster": "./effects/Monster Pop/intro-monster.png",
+    "intro-glass": "./effects/Monster Pop/intro-glass.png",
+    "loop": "./effects/Monster Pop/loop.png"
+  },
+  {
+    "intro": "./effects/Nightrunner/intro.png",
+    "idle": "./effects/Nightrunner/idle.png"
+  },
+  {
+    "intro": "./effects/Uplink Error/intro.png",
+    "idle": "./effects/Uplink Error/idle.png"
+  },
+  {
+    "intro_2e0f72c35c": "./effects/Dragon Dance/intro.png",
+    "loop_20e743b578": "./effects/Dragon Dance/loop.png"
+  },
+  {
+    "frame": "./effects/Fortune Flurry/frame.png",
+    "intro": "./effects/Fortune Flurry/intro.png",
+    "loop": "./effects/Fortune Flurry/loop.png"
+  },
+  {
+    "frame": "./effects/Midnight Celebration/frame.png",
+    "intro": "./effects/Midnight Celebration/intro.png",
+    "fireworks": "./effects/Midnight Celebration/fireworks.png"
+  },
+  {
+    "intro": "./effects/Rock Slide/intro.png",
+    "idle": "./effects/Rock Slide/idle.png"
+  },
+  {
+    "intro": "./effects/Vortex/intro.png",
+    "idle": "./effects/Vortex/idle.png"
+  },
+  {
+    "intro": "./effects/Mastery/intro.png",
+    "idle": "./effects/Mastery/idle.png"
+  },
+  {
+    "intro": "./effects/Dreamy/intro.png",
+    "idle": "./effects/Dreamy/loop.png"
+  },
+  {
+    "intro": "./effects/Ki Detonate/intro.png",
+    "idle": "./effects/Ki Detonate/idle.png"
+  },
+  {
+    "intro": "./effects/Sushi Mania/intro.png",
+    "idle": "./effects/Sushi Mania/idle.png"
+  },
+  {
+    "intro": "./effects/Boost Relic/intro.png",
+    "loop": "./effects/Boost Relic/loop.png"
+  },
+  {
+    "intro": "./effects/Cyberspace/intro.png",
+    "loop": "./effects/Cyberspace/loop.png"
+  }
+]

@@ -49,7 +49,7 @@ function Cart(props) {
             <div className="account-tab-container">
                 {
                     items && items.map(item => (
-                        <ItemCard item={item} width="250px"/>
+                        <ItemCard key={item.id} item={item} width="250px"/>
                     ))
                 }
             </div>

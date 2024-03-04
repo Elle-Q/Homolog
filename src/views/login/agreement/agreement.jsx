@@ -6,7 +6,6 @@ import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import Markdown from 'react-markdown'
 import {getAgreement} from "../../../api/config.service";
 import './agreement.scss'
-import {fontSize} from "@mui/system";
 
 function Agreement(props) {
     const {handleAgree, agree, type, label} = props
@@ -18,7 +17,7 @@ function Agreement(props) {
         getAgreement(type).then(resp => {
             setAgreement(resp)
         })
-    }, []);
+    }, [type]);
 
     const toggleOpenAgr = () => {
         setOpenAgreement(!openAgreement)

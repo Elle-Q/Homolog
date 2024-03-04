@@ -80,15 +80,17 @@ function Card(props) {
                 <span>订单编号: {order.id}</span>
                 <Divider orientation="vertical" sx={{display: 'inline', backgroundColor: 'rgb(65,63,63)',}}/>
                 <span>创建时间: {order.createTime}</span>
-                <span></span>
+                {
+                    order.payCode && <span>支付单号: {order.payCode}</span>
+                }
             </div>
             <Divider sx={{backgroundColor: 'rgb(65,63,63)', width: '100%'}}/>
             <Stack direction="row" className="order-card-body" spacing={3}>
                 <div className="cell">
                     {
                         thumbnails.map(thumbnail => {
-                            return <img style={{width: 'auto', height: '50px', borderRadius: '5px'}}
-                                        src={thumbnail.main}/>
+                            return <img key={thumbnail.itemId} style={{width: 'auto', height: '50px', borderRadius: '5px'}}
+                                        src={thumbnail.main} alt="thumbnail"/>
                         })
                     }
                     <MoreHorizIcon
@@ -103,12 +105,15 @@ function Card(props) {
                 <div className="text-cell">
                     {
                         order.status !== 'closed' ?
-                        <React.Fragment>
-                            <p style={{margin: '0', color: '#f02d2d'}}>等待付款</p>
-                            <span className="count-down">23:59:04</span>
-                        </React.Fragment>
+                            <React.Fragment>
+                                <p style={{margin: '0', color: '#f02d2d'}}>等待付款</p>
+                                <span className="count-down">23:59:04</span>
+                            </React.Fragment>
                             :
-                            <p style={{color: '#7b7b7b'}}>付款成功</p>
+                            <React.Fragment>
+                                <span style={{color: '#7b7b7b'}}>付款成功</span>
+                                <span >{order.payChannel}</span>
+                            </React.Fragment>
                     }
                 </div>
 
@@ -128,7 +133,7 @@ function Card(props) {
 
             <div hidden={!showDetail}>
                 {
-                    details.map(detail => (<Stack direction="row" className="order-detail-body" spacing={2}>
+                    details.map(detail => (<Stack key={detail.itemId} direction="row" className="order-detail-body" spacing={2}>
                             <div className="cell">
                                 <img alt="thumbnail" src={detail.main}/>
                             </div>

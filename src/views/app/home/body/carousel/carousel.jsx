@@ -1,42 +1,51 @@
 import React, {useEffect, useState} from 'react';
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import {getCarousel} from "../../../../../api/config.service";
+import './carousel.scss'
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import IconButton from "@mui/material/IconButton";
 
-function Carousel(props) {
+function Carousel({children: slides, autoSlide = false}) {
+    const [curr, setCurr] = useState(0)
+    const [len, setLen] = useState(0)
 
-    const [items, setItems] = useState([])
     useEffect(() => {
-        getCarousel().then(resp => {
-            setItems(resp);
-        })
-    }, []);
+        if (!autoSlide) return
+        const slideInterval = setInterval(next, 3000)
+        return () => clearInterval(slideInterval);
+    }, [slides]);
 
-    const settings = {
-        dots: true,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 2,
-        slidesToScroll: 1,
-        autoplay: true,
-        focusOnSelect: true,
-        adaptiveHeight: true
-    };
+    const prev = () => {
+        setCurr((curr) => (curr === 0 ? slides.length - 1 : curr - 1))
+    }
+
+    const next = () => {
+        setCurr((curr) => (curr === slides.length - 1 ? 0 : curr + 1))
+    }
 
     return (
-        <Slider {...settings}>
-            {
-                items.map((item, index) => (
-                    <div key={index}>
-                        <img style={{cursor: 'pointer', maxHeight: '270px', width: '100%'}}
-                             key={index} src={item}
-                             alt='carousel-item'
-                        />
-                    </div>
-                ))
-            }
-        </Slider>
+        <div className="carousel-container">
+            <div className="c-body" style={{transform: `translateX(-${curr * 100}%)`}}>
+                {slides}
+            </div>
+            <div className="button-container">
+                <IconButton onClick={prev}>
+                    <ArrowBackIosIcon fontSize="large" className="icon"/>
+                </IconButton>
+                <IconButton onClick={next}>
+                    <ArrowForwardIosIcon fontSize="large" className="icon"/>
+                </IconButton>
+            </div>
+            <div className="c-footer">
+                <div className="body">
+                    {
+                        slides.map((_, i) => (
+                            <div className="slide-bar"
+                                 style={{opacity: `${curr === i ? 1 : 0.5}`, padding: `${curr === i ? 5 : 0}px`}}/>
+                        ))
+                    }
+                </div>
+            </div>
+        </div>
     );
 }
 

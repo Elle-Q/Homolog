@@ -23,8 +23,15 @@ function Search() {
     const metric = params.get("metric");
 
     useEffect(() => {
-        search()
-    }, [doSearch, catId, metric]);
+        ListItems(1, keyword, catId, metric).then((items) => {
+            setList(items)
+            TotalSize(keyword, catId, metric).then((size) => {
+                setTotalSize(size)
+                setHasMore(items.length < size)
+            })
+        })
+        setPage(2);
+    }, [doSearch, catId, metric, keyword]);
 
     const loadMoreItems = () => {
         if (list.length >= totalSize) return
@@ -36,17 +43,6 @@ function Search() {
         });
 
     };
-
-    const search = () => {
-        ListItems(1, keyword, catId, metric).then((items) => {
-            setList(items)
-            TotalSize(keyword, catId, metric).then((size) => {
-                setTotalSize(size)
-                setHasMore(items.length < size)
-            })
-        })
-        setPage(2);
-    }
 
     return (
         <div className="search-container">

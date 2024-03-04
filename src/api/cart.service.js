@@ -1,5 +1,4 @@
 import api from "./api";
-import {setChapters} from "../views/app/play/playSlice";
 
 export const listCart = () => {
     return api.get(`/leetroll-app/cart/list`)

@@ -3,14 +3,14 @@ import StarHalfRoundedIcon from "@mui/icons-material/StarHalfRounded";
 import React from "react";
 import Button from "@mui/material/Button";
 
-export function getStarIcons(score, width, height){
+export function getStarIcons(score, width, height) {
     const stars = [];
     const scoreInt = Math.floor(score);
     for (let i = 0; i < scoreInt; i++) {
-        stars.push(<StarRateRoundedIcon sx={{width:width, height:height}}  key={i}/>)
+        stars.push(<StarRateRoundedIcon sx={{width: width, height: height}} key={i}/>)
     }
     if (score % scoreInt !== 0) {
-        stars.push(<StarHalfRoundedIcon sx={{width:width, height:height}} key='6'/>)
+        stars.push(<StarHalfRoundedIcon sx={{width: width, height: height}} key='6'/>)
     }
     return stars;
 }
@@ -51,6 +51,8 @@ export function getColorFromUserStatus(status) {
             return '#252422'
         case 'busy':
             return '#FF0000'
+        default:
+            return "#252422"
     }
 }
 
@@ -71,10 +73,12 @@ export function getOrderStatus(status) {
                 color: '#00a896',
                 text: '已完成'
             }
+        default:
+            return {}
     }
 }
 
-export function isVideo(format){
+export function isVideo(format) {
     format = format.toLowerCase()
     return format === "video/mp4" || format === "avi" || format === "mkv" || format === "mp4"
 }

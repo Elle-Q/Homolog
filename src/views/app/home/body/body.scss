@@ -6,24 +6,22 @@
 }
 
 .home-header {
-  width: 85%;
+  width: 80%;
   overflow: hidden;
   display: flex;
   margin: 20px auto auto;
 }
 
 .carousel {
-  width: 60%;
-  overflow: hidden;
+  width: 65%;
   margin: auto;
   border: 1px solid rgba(44, 44, 43, 0.8);
-  height: 350px;
   box-shadow: inset 0 0 50px rgb(23, 23, 23);
-  border-radius: 10px;
+  border-radius: 20px;
 }
 
 .cat-container {
-  width: 40%;
+  width: 30%;
   margin: 50px auto;
   display: flex;
   flex-wrap: wrap;

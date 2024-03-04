@@ -50,5 +50,7 @@
     .item-card .model-container > img {
       width: 100%;
       border-radius: 20px; }
+      .item-card .model-container > img:hover {
+        filter: grayscale(100%); }
 
 /*# sourceMappingURL=index.css.map */

@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 import {useDispatch, useSelector} from "react-redux";
 import {Link} from "react-router-dom";
 import {selectSider} from "../../../../store/sider-slice";
-import {selectItemModal} from "../item-slice";
+import {selectItemModal} from "../../../../store/item-slice";
 
 const Container = styled.div`
   position: relative;

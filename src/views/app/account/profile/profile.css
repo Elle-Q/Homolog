@@ -1,0 +1,9 @@
+.profile-avatar-mask {
+  position: absolute;
+  z-index: 1;
+  left: -10px;
+  top: -10px; }
+  .profile-avatar-mask > img {
+    width: 140px; }
+
+/*# sourceMappingURL=profile.css.map */

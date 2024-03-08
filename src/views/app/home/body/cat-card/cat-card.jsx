@@ -1,8 +1,8 @@
 import React from 'react';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import {StyledLink} from "../../../../../components/styled/StyledComponent";
 import styled from "styled-components";
 import "./cat-card.scss"
+import {Link} from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
@@ -59,6 +59,15 @@ const Container = styled.div`
 
   }
 `
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+
+  &:focus, &:hover, &:visited, &:link, &:active {
+    text-decoration: none;
+  }
+`;
+
 
 const colors = [
     {fontColor: '#ff5d8f', bgColor: '#fae0e4', imgBgColor: '#ff99ac'},

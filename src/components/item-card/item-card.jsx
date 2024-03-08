@@ -69,7 +69,7 @@ function ItemCard(props) {
                         <FavoriteIcon fontSize="small" sx={{color: `${collected ? '#ff0a54' : 'white'}`}}/>
                     </IconButton>
                     {
-                        item.price === 0 ?
+                        item.bought  ?
                             <IconButton onClick={handleDownload}>
                                 <DownloadIcon fontSize="small"/>
                             </IconButton>
@@ -79,7 +79,6 @@ function ItemCard(props) {
                             </IconButton>
                     }
                 </div>
-                <span style={{fontSize: '10px', color: '#7b7b7b'}}>已有{item.downCnt}人下载</span>
                 {
                     item.price !==0 && <PriceTag price={item.price}/>
                 }

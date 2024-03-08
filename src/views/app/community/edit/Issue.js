@@ -56,7 +56,7 @@ function Issue(props) {
         'link', 'image', 'color', 'background'
     ]
 
-    useEffect(() => {
+    /*useEffect(() => {
         const interval = setInterval(() => {
             if (!contentRef.current.value) {
                 contentRef.current.style.border = "1px solid #3399ff";
@@ -69,7 +69,7 @@ function Issue(props) {
             }
         }, 100);
         return () => clearInterval(interval);
-    },[contentRef.current])
+    },[contentRef.current])*/
 
     return (
         <Box sx={{

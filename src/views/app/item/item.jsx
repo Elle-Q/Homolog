@@ -9,7 +9,7 @@ import catBriefInfo from "../../../json/catBriefInfo.json"
 import List from "./list/list";
 import PrevShow from "./prev/prev-show";
 import {useDispatch} from "react-redux";
-import {setItem} from "./item-slice";
+import {setItem} from "../../../store/item-slice";
 import {ThumbUpButton} from "../../../components/ui/IconButton";
 import {openSider} from "../../../store/sider-slice";
 import DownloadIcon from '@mui/icons-material/Download';
@@ -68,7 +68,7 @@ function Item() {
 
     //点击下载源文件
     const handleDownload = () => {
-
+        // window.location.href = data.attachments[0].link
     }
 
     //获取资源的部分描述信息
@@ -86,9 +86,9 @@ function Item() {
         toggleAtion(data.id, 'like').then(resp => {
             let newData = {...data, liked: resp}
             if (resp) {
-                newData = {...newData, liked: data.liked+1}
+                newData = {...newData, liked: data.liked + 1}
             } else {
-                newData = {...newData, liked: data.liked-1}
+                newData = {...newData, liked: data.liked - 1}
             }
             setData(newData)
         })
@@ -98,9 +98,9 @@ function Item() {
         toggleAtion(data.id, 'collect').then(resp => {
             let newData = {...data, collected: resp}
             if (resp) {
-                newData = {...newData, collectCnt: data.collectCnt+1}
+                newData = {...newData, collectCnt: data.collectCnt + 1}
             } else {
-                newData = {...newData, collectCnt: data.collectCnt-1}
+                newData = {...newData, collectCnt: data.collectCnt - 1}
             }
             setData(newData)
         })
@@ -144,7 +144,7 @@ function Item() {
                         <Stack sx={{alignItems: 'center'}}>
                             <div className="icon-container">
                                 {
-                                    data.price === 0 ?
+                                    data.bought ?
                                         <IconButton onClick={handleDownload}><DownloadIcon fontSize="large"
                                                                                            sx={{color: "red"}}/>
                                         </IconButton> :
@@ -155,9 +155,11 @@ function Item() {
                                 }
                             </div>
                             <div className="icon-container">
-                                <ThumbUpButton onClick={handleLike} color={`${data.liked ? '#595DFD': 'white'}`}></ThumbUpButton>
+                                <ThumbUpButton onClick={handleLike}
+                                               color={`${data.liked ? '#595DFD' : 'white'}`}></ThumbUpButton>
                                 <IconButton onClick={handleCollect}>
-                                    <FavoriteIcon fontSize="small" sx={{color: `${data.collected ? '#ff0a54' : 'white'}`}}/>
+                                    <FavoriteIcon fontSize="small"
+                                                  sx={{color: `${data.collected ? '#ff0a54' : 'white'}`}}/>
                                 </IconButton>
                             </div>
                         </Stack>

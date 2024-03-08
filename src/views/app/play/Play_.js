@@ -2,8 +2,6 @@ import React, {useEffect, useRef, useState} from 'react';
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import TitleHeader from "./TitleHeader";
-import PageTipFloatingBar from "../../../components/PageTipFloatingBar";
-import BriefDesc from "./video/BriefDesc";
 import Comments from "../item/comment/Comments";
 import {GetItemWithFiles} from "../../../api/item.service";
 import {useParams} from "react-router-dom";
@@ -69,13 +67,7 @@ function Play(props) {
                 <Grid item xs={7}>
                     <Comments/>
                 </Grid>
-                <Grid item xs={4}>
-                    <BriefDesc/>
-                </Grid>
             </Grid>
-
-            <PageTipFloatingBar/>
-
 
         </Box>
     );

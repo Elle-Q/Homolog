@@ -8,13 +8,17 @@ import Partner from "../partner/Partner";
 import Community from "../community/Community";
 import Issue from "../community/edit/Issue";
 import {NavBar} from "./navbar/navbar";
-import {Route, Routes} from "react-router-dom";
+import {Route, Routes, useLocation} from "react-router-dom";
 import Item from "../item/item.jsx";
 import Help from "./help/help";
 import Order from "../order/order";
 import Sidebar from "./sidebar/sidebar";
+import {TransitionGroup, CSSTransition} from "react-transition-group";
+import './home.scss'
 
 function Home(props) {
+
+    const location = useLocation();
 
     const routes = [
         {
@@ -68,11 +72,15 @@ function Home(props) {
         <div>
             <NavBar/>
             <Sidebar/>
-            <Routes>
-                {routes.map(({path, component}) => (
-                    <Route path={path} element={component} key={path}/>
-                ))}
-            </Routes>
+            <TransitionGroup>
+                <CSSTransition key={location.key} classNames="page" timeout={300}>
+                    <Routes>
+                        {routes.map(({path, component}) => (
+                            <Route path={path} element={component} key={path}/>
+                        ))}
+                    </Routes>
+                </CSSTransition>
+            </TransitionGroup>
             <Footer/>
             <Help/>
         </div>

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import Box from "@mui/material/Box";
 import {alpha} from "@mui/system";
 import Stack from "@mui/material/Stack";
@@ -19,22 +19,24 @@ import Timer from "./timer/timer";
 import styled from "styled-components";
 import {SendSmsCode} from "../../api/sms.service";
 import {isPhone, varifyPsw} from "../../utils/VarifyUtil";
-import Agreement from "./agreement/agreement";
+import Agreement from "../../components/agreement/agreement";
 import {loginFail, loginSuccess, registerSuccess} from "../../api/authSlice";
-import Qrcode from "./qrcode/qrcode";
-import {checkOrderStatus} from "../../api/order.service";
-import {setRefresh} from "../../store/order-slice";
-import {closeSider} from "../../store/sider-slice";
+import WeChat from '../../assets/icons/wechat_login.svg'
+import IconButton from "@mui/material/IconButton";
 
 const SignButton = styled(Button)({
-    backgroundColor: "rgba(92,96,253,0.62)",
+    backgroundColor: "#5054fd",
     color: '#dcddde',
-    fontSize: '18px',
-    width: '100%',
+    fontSize: '26px',
+    width: '30%',
     height: `50px`,
     border: "none",
+    fontFamily: "cursive",
+    borderRadius: '10px',
+    marginRight: '10px',
     '&:hover': {
-        backgroundColor: alpha("#5C60FD9E", 0.6),
+        backgroundColor: alpha("#5054fd", 0.8),
+        color: 'white',
     }
 })
 
@@ -43,30 +45,14 @@ function Login(props) {
     const [action, setAction] = useState('signin');//register
     const [phone, setPhone] = useState("");
     const [password, setPassword] = useState("")
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
     const userNameRef = React.createRef();
     const phoneRef = React.createRef();
     const passRef = React.createRef();
     const codeRef = React.createRef();
     const [message, setMessage] = useState("")
     const [agree, setAgree] = useState(false)
-    const [loginQrUri, setLoginQrUri] = useState("")
-    const [timer, setTimer] = useState()
-
-    useEffect(() => {
-        AuthService.welogin().then(resp => {
-            setLoginQrUri(resp.qrUrl)
-            /*let check_timer = setInterval(() => {
-                console.log("checking login status....", resp.code)
-                AuthService.checkLoginStatus(resp.code).then(resp => {
-                    console.log(resp)
-                })
-            }, 1000)
-            setTimer(check_timer)*/
-        })
-        return () => clearInterval(timer)
-    }, []);
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const handleLogin = async () => {
         if (!agree) {
@@ -98,6 +84,16 @@ function Login(props) {
             setPassword(passRef.current.value);
             toggleAction()
         }
+    }
+
+    const handleWechatLogin = () => {
+        if (!agree) {
+            alert("请先同意用户协议!")
+            return
+        }
+        AuthService.welogin().then(resp => {
+            window.open(resp, '_self');
+        })
     }
 
     const fetchUser = async () => {
@@ -197,7 +193,7 @@ function Login(props) {
                     <label style={{color: 'red', marginLeft: '40px', fontSize: '14px'}}>{message}</label>
                     <div style={{margin: "10px 0 10px 40px", color: '#6e6d6d', fontSize: "14px"}}>
                         {action === 'signin' ? '没有账号? ' : '已有账号 '}
-                        <Link color="#3399FF" onClick={toggleAction} sx={{cursor: "pointer", fontSize: "16px"}}>
+                        <Link color="#5054fd" onClick={toggleAction} sx={{cursor: "pointer", fontSize: "16px"}}>
                             {action === 'signin' ? ' 注册' : ' 登录'}
                         </Link>
                     </div>
@@ -207,28 +203,17 @@ function Login(props) {
                                    label={'我已阅读并同意登录协议'}
                                    type={'login_agreement'}/>
                     </div>
-                    <SignButton onClick={handleLogin}>
-                        {
-                            action === 'signin' ? '登录' : '注册'
-                        }
-                    </SignButton>
-                </Stack>
-                {
-                    action === 'signin' &&
-                    <div style={{
-                        display: 'flex',
-                        justifyContent: 'flex-end',
-                        alignItems: 'center',
-                        marginLeft: '20px',
-                        flexDirection: 'column',
-                        color: '#d7d5d5',
-                        gap: 4,
-                        fontSize: '14px'
-                    }}>
-                        <img src={loginQrUri} style={{width: '250px'}}></img>
-                        <span>微信扫码登录</span>
+                    <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                        <SignButton onClick={handleLogin}>
+                            {
+                                action === 'signin' ? '登录' : '注册'
+                            }
+                        </SignButton>
+                        <SignButton onClick={handleWechatLogin}>
+                            <img src={WeChat} alt="we_login"/>
+                        </SignButton>
                     </div>
-                }
+                </Stack>
             </Box>
 
         </div>

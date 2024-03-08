@@ -12,6 +12,14 @@
   .profile-mask > img {
     width: 280px; }
 
+.avatar-mask {
+  position: absolute;
+  z-index: 1;
+  top: -50px;
+  left: 10px; }
+  .avatar-mask > img {
+    width: 120px; }
+
 .mini-profile-banner {
   height: 120px;
   border-radius: 10px 10px 0 0; }
@@ -52,7 +60,7 @@
   color: #646464;
   padding: 5px 10px;
   cursor: pointer;
-  border-radius: 10px 0;
+  border-radius: 20px 0;
   font-size: 12px;
   display: flex;
   align-items: center; }
@@ -70,7 +78,6 @@
   position: absolute;
   z-index: 99;
   left: -20px;
-  top: 50%;
   flex-direction: column;
   display: flex;
   gap: 5px; }

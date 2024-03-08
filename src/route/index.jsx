@@ -6,6 +6,9 @@ import "../index.scss";
 import "../api/api";
 import CssBaseline from "@mui/material/CssBaseline";
 import AlertDialog from "../components/alert/confirm/AlertDialog";
+import Result from "../views/login/result/result";
+import '../views/app/home/home.scss'
+
 function Index() {
 
     return (
@@ -16,7 +19,9 @@ function Index() {
             <Routes>
                 <Route path="/*" element={<Home/>} key='/'/>
                 <Route path="/login" element={<Login/>} key='/login'/>
+                <Route path="/login_result" element={<Result/>} key='/login_result'/>
             </Routes>
+
         </div>
     );
 }

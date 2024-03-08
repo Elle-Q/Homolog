@@ -1,0 +1,10 @@
+.profile-avatar-mask {
+  position: absolute;
+  z-index: 1;
+  left: -10px;
+  top: -10px;
+
+  & > img {
+    width: 140px;
+  }
+}

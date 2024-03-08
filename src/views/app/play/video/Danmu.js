@@ -37,6 +37,7 @@ function Danmu(props) {
             "你还是闭嘴把, 你嘴巴长着就是用来进化的",
         ]
     ];
+/*
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -44,6 +45,7 @@ function Danmu(props) {
         }, 100);
         return () => clearInterval(interval);
     }, [damuItems])
+*/
 
     return (
         <Box

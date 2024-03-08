@@ -6,7 +6,7 @@ import IconButton from "@mui/material/IconButton";
 import wepay from '../../../assets/icons/wepay.svg'
 import alipay from '../../../assets/icons/alipay.svg'
 import Divider from "@mui/material/Divider";
-import Agreement from "../../login/agreement/agreement";
+import Agreement from "../../../components/agreement/agreement";
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import {useDispatch, useSelector} from "react-redux";
 import {setRefresh} from "../../../store/order-slice";
@@ -28,8 +28,12 @@ function Pay(props) {
 
     useEffect(() => {
         setOrderDetail(order.order)
-        setPayChannel(order.order.payChannel ? order.order.payChannel:'wepay')
+        setPayChannel(order.order.payChannel ? order.order.payChannel : 'wepay')
     }, [order])
+
+    useEffect(() => {
+        return () => clearInterval(timer)
+    }, [openPayCode]);
 
     //支付有效时间 5分钟
     const validTime = +new Date() + 5 * 60 * 1000
@@ -64,17 +68,16 @@ function Pay(props) {
             setOpenPayCode(true)
             setPayCodeUri(resp.payQrCode)
 
-            let check_timer = setInterval(() => {
+            const check_timer = setInterval(() => {
                 console.log("checking....", resp.batchCode)
                 checkOrderStatus(resp.batchCode).then(completed => {
                     if (completed) {
                         dispatch(setRefresh())
                         dispatch(closeSider())
                         setOpenPayCode(false)
-                        clearInterval(timer)
                     }
                 })
-            }, 1000)
+            }, 2000)
             setTimer(check_timer)
         })
     }

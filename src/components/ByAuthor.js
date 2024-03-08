@@ -28,7 +28,7 @@ function ByAuthor(props) {
                     sx={{width: '60px', height: '60px'}}
                     style={{marginRight: "14px"}}
                     alt="avatar"
-                    src="/avatar/avatar1.jpg"
+                    src={avatar}
                 />
                 <Typography variant="body2" sx={{fontSize: '20px'}} color="text.fifth"> {author}</Typography>
             </AvatarLabel>

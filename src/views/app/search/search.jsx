@@ -7,7 +7,7 @@ import FilterListIcon from '@mui/icons-material/FilterList';
 import InfiniteScroll from "react-infinite-scroller";
 import {useSelector} from "react-redux";
 import {selectSearch} from "../../../store/search";
-import SearchBar from "./searchbar/SearchBar";
+import Searchbar from "./searchbar/searchbar";
 import {useSearchParams} from "react-router-dom";
 
 function Search() {
@@ -46,7 +46,7 @@ function Search() {
 
     return (
         <div className="search-container">
-            <SearchBar catId={catId}/>
+            <Searchbar catId={catId}/>
             <div className="filter-container">
                 <span>{totalSize}个资源 </span>
                 <IconButton><FilterListIcon fontSize="small"/>过滤</IconButton>

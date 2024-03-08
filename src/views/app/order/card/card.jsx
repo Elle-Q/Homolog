@@ -89,7 +89,8 @@ function Card(props) {
                 <div className="cell">
                     {
                         thumbnails.map(thumbnail => {
-                            return <img key={thumbnail.itemId} style={{width: 'auto', height: '50px', borderRadius: '5px'}}
+                            return <img key={thumbnail.itemId}
+                                        style={{width: 'auto', height: '50px', borderRadius: '5px'}}
                                         src={thumbnail.main} alt="thumbnail"/>
                         })
                     }
@@ -112,7 +113,8 @@ function Card(props) {
                             :
                             <React.Fragment>
                                 <span style={{color: '#7b7b7b'}}>付款成功</span>
-                                <span >{order.payChannel}</span>
+                                <span style={{fontSize: '10px', color: '#7b7b7b'}}>
+                                    {order.payChannel === 'wepay' ? '微信支付' : '支付宝'}</span>
                             </React.Fragment>
                     }
                 </div>
@@ -133,7 +135,8 @@ function Card(props) {
 
             <div hidden={!showDetail}>
                 {
-                    details.map(detail => (<Stack key={detail.itemId} direction="row" className="order-detail-body" spacing={2}>
+                    details.map(detail => (
+                        <Stack key={detail.itemId} direction="row" className="order-detail-body" spacing={2}>
                             <div className="cell">
                                 <img alt="thumbnail" src={detail.main}/>
                             </div>
@@ -160,11 +163,11 @@ function Card(props) {
                                         <RemoveRedEyeIcon sx={{fontSize: '14px'}}/>
                                     </IconButton>
                                 </Tooltip>
-                                <Tooltip title="重新加入购物车">
+                                {/*<Tooltip title="重新加入购物车">
                                     <IconButton onClick={() => handleReadd2Cart(detail.itemId)}>
                                         <AddShoppingCartIcon sx={{fontSize: '14px'}}/>
                                     </IconButton>
-                                </Tooltip>
+                                </Tooltip>*/}
                             </div>
                         </Stack>
                     ))

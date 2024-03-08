@@ -5,7 +5,7 @@ import confirmReducer from "../components/alert/confirm/confirmSlice";
 import refreshReducer from "./refresh-slice";
 import playerReducer from "../views/app/play/playSlice";
 import loadingReducer from "../components/loading/loading-slice";
-import itemReducer from "../views/app/item/item-slice";
+import itemReducer from "./item-slice";
 import siderReducer from "./sider-slice";
 import searchReducer from "./search";
 import orderReducer from "./order-slice";

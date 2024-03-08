@@ -7,12 +7,11 @@ import {BrowserRouter} from "react-router-dom";
 import './api/api'
 
 ReactDOM.render(
-
-        <Provider store={store}>
-            <BrowserRouter>
+    <Provider store={store}>
+        <BrowserRouter>
             <App/>
-            </BrowserRouter>
-        </Provider>
+        </BrowserRouter>
+    </Provider>
     ,
     document.getElementById('root')
 )

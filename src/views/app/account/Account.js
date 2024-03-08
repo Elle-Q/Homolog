@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import Box from "@mui/material/Box";
-import Profile from "./profile/Profile";
 import TabBar from "./tab/TabBar";
-import BgEditModal from "./profile/BgEditModal";
+import BgModal from "./profile/bg/bg-modal";
 import UserService from "../../../api/user.service";
+import Profile from "./profile/profile";
+import {getCurrentEffect} from "../../../api/config.service";
 
 function Account(props) {
 
@@ -56,11 +57,11 @@ function Account(props) {
                 }}
                 onClick={onClickBG}
             >
-                <Profile/>
+                <Profile />
             </Box>
 
             {/*修改背景图像*/}
-            <BgEditModal
+            <BgModal
                 open={openBgModal}
                 handleClose={handleClose}
                 previewBG={changeBG}

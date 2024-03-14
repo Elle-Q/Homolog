@@ -5,7 +5,7 @@
   margin-right: 5%;
   color: white;
 
-  & span {
+  & span, h5 {
     color: grey;
   }
 
@@ -53,4 +53,25 @@
       border-bottom: 3px solid #EB5050;
     }
   }
+
+}
+
+.format-label {
+  text-align: center;
+  border: 1px #3b3b39 solid;
+  color: #6e6d6d;
+  display: inline-block;
+  padding: 4px 18px;
+  border-radius: 5px;
+
+  &:hover {
+    background-color: #595DFD;
+    color: white;
+  }
+}
+
+.select {
+  background-color: #595DFD;
+  color: white !important;
+  cursor: pointer;
 }

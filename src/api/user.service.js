@@ -13,6 +13,13 @@ class UserService {
             });
     }
 
+    uploadAvatar(file) {
+        const formData = new FormData();
+        formData.append("file", file);
+        return api.post('/leetroll-app/user/avatar/upload', formData)
+            .then(resp=>resp)
+    }
+
     changeBG(bgLink) {
         return api.post('/leetroll-app/user/bg/update', {
             bgImg: bgLink

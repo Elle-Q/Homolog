@@ -4,7 +4,7 @@ import {useParams} from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import {GetItem} from "../../../api/item.service";
+import {downloadAttachment, GetItem} from "../../../api/item.service";
 import catBriefInfo from "../../../json/catBriefInfo.json"
 import List from "./list/list";
 import PrevShow from "./prev/prev-show";
@@ -18,20 +18,25 @@ import IconButton from "@mui/material/IconButton";
 import {addItem2Cart} from "../../../api/cart.service";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import {toggleAtion} from "../../../api/action.service";
+import Divider from "@mui/material/Divider";
 
 
 function Item() {
     let params = useParams();
     let id = params.id;
 
-    const [data, setData] = useState(null);
+    const [data, setData] = useState({});
     const [tab, setTab] = useState('review');
+    const [selectedFile, setSelectedFile] = useState("")
     let dispatch = useDispatch();
 
     useEffect(() => {
         const fetch = async () => {
             await GetItem(id).then((data) => {
                 setData(data)
+                if (data.attachments.length > 0) {
+                    setSelectedFile(data.attachments[0].id)
+                }
                 dispatch(setItem(data))
             })
         }
@@ -68,7 +73,9 @@ function Item() {
 
     //点击下载源文件
     const handleDownload = () => {
-        // window.location.href = data.attachments[0].link
+        downloadAttachment(selectedFile).then(resp => {
+            window.location.href = resp
+        })
     }
 
     //获取资源的部分描述信息
@@ -106,9 +113,6 @@ function Item() {
         })
     }
 
-    if (data == null) {
-        return <React.Fragment/>
-    }
     return (
         <div className="item-container">
             <Grid container direction="row">
@@ -139,6 +143,21 @@ function Item() {
                             <span> 有{data.likeCnt}人觉得该资源很赞 </span>
                             <span> 有{data.downCnt}人下载了该资源 </span>
                             <span> 有{data.collectCnt}人收藏了该资源 </span>
+                        </Stack>
+
+                        <Divider sx={{backgroundColor: '#403D39'}}/>
+                        <h5>选择下载格式：</h5>
+                        <Stack direction='row'  sx={{flexWrap: 'wrap', justifyContent: 'flex-start'}}>
+                            {
+                                data.attachments && data.attachments.map(atta => (
+                                    <span key={atta.id}
+                                          className={`format-label ${selectedFile === atta.id && 'select'}`}
+                                          onClick={() => setSelectedFile(atta.id)}
+                                    >
+                                        {atta.format}
+                                    </span>
+                                ))
+                            }
                         </Stack>
 
                         <Stack sx={{alignItems: 'center'}}>

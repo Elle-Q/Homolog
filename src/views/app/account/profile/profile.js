@@ -10,7 +10,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import AuthService from "../../../../api/auth.service";
 import {getCurrentEffect, getDefaultAvatar} from "../../../../api/config.service";
 import UserDrawer from "./drawer/user-drawer";
-import Avatar_editor from "./avatar/avatar_editor";
+import AvatarEditor from "./avatar/avatar_editor";
 import UserService from "../../../../api/user.service";
 import './profile.scss'
 
@@ -82,8 +82,8 @@ function Profile(props) {
 
     //点击头像获取默认头像集合
     const onClickAvatar = (e) => {
-        e.stopPropagation()
         setOpenModal(true)
+        e.stopPropagation()
         //获取默认头像
         getDefaultAvatar().then(resp => {
             setDefaultAvatars(resp)
@@ -93,7 +93,8 @@ function Profile(props) {
     //带有编辑和注销按钮的头像结合体!(结合体! 哈哈`)
     const AvatarWithEdit = () => {
         return (
-            <div style={{marginBottom: '100px', position: 'relative'}}>
+            <div style={{marginBottom: '100px', position: 'relative'}}
+                 onClick={onClickAvatar}>
                 <Avatar alt="avatar"
                         src={avatarUri}
                         sx={{
@@ -104,13 +105,12 @@ function Profile(props) {
                             boxShadow: '0 0 5px #403D39',
                             cursor: "pointer"
                         }}
-                        onClick={onClickAvatar}
                 />
                 {
                     effects.frame_effect &&
-                        <div className="profile-avatar-mask">
-                            <img alt="loop" src={effects.frame_effect}/>
-                        </div>
+                    <div className="profile-avatar-mask">
+                        <img alt="loop" src={effects.frame_effect}/>
+                    </div>
                 }
 
                 <ActionButton icon={<EditIcon sx={{color: "white"}}/>} name="edit" onClick={toggleDrawer(true)}/>
@@ -145,7 +145,7 @@ function Profile(props) {
                 <RoomOutlinedIcon fontSize="small"/>{user && user.address}
             </StyledTypography>
 
-            <Avatar_editor
+            <AvatarEditor
                 user={user}
                 open={openModal}
                 handleClose={handleClose}

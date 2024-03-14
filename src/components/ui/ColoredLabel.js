@@ -12,7 +12,7 @@ function ColoredLabel(props) {
             cursor: "pointer",
             backgroundColor:alpha(color,0.3),
             color: color,
-            borderRadius: '2em',
+            borderRadius: '10px',
             alignItems: "center",
             justifyContent: "flex-start",
             display: 'flex',

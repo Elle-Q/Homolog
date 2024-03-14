@@ -6,11 +6,10 @@ import Search from "../search/search";
 import Account from "../account/Account";
 import Partner from "../partner/Partner";
 import Community from "../community/Community";
-import Issue from "../community/edit/Issue";
+import Issue from "../community/edit/issue";
 import {NavBar} from "./navbar/navbar";
 import {Route, Routes, useLocation} from "react-router-dom";
 import Item from "../item/item.jsx";
-import Help from "./help/help";
 import Order from "../order/order";
 import Sidebar from "./sidebar/sidebar";
 import {TransitionGroup, CSSTransition} from "react-transition-group";
@@ -82,7 +81,7 @@ function Home(props) {
                 </CSSTransition>
             </TransitionGroup>
             <Footer/>
-            <Help/>
+            {/*<Help/>*/}
         </div>
     );
 }

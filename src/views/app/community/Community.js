@@ -2,13 +2,15 @@ import React, {useEffect, useState} from 'react';
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import {Divider, Stack} from "@mui/material";
-import IssueCard from "./issue/IssueCard";
+import IssueCard from "./issue/issue-card";
 import BugReportRoundedIcon from '@mui/icons-material/BugReportRounded';
 import PsychologyIcon from '@mui/icons-material/Psychology';
 import {alpha} from "@mui/system";
 import styled from "styled-components";
 import PostCard from "./post/PostCard";
 import UserInfoSide from "./user/UserInfoSide";
+import Sider from "./sider/sider";
+import IssueService from "../../../api/issue.service";
 
 const StyledA = styled.a`
   line-height: 25px;
@@ -82,10 +84,13 @@ const items = [
 function Community(props) {
 
     const [selected, setSelected] = useState("issue");
+    const [issues, setIssues] = useState([])
 
     useEffect(() => {
-
-    })
+        IssueService.list('official').then(resp => {
+           setIssues(resp)
+        })
+    }, [])
 
     const handleTabClick = (e) => {
         setSelected(e.target.id)
@@ -104,9 +109,9 @@ function Community(props) {
             </Box>
             <Divider sx={{mt: '0px', mb: '10px'}}/>
             <Box sx={{
-                width: '80%',
-                ml: '10%',
-                mr: '10%',
+                width: '100%',
+                // ml: '10%',
+                // mr: '10%',
                 borderRadius: '10px',
                 backgroundColor: "transparent",
                 display: "flex",
@@ -119,15 +124,15 @@ function Community(props) {
                           flexWrap: "wrap"
                       }}
                 >
-                    <Grid item xs={3} sx={{ pl:'60px' }}>
-                        <UserInfoSide />
+                    <Grid item xs={2} >
+                        <Sider />
                     </Grid>
 
                     <Grid item xs={9} sx={{mb: '80px', display: "flex"}}>
                         {selected === 'issue' ?
                             <Stack sx={{width: "100%"}} spacing={2} direction='column'>
-                                {items.map((item, index) => (
-                                    <IssueCard key={index} item={item}/>
+                                {issues.map((issue, index) => (
+                                    <IssueCard key={issue.id} issue={issue}/>
                                 ))}
                             </Stack>
                             :
@@ -137,7 +142,6 @@ function Community(props) {
                                 ))}
                             </Stack>
                         }
-
                     </Grid>
                 </Grid>
             </Box>

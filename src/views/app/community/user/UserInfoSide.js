@@ -72,7 +72,7 @@ function UserInfoSide(props) {
                 </Typography>
             </div>
 
-            <div style={{marginTop: '30px', marginBottom: '30px'}}>
+            {/*<div style={{marginTop: '30px', marginBottom: '30px'}}>
                 <Button sx={{
                     borderRadius: '10px',
                     width: '100%',
@@ -85,7 +85,7 @@ function UserInfoSide(props) {
                     <span className={classes.span}><strong>1</strong>粉丝</span>
                     <span className={classes.span}><strong>15</strong>关注</span>
                 </Box>
-            </div>
+            </div>*/}
 
             <Divider/>
 

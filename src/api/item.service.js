@@ -35,3 +35,10 @@ export const TotalActionSize = (action) => {
             return resp
         });
 }
+
+export const downloadAttachment = (fileId) => {
+    return api.get(`/leetroll-app/item/download-attach/${fileId}`)
+        .then(resp => {
+            return resp
+        })
+}

@@ -1,9 +1,10 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useRef, useState} from 'react';
 import ReactQuill from 'react-quill';
 import Box from "@mui/material/Box";
 import {makeStyles} from "@mui/styles";
 import {alpha} from "@mui/system";
 import {StyledSingleInputElement} from "../../../../components/ui/CustomInput";
+import 'react-quill/dist/quill.snow.css';
 
 const useStyles = makeStyles({
     quill: {
@@ -32,7 +33,6 @@ const useStyles = makeStyles({
 function Issue(props) {
     const [value, setValue] = useState('');
     const classes = useStyles()
-    const contentRef = useRef()
 
     const modules = {
         toolbar: [
@@ -56,21 +56,6 @@ function Issue(props) {
         'link', 'image', 'color', 'background'
     ]
 
-    /*useEffect(() => {
-        const interval = setInterval(() => {
-            if (!contentRef.current.value) {
-                contentRef.current.style.border = "1px solid #3399ff";
-                contentRef.current.style.borderRadius = "10px";
-                // contentRef.current.focus()
-            } else {
-                contentRef.current.style.border = "1px solid #30363d";
-                contentRef.current.style.borderRadius = '10px 10px 0 0';
-                contentRef.current.style.borderBottom="none"
-            }
-        }, 100);
-        return () => clearInterval(interval);
-    },[contentRef.current])*/
-
     return (
         <Box sx={{
             width: '60%',
@@ -86,28 +71,24 @@ function Issue(props) {
                     width: '100%',
                     border: "1px solid #30363d",
                     borderRadius: '10px 10px 0 0',
-                    borderBottom:"none",
+                    borderBottom: "none",
                     color: 'white',
-                    fontSize:'20px',
-                    padding:'10px',
-                    verticalAlign:'center'
+                    fontSize: '20px',
+                    padding: '10px',
+                    verticalAlign: 'center'
                 }}
                 placeholder='标题'
-                ref={contentRef}
             >
             </StyledSingleInputElement>
             <ReactQuill
                 className={classes.quill}
                 theme="snow"
-                placeholder='提出你的问题吧...'
                 modules={modules}
                 formats={formats}
                 value={value}
                 onChange={setValue}
             >
             </ReactQuill>
-
-
         </Box>
     );
 }

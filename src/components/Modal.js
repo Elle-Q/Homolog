@@ -11,7 +11,7 @@ import {CancelButton, OKButton} from "./ui/CustomButton";
 export const ModalDialog = styled(Dialog)(({theme}) => ({
     zIndex:999,
     '& .MuiPaper-root':{
-        backgroundColor: alpha('#0a0908', 0.9),
+        backgroundColor: alpha('#0a0908', 0.7),
         boxShadow: '0 0 1px white',
         borderRadius:'40px',
     },
@@ -58,7 +58,7 @@ const ModalDialogTitle = (props) => {
 
 
 export function Modal(props) {
-    const {title, children, open, handleClose, handleOK, handleCancel, maxWidth} = props;
+    const {children, open, handleClose, handleOK, handleCancel, maxWidth} = props;
 
     return (
         <ModalDialog
@@ -68,9 +68,7 @@ export function Modal(props) {
             maxWidth={maxWidth}
             onClick={(event)=>{event.stopPropagation()}}
         >
-            <ModalDialogTitle id="dialog-title" onClose={handleClose}>
-                <span style={{color: '#3399ff', fontSize: '18px', marginLeft: '5px', textAlign: "center"}}>{title}</span>
-            </ModalDialogTitle>
+            <ModalDialogTitle id="dialog-title" onClose={handleClose} />
             <DialogContent sx={{mt: '20px', ml: '20px'}}>
                 {children}
             </DialogContent>

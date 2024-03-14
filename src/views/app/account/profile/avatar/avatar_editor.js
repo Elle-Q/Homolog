@@ -7,7 +7,7 @@ import {Modal as AvatarModal} from "../../../../../components/Modal";
 import UserService from "../../../../../api/user.service";
 import {upload} from "../../../../../api/qiniu.service";
 
-function Avatar_editor(props) {
+function AvatarEditor(props) {
     const {open, handleClose, handleOk, defaultAvatars} = props;
     const [avatarUri, setAvatarUri] = useState(null);
     const [avatarFile, setAvatarFile] = useState(null);
@@ -57,21 +57,16 @@ function Avatar_editor(props) {
                     handleClose()
                 }
             )
-
         } else {
-            upload(avatarFile).then((link) => {
-                UserService.changeAvatar(avatarUri).then(
-                    () => {
-                        handleClose()
-                    }
-                )
+            UserService.uploadAvatar(avatarFile).then((link) => {
+                handleClose()
+                setAvatarUri(link)
             })
         }
     }
 
     return (
-        <AvatarModal title="修改头像"
-                     maxWidth="md"
+        <AvatarModal maxWidth="md"
                      open={open}
                      handleClose={handleClose}
                      handleCancel={handleClose}
@@ -133,7 +128,7 @@ function Avatar_editor(props) {
                                     }
                                 }}
                     >
-                        <span style={{fontSize: '16px', color: '#3399ff'}}>+ 上传图片</span>
+                        <span style={{fontSize: '16px', color: '#595DFD'}}>+ 上传图片</span>
                     </IconButton>
                 </DragDrop>
 
@@ -142,4 +137,4 @@ function Avatar_editor(props) {
     )
 }
 
-export default Avatar_editor;
+export default AvatarEditor;

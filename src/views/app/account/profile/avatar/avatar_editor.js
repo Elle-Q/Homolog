@@ -119,16 +119,15 @@ function AvatarEditor(props) {
                            style={{display: 'none',}}/>
                     <IconButton onClick={handleUploadAvatar}
                                 sx={{
-                                    width: '200px',
-                                    height: '50px',
-                                    borderRadius: '5px',
-                                    backgroundColor: alpha('#252422', 0.3),
+                                    padding: '10px 20px',
+                                    borderRadius: '10px',
+                                    backgroundColor: alpha('#595DFD', 0.3),
                                     '&:hover': {
-                                        backgroundColor: alpha('#252422', 0.1)
+                                        backgroundColor: alpha('#595DFD', 0.1)
                                     }
                                 }}
                     >
-                        <span style={{fontSize: '16px', color: '#595DFD'}}>+ 上传图片</span>
+                        <span style={{fontSize: '16px', color: '#5f63fc'}}>+ 上传图片</span>
                     </IconButton>
                 </DragDrop>
 

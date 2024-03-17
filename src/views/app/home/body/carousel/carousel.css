@@ -1,19 +1,21 @@
 .carousel-container {
   overflow: hidden;
   position: relative;
-  background-color: #4f518c;
+  background-color: transparent;
   border-radius: 20px; }
-  .carousel-container .button-container {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  .carousel-container * .icon {
+    color: white;
     padding: 5px; }
-    .carousel-container .button-container * .icon {
-      color: white; }
-      .carousel-container .button-container * .icon:hover {
-        color: rgba(255, 255, 255, 0.8); }
+    .carousel-container * .icon:hover {
+      color: rgba(255, 255, 255, 0.8); }
+  .carousel-container .left {
+    position: absolute;
+    top: 40%;
+    left: 0; }
+  .carousel-container .right {
+    position: absolute;
+    top: 40%;
+    right: 0; }
 
 .c-body {
   display: flex;

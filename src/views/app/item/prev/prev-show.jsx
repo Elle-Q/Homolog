@@ -1,76 +1,61 @@
 import React, {useEffect, useState} from 'react';
-import Stack from "@mui/material/Stack";
-import {makeStyles} from "@mui/styles";
 import {isVideo} from "../../../../utils/ToolUtil";
 import SimplePlayer from "../../../../components/player/SimplePlayer";
-import Box from "@mui/material/Box";
-
-
-const useStyles = makeStyles({
-    prev: {
-        width: '1/4',
-        maxHeight: '100px',
-        cursor: "pointer",
-        borderRadius: '5px',
-
-        '&:hover': {
-            filter: 'grayscale(90%)',
-            transform: 'scale(1.1)',
-            border: '1px solid white',
-        }
-    }
-})
-
-const fileShowContainer = {
-    position: "relative",
-    height: '100px',
-    aspectRatio: '4/3',
-    '&:hover': {
-        filter: 'grayscale(90%)',
-        transform: 'scale(1.1)',
-        border: '1px solid white',
-    }
-}
-
+import Carousel from "../../home/body/carousel/carousel";
+import PlayImg from '../../../../assets/images/play_img.jpg'
 
 function PrevShow(props) {
     const {preList} = props
-    const classes = useStyles();
     const [currentPrev, setCurrentPrev] = useState();
 
     useEffect(() => {
-        setCurrentPrev(preList && preList.length > 0 && preList[0])
+        setCurrentPrev(preList && preList.length > 0 && preList[0]);
+
     }, [preList])
 
 
     function handlePrevChange(prev, event) {
         setCurrentPrev(prev);
-        let element = document.getElementById("prevList");
-        for (let i = 0; i < element.children.length; i++) {
-            element.children[i].style.border = '0px';
+        let prevs = document.getElementsByClassName("prev");
+        for (let i = 0; i < prevs.length; i++) {
+            prevs[i].style.border = '0px';
         }
-        event.target.style.border = '2px solid white';
+        event.target.style.border = '1px solid white';
         event.target.style.borderRadius = '5px';
     }
 
     return (
         <React.Fragment>
             {
-                currentPrev && isVideo(currentPrev.format) ? <SimplePlayer videoSrc={{
-                        type: `${currentPrev.key ? 'application/x-mpegURL' : 'video/mp4'}`,
-                        src: currentPrev.link
-                    }}/> :
+                currentPrev && isVideo(currentPrev.format) ?
+                    <SimplePlayer
+                        videoSrc={{
+                            type: `${currentPrev.key ? 'application/x-mpegURL' : 'video/mp4'}`,
+                            src: currentPrev.link
+                        }}/> :
                     <div>
-                        <img src={currentPrev && currentPrev.link} alt='prevShow'
+                        <img src={currentPrev && currentPrev.link}
+                             alt='prevShow'
                              style={{
-                                 width: 'auto',
-                                 maxHeight: '650px',
+                                 maxWidth: '100%',
                                  borderRadius: '25px',
                              }}/>
                     </div>
             }
-
-            <Stack id={"prevList"} direction={'row'} spacing={1} style={{justifyContent: "center", flexWrap: 'wrap'}}>
+            <div id="prevList">
+                <Carousel showDots={false}>
+                    {
+                        preList && preList.map((prev, index) => (
+                            <img alt='smallPrev'
+                                 src={`${isVideo(prev.format) ? PlayImg : prev.link}`}
+                                 key={index}
+                                 className="prev"
+                                 onClick={(event) => handlePrevChange(prev, event)}/>
+                        ))
+                    }
+                </Carousel>
+            </div>
+            {/* <Stack id={"prevList"} direction={'row'} spacing={1} style={{justifyContent: "center", flexWrap: 'wrap'}}>
                 {
                     preList && preList.map((prev, index) => {
                         return isVideo(prev.format) ?
@@ -86,7 +71,7 @@ function PrevShow(props) {
                                  onClick={(event) => handlePrevChange(prev, event)}/>
                     })
                 }
-            </Stack>
+            </Stack>*/}
         </React.Fragment>
     );
 }

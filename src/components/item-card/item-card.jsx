@@ -49,6 +49,8 @@ function ItemCard(props) {
             return 'doc-container'
         } else if (item.type === 'model') {
             return 'model-container'
+        } else if (item.type === 'tutorial') {
+            return 'tutorial-container'
         } else {
             return 'normal-container'
         }
@@ -69,7 +71,7 @@ function ItemCard(props) {
                         <FavoriteIcon fontSize="small" sx={{color: `${collected ? '#ff0a54' : 'white'}`}}/>
                     </IconButton>
                     {
-                        item.bought  ?
+                        item.bought ?
                             <IconButton onClick={handleDownload}>
                                 <DownloadIcon fontSize="small"/>
                             </IconButton>
@@ -80,7 +82,7 @@ function ItemCard(props) {
                     }
                 </div>
                 {
-                    item.price !==0 && <PriceTag price={item.price}/>
+                    item.price !== 0 && <PriceTag price={item.price}/>
                 }
             </Stack>
         </Box>

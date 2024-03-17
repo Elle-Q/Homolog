@@ -81,5 +81,18 @@
       }
     }
   }
+
+  .tutorial-container {
+    max-height: 250px;
+    min-height: 200px;
+    display: flex;
+    overflow: hidden;
+
+    > img {
+      width: 100%;
+      border-radius: 20px;
+    }
+  }
+
 }
 

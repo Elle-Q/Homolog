@@ -4,9 +4,8 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import IconButton from "@mui/material/IconButton";
 
-function Carousel({children: slides, autoSlide = false}) {
+function Carousel({children: slides, autoSlide = false, showDots = true}) {
     const [curr, setCurr] = useState(0)
-    const [len, setLen] = useState(0)
 
     useEffect(() => {
         if (!autoSlide) return
@@ -27,24 +26,27 @@ function Carousel({children: slides, autoSlide = false}) {
             <div className="c-body" style={{transform: `translateX(-${curr * 100}%)`}}>
                 {slides}
             </div>
-            <div className="button-container">
-                <IconButton onClick={prev}>
-                    <ArrowBackIosIcon fontSize="large" className="icon"/>
-                </IconButton>
-                <IconButton onClick={next}>
-                    <ArrowForwardIosIcon fontSize="large" className="icon"/>
-                </IconButton>
-            </div>
-            <div className="c-footer">
-                <div className="body">
-                    {
-                        slides.map((_, i) => (
-                            <div className="slide-bar"
-                                 style={{opacity: `${curr === i ? 1 : 0.5}`, padding: `${curr === i ? 5 : 0}px`}}/>
-                        ))
-                    }
+            <IconButton onClick={prev} className="left">
+                <ArrowBackIosIcon fontSize="large" className="icon"/>
+            </IconButton>
+            <IconButton onClick={next} className="right">
+                <ArrowForwardIosIcon fontSize="large" className="icon"/>
+            </IconButton>
+            {
+                showDots &&
+                <div className="c-footer">
+                    <div className="body">
+                        {
+                            slides && slides.map((_, i) => (
+                                <div className="slide-bar"
+                                     key={i}
+                                     style={{opacity: `${curr === i ? 1 : 0.5}`, padding: `${curr === i ? 5 : 0}px`}}/>
+                            ))
+                        }
+                    </div>
                 </div>
-            </div>
+            }
+
         </div>
     );
 }

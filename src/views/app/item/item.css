@@ -38,6 +38,12 @@
     .item-container .tab:hover {
       color: #EB5050;
       border-bottom: 3px solid #EB5050; }
+  .item-container * .prev {
+    max-height: 120px; }
+    .item-container * .prev:hover {
+      cursor: pointer;
+      filter: grayscale(100);
+      transform: scale(1.1); }
 
 .format-label {
   text-align: center;

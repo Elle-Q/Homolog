@@ -71,15 +71,11 @@ function Home(props) {
         <div>
             <NavBar/>
             <Sidebar/>
-            <TransitionGroup>
-                <CSSTransition key={location.key} classNames="page" timeout={300}>
-                    <Routes>
-                        {routes.map(({path, component}) => (
-                            <Route path={path} element={component} key={path}/>
-                        ))}
-                    </Routes>
-                </CSSTransition>
-            </TransitionGroup>
+            <Routes>
+                {routes.map(({path, component}) => (
+                    <Route path={path} element={component} key={path}/>
+                ))}
+            </Routes>
             <Footer/>
             {/*<Help/>*/}
         </div>

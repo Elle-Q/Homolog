@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Player from "./Player";
 import Box from "@mui/material/Box";
 
@@ -9,10 +9,8 @@ function SimplePlayer(props) {
     const [play, setPlay] = useState(false);
     const playerRef = React.useRef(null);
 
-    console.log(videoSrc)
     const videoJsOptions = {
         autoplay: false,
-        height: "auto",
         aspectRatio: "4:3",
         controls: true,
         responsive: true,
@@ -55,9 +53,9 @@ function SimplePlayer(props) {
         <Box
             id="videoPlayContainer"
             sx={{
-                ...size,
+                width:'65%',
+                margin: 'auto',
                 borderRadius: '10px',
-                zIndex: 1,
             }}
         >
             <Player

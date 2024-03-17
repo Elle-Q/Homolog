@@ -13,13 +13,13 @@ import {setItem} from "../../../store/item-slice";
 import {ThumbUpButton} from "../../../components/ui/IconButton";
 import {openSider} from "../../../store/sider-slice";
 import DownloadIcon from '@mui/icons-material/Download';
-import "./item.scss"
 import IconButton from "@mui/material/IconButton";
 import {addItem2Cart} from "../../../api/cart.service";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import {toggleAtion} from "../../../api/action.service";
 import Divider from "@mui/material/Divider";
-
+import SlowMotionVideoIcon from '@mui/icons-material/SlowMotionVideo';
+import "./item.scss"
 
 function Item() {
     let params = useParams();
@@ -41,7 +41,7 @@ function Item() {
             })
         }
         fetch().catch()
-    }, [id])
+    }, [])
 
     const tabClick = (tab, event) => {
         setTab(tab === '测评' ? "review" : "list");
@@ -113,12 +113,33 @@ function Item() {
         })
     }
 
+    const getShowIconButton = () => {
+        if (!data.bought) {
+            return (<IconButton onClick={handleAdd2Cart}>
+                <AddShoppingCartIcon fontSize="large" sx={{color: "white"}}/>
+                <span style={{fontSize: '14px'}}>加入购物车</span>
+            </IconButton>)
+        }
+        if (data.type === 'tutorial') {
+            return (<IconButton>
+                <SlowMotionVideoIcon fontSize="large" sx={{color: "white"}}/>
+            </IconButton>)
+        } else {
+            return (<IconButton onClick={handleDownload}>
+                <DownloadIcon fontSize="large" sx={{color: "white"}}/>
+            </IconButton>)
+        }
+    }
+
+
     return (
         <div className="item-container">
             <Grid container direction="row">
                 {/*上左 预览区域*/}
-                <Grid item xs={9} direction="column"
-                      style={{textAlign: 'center', justifyContent: 'space-between', display: "flex"}}>
+                <Grid item xs={9}
+                      container
+                      direction="column"
+                      style={{textAlign: 'center', display: "flex"}}>
                     <PrevShow preList={data.previews}/>
                 </Grid>
                 {/*上右 详情信息区域*/}
@@ -134,9 +155,7 @@ function Item() {
                             <span> 价格: ￥{data.price}</span>
                             <span> 作者: {data.author}</span>
                             <span> 资源类型: {data.type}</span>
-                            {
-                                getMark()
-                            }
+                            {getMark()}
                         </Stack>
 
                         <Stack className="behave-area">
@@ -147,7 +166,7 @@ function Item() {
 
                         <Divider sx={{backgroundColor: '#403D39'}}/>
                         <h5>选择下载格式：</h5>
-                        <Stack direction='row'  sx={{flexWrap: 'wrap', justifyContent: 'flex-start'}}>
+                        <Stack direction='row' sx={{flexWrap: 'wrap', justifyContent: 'flex-start'}}>
                             {
                                 data.attachments && data.attachments.map(atta => (
                                     <span key={atta.id}
@@ -161,14 +180,25 @@ function Item() {
                         </Stack>
 
                         <Stack sx={{alignItems: 'center'}}>
+                            {
+                                data.type === 'tutorial' &&
+                                <div className="icon-container">
+                                    <IconButton>
+                                        <SlowMotionVideoIcon fontSize="large" sx={{color: "white"}}/>
+                                    </IconButton>
+                                </div>
+                            }
                             <div className="icon-container">
                                 {
                                     data.bought ?
-                                        <IconButton onClick={handleDownload}><DownloadIcon fontSize="large"
-                                                                                           sx={{color: "red"}}/>
-                                        </IconButton> :
-                                        <IconButton onClick={handleAdd2Cart}><AddShoppingCartIcon fontSize="large"
-                                                                                                  sx={{color: "red"}}/>
+                                        <React.Fragment>
+                                            <IconButton onClick={handleDownload}>
+                                                <DownloadIcon fontSize="large" sx={{color: "white"}}/>
+                                            </IconButton>
+                                        </React.Fragment>
+                                        :
+                                        <IconButton onClick={handleAdd2Cart}>
+                                            <AddShoppingCartIcon fontSize="large" sx={{color: "white"}}/>
                                             <span style={{fontSize: '14px'}}>加入购物车</span>
                                         </IconButton>
                                 }

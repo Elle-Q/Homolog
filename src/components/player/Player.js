@@ -51,7 +51,7 @@ function Player(props) {
 
     return (
             <video
-                style={{borderRadius: '2px'}}
+                style={{borderRadius: '10px'}}
                 ref={videoRef}
                 className="video-js vjs-big-play-centered"
             />

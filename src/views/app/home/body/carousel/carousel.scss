@@ -1,24 +1,29 @@
 .carousel-container {
   overflow: hidden;
   position: relative;
-  background-color: #4f518c;
+  background-color: transparent;
   border-radius: 20px;
 
-  & .button-container {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+
+  & * .icon {
+    color: white;
     padding: 5px;
 
-    & * .icon {
-      color: white;
-
-      &:hover {
-        color: rgba(255, 255, 255, 0.8);
-      }
+    &:hover {
+      color: rgba(255, 255, 255, 0.8);
     }
+  }
+
+  & .left {
+    position: absolute;
+    top: 40%;
+    left: 0;
+  }
+
+  & .right {
+    position: absolute;
+    top: 40%;
+    right: 0;
   }
 }
 

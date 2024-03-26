@@ -1,7 +1,15 @@
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
 body {
-    background-image: radial-gradient(circle, #3f3f41, #3b3b3c, #363638, #323233, #2e2e2f, #2a2a2b, #262627, #222223, #1e1e1f, #1a1a1a, #161616, #111111);
+    background-color: #1C2129 !important;
+    //background-image: radial-gradient(circle, #3f3f41, #3b3b3c, #363638, #323233, #2e2e2f, #2a2a2b, #262627, #222223, #1e1e1f, #1a1a1a, #161616, #111111);
     font-family: Figtree,sans-serif;
+    box-sizing: border-box;
 }
 
 /*设置input输入框输入内容后背景颜色变成丑陋的白色*/

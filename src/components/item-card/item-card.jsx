@@ -44,15 +44,17 @@ function ItemCard(props) {
 
     const getClass = () => {
         if (item.type === 'hdri') {
-            return 'hdri-container'
+            return 'media-container media-container_hdri'
         } else if (item.type === 'doc') {
-            return 'doc-container'
+            return 'media-container media-container_doc'
         } else if (item.type === 'model') {
-            return 'model-container'
+            return 'media-container media-container_model'
         } else if (item.type === 'tutorial') {
-            return 'tutorial-container'
-        } else {
-            return 'normal-container'
+            return 'media-container media-container_tutorial'
+        } else if (item.type === 'image') {
+            return 'media-container media-container_img'
+        } else if (item.type === 'texture') {
+            return 'media-container media-container_texture'
         }
     }
 

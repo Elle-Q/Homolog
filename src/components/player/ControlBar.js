@@ -20,12 +20,12 @@ function ControlBar({
                         play,
                         togglePlay,
                         visible,
-                        barrageVisible,
+                        showTime,
+                        totalTime,
                         rePlay,
                         setVolume,
                         enterFullScreen,
                         handleRateClick,
-                        toggleShowBarrage,
                     }) {
     const [value, setValue] = useState(30);
 
@@ -51,10 +51,9 @@ function ControlBar({
                     onClick={() => togglePlay(!play)}>
                 {
                     play ? <PauseCircleFilledRoundedIcon fontSize="large" sx={{
-                            color: 'secondary.light',
-
+                            color: '#595DFD',
                         }}/>
-                        : <PlayCircleRoundedIcon fontSize="large" sx={{color: 'secondary.light'}}/>
+                        : <PlayCircleRoundedIcon fontSize="large" sx={{color: '#595DFD'}}/>
                 }
 
             </Button>
@@ -64,65 +63,36 @@ function ControlBar({
             }}
                     onClick={() => {
                     }}>
-                <SkipNextRoundedIcon fontSize="medium" sx={{color: 'secondary.light'}}/>
+                <SkipNextRoundedIcon fontSize="medium" sx={{color: '#595DFD'}}/>
             </Button>
             <Button sx={{
                 backgroundColor: "inherit",
                 border: "none",
             }}
                     onClick={rePlay}>
-                <ReplayRoundedIcon fontSize="medium" sx={{color: 'secondary.light'}}/>
+                <ReplayRoundedIcon fontSize="medium" sx={{color: '#595DFD'}}/>
             </Button>
-
+            <span style={{color: "#777", fontSize: '14px'}}>{showTime} /</span>
+            <span style={{color: "#777", fontSize: '14px'}}>&nbsp;{totalTime}</span>
             <div style={{display: 'flex', justifyContent: 'end', alignItems: 'center', flex: '1'}}>
                 <Box sx={{width: 80, mr: 2}}>
                     <Stack direction="row" alignItems="center">
-                        <VolumeUp/>
+                        <VolumeUp style={{color: '#777'}}/>
                         <Slider aria-label="Volume"
                                 value={value}
                                 onChange={handleChange}
-                                sx={{color: "secondary.light"}}
+                                sx={{color: "#777"}}
                                 size="small"
                         />
                     </Stack>
                 </Box>
-                <Box sx={{
-                    display: "flex"
-                }}>
-                    <FormControlLabel
-                        size="small"
-                        control={<Switch aria-label='Switch Danmu'
-                                         size="small"
-                                         sx={{
-                                             "& > span.MuiSwitch-track": {backgroundColor: 'white'},
-                                             ".MuiSwitch-switchBase.Mui-checked .MuiSwitch-thumb":
-                                                 {
-                                                     backgroundColor: 'secondary.light',
-                                                     boxShadow: '0 0 5px #3399FF',
-                                                 },
-                                             ".MuiSwitch-thumb":
-                                                 {
-                                                     backgroundColor: 'primary.dark',
-                                                     boxShadow: '0 0 5px #EB5E28',
-                                                 },
-                                         }}
-                                         color="third"
-                                         onChange={toggleShowBarrage}
-                                         checked={barrageVisible}
-                        />}
-                        label={<Typography
-                            style={{
-                                fontSize: '0.8rem',
-                                fontFamily: 'typography.fontFamily'
-                            }}>弹幕</Typography>}
-                    />
-                </Box>
-
                 <Typography
                     style={{
+                        color: "#777",
                         fontSize: '0.8rem',
-                        fontFamily: 'typography.fontFamily'
-                    }}>清晰度</Typography>
+                        fontFamily: '-apple-system'
+                    }}>清晰度
+                </Typography>
 
                 <PopupState variant="popover" popupId="demo-popup-menu">
                     {(popupState) => (
@@ -130,12 +100,12 @@ function ControlBar({
                             <Button sx={{
                                 border: "none",
                                 backgroundColor: "transparent",
-                                color: 'secondary.light',
+                                color: '#777',
                                 fontSize: '0.8rem',
                                 mt: '2px',
                                 ml: '10px',
                                 pl: 0,
-                                fontFamily: 'typography.fontFamily'
+                                fontFamily: '-apple-system'
                             }} {...bindTrigger(popupState)}>
                                 倍速
                             </Button>
@@ -157,14 +127,14 @@ function ControlBar({
                     )}
                 </PopupState>
 
-                <Button sx={{
+               {/* <Button sx={{
                     backgroundColor: "inherit",
                     border: "none",
                     display: "flex"
                 }}
                         onClick={enterFullScreen}>
-                    <FullscreenExitIcon fontSize="medium" sx={{color: 'secondary.light'}}/>
-                </Button>
+                    <FullscreenExitIcon fontSize="medium" sx={{color: '#777'}}/>
+                </Button>*/}
             </div>
         </Box>
     );

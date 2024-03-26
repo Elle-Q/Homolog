@@ -4,9 +4,12 @@
   margin-bottom: 10px;
 
   .nav-cat {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+
     &:hover {
       border-bottom: 1px solid #868cea;
-
       span {
         color: #fff;
       }
@@ -16,6 +19,7 @@
       color: #ccc;
       font-size: 12px;
       font-weight: 600;
+      margin-left: 5px;
     }
   }
 }

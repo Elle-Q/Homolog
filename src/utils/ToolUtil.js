@@ -80,5 +80,21 @@ export function getOrderStatus(status) {
 
 export function isVideo(format) {
     format = format.toLowerCase()
-    return format === "video/mp4" || format === "avi" || format === "mkv" || format === "mp4"
+    return format === "intro/mp4" || format === "avi" || format === "mkv" || format === "mp4"
 }
+
+export function timeFormat(time) {
+    let hour = Math.floor(time / 3600);
+    let minute = Math.floor((time % 3600) / 60);
+    let second = Math.floor(time % 60);
+    hour = hour < 10 ? "0" + hour : hour;
+    minute = minute < 10 ? "0" + minute : minute;
+    second = second < 10 ? "0" + second : second;
+    return `${hour}:${minute}:${second}`;
+}
+
+export function updateUrl(key, newValue, params, path) {
+    const searchParams = new URLSearchParams(params);
+    searchParams.set(key, newValue);
+    return `${path}${searchParams.toString() === '' ? '' : '?'}${searchParams.toString()}`;
+};

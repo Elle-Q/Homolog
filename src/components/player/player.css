@@ -1,0 +1,38 @@
+.video-js .vjs-big-play-button .vjs-icon-placeholder:before {
+  content: "";
+  background-image: url("../../assets/logo/logo.png");
+  background-repeat: no-repeat;
+  background-size: 86px;
+  width: 96px;
+  height: 96px;
+  border-radius: 500px;
+  background-position: 50% calc(50% - 0px);
+  background-color: transparent;
+  transition: all 2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform: translateY(-50%); }
+
+.video-js .vjs-big-play-button {
+  background-color: transparent;
+  border: none;
+  transform: translateY(-50%); }
+
+.video-js:hover .vjs-big-play-button,
+.video-js .vjs-big-play-button:focus {
+  border-color: #fff;
+  background-color: transparent;
+  transform: scale(1.05) translateY(-50%);
+  transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+
+.video-js .vjs-progress-control {
+  display: none; }
+
+.video-js .vjs-play-progress {
+  display: none; }
+
+.video-js .vjs-control-bar {
+  display: none; }
+
+.video-js .vjs-nofull .vjs-fullscreen-control {
+  display: none; }
+
+/*# sourceMappingURL=player.css.map */

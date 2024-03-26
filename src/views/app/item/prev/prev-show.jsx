@@ -30,7 +30,7 @@ function PrevShow(props) {
                 currentPrev && isVideo(currentPrev.format) ?
                     <SimplePlayer
                         videoSrc={{
-                            type: `${currentPrev.key ? 'application/x-mpegURL' : 'video/mp4'}`,
+                            type: 'video/mp4',
                             src: currentPrev.link
                         }}/> :
                     <div>
@@ -61,7 +61,7 @@ function PrevShow(props) {
                         return isVideo(prev.format) ?
                             <Box sx={fileShowContainer} onClick={(event) => handlePrevChange(prev, event)}>
                                 <SimplePlayer videoSrc={{
-                                    type: `${prev.key ? 'application/x-mpegURL' : 'video/mp4'}`,
+                                    type: `${prev.key ? 'application/x-mpegURL' : 'intro/mp4'}`,
                                     src: prev.link
                                 }}/></Box>
                             :

@@ -2,14 +2,19 @@
   border-bottom: 1px solid #2e2e2f;
   margin-top: 10px;
   margin-bottom: 10px; }
-  .navcat-container .nav-cat:hover {
-    border-bottom: 1px solid #868cea; }
-    .navcat-container .nav-cat:hover span {
-      color: #fff; }
-  .navcat-container .nav-cat span {
-    color: #ccc;
-    font-size: 12px;
-    font-weight: 600; }
+  .navcat-container .nav-cat {
+    display: flex;
+    align-items: center;
+    padding: 5px; }
+    .navcat-container .nav-cat:hover {
+      border-bottom: 1px solid #868cea; }
+      .navcat-container .nav-cat:hover span {
+        color: #fff; }
+    .navcat-container .nav-cat span {
+      color: #ccc;
+      font-size: 12px;
+      font-weight: 600;
+      margin-left: 5px; }
 
 .metric-container {
   display: flex;
@@ -30,4 +35,4 @@
     height: 100px;
     margin-bottom: 5px; }
 
-/*# sourceMappingURL=searchbar.css.map */
+/*# sourceMappingURL=navbar.css.map */

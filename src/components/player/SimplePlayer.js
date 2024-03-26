@@ -5,9 +5,7 @@ import Box from "@mui/material/Box";
 
 function SimplePlayer(props) {
 
-    const {videoSrc, size} = props;
-    const [play, setPlay] = useState(false);
-    const playerRef = React.useRef(null);
+    const {videoSrc} = props;
 
     const videoJsOptions = {
         autoplay: false,
@@ -18,37 +16,6 @@ function SimplePlayer(props) {
         sources: [videoSrc],
     }
 
-    //toggle
-    function togglePlay() {
-        const player = playerRef.current;
-        if (play) {
-            player.pause();
-        } else {
-            player.play();
-        }
-    }
-
-    //listen event
-    const handlePlayerReady = (player) => {
-        playerRef.current = player;
-        //   handle player events
-        player.on(['waiting', 'pause'], () => {
-            setPlay(false);
-        });
-
-        player.on('playing', () => {
-            setPlay(true)
-        });
-
-        player.on('dispose', () => {
-        });
-
-        player.on('seeked', () => {
-            setPlay(true);
-        });
-    };
-
-
     return (
         <Box
             id="videoPlayContainer"
@@ -58,9 +25,7 @@ function SimplePlayer(props) {
                 borderRadius: '10px',
             }}
         >
-            <Player
-                options={videoJsOptions}
-                onReady={handlePlayerReady}
+            <Player options={videoJsOptions}
             />
         </Box>
     );

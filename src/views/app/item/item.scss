@@ -21,7 +21,7 @@
   }
 
   .icon-container {
-    border: 1px solid #3b3b39;
+    border: 1px solid #0f141a;
     width: 100%;
     min-height: 50px;
     border-radius: 10px;
@@ -31,9 +31,10 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    background-color: #0f141a;
 
     &:hover {
-      background-color: #2a2a2b;
+      background-color: rgba(15, 20, 26, 0.73);
     }
 
   }
@@ -60,7 +61,7 @@
     &:hover {
       cursor: pointer;
       filter: grayscale(100);
-      transform: scale(1.1);
+      transform: scale(0.9);
     }
   }
 

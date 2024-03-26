@@ -7,9 +7,13 @@ import Doc from "../../../../assets/menu/book.svg";
 import Tutorial from "../../../../assets/menu/video.svg";
 import Soft from "../../../../assets/menu/soft.svg";
 import Image from "../../../../assets/menu/image.svg";
-import './searchbar.scss'
+import All from "../../../../assets/menu/all.svg";
+import './navbar.scss'
 import {ListMetrics} from "../../../../api/cat.service";
+import {useDispatch} from "react-redux";
+import {setCatId, setMetric} from "../../../../store/search";
 import {useLocation, useNavigate} from "react-router-dom";
+import {updateUrl} from "../../../../utils/ToolUtil";
 
 const navCats = [
     {
@@ -42,12 +46,16 @@ const navCats = [
         'icon': Image,
         'id': 6
     },
+    {
+        'name': '全部',
+        'icon': All,
+        'id': 0
+    },
 ]
 
 
-function Searchbar(props) {
+function Navbar(props) {
     const {catId} = props
-
     const [metrics, setMetrics] = useState([])
     const navigate = useNavigate();
     const location = useLocation();
@@ -64,7 +72,7 @@ function Searchbar(props) {
             elements[i].style.borderBottom = 'none';
         }
         event.target.closest('div').style.borderBottom = '3px solid #595DFD';
-        navigate("/search?catId="+catId);
+        updateQueryUrl("catId", catId)
     }
 
     const handleMetricClick = (event, metric) => {
@@ -73,8 +81,13 @@ function Searchbar(props) {
             elements[i].style.borderBottom = 'none';
         }
         event.target.closest('div').style.borderBottom = '3px solid #595DFD';
-        navigate(location.pathname+"?catId="+catId+"&metric="+metric);
+        updateQueryUrl("metric", metric)
     }
+
+    const updateQueryUrl = (key, newValue) => {
+        let url = updateUrl(key, newValue, location.search, location.pathname)
+        navigate(url)
+    };
 
     return (
         <div>
@@ -82,9 +95,11 @@ function Searchbar(props) {
                 <Stack direction="row" spacing={1}>
                     {
                         navCats.map((navCat, index) => (
-                            <div className="nav-cat" onClick={(event) => handleNavCatClick(event, navCat.id)}
+                            <div className="nav-cat"
+                                 style={{borderBottom: `${navCat.id === catId && '2px solid #868cea' }`}}
+                                 onClick={(event) => handleNavCatClick(event, navCat.id)}
                                  key={index}>
-                                <IconButton> <img alt="icon" src={navCat.icon}/> </IconButton>
+                                <img alt="icon" src={navCat.icon}/>
                                 <span>{navCat.name}</span>
                             </div>
                         ))
@@ -107,4 +122,4 @@ function Searchbar(props) {
     );
 }
 
-export default Searchbar;
+export default Navbar;

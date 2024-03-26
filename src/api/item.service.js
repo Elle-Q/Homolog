@@ -6,14 +6,6 @@ export const GetItem = (itemId) => {
             return resp
         })
 }
-
-export const GetChapters = (itemId) => {
-    return api.get(`/leetroll-app/item/chapter/${itemId}`)
-        .then(resp => {
-            return resp
-        })
-}
-
 export const ListActionItems = (pageNumber, action) => {
     let params = {
         pageNumber: pageNumber,
@@ -36,8 +28,8 @@ export const TotalActionSize = (action) => {
         });
 }
 
-export const downloadAttachment = (fileId) => {
-    return api.get(`/leetroll-app/item/download-attach/${fileId}`)
+export const downloadAttachment = (itemId, format) => {
+    return api.get(`/leetroll-app/item/download-attach/${itemId}`)
         .then(resp => {
             return resp
         })

@@ -107,20 +107,6 @@ function IssueCard(props) {
                             }
                         </Box>
                     </Box>
-                    {/*<CardMedia
-                        component="img"
-                        sx={{
-                            width: 110,
-                            height: 100,
-                            filter: 'grayscale(0%)',
-                            mixBlendMode: 'exclusion',
-                            marginRight: '10px',
-                            '&:hover': {
-                                filter: 'grayscale(100%)',
-                            }
-                        }}
-                        src={Logo}
-                    />*/}
                 </Card>
             </Grid>
         </Grid>

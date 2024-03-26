@@ -163,11 +163,6 @@ function Card(props) {
                                         <RemoveRedEyeIcon sx={{fontSize: '14px'}}/>
                                     </IconButton>
                                 </Tooltip>
-                                {/*<Tooltip title="重新加入购物车">
-                                    <IconButton onClick={() => handleReadd2Cart(detail.itemId)}>
-                                        <AddShoppingCartIcon sx={{fontSize: '14px'}}/>
-                                    </IconButton>
-                                </Tooltip>*/}
                             </div>
                         </Stack>
                     ))

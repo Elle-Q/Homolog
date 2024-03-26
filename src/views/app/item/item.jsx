@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import Grid from "@mui/material/Grid";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
@@ -27,7 +27,8 @@ function Item() {
 
     const [data, setData] = useState({});
     const [tab, setTab] = useState('review');
-    const [selectedFile, setSelectedFile] = useState("")
+    const [selectedFormat, setSelectedFormat] = useState("")
+    const navigate = useNavigate();
     let dispatch = useDispatch();
 
     useEffect(() => {
@@ -35,34 +36,13 @@ function Item() {
             await GetItem(id).then((data) => {
                 setData(data)
                 if (data.attachments.length > 0) {
-                    setSelectedFile(data.attachments[0].id)
+                    setSelectedFormat(data.attachments[0].format)
                 }
                 dispatch(setItem(data))
             })
         }
         fetch().catch()
     }, [])
-
-    const tabClick = (tab, event) => {
-        setTab(tab === '测评' ? "review" : "list");
-        let allTabs = document.getElementsByName("tab");
-        allTabs.forEach(tab => {
-            tab.style.color = 'white';
-            tab.style.borderBottom = 'none';
-        })
-        event.target.style.borderBottom = '3px solid #EB5050';
-        event.target.style.color = '#EB5050';
-    }
-
-    function getTabContent(type) {
-        if (type === undefined) return null;
-        let tabInfo = catBriefInfo[type].tab;
-        const ps = [];
-        tabInfo.forEach((tab, index) => {
-            ps.push(<p className="tab" id={"tab-".concat(index)} onClick={(event) => tabClick(tab, event)}>{tab}</p>)
-        })
-        return ps
-    }
 
     //加入购物车
     const handleAdd2Cart = () => {
@@ -73,7 +53,7 @@ function Item() {
 
     //点击下载源文件
     const handleDownload = () => {
-        downloadAttachment(selectedFile).then(resp => {
+        downloadAttachment(id, selectedFormat).then(resp => {
             window.location.href = resp
         })
     }
@@ -113,25 +93,6 @@ function Item() {
         })
     }
 
-    const getShowIconButton = () => {
-        if (!data.bought) {
-            return (<IconButton onClick={handleAdd2Cart}>
-                <AddShoppingCartIcon fontSize="large" sx={{color: "white"}}/>
-                <span style={{fontSize: '14px'}}>加入购物车</span>
-            </IconButton>)
-        }
-        if (data.type === 'tutorial') {
-            return (<IconButton>
-                <SlowMotionVideoIcon fontSize="large" sx={{color: "white"}}/>
-            </IconButton>)
-        } else {
-            return (<IconButton onClick={handleDownload}>
-                <DownloadIcon fontSize="large" sx={{color: "white"}}/>
-            </IconButton>)
-        }
-    }
-
-
     return (
         <div className="item-container">
             <Grid container direction="row">
@@ -170,8 +131,8 @@ function Item() {
                             {
                                 data.attachments && data.attachments.map(atta => (
                                     <span key={atta.id}
-                                          className={`format-label ${selectedFile === atta.id && 'select'}`}
-                                          onClick={() => setSelectedFile(atta.id)}
+                                          className={`format-label ${selectedFormat === atta.format && 'select'}`}
+                                          onClick={() => setSelectedFormat(atta.format)}
                                     >
                                         {atta.format}
                                     </span>
@@ -183,7 +144,7 @@ function Item() {
                             {
                                 data.type === 'tutorial' &&
                                 <div className="icon-container">
-                                    <IconButton>
+                                    <IconButton onClick={() => navigate(`/play/${data.id}`)}>
                                         <SlowMotionVideoIcon fontSize="large" sx={{color: "white"}}/>
                                     </IconButton>
                                 </div>

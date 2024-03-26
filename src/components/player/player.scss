@@ -6,48 +6,40 @@
     width: 96px;
     height: 96px;
     border-radius: 500px;
-    background-position: 55% calc(50% - 0px);
+    background-position: 50% calc(50% - 0px);
     background-color: transparent;
     transition: all 2s cubic-bezier(.175,.885,.32,1.275);
-    /*border: none !important;*/
-    /*box-shadow: none !important;*/
+    transform: translateY(-50%);
 }
 
 .video-js .vjs-big-play-button {
     background-color: transparent;
     border: none;
+    transform: translateY(-50%);
 }
 
 .video-js:hover .vjs-big-play-button,
 .video-js .vjs-big-play-button:focus {
     border-color: #fff;
     background-color: transparent;
-    transform: scale(1.5);
+    transform: scale(1.05)  translateY(-50%);
     transition: all 1s cubic-bezier(.175,.885,.32,1.275);
 }
 
 .video-js .vjs-progress-control {
-    cursor: pointer;
-    flex: auto;
-    display: flex;
-    align-items: center;
-    min-width: 4em;
-    touch-action: none;
-    color: #3399FF;
-    border: none;
-}
-
-.video-js .vjs-play-progress:before {
-    color: #3399FF;
-    background-color: #3399FF;
-    border-radius: 50px;
-    box-shadow: 0 0 5px #3399FF;
+    display: none;
 }
 
 .video-js .vjs-play-progress {
-    background-color: #3399FF70;
-    /*box-shadow: 0 0 5px #3399FF;*/
+    display: none;
+}
 
+.video-js .vjs-control-bar {
+    display: none;
+}
+
+.video-js .vjs-nofull .vjs-fullscreen-control {
+    display:none;
 }
 
 

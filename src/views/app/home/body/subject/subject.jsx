@@ -28,13 +28,13 @@ function Subject(props) {
                 <div className="btn-container">
                     <Link to={`/search?catId=${subject.id}`}>
                         <Button sx={{
-                            border: '#7b7b7b 1px solid',
                             height: '30px',
                             color: '#9f9f9f',
+                            backgroundColor: '#0f141a',
                             borderRadius: '8px',
                             '&:hover': {
-                              backgroundColor: 'black',
-                                color: 'white'
+                                color: 'white',
+                                backgroundColor: 'rgba(15,20,26,0.85)',
                             }
                         }}>更多</Button>
                         {/*<GradientButton name="更多"*/}

@@ -4,7 +4,7 @@ import Toolbar from '@mui/material/Toolbar';
 import HomeIcon from '@mui/icons-material/Home';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Stack from "@mui/material/Stack";
-import {Link, useNavigate} from "react-router-dom";
+import {Link, useNavigate, useSearchParams} from "react-router-dom";
 import Logo from "./logo/logo";
 import {useDispatch, useSelector} from "react-redux";
 import useScroll from "../../../../hook/useScroll";
@@ -26,6 +26,7 @@ import AvatarBadge from "../../../../components/avatar-badge/avatar-badge";
 import MiniProfile from "./mini-profile/mini-profile";
 
 function NavBar(props) {
+    let [params] = useSearchParams();
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const {open} = useSelector(selectSider);
@@ -33,8 +34,9 @@ function NavBar(props) {
     const [cartCount, setCartCount] = useState(0)
     const [orderCount, setOrderCount] = useState(0)
     const [showMiniProfile, setShowMiniProfile] = useState(false)
-    const scroll = useScroll()
     const [user, setUser] = useState({})
+    const [keyword, setKeyword] = useState("")
+    const scroll = useScroll()
 
     useEffect(() => {
         countCart().then(resp => {
@@ -59,10 +61,12 @@ function NavBar(props) {
 
     const handleEnter = (event) => {
         if (event.nativeEvent.keyCode === 13) {
-            dispatch(setKeyword(event.target.value))
-            dispatch(toggleSearch());
-            navigate('/search')
+            handleSearch();
         }
+    }
+    const handleSearch = (event) => {
+        dispatch(toggleSearch());
+        navigate("/search?keyword="+keyword);
     }
 
     return (
@@ -72,8 +76,12 @@ function NavBar(props) {
                 <Toolbar>
                     <Logo title="LEETROLL"/>
                     <div className="search-bar">
-                        <input type="text" placeholder="搜索" onKeyDown={handleEnter}/>
-                        <IconButton className={'search-button'} onClick={() => navigate("/search")}>
+                        <input type="text"
+                               placeholder="搜索"
+                               defaultValue={params.get("keyword")}
+                               onKeyDown={handleEnter}
+                               onChange={(event) => setKeyword(event.target.value)}/>
+                        <IconButton className={'search-button'} onClick={handleSearch}>
                             <SearchIcon fontSize="medium"/>
                         </IconButton>
                     </div>
@@ -95,8 +103,10 @@ function NavBar(props) {
                             <SupervisorAccountIcon fontSize="medium"/>
                         </Link>
                         <div style={{position: 'relative'}}>
-                            <AvatarBadge handleMouseOver={()=>setShowMiniProfile(true)} user={user} size={{width: 5, height: 5}}/>
-                            <MiniProfile user={user} show={showMiniProfile} handleClose={()=>setShowMiniProfile(false)}/>
+                            <AvatarBadge handleMouseOver={() => setShowMiniProfile(true)} user={user}
+                                         size={{width: 5, height: 5}}/>
+                            <MiniProfile user={user} show={showMiniProfile}
+                                         handleClose={() => setShowMiniProfile(false)}/>
                         </div>
                     </Stack>
                 </Toolbar>

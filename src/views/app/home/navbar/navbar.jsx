@@ -52,6 +52,7 @@ function NavBar(props) {
 
     useEffect(() => {
         setUser(UserService.getLocalUser())
+        return () => setShowMiniProfile(false)
     }, []);
 
     const handleOpenCart = () => {
@@ -103,10 +104,12 @@ function NavBar(props) {
                             <SupervisorAccountIcon fontSize="medium"/>
                         </Link>
                         <div style={{position: 'relative'}}>
-                            <AvatarBadge handleMouseOver={() => setShowMiniProfile(true)} user={user}
+                            <AvatarBadge handleMouseOver={() => setShowMiniProfile(true)}
+                                         user={user}
                                          size={{width: 5, height: 5}}/>
-                            <MiniProfile user={user} show={showMiniProfile}
-                                         handleClose={() => setShowMiniProfile(false)}/>
+                            {
+                                user && <MiniProfile user={user} show={showMiniProfile} handleClose={() => setShowMiniProfile(false)}/>
+                            }
                         </div>
                     </Stack>
                 </Toolbar>

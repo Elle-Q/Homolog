@@ -96,5 +96,8 @@ export function timeFormat(time) {
 export function updateUrl(key, newValue, params, path) {
     const searchParams = new URLSearchParams(params);
     searchParams.set(key, newValue);
+    if (key==='catId') {
+        searchParams.delete('metric')
+    }
     return `${path}${searchParams.toString() === '' ? '' : '?'}${searchParams.toString()}`;
 };

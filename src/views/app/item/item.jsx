@@ -60,13 +60,13 @@ function Item() {
 
     //获取资源的部分描述信息
     const getMark = () => {
-        if (!data || !data.mark) return
+        /*if (!data || !data.mark) return
         let json = JSON.parse(data.mark)
         let spans = []
         Object.keys(json).forEach(key => {
             spans.push(<span>{key}:{json[key]}</span>)
         });
-        return spans
+        return spans*/
     }
 
     const handleLike = () => {

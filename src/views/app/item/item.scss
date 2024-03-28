@@ -56,7 +56,9 @@
   }
 
   & * .prev {
-    max-height: 120px;
+    max-height: 200px;
+    max-width: 200px;
+    //width: 100%;
 
     &:hover {
       cursor: pointer;

@@ -48,7 +48,7 @@ function ItemCard(props) {
         } else if (item.type === 'doc') {
             return 'media-container media-container_doc'
         } else if (item.type === 'model') {
-            return 'media-container media-container_model'
+            return 'media-container media-container_img'
         } else if (item.type === 'tutorial') {
             return 'media-container media-container_tutorial'
         } else if (item.type === 'image') {

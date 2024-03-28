@@ -55,23 +55,6 @@ function PrevShow(props) {
                     }
                 </Carousel>
             </div>
-            {/* <Stack id={"prevList"} direction={'row'} spacing={1} style={{justifyContent: "center", flexWrap: 'wrap'}}>
-                {
-                    preList && preList.map((prev, index) => {
-                        return isVideo(prev.format) ?
-                            <Box sx={fileShowContainer} onClick={(event) => handlePrevChange(prev, event)}>
-                                <SimplePlayer videoSrc={{
-                                    type: `${prev.key ? 'application/x-mpegURL' : 'intro/mp4'}`,
-                                    src: prev.link
-                                }}/></Box>
-                            :
-                            <img src={prev.link} alt='smallPrev'
-                                 key={'prev'.concat(index)}
-                                 className={classes.prev}
-                                 onClick={(event) => handlePrevChange(prev, event)}/>
-                    })
-                }
-            </Stack>*/}
         </React.Fragment>
     );
 }

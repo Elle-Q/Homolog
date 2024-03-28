@@ -28,7 +28,7 @@ function MiniProfile(props) {
     return (
         <div hidden={!show} className="mini-profile-container" onMouseLeave={handleClose}>
             {
-                effects.bg_effect && effects.bg_effect.map((effect, index) => (
+                effects && effects.bg_effect && effects.bg_effect.map((effect, index) => (
                     <div key={index} className="profile-mask">
                         <img alt="loop" src={effect}/>
                     </div>
@@ -41,7 +41,7 @@ function MiniProfile(props) {
                     <AvatarBadge user={user} size={{width: 10, height: 10}}/>
                 </div>
                  <div className="avatar-mask">
-                    <img alt="loop" src={effects.frame_effect}/>
+                    <img alt="loop" src={effects && effects.frame_effect}/>
                 </div>
             </div>
             <div style={{display: 'flex', justifyContent: 'flex-end', marginTop: '20px'}}>

@@ -40,8 +40,8 @@
       color: #EB5050;
       border-bottom: 3px solid #EB5050; }
   .item-container * .prev {
-    max-height: 200px;
-    max-width: 200px; }
+    height: 200px;
+    object-fit: contain; }
     .item-container * .prev:hover {
       cursor: pointer;
       filter: grayscale(100);

@@ -13,6 +13,8 @@ import DownloadIcon from '@mui/icons-material/Download';
 import {addItem2Cart} from "../../api/cart.service";
 import {toggleAtion} from "../../api/action.service";
 import Box from "@mui/material/Box";
+import {ColoredButton} from "../ui/CustomButton";
+import Debugger from "../debugger/debugger";
 
 function ItemCard(props) {
     const {item, width} = props;
@@ -48,7 +50,9 @@ function ItemCard(props) {
         } else if (item.type === 'doc') {
             return 'media-container media-container_doc'
         } else if (item.type === 'model') {
-            return 'media-container media-container_img'
+            return 'media-container'
+        } else if (item.type === 'model_bundle') {
+            return 'media-container media-container_bundle'
         } else if (item.type === 'tutorial') {
             return 'media-container media-container_tutorial'
         } else if (item.type === 'image') {
@@ -59,7 +63,7 @@ function ItemCard(props) {
     }
 
     return (
-        <Box className="item-card" sx={{width: `${width}`}}>
+        <Box className="item-card" sx={{width: `${width}`, position: 'relative'}}>
             <Link to={`/item/${item.id}`} key={item.id}>
                 <div className={getClass()}>
                     <img src={item.main && item.main.link} alt="item"/>
@@ -87,6 +91,8 @@ function ItemCard(props) {
                     item.price !== 0 && <PriceTag price={item.price}/>
                 }
             </Stack>
+            {/*调试窗口*/}
+           <Debugger item={item} />
         </Box>
     );
 }

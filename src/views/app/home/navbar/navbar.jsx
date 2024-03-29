@@ -107,9 +107,7 @@ function NavBar(props) {
                             <AvatarBadge handleMouseOver={() => setShowMiniProfile(true)}
                                          user={user}
                                          size={{width: 5, height: 5}}/>
-                            {
-                                user && <MiniProfile user={user} show={showMiniProfile} handleClose={() => setShowMiniProfile(false)}/>
-                            }
+                            <MiniProfile user={user} show={showMiniProfile} handleClose={() => setShowMiniProfile(false)}/>
                         </div>
                     </Stack>
                 </Toolbar>

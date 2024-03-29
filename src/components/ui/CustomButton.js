@@ -46,3 +46,22 @@ export const CancelButton = (props) => {
     )
 }
 
+export const ColoredButton = (props) => {
+    const {handleClick, color} = props;
+
+    return (
+        <Button sx={{
+            fontSize:'12px',
+            width:'80px',
+            height:'30px',
+            color: `${color} !important`,
+            backgroundColor:alpha(`${color}`, 0.2),
+            '&:hover': {
+                backgroundColor:alpha(`${color}`,0.4),
+            }
+        }} onClick={handleClick}>
+            {props.children}
+        </Button>
+    )
+}
+

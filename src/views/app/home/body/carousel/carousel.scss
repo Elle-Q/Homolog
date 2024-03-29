@@ -6,7 +6,7 @@
 
 
   & * .icon {
-    color: white;
+    color: #00a896;
     padding: 5px;
 
     &:hover {
@@ -14,14 +14,21 @@
     }
   }
 
-  & .left {
+  & .c-icon-container {
     position: absolute;
+    background-color: rgba(2, 150, 134, 0.29);
+
+    &:hover {
+      background-color: rgba(0, 168, 150, 0.66);
+    }
+  }
+
+  & .left {
     top: 40%;
     left: 0;
   }
 
   & .right {
-    position: absolute;
     top: 40%;
     right: 0;
   }
@@ -33,7 +40,7 @@
   transition: transform 0.5s ease-in-out;
 
   & > img {
-    max-height: 350px;
+    //max-height: 350px;
     width: 100%;
   }
 }

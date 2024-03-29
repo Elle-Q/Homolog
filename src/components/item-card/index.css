@@ -4,7 +4,9 @@
   border-radius: 20px !important;
   background-color: #0f141a !important;
   justify-content: space-between;
-  box-shadow: 0 4px 8px #0f141a; }
+  box-shadow: 0 4px 8px #0f141a;
+  height: fit-content;
+  min-height: 250px; }
   .item-card:hover {
     border: 2px solid #313a56; }
     .item-card:hover .normal-container > img {
@@ -35,9 +37,9 @@
     .item-card .media-container_texture > img {
       width: 80%;
       height: 80%; }
-  .item-card .media-container_model {
+  .item-card .media-container_bundle {
     aspect-ratio: 1.5; }
-    .item-card .media-container_model > img:hover {
+    .item-card .media-container_bundle > img:hover {
       filter: grayscale(100%); }
   .item-card .media-container_img {
     aspect-ratio: 1;

@@ -16,30 +16,26 @@ function SearchBody(props) {
 
     useEffect(() => {
         const fetchData = async () => {
-            await ListItems(1, keyword, catId, metric).then((items) => {
-                setList(items)
-                return items.length;
-            })
+            return await ListItems(1, keyword, catId, metric)
         }
         const fetchSize = async () => {
-            await TotalSize(keyword, catId, metric).then((size) => {
+            return await TotalSize(keyword, catId, metric)
+        }
+        fetchData().then(items => {
+            setList(items)
+            fetchSize().then(size => {
                 updateSize(size)
                 setTotalSize(size)
-                return size
-            })
-        }
-        fetchData().then(curSize => {
-            fetchSize().then(totalSize => {
-                setHasMore(curSize < totalSize)
+                setHasMore(items.length < size)
+                setPage(2);
+                setIsFetching(false);
             })
         })
-        setPage(2);
-        setIsFetching(false);
+
     }, [doSearch, catId, metric, keyword]);
 
 
     const loadMoreItems = () => {
-        console.log(hasMore, isFetching)
         if (isFetching) return
         ListItems(page, keyword, catId, metric).then((data) => {
             let newList = [...list, ...data]

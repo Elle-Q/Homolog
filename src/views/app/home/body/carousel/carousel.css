@@ -4,16 +4,19 @@
   background-color: transparent;
   border-radius: 20px; }
   .carousel-container * .icon {
-    color: white;
+    color: #00a896;
     padding: 5px; }
     .carousel-container * .icon:hover {
       color: rgba(255, 255, 255, 0.8); }
-  .carousel-container .left {
+  .carousel-container .c-icon-container {
     position: absolute;
+    background-color: rgba(2, 150, 134, 0.29); }
+    .carousel-container .c-icon-container:hover {
+      background-color: rgba(0, 168, 150, 0.66); }
+  .carousel-container .left {
     top: 40%;
     left: 0; }
   .carousel-container .right {
-    position: absolute;
     top: 40%;
     right: 0; }
 
@@ -21,7 +24,6 @@
   display: flex;
   transition: transform 0.5s ease-in-out; }
   .c-body > img {
-    max-height: 350px;
     width: 100%; }
 
 .c-footer {

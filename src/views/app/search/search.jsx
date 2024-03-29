@@ -12,14 +12,14 @@ function Search() {
 
     const [totalSize, setTotalSize] = useState(0);
     const [catId, setCatId] = useState()
-    const [keyword, setKeyword] = useState()
-    const [metric, setMetric] = useState()
+
+    const catIdP = params.get("catId");
+    const keywordP = params.get("keyword");
+    const metricP = params.get("metric");
 
     useEffect(() => {
-        setCatId(params.get("catId"))
-        setKeyword(params.get("keyword"))
-        setMetric(params.get("metric"))
-    }, [params]);
+        setCatId(catIdP)
+    }, [catIdP]);
 
     const updateSize = (size) => {
         setTotalSize(size)
@@ -32,7 +32,7 @@ function Search() {
                 <span>{totalSize}个资源 </span>
                 <IconButton><FilterListIcon fontSize="small"/>过滤</IconButton>
             </div>
-            <SearchBody keyword={keyword} catId={catId} metric={metric} updateSize={updateSize}/>
+            <SearchBody keyword={keywordP} catId={catIdP} metric={metricP} updateSize={updateSize}/>
         </div>
     );
 }

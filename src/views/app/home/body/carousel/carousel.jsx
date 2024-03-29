@@ -23,13 +23,15 @@ function Carousel({children: slides, autoSlide = false, showDots = true}) {
 
     return (
         <div className="carousel-container">
-            <div className="c-body" style={{transform: `translateX(-${curr * 100}%)`}}>
+            <div className="c-body" style={{
+                transform: `translateX(-${curr * 100}%)`,
+            }}>
                 {slides}
             </div>
-            <IconButton onClick={prev} className="left">
+            <IconButton onClick={prev} className="c-icon-container left">
                 <ArrowBackIosIcon fontSize="large" className="icon"/>
             </IconButton>
-            <IconButton onClick={next} className="right">
+            <IconButton onClick={next} className="c-icon-container right">
                 <ArrowForwardIosIcon fontSize="large" className="icon"/>
             </IconButton>
             {

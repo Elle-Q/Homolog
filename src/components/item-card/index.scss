@@ -6,6 +6,8 @@
   background-color: #0f141a !important;
   justify-content: space-between;
   box-shadow: 0 4px 8px #0f141a;
+  height: fit-content;
+  min-height: 250px;
 
   &:hover {
     border: 2px solid #313a56;
@@ -55,7 +57,7 @@
     }
   }
 
-  .media-container_model {
+  .media-container_bundle {
     aspect-ratio: 1.5;
 
     > img {
@@ -64,7 +66,6 @@
       }
     }
   }
-
 
   .media-container_img {
     aspect-ratio: 1;
@@ -86,6 +87,4 @@
     display: flex;
     overflow: hidden;
   }
-
 }
-

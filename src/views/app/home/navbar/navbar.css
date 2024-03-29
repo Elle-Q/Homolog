@@ -19,7 +19,8 @@
     cursor: pointer;
     display: inline-flex;
     align-items: center;
-    justify-content: center; }
+    justify-content: center;
+    text-decoration: none; }
   .navbar-container a::after {
     transform: scaleY(0.5);
     -webkit-transform: scaleY(0.5); }

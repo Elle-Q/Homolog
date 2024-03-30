@@ -19,6 +19,10 @@ function MiniProfile(props) {
         getCurrentEffect().then(resp => {
             setEffects(resp)
         })
+        document.addEventListener('click', handleClose);
+        return () => {
+            document.removeEventListener('click', handleClose);
+        };
     }, []);
 
     const enterAccount = (e) => {
@@ -82,7 +86,14 @@ function MiniProfile(props) {
                         </li>
                     </React.Fragment>
                     :
-                    <div style={{height: '200px', display: 'flex', alignItems: "center", justifyContent: "center", color: '#777', fontSize: '20px'}}>
+                    <div style={{
+                        height: '200px',
+                        display: 'flex',
+                        alignItems: "center",
+                        justifyContent: "center",
+                        color: '#777',
+                        fontSize: '20px'
+                    }}>
                         去
                         <Link to={`/login`} style={{color: '#595DFD', width: '80px'}}>
                             登录

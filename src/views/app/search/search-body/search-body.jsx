@@ -26,7 +26,6 @@ function SearchBody(props) {
             fetchSize().then(size => {
                 updateSize(size)
                 setTotalSize(size)
-                setHasMore(items.length < size)
                 setPage(2);
                 setIsFetching(false);
             })
@@ -37,6 +36,7 @@ function SearchBody(props) {
 
     const loadMoreItems = () => {
         if (isFetching) return
+        setHasMore(list.length < totalSize)
         ListItems(page, keyword, catId, metric).then((data) => {
             let newList = [...list, ...data]
             setList(newList)

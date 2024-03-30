@@ -1,7 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {ColoredButton} from "../ui/CustomButton";
 import {updatePrice, updateTag} from "../../api/item.service";
-import {useSearchParams} from "react-router-dom";
 import './debugger.scss'
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
@@ -13,14 +12,12 @@ function Debugger(props) {
     const priceRef = useRef();
     const [tags, setTags] = useState([])
 
-    let [params] = useSearchParams();
-    const catIdP = params.get("catId");
 
     useEffect(() => {
-        ListMetrics(catIdP).then((metrics) => {
+        ListMetrics(item.catId).then((metrics) => {
             setTags(metrics)
         })
-    }, [catIdP]);
+    }, [item]);
 
     const handleUpdatePrice = () => {
         updatePrice(item.id, priceRef.current.value).catch()

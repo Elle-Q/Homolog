@@ -4,7 +4,7 @@ import Toolbar from '@mui/material/Toolbar';
 import HomeIcon from '@mui/icons-material/Home';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Stack from "@mui/material/Stack";
-import {Link, useNavigate, useSearchParams} from "react-router-dom";
+import {Link, useLocation, useNavigate, useSearchParams} from "react-router-dom";
 import Logo from "./logo/logo";
 import {useDispatch, useSelector} from "react-redux";
 import useScroll from "../../../../hook/useScroll";
@@ -24,6 +24,7 @@ import {selectOrder} from "../../../../store/order-slice";
 import UserService from "../../../../api/user.service";
 import AvatarBadge from "../../../../components/avatar-badge/avatar-badge";
 import MiniProfile from "./mini-profile/mini-profile";
+import {updateUrl} from "../../../../utils/ToolUtil";
 
 function NavBar(props) {
     let [params] = useSearchParams();
@@ -37,6 +38,7 @@ function NavBar(props) {
     const [user, setUser] = useState({})
     const [keyword, setKeyword] = useState("")
     const scroll = useScroll()
+    const location = useLocation();
 
     useEffect(() => {
         countCart().then(resp => {
@@ -67,7 +69,8 @@ function NavBar(props) {
     }
     const handleSearch = (event) => {
         dispatch(toggleSearch());
-        navigate("/search?keyword="+keyword);
+        let url = updateUrl("keyword", keyword, location.search, "/search");
+        navigate(url)
     }
 
     return (

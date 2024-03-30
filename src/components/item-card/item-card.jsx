@@ -8,7 +8,7 @@ import {openSider} from "../../store/sider-slice";
 import {useDispatch} from "react-redux";
 import "../../views/app/home/body/subject/subject.scss"
 import Stack from "@mui/material/Stack";
-import './index.scss'
+import './item-card.scss'
 import DownloadIcon from '@mui/icons-material/Download';
 import {addItem2Cart} from "../../api/cart.service";
 import {toggleAtion} from "../../api/action.service";
@@ -92,7 +92,7 @@ function ItemCard(props) {
                 }
             </Stack>
             {/*调试窗口*/}
-           <Debugger item={item} />
+           {/*<Debugger item={item} />*/}
         </Box>
     );
 }

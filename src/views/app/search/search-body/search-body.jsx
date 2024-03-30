@@ -27,12 +27,12 @@ function SearchBody(props) {
                 updateSize(size)
                 setTotalSize(size)
                 setPage(2);
+                setHasMore(items.length < size)
                 setIsFetching(false);
             })
         })
 
     }, [doSearch, catId, metric, keyword]);
-
 
     const loadMoreItems = () => {
         if (isFetching) return
@@ -46,20 +46,24 @@ function SearchBody(props) {
     };
 
     return (
-        <InfiniteScroll
-            pageStart={page}
-            loadMore={loadMoreItems}
-            hasMore={hasMore}
-            loader={<div key={0}>Loading...</div>}
-        >
-            <div className="body-container">
-                {
-                    list && list.map(item => (
-                        <ItemCard key={item.id} item={item} width="23%"/>
-                    ))
-                }
-            </div>
-        </InfiniteScroll>
+        <React.Fragment>
+            {
+                !isFetching && <InfiniteScroll
+                    pageStart={page}
+                    loadMore={loadMoreItems}
+                    hasMore={hasMore}
+                    loader={<div key={0}>Loading...</div>}
+                >
+                    <div className="body-container">
+                        {
+                            list && list.map(item => (
+                                <ItemCard key={item.id} item={item} width="23%"/>
+                            ))
+                        }
+                    </div>
+                </InfiniteScroll>
+            }
+        </React.Fragment>
     );
 }
 

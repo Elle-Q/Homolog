@@ -8,16 +8,13 @@ import Partner from "../partner/Partner";
 import Community from "../community/Community";
 import Issue from "../community/edit/issue";
 import {NavBar} from "./navbar/navbar";
-import {Route, Routes, useLocation} from "react-router-dom";
+import {Route, Routes} from "react-router-dom";
 import Item from "../item/item.jsx";
 import Order from "../order/order";
 import Sidebar from "./sidebar/sidebar";
-import {TransitionGroup, CSSTransition} from "react-transition-group";
 import './home.scss'
 
-function Home(props) {
-
-    const location = useLocation();
+function Home() {
 
     const routes = [
         {
@@ -77,7 +74,6 @@ function Home(props) {
                 ))}
             </Routes>
             <Footer/>
-            {/*<Help/>*/}
         </div>
     );
 }

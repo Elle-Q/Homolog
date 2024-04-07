@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import './carousel.scss'
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import IconButton from "@mui/material/IconButton";
 
@@ -29,7 +29,7 @@ function Carousel({children: slides, autoSlide = false, showDots = true}) {
                 {slides}
             </div>
             <IconButton onClick={prev} className="c-icon-container left">
-                <ArrowBackIosIcon fontSize="large" className="icon"/>
+                <ArrowBackIosNewIcon fontSize="large" className="icon"/>
             </IconButton>
             <IconButton onClick={next} className="c-icon-container right">
                 <ArrowForwardIosIcon fontSize="large" className="icon"/>

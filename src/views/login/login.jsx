@@ -22,7 +22,6 @@ import {isPhone, varifyPsw} from "../../utils/VarifyUtil";
 import Agreement from "../../components/agreement/agreement";
 import {loginFail, loginSuccess, registerSuccess} from "../../api/authSlice";
 import WeChat from '../../assets/icons/wechat_login.svg'
-import IconButton from "@mui/material/IconButton";
 
 const SignButton = styled(Button)({
     backgroundColor: "#5054fd",
@@ -135,7 +134,6 @@ function Login(props) {
     }
 
     const handlePhoneChange = (event) => {
-        // phoneVerify(event)
         setPhone(event.target.value)
     }
 
@@ -145,15 +143,8 @@ function Login(props) {
     }
 
     return (
-        <div id="bgBody">
-            <Box sx={{
-                padding: '20px 20px 30px 20px',
-                backgroundColor: 'rgba(28,28,28,0.8)',
-                borderRadius: '10px',
-                boxShadow: '0 0 8px #36393f',
-                flexDirection: 'row',
-                display: 'flex'
-            }}>
+        <div className="login">
+            <div className="login__box">
                 <Stack sx={{mt: '5px'}}>
                     <Typography variant="h4" align="center" color='#fff' sx={{fontFamily: 'cursive'}}>
                         {
@@ -214,8 +205,7 @@ function Login(props) {
                         </SignButton>
                     </div>
                 </Stack>
-            </Box>
-
+            </div>
         </div>
     );
 }

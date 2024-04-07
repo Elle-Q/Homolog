@@ -54,19 +54,6 @@
       border-bottom: 3px solid #EB5050;
     }
   }
-
-  & * .prev {
-    height: 200px;
-    //width: 100%;
-    object-fit: contain;
-
-    &:hover {
-      cursor: pointer;
-      filter: grayscale(100);
-      transform: scale(0.9);
-    }
-  }
-
 }
 
 .format-label {

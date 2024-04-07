@@ -1,0 +1,32 @@
+.item-carousel-container {
+  overflow: hidden;
+  position: relative;
+  background-color: transparent;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+  .item-carousel-container * .icon {
+    color: #00a896;
+    padding: 5px; }
+    .item-carousel-container * .icon:hover {
+      color: rgba(255, 255, 255, 0.8); }
+  .item-carousel-container .item-cr-icon {
+    position: absolute;
+    background-color: rgba(2, 150, 134, 0.29); }
+    .item-carousel-container .item-cr-icon:hover {
+      background-color: rgba(0, 168, 150, 0.66); }
+  .item-carousel-container .left {
+    top: 40%;
+    left: 0; }
+  .item-carousel-container .right {
+    top: 40%;
+    right: 0; }
+  .item-carousel-container .slide {
+    border-radius: 0.5rem;
+    box-shadow: 0 0 7px #666;
+    max-width: 100%; }
+  .item-carousel-container .slide-hidden {
+    display: none; }
+
+/*# sourceMappingURL=carousel.css.map */

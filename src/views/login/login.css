@@ -1,9 +1,22 @@
+.login {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("../../assets/bg/login.svg");
+  background-size: cover; }
+  .login__box {
+    padding: 3rem;
+    background-color: rgba(28, 28, 28, 0.8);
+    border-radius: 10px;
+    box-shadow: 0 0 8px #36393f;
+    flex-direction: row;
+    display: flex; }
+
 .content {
   gap: 5rem;
   width: 100%;
   padding-top: 3rem;
-  /*justify-content: center;*/
-  /*place-content: center;*/
   position: relative; }
 
 .content:before {
@@ -14,18 +27,6 @@
   width: 100%;
   border-bottom: 1px solid #3399ff;
   transform: scaleX(1); }
-
-#bgBody {
-  height: 100vh;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-image: url("../../assets/bg/login.svg");
-  background-size: cover;
-  font-family: cursive;
-  /*animation: bgAnimation 30s linear infinite;*/ }
 
 @keyframes bgAnimation {
   0% {

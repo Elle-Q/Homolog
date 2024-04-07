@@ -1,33 +1,38 @@
+.home {
+  &__header {
+    width: 80%;
+    overflow: hidden;
+    display: flex;
+    margin: 20px auto auto;
+  }
 
-.home-body {
-  width: 80%;
-  overflow: hidden;
-  margin: auto;
+  &__body {
+    width: 80%;
+    overflow: hidden;
+    margin: auto;
+  }
+
+  &__carousel-box {
+    width: 65%;
+    margin: auto;
+    border: 1px solid rgba(44, 44, 43, 0.8);
+    box-shadow: inset 0 0 50px rgb(23, 23, 23);
+    border-radius: 20px;
+  }
+
+  &__cat-box {
+    width: 35%;
+    margin: 50px auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+  }
+
 }
 
-.home-header {
-  width: 80%;
-  overflow: hidden;
-  display: flex;
-  margin: 20px auto auto;
-}
 
-.carousel {
-  width: 65%;
-  margin: auto;
-  border: 1px solid rgba(44, 44, 43, 0.8);
-  box-shadow: inset 0 0 50px rgb(23, 23, 23);
-  border-radius: 20px;
-}
 
-.cat-container {
-  width: 35%;
-  margin: 50px auto;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 15px;
-}
 
 

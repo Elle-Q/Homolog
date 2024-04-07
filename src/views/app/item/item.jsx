@@ -177,7 +177,7 @@ function Item() {
                 </Grid>
 
                 <Grid item xs={12} sx={{marginTop: '30px'}}>
-                    {/*<Stack direction={'row'} style={{justifyContent: 'center', borderBottom: '1px solid grey'}}>*/}
+                    {/*<Stack direction={'row'} styles={{justifyContent: 'center', borderBottom: '1px solid grey'}}>*/}
                     {/*    {getTabContent(data.type)}*/}
                     {/*</Stack>*/}
                 </Grid>

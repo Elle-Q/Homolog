@@ -36,7 +36,7 @@ function PriceFilter(props) {
             <h4 style={{color: '#CCC5B9', marginTop: '20px'}}> 价格 </h4>
             <CssTextField label="最低" id="custom-css-outlined-input"/>
             <MaximizeRoundedIcon sx={{color: '#CCC5B9'}}/>
-            {/*<Box style={{height:'1px', width:'20px', backgroundColor:'red' }} />*/}
+            {/*<Box styles={{height:'1px', width:'20px', backgroundColor:'red' }} />*/}
             <CssTextField label="最高" id="custom-css-outlined-input"/>
         </div>
     );

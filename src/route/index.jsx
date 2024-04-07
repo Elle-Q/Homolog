@@ -2,12 +2,12 @@ import React from 'react';
 import Home from "../views/app/home/home";
 import {Route, Routes} from "react-router-dom";
 import Login from "../views/login/login";
-import "../index.scss";
 import "../api/api";
 import CssBaseline from "@mui/material/CssBaseline";
 import AlertDialog from "../components/alert/confirm/AlertDialog";
 import Result from "../views/login/result/result";
 import '../views/app/home/home.scss'
+import "../index.scss";
 
 function Index() {
 

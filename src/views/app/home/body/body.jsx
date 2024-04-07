@@ -6,7 +6,7 @@ import "./body.scss"
 import Carousel from "./carousel/carousel";
 import {getCarousel} from "../../../../api/config.service";
 
-function Body(props) {
+function Body() {
 
     const [cats, setCats] = useState([]);
     const [catItems, setCatItems] = useState([]);
@@ -36,8 +36,8 @@ function Body(props) {
 
     return (
         <React.Fragment>
-            <div className={'home-header'} style={{}}>
-                <div className="carousel">
+            <div className={'home__header'}>
+                <div className="home__carousel-box">
                     <Carousel autoSlide={true}>
                         {
                             slides.map((item, index) => (
@@ -49,7 +49,7 @@ function Body(props) {
                         }
                     </Carousel>
                 </div>
-                <div className="cat-container">
+                <div className="home__cat-box">
                     {
                         cats.map((cat, i) => (
                             <CatCard key={i} index={i} cat={cat}/>
@@ -57,7 +57,7 @@ function Body(props) {
                     }
                 </div>
             </div>
-            <div className="home-body">
+            <div className="home__body">
                 {
                     catItems && catItems.map((catItem, index) => {
                         return (<Subject key={index} subject={catItem}/>)

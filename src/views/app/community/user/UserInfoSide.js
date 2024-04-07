@@ -72,7 +72,7 @@ function UserInfoSide(props) {
                 </Typography>
             </div>
 
-            {/*<div style={{marginTop: '30px', marginBottom: '30px'}}>
+            {/*<div styles={{marginTop: '30px', marginBottom: '30px'}}>
                 <Button sx={{
                     borderRadius: '10px',
                     width: '100%',

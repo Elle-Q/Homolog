@@ -1,0 +1,49 @@
+.item-carousel-container {
+  overflow: hidden;
+  position: relative;
+  background-color: transparent;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  //width: 600px;
+  //height: 600px;
+
+  & * .icon {
+    color: #00a896;
+    padding: 5px;
+
+    &:hover {
+      color: rgba(255, 255, 255, 0.8);
+    }
+  }
+
+  & .item-cr-icon {
+    position: absolute;
+    background-color: rgba(2, 150, 134, 0.29);
+
+    &:hover {
+      background-color: rgba(0, 168, 150, 0.66);
+    }
+  }
+
+  & .left {
+    top: 40%;
+    left: 0;
+  }
+
+  & .right {
+    top: 40%;
+    right: 0;
+  }
+
+  & .slide {
+    border-radius: 0.5rem;
+    box-shadow: 0 0 7px #666;
+    max-width: 100%;
+  }
+
+  & .slide-hidden {
+    display: none;
+  }
+}

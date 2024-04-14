@@ -30,7 +30,7 @@
 }
 
 .pay {
-  color: #dcddde;
+  color: #9f9f9f;
   font-size: 1.4rem;
   display: flex;
   flex-direction: column;
@@ -52,7 +52,7 @@
 }
 .pay__price {
   font-size: 1.8rem;
-  color: #dcddde !important;
+  color: #9f9f9f !important;
 }
 .pay__btn-box {
   text-align: center;

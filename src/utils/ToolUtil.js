@@ -60,7 +60,7 @@ export function getOrderStatus(status) {
     switch (status) {
         case 'open':
             return {
-                color: '#e9c46a',
+                color: '#595DFD',
                 text: '待支付'
             }
         case 'canceled':

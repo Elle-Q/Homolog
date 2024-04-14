@@ -8,6 +8,7 @@ import MaleIcon from "@mui/icons-material/Male";
 import IconButton from "@mui/material/IconButton";
 import AvatarBadge from "../../../../../components/avatar-badge/avatar-badge";
 import {getCurrentEffect} from "../../../../../api/config.service";
+import AuthService from "../../../../../api/auth.service";
 
 function MiniProfile(props) {
 
@@ -28,6 +29,10 @@ function MiniProfile(props) {
     const enterAccount = (e) => {
         navigate('/account')
     };
+
+    const handleLogout = () => {
+        AuthService.logout()
+    }
 
     return (
         <div hidden={!show} className="mini-profile" onMouseLeave={handleClose}>
@@ -75,7 +80,10 @@ function MiniProfile(props) {
                                 </li>
                             </div>
                         </div>
-                        <li className="mini-profile__nav-link mini-profile__logout">退出登录</li>
+                        <li className="mini-profile__nav-link mini-profile__logout"
+                            onClick={handleLogout}>
+                            退出登录
+                        </li>
                     </React.Fragment>
                     :
                     <div className="mini-profile__login-box">

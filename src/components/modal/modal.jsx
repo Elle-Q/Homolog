@@ -9,11 +9,11 @@ import DialogActions from "@mui/material/DialogActions";
 import {CancelButton, OKButton} from "../button/text-button";
 
 export const ModalDialog = styled(Dialog)(({theme}) => ({
-    zIndex:999,
-    '& .MuiPaper-root':{
+    zIndex: 999,
+    '& .MuiPaper-root': {
         backgroundColor: alpha('#0a0908', 0.7),
         boxShadow: '0 0 1px white',
-        borderRadius:'40px',
+        borderRadius: '40px',
     },
     '& .MuiDialogContent-root': {
         padding: theme.spacing(2),
@@ -56,9 +56,8 @@ const ModalDialogTitle = (props) => {
 };
 
 
-
 export function Modal(props) {
-    const {children, open, handleClose, handleOK, maxWidth} = props;
+    const {children, open, handleClose, handleOK, maxWidth, actions = true} = props;
 
     return (
         <Dialog
@@ -66,16 +65,23 @@ export function Modal(props) {
             open={open}
             fullWidth={true}
             maxWidth={maxWidth}
-            onClick={(event)=>{event.stopPropagation()}}
+            onClick={(event) => {
+                event.stopPropagation()
+            }}
         >
-            <ModalDialogTitle id="dialog-title" onClose={handleClose} />
+            <ModalDialogTitle id="dialog-title" onClose={handleClose}/>
             <DialogContent sx={{mt: '20px', ml: '20px'}}>
                 {children}
             </DialogContent>
-            <DialogActions sx={{justifyContent: "center", mt: '30px'}}>
-                <OKButton handleClick={handleOK}>确定</OKButton>
-                <CancelButton handleClick={handleClose}>关闭</CancelButton>
-            </DialogActions>
+
+            {
+                actions &&
+                <DialogActions sx={{justifyContent: "center", mt: '30px'}}>
+                    <OKButton handleClick={handleOK}>确定</OKButton>
+                    <CancelButton handleClick={handleClose}>关闭</CancelButton>
+                </DialogActions>
+            }
+
         </Dialog>
     );
 }

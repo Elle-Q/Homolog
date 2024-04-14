@@ -78,9 +78,9 @@
     }
 
     &--item {
-      min-width: 20rem;
-      max-width: 25rem;
-
+      min-width: 30rem;
+      max-width: 35rem;
+      justify-content: flex-start;
       & > img {
         width: auto;
         height: 5rem;

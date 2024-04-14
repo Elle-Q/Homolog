@@ -52,12 +52,12 @@
   align-items: center;
 }
 .login__input-box__icon {
-  color: #dcddde !important;
+  color: #9f9f9f !important;
 }
 .login__input-box__input {
   font-family: -apple-system, sans-serif;
   font-size: 1.6rem !important;
-  color: #dcddde !important;
+  color: #9f9f9f !important;
   background-color: rgba(0, 0, 0, 0.9);
   margin-left: 0.5rem;
   padding-left: 0.5rem;
@@ -141,7 +141,7 @@
 
 .login-result__span {
   font-size: 3rem;
-  color: #dcddde;
+  color: #9f9f9f;
   font-weight: 500;
   font-family: cursive;
 }

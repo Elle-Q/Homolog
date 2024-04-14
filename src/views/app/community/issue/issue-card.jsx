@@ -1,34 +1,23 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
-import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
-import ThumbDownOffAltIcon from "@mui/icons-material/ThumbDownOffAlt";
 import CardContent from "@mui/material/CardContent";
-import Card from "@mui/material/Card";
-import CardMedia from "@mui/material/CardMedia";
 import {Divider} from "@mui/material";
 import ColoredLabel from "../../../../components/ui/ColoredLabel";
 import ModeCommentOutlinedIcon from '@mui/icons-material/ModeCommentOutlined';
-import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded';
 import {makeStyles} from "@mui/styles";
-import {useNavigate} from "react-router-dom";
 import {getInternalDaysFromNow} from "../../../../utils/DateUtil";
 import {getOrderStatus} from "../../../../utils/ToolUtil";
 import Logo28 from '../../../../assets/logo/logo_28.png'
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import './issue-card.scss'
+import IconButton from "@mui/material/IconButton";
+import {Modal} from "../../../../components/modal/modal";
+import Markdown from "react-markdown";
+import CommentInput from "../../item/comment/CommentInput";
+import {AddComment, CountComment, ListComment} from "../../../../api/comment.service";
 
-const IconLabel = ({icon, label}) => {
-    return (
-        <React.Fragment>
-            {icon}
-            <span style={{fontSize: '12px', fontStyle: 'italic', color: '#CCC5B9', marginRight: '10px'}}>{label}</span>
-        </React.Fragment>
-    )
-}
 const useStyles = makeStyles({
     icon: {
         width: '20px',
@@ -43,69 +32,92 @@ const useStyles = makeStyles({
 function IssueCard(props) {
     const classes = useStyles()
     const {issue} = props
-    const navigate = useNavigate();
-    const [expand, setExpand] = useState(false)
+    const [showIssue, setShowIssue] = useState(false)
+    const [showComment, setShowComment] = useState(false)
+    const [comments, setComments] = useState([])
+    const [commentsSize, setCommentsSize] = useState([])
 
-    const handleGoToIssue = (e) => {
-        e.stopPropagation()
-        navigate('/issue')
+    useEffect(() => {
+        CountComment('issue', issue.id).then(resp => {
+            setCommentsSize(resp)
+        })
+    }, []);
+
+    const handleShowIssue = (e) => {
+        setShowIssue(!showIssue)
     }
 
-    const handleExpand = (e) => {
-        e.stopPropagation()
-        setExpand(!expand)
+    const handleShowComment = (e) => {
+        e.stopPropagation();
+        setShowComment(!showComment);
+        ListComment('issue', issue.id).then(resp => {
+            setComments(resp)
+        })
     }
+
+    const handleSendComment = (content) => {
+        let params = {
+            rescType: 'issue',
+            rescId: issue.id,
+            content: content,
+        }
+        AddComment(params);
+        setShowComment(false);
+    }
+
 
     return (
         <Grid container>
-            <Grid item xs={1} style={{display: "flex", justifyContent: "end", padding: '10px'}}>
-                <Avatar
-                    sx={{width: '50px', height: '50px'}}
-                    src={issue.userAvatar}
-                />
+            <Grid item xs={1} className="issue-card__avatar-box">
+                <Avatar className="issue-card__avatar" src={issue.userAvatar}/>
             </Grid>
-            <Grid item xs={11} style={{position: "relative"}}>
-                <ColoredLabel color={getOrderStatus(issue.status).color} content={issue.status} style={{
-                    right: 0,
-                    top: 0,
-                    position: "absolute",
-                    zIndex: 10,
-                }}/>
-                <Card onClick={handleGoToIssue} className="issue-card-container">
-                    <i></i>
-                    <Box sx={{display: 'flex', flexGrow: 1, flexDirection: 'column'}}>
-                        <Typography className="issue-card-header" component="div" display="flex">
-                            {issue.userName} {getInternalDaysFromNow(issue.createTime)}天前打开
-                            <span style={{fontSize: '12px', color: '#00a896', margin: '0 10px'}}>#{issue.id}</span>
-                            <img alt="logo_28" src={Logo28} style={{width: '15px', display: 'inline'}}/>
-                        </Typography>
-                        <Divider sx={{backgroundColor: '#403D39'}}/>
-                        <CardContent sx={{flex: '1 0 auto', maxHeight: `${expand ? '' : '6.5em'}`, overflow: 'hidden'}}>
-                            <Typography component="div" sx={{color: '#d2cfcb', fontSize: '22px', fontWeight: '600'}}>
-                                {issue.title}
-                            </Typography>
-                            <pre style={{color: '#c0bbb4', fontSize: '14px', lineHeight: 1.5, padding: '0 10px'}}>
-                                {issue.content}
-                            </pre>
-                        </CardContent>
-                        <Box sx={{display: 'flex', pb: 1, mt: 1, ml: 1, zIndex: 10}}>
-                            <IconLabel icon={<FavoriteBorderRoundedIcon className={classes.icon}/>}
-                                       label={issue.collects}/>
-                            <IconLabel icon={<ThumbUpOffAltIcon className={classes.icon}/>} label={issue.likes}/>
-                            <IconLabel icon={<ThumbDownOffAltIcon className={classes.icon}/>} label={issue.hates}/>
-                            <IconLabel icon={<ModeCommentOutlinedIcon className={classes.icon}/>}
-                                       label={issue.comments}/>
+            <Grid item xs={11} className="issue-card__body">
+                <ColoredLabel color={getOrderStatus(issue.status).color}
+                              content={issue.status}
+                              className="issue-card__body--fixed-label"/>
 
+                <Box className="issue-card__body--main" onClick={handleShowIssue}>
+                    <Typography className="issue-card__heading" component="div" display="flex">
+                        {issue.userName} {getInternalDaysFromNow(issue.createTime)}天前打开
+                        <span>#{issue.id}</span>
+                        <img alt="logo_28" src={Logo28}/>
+                    </Typography>
+                    <Divider variant="middle"/>
+                    <CardContent className="issue-card__content">
+                        <h2> {issue.title} </h2>
+                        <pre>{issue.content} </pre>
+                    </CardContent>
+                    <div className="issue-card__footer">
+                        <IconButton className="issue-card__footer-icon" onClick={handleShowComment}>
+                            <ModeCommentOutlinedIcon className={classes.icon}/>
                             {
-                                expand ? <ExpandLessIcon onClick={handleExpand} fontSize="small"
-                                                         sx={{color: '#fff', marginLeft: '10px'}}/>
-                                    : <ExpandMoreIcon onClick={handleExpand} fontSize="small"
-                                                      sx={{color: '#fff', marginLeft: '10px'}}/>
+                                commentsSize > 0 &&
+                                <div className="issue-card__footer-icon--badge">{commentsSize}</div>
                             }
-                        </Box>
-                    </Box>
-                </Card>
+                        </IconButton>
+                    </div>
+                </Box>
+                {
+                    showComment && <React.Fragment>
+                        <CommentInput handleSend={handleSendComment}/>
+                        {comments.map((comment, _) => (
+                            <div className="issue-card__comment">
+                                <Avatar className="issue-card__comment-avatar" src={comment.userAvatar}/>
+                                <p className="issue-card__comment-name">{comment.userName}: &nbsp;</p>
+                                <span className="issue-card__comment-content">{comment.content}</span>
+                                <p>{comment.createTime}</p>
+                            </div>
+                        ))}
+                    </React.Fragment>
+                }
             </Grid>
+            <Modal
+                maxWidth="md"
+                open={showIssue}
+                handleClose={handleShowIssue}
+                actions={false}>
+                <Markdown children={issue.content} className="issue-card__md"/>
+            </Modal>
         </Grid>
 
     );

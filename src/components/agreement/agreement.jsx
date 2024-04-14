@@ -44,7 +44,7 @@ function Agreement(props) {
                    open={openAgreement}
                    handleClose={toggleOpenAgr}
                    handleOK={handleOK}>
-                <Markdown children={agreement} className={'agreement'}/>
+                <Markdown children={agreement}/>
             </Modal>
         </React.Fragment>
     );

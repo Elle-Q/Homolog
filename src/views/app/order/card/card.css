@@ -66,8 +66,9 @@
   font-size: 1.2rem;
 }
 .order-card__cell--item {
-  min-width: 20rem;
-  max-width: 25rem;
+  min-width: 30rem;
+  max-width: 35rem;
+  justify-content: flex-start;
 }
 .order-card__cell--item > img {
   width: auto;

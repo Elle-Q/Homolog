@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import Grid from "@mui/material/Grid";
 import {useNavigate, useParams} from "react-router-dom";
-import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import {downloadAttachment, GetItem} from "../../../api/item.service";
@@ -59,13 +58,13 @@ function Item() {
 
     //获取资源的部分描述信息
     const getMark = () => {
-        /*if (!data || !data.mark) return
+        if (!data || !data.mark || data.mark.trim().length === 0) return
         let json = JSON.parse(data.mark)
         let spans = []
         Object.keys(json).forEach(key => {
             spans.push(<span>{key}:{json[key]}</span>)
         });
-        return spans*/
+        return spans
     }
 
     const handleLike = () => {

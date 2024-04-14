@@ -5,7 +5,7 @@ import Play from "../play/play";
 import Search from "../search/search";
 import Account from "../account/Account";
 import Partner from "../partner/Partner";
-import Community from "../community/Community";
+import Community from "../community/community";
 import Issue from "../community/edit/issue";
 import {NavBar} from "./navbar/navbar";
 import {createBrowserRouter, Outlet, Route, RouterProvider, Routes, ScrollRestoration} from "react-router-dom";

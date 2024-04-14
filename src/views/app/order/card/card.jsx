@@ -124,7 +124,9 @@ function Card(props) {
             <div hidden={!showDetail}>
                 {
                     details.map(detail => (
-                        <Stack key={detail.itemId} direction="row" className="order-detail-body" spacing={2}>
+                        <Stack key={detail.itemId} direction="row"
+                               className="order-detail-body"
+                               spacing={2}>
                             <div className="cell">
                                 <img alt="thumbnail" src={detail.main}/>
                             </div>

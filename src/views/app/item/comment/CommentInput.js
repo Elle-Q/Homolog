@@ -1,23 +1,24 @@
 import React, {useState} from 'react';
 import {alpha, styled} from "@mui/system";
-import {Picker} from "emoji-mart";
+import data from '@emoji-mart/data'
+import Picker from '@emoji-mart/react'
 import InsertEmoticonIcon from "@mui/icons-material/InsertEmoticon";
 import {StyledInputElement} from "../../../../components/ui/CustomInput";
+import SendIcon from '@mui/icons-material/Send';
+import IconButton from "@mui/material/IconButton";
 
 const InputBox = styled('div')(({theme}) => ({
+    display: 'flex',
+    justifyContent: "space-between",
+    flexDirection: 'column',
     zIndex: 1,
-    position:'relative',
-    padding:'10px 0 10px 10px',
-    borderRadius: '10px',
+    borderRadius: '1rem 1rem 0 0',
     backgroundColor: '#0A1929',
     width: '100%',
-    marginTop:'10px',
-    height: '100px',
-    justifyContent: "flex-end",
+    marginTop: '.5rem',
+    minHeight: '5rem',
+    padding: '0 1rem',
     background: alpha('#0a0908', 0.5),
-    [theme.breakpoints.up('sm')]: {
-        marginRight: theme.spacing(5),
-    },
     '&:hover': {
         backgroundColor: alpha('#0a0908', 0.7),
     },
@@ -29,40 +30,51 @@ const InputBox = styled('div')(({theme}) => ({
 
 
 function CommentInput(props) {
-
+    const {handleSend} = props;
     const [showPicker, setShowPicker] = useState(false);
+    const [comment, setComment] = useState("")
+
+    const handleSelectEmoji = (e) => {
+        setComment(comment + e.native)
+    }
+
+    const handleSendComment = () => {
+        if (comment.trim().length == 0) return;
+        handleSend(comment);
+    }
 
     return (
-        <InputBox>
+        <div style={{position: 'relative'}}>
+            <InputBox>
+                <div style={{display: 'flex', alignItems: 'center', justifyContent: 'flex-start'}}>
+                    <IconButton onClick={handleSendComment}>
+                        <SendIcon fontSize="large" sx={{zIndex: 99, color: '#ffffff'}}></SendIcon>
+                    </IconButton>
+                    <InsertEmoticonIcon
+                        fontSize="large"
+                        sx={{zIndex: 99, color: '#595DFD'}}
+                        onClick={() => setShowPicker(true)}/>
+                </div>
+                <StyledInputElement placeholder='Be Nice, Man'
+                                    onClick={() => setShowPicker(false)}
+                                    value={comment}
+                                    onChange={(event) => setComment(event.target.value)}
+                />
+            </InputBox>
             {
-                showPicker ?
-                    <Picker
-                        style={{
-                            position:'absolute',
-                            zIndex:99,
-                            left:'400px',
-                            top:'20px',
-                        }}
-                        set='apple'
-                        showPreview={false}
-                        showSkinTones={false}
-                        color='#3399FF'
-                        emojiSize={20}
-                        theme='dark'
-                    /> : <div/>
+                showPicker &&
+                <div style={{
+                    position: 'absolute',
+                    zIndex: 99,
+                    left: '3rem',
+                    top: '0',
+                }}>
+                    <Picker data={data} onEmojiSelect={handleSelectEmoji}/>
+                </div>
             }
-            <StyledInputElement
-                onClick={() => setShowPicker(false)}
-                placeholder='Be Nice, Man'
-                style={{
-                    height: '100%',
-                }}
-            />
-
-            <InsertEmoticonIcon sx={{zIndex:99, color:'#e9c46a'}} onClick={() => setShowPicker(true)}/>
-
-        </InputBox>
+        </div>
     );
+
 }
 
 export default CommentInput;

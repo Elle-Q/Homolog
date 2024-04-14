@@ -1,7 +1,6 @@
 import React, {useEffect} from 'react';
-import {alpha, styled} from "@mui/material/styles";
+import {alpha} from "@mui/material/styles";
 import {Drawer, FormControlLabel, FormLabel, Radio, RadioGroup} from "@mui/material";
-import {StyledInputElement} from "../../../../components/ui/CustomInput";
 import IconButton from "@mui/material/IconButton";
 import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
 import {UserStatus} from "../../../../constant/constant";

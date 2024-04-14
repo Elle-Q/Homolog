@@ -63,7 +63,7 @@
 .cart__item-btn {
   align-self: center !important;
   background-color: #0f141a !important;
-  color: #dcddde !important;
+  color: #9f9f9f !important;
   transition: all 0.5s ease-in-out;
 }
 .cart__item-btn:hover {
@@ -71,7 +71,7 @@
 }
 .cart__item-h2 {
   font-size: 1.4rem !important;
-  color: #dcddde;
+  color: #9f9f9f;
 }
 
 /*# sourceMappingURL=cart.css.map */

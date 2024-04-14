@@ -1,0 +1,33 @@
+@use '../../../styles' as *;
+
+.community {
+  min-height: 100vh;
+
+  &__heading-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+  }
+
+  &__heading {
+    width: 60vw;
+    font-size: 2rem;
+    color: #9f9f9f;
+    font-family: cursive;
+    padding: 2rem;
+    border-radius: 2rem;
+    text-align: center;
+    font-weight: 600;
+    text-shadow: 1px 1px 1px #000000;
+
+
+    & > span {
+      font-size: 1.6rem;
+      color: $color-primary;
+      background-color:rgba($color-primary,0.3);
+      padding: .5rem 2rem;
+      border-radius: 2rem;
+    }
+  }
+}

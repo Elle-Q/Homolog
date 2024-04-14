@@ -23,7 +23,7 @@ class AuthService {
     logout() {
         TokenService.removeAuth();
         UserService.removeUser()
-        window.location = "/app";
+        window.location = "/login";
     }
 
     signup(name, phone, password, code) {

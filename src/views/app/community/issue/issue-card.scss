@@ -1,61 +1,134 @@
-.issue-card-container {
-  display: flex;
-  justify-content: end;
-  background-color: transparent !important;
-  cursor: pointer;
-  align-items: center;
-  position: relative;
-  border: 1px #403D39 solid;
-  border-radius: 10px;
-  overflow: visible !important;
+@use '../../../../styles' as *;
 
-  &:hover {
-    transform: scale(1.01);
-    & > i::before {
-      left: 20%;
-      width: 150px;
+.issue-card {
+  &__avatar-box {
+    display: flex;
+    justify-content: flex-end;
+    padding: 1rem;
+  }
+
+  &__avatar {
+    width: 5rem;
+    height: 5rem;
+  }
+
+  &__body {
+    position: relative;
+
+    &--fixed-label {
+      position: absolute;
+      top: -1rem;
+      right: 0;
+      z-index: 10;
     }
-    & > i::after {
-      left: 80%;
-      width: 150px;
+
+    &--main {
+      display: flex;
+      flex-direction: column;
+      background-color: $color-secondary-dark !important;
+      cursor: pointer;
+      position: relative;
+      border-radius: 10px;
+      overflow: visible !important;
+
+      &:hover {
+        transform: scale(1.01);
+      }
+    }
+
+  }
+
+  &__heading {
+    color: gray;
+    align-items: center;
+    font-size: 1.2rem !important;
+    letter-spacing: 1px;
+    padding: .5rem 1.5rem;
+
+    & > span {
+      font-size: 1.4rem;
+      color: $color-tertiary;
+      margin-right: 1rem;
+      margin-left: 1rem;
+    }
+
+    & > img {
+      width: 1.5rem;
+      display: inline;
     }
   }
 
-  & > i {
-    position: absolute;
-    inset: 0;
-    display: block;
+  &__content {
+    max-height: 18rem;
+    overflow: hidden;
+
+    & > h2 {
+      color: $color-white-1;
+      font-size: 2rem;
+      font-weight: 400;
+      margin-bottom: 1rem;
+    }
+
+    & > pre {
+      color: $color-grey-light-2;
+      font-size: 1.4rem;
+      line-height: 2rem;
+      font-weight: 400;
+    }
   }
 
-  & > i::before {
-    content: '';
-    position: absolute;
-    top: -2px;
-    left: 80%;
-    height: 4px;
-    width: 100px;
-    background-color: #171717;
-    transform: translateX(-50%) skewX(325deg);
-    transition: 0.5s;
+  &__footer {
+    display: flex;
+    padding: 0 .5rem .5rem 1.5rem;
+
+    &-icon {
+      background-color: $color-secondary !important;
+
+      &--badge {
+        position: absolute;
+        color: $color-white;
+        background-color: $color-pink-light-1;
+        border-radius: 50%;
+        width: 1.5rem;
+        aspect-ratio: 1;
+        top: 0;
+        right: 0;
+      }
+    }
   }
 
-  & > i::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 20%;
-    height: 4px;
-    width: 100px;
-    background-color: #171717;
-    transform: translateX(-50%) skewX(325deg);
-    transition: 0.5s;
-  }
-}
+  &__md {
+    font-size: 1.6rem;
+    color: $color-grey-light-2;
 
-.issue-card-header {
-  color: gray;
-  align-items: center;
-  font-size: 12px;
-  letter-spacing: 1px;
-  margin: 5px 0 5px 20px;
+    & * > img {
+      width: 20rem;
+    }
+  }
+
+  &__comment {
+    font-size: 1.4rem;
+    color: $color-grey-light-2;
+    background-color: rgba(#0a0908, .5);
+    padding: .5rem 2rem;
+    display: flex;
+    align-items: center;
+
+    &-avatar {
+      width: 3rem !important;
+      height: 3rem !important;
+    }
+
+    &-name{
+      font-size: 1.4rem;
+      margin-left: .5rem;
+      color: $color-white-1;
+      font-weight: 700;
+    }
+
+    &-content{
+     flex: 1;
+    }
+
+  }
 }

@@ -14,7 +14,7 @@ import Search from "../views/app/search/search";
 import Item from "../views/app/item/item";
 import Account from "../views/app/account/Account";
 import Partner from "../views/app/partner/Partner";
-import Community from "../views/app/community/Community";
+import Community from "../views/app/community/community";
 import Issue from "../views/app/community/edit/issue";
 
 function Index() {

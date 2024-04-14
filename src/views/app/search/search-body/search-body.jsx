@@ -54,7 +54,7 @@ function SearchBody(props) {
                     hasMore={hasMore}
                     loader={<div key={0}>Loading...</div>}
                 >
-                    <div className="body-container">
+                    <div className="search__body">
                         {
                             list && list.map(item => (
                                 <ItemCard key={item.id} item={item} width="23%"/>

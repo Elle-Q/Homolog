@@ -1,69 +1,69 @@
-.carousel-container {
+@use "../../../../../styles" as *;
+
+.home-carousel {
   overflow: hidden;
   position: relative;
   background-color: transparent;
-  border-radius: 20px;
+  border-radius: 2rem;
 
-
-  & * .icon {
-    color: #00a896;
-    padding: 5px;
-
-    &:hover {
-      color: rgba(255, 255, 255, 0.8);
-    }
-  }
-
-  & .c-icon-container {
-    position: absolute;
-    background-color: rgba(2, 150, 134, 0.29);
-
-    &:hover {
-      background-color: rgba(0, 168, 150, 0.66);
-    }
-  }
-
-  & .left {
-    top: 40%;
-    left: 0;
-  }
-
-  & .right {
-    top: 40%;
-    right: 0;
-  }
-}
-
-
-.c-body {
-  display: flex;
-  transition: transform 0.5s ease-in-out;
-
-  & > img {
-    //max-height: 350px;
-    width: 100%;
-  }
-}
-
-
-.c-footer {
-  position: absolute;
-  right: 0;
-  left: 0;
-  bottom: 15px;
-
-  & .body {
+  &__body {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
+    transition: transform 0.5s ease-in-out;
 
-    & .slide-bar {
+    & > img {
+      width: 100%;
+    }
+  }
+
+  &__icon-box {
+    position: absolute !important;
+    background-color: rgba($color-tertiary, 0.29) !important;
+
+    &:hover {
+      background-color: rgba($color-tertiary, 0.66) !important;
+    }
+
+    &--left {
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+    }
+
+    &--right {
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
+    }
+  }
+
+  &__icon {
+    color: $color-tertiary;
+    padding: .5rem;
+
+    &:hover {
+      color: rgba($color-white, 0.8);
+    }
+  }
+
+  &__footer {
+    position: absolute;
+    right: 0;
+    left: 0;
+    bottom: 1.5rem;
+
+    &__body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+    }
+
+    &__bar {
       transition: all;
-      width: 40px;
-      height: 8px;
-      background-color: white;
-      border-radius: 20px;
+      width: 4rem;
+      height: .8rem;
+      background-color: $color-white;
+      border-radius: 2rem;
     }
   }
 }

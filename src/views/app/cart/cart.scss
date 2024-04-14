@@ -1,26 +1,58 @@
-.cart-span {
-  background-color: rgb(89,93,253);
-  color: #ffffff;
-  font-family: cursive;
-  font-size: 36px;
-  padding: 10px;
-  margin-bottom: 20px;
-  border-radius:0 100% 0 0 ;
-}
+@use "../../../styles" as *;
 
-.cart-button {
-  color: #595DFD !important;
-  width: 200px;
-  height: 40px;
-  background-color: rgba(89, 93, 253, 0.2) !important;
-  border-radius: 8px  !important;
-
-  &:hover {
-    background-color: #252525 !important;
+.cart {
+  &__btn-box {
+    text-align: center;
+    margin-top: 1rem;
   }
-}
 
-.cart-button-wrapper {
-  text-align: center;
-  margin-top: 10px;
+  &__btn--pay {
+    font-size: 1.6rem !important;
+    color: #595DFD !important;
+    width: 20rem;
+    height: 4rem;
+    background-color: rgba(89, 93, 253, 0.2) !important;
+    border-radius: .8rem !important;
+
+    &:hover {
+      background-color: #252525 !important;
+    }
+  }
+
+  &__item {
+    display: flex;
+    justify-content: center;
+    flex: 1;
+    margin-bottom: 2rem;
+    cursor: pointer;
+
+    & > img {
+      max-height: 10rem;
+      border-radius: 2.5rem;
+      margin-right: .5rem;
+    }
+  }
+
+  &__item-box {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__item-btn {
+    align-self: center !important;
+    background-color: $color-secondary-dark !important;
+    color: $color-white-1 !important;
+    transition: all .5s ease-in-out;
+
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+
+  &__item-h2 {
+    font-size: 1.4rem !important;
+    color: $color-white-1;
+  }
+
+
 }

@@ -1,48 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import Avatar from "@mui/material/Avatar";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import RoomOutlinedIcon from '@mui/icons-material/RoomOutlined';
-import {alpha, styled} from '@mui/material/styles';
 import EditIcon from '@mui/icons-material/Edit';
-import IconButton from "@mui/material/IconButton";
 import LogoutIcon from '@mui/icons-material/Logout';
 import AuthService from "../../../../api/auth.service";
 import {getCurrentEffect, getDefaultAvatar} from "../../../../api/config.service";
-import UserDrawer from "./drawer/user-drawer";
-import AvatarEditor from "./avatar/avatar_editor";
+import UserDrawer from "../user-drawer/user-drawer";
+import AvatarModal from "../avatar-modal/avatar_modal";
 import UserService from "../../../../api/user.service";
-import './profile.scss'
-
-const StyledTypography = styled(Typography)({
-    color: '#bbb',
-    lineHeight: '1.75em',
-    fontSize: '14px',
-    textAlign: 'center',
-    textShadow: '1px 1px 2px rgb(0 0 0 / 37%)'
-})
-
-
-const ActionButton = (props) => {
-    const {icon, onClick, name} = props;
-
-    return (
-        <IconButton onClick={onClick}
-                    sx={{
-                        position: "relative",
-                        left: `${name === 'logout' ? 30 : 70}px`,
-                        top: `${name === 'logout' && 80}px`,
-                        zIndex: '2',
-                        backgroundColor: alpha('#484846', 0.5),
-                        '&:hover': {
-                            transform: 'scale(1.3)',
-                            transition: 'all .2s ease .2s'
-                        }
-                    }}>
-            {icon}
-        </IconButton>
-    )
-}
+import '../account.scss'
+import {ActionButton} from "../../../../components/button/icon-button";
 
 function Profile(props) {
 
@@ -108,19 +75,23 @@ function Profile(props) {
                 />
                 {
                     effects.frame_effect &&
-                    <div className="profile-avatar-mask">
+                    <div className="profile__avatar--mask">
                         <img alt="loop" src={effects.frame_effect}/>
                     </div>
                 }
 
-                <ActionButton icon={<EditIcon sx={{color: "white"}}/>} name="edit" onClick={toggleDrawer(true)}/>
-                <ActionButton icon={<LogoutIcon sx={{color: "white"}}/>} name="logout" onClick={logout}/>
+                <ActionButton icon={<EditIcon sx={{color: "white"}} fontSize="large"/>}
+                              name="edit"
+                              onClick={toggleDrawer(true)}/>
+                <ActionButton icon={<LogoutIcon sx={{color: "white"}} fontSize="large"/>}
+                              name="logout"
+                              onClick={logout}/>
             </div>
         )
     }
 
     return (
-        <Box sx={{mb: '20px', textAlign: "center"}}>
+        <div className="profile">
             <AvatarWithEdit/>
             <UserDrawer
                 toggleDrawer={toggleDrawer}
@@ -128,24 +99,17 @@ function Profile(props) {
                 user={user}
             />
 
-            <Typography variant="h6" sx={{display: {xs: 'none', sm: 'block'}}}>
-                {user && user.name}
-            </Typography>
+            <h1 className="profile__name"> {user && user.name} </h1>
 
-            <Typography variant="body" sx={{
-                color: '#bbb',
-                lineHeight: '1.75em',
-                fontSize: '14px',
-                textShadow: '1px 1px 2px rgb(0 0 0 / 37%)'
-            }}>
+            <h2 className="profile__info">
                 {user && user.moto}
-            </Typography>
+            </h2>
 
-            <StyledTypography>
-                <RoomOutlinedIcon fontSize="small"/>{user && user.address}
-            </StyledTypography>
+            <h2 className="profile__info">
+                <RoomOutlinedIcon fontSize="small"/> {user && user.address}
+            </h2>
 
-            <AvatarEditor
+            <AvatarModal
                 user={user}
                 open={openModal}
                 handleClose={handleClose}
@@ -153,7 +117,7 @@ function Profile(props) {
                 defaultAvatars={defaultAvatars}
             />
 
-        </Box>
+        </div>
     );
 }
 

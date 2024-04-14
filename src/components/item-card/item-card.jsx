@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import IconButton from "@mui/material/IconButton";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import {Link} from "react-router-dom";
-import PriceTag from "../PriceTag";
+import PriceTag from "./price-tag";
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import {openSider} from "../../store/sider-slice";
 import {useDispatch} from "react-redux";
@@ -13,7 +13,6 @@ import DownloadIcon from '@mui/icons-material/Download';
 import {addItem2Cart} from "../../api/cart.service";
 import {toggleAtion} from "../../api/action.service";
 import Box from "@mui/material/Box";
-import {ColoredButton} from "../ui/CustomButton";
 import Debugger from "../debugger/debugger";
 
 function ItemCard(props) {
@@ -63,27 +62,28 @@ function ItemCard(props) {
     }
 
     return (
-        <Box className="item-card" sx={{width: `${width}`, position: 'relative'}}>
+        <Box className="item-card" sx={{width: `${width}`}}>
             <Link to={`/item/${item.id}`} key={item.id}>
                 <div className={getClass()}>
                     <img src={item.main && item.main.link} alt="item"/>
                 </div>
             </Link>
-
-            <span> {item.name}</span>
-            <Stack direction="row" sx={{justifyContent: 'space-between', alignItems: 'center'}}>
+            <span className="item-card__heading"> {item.name}</span>
+            <Stack className="item-card__btn-box" direction="row">
                 <div>
                     <IconButton onClick={handleCollect}>
-                        <FavoriteIcon fontSize="small" sx={{color: `${collected ? '#ff0a54' : 'white'}`}}/>
+                        <FavoriteIcon fontSize="large"
+                                      sx={{color: `${collected ? '#ff0a54' : 'white'}`}}/>
                     </IconButton>
                     {
                         item.bought ?
                             <IconButton onClick={handleDownload}>
-                                <DownloadIcon fontSize="small"/>
+                                <DownloadIcon fontSize="large"/>
                             </IconButton>
                             :
                             <IconButton onClick={handleAdd2Cart}>
-                                <AddShoppingCartIcon fontSize="small" sx={{color: `${added ? '#ff0a54' : 'white'}`}}/>
+                                <AddShoppingCartIcon fontSize="large"
+                                                     sx={{color: `${added ? '#ff0a54' : 'white'}`}}/>
                             </IconButton>
                     }
                 </div>
@@ -92,7 +92,7 @@ function ItemCard(props) {
                 }
             </Stack>
             {/*调试窗口*/}
-           {/*<Debugger item={item} />*/}
+            {/*<Debugger item={item} />*/}
         </Box>
     );
 }

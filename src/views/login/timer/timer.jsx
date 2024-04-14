@@ -25,16 +25,10 @@ function Timer(props) {
     }
 
     return (
-        <Button sx={{
-            backgroundColor: "rgba(49,47,46,0.4)",
-            color: '#3399ff',
-            fontSize: '18px',
-            marginLeft: '10px',
-            width: '150px'
-        }}
+        <button className="login__btn--varify"
                 onClick={SendMSCode}>
             发送验证码 {start && timer}
-        </Button>
+        </button>
     );
 }
 

@@ -1,4 +1,27 @@
+@use "../../styles" as *;
+
 .agreement {
-  font-size: 12px;
-  color: white;
+  font-size: 1.4rem;
+  color: $color-grey-light-2;
+  display: flex;
+  align-items: center;
+
+  &__checkbox {
+    color: $color-pink-dark-1 !important;
+
+    &.Mui-checked {
+      color: $color-pink-light-1 !important;
+    }
+  }
+
+  &__icon {
+    width: 1.4rem;
+    vertical-align: top;
+
+    &:hover {
+      color: #8ecae6
+    }
+  }
+
 }
+

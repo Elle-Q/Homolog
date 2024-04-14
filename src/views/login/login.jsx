@@ -1,11 +1,8 @@
 import React, {useState} from 'react';
-import Box from "@mui/material/Box";
 import {alpha} from "@mui/system";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
 import {useNavigate} from 'react-router-dom';
-import InputWithIcon from "../../components/icon-input/InputWithIcon";
 import PhoneIphoneIcon from "@mui/icons-material/PhoneIphone";
 import VpnKeyIcon from "@mui/icons-material/VpnKey";
 import PersonIcon from "@mui/icons-material/Person";
@@ -22,23 +19,7 @@ import {isPhone, varifyPsw} from "../../utils/VarifyUtil";
 import Agreement from "../../components/agreement/agreement";
 import {loginFail, loginSuccess, registerSuccess} from "../../api/authSlice";
 import WeChat from '../../assets/icons/wechat_login.svg'
-
-const SignButton = styled(Button)({
-    backgroundColor: "#5054fd",
-    color: '#dcddde',
-    fontSize: '26px',
-    width: '30%',
-    height: `50px`,
-    border: "none",
-    fontFamily: "cursive",
-    borderRadius: '10px',
-    marginRight: '10px',
-    '&:hover': {
-        backgroundColor: alpha("#5054fd", 0.8),
-        color: 'white',
-    }
-})
-
+import IconInput from "./icon-input/icon-input";
 
 function Login(props) {
     const [action, setAction] = useState('signin');//register
@@ -144,68 +125,63 @@ function Login(props) {
 
     return (
         <div className="login">
-            <div className="login__box">
-                <Stack sx={{mt: '5px'}}>
-                    <Typography variant="h4" align="center" color='#fff' sx={{fontFamily: 'cursive'}}>
-                        {
-                            action === 'signin' ? '欢迎回来' : '注册账号'
-                        }
-                    </Typography>
-
+            <Stack className="login__box">
+                <h1 className="heading-1">
                     {
-                        action === 'signin' ?
-                            <React.Fragment>
-                                <InputWithIcon placeholder="输入手机号"
-                                               onChange={handlePhoneChange}
-                                               value={phone}
-                                               icon={<PhoneIphoneIcon fontSize="small"/>}/>
-                                <InputWithIcon placeholder="输入密码"
-                                               type="password"
-                                               value={password}
-                                               onChange={handlePswChange}
-                                               icon={<VpnKeyIcon fontSize="small"/>}/>
-                            </React.Fragment>
-                            :
-                            <React.Fragment>
-                                <InputWithIcon ref={userNameRef} placeholder="输入昵称"
-                                               icon={<PersonIcon fontSize="small"/>}/>
-                                <InputWithIcon ref={phoneRef} placeholder="输入手机号"
-                                               onChange={phoneVerify}
-                                               icon={<PhoneIphoneIcon fontSize="small"/>}/>
-                                <InputWithIcon ref={codeRef} placeholder="输入短信验证码" type="verify"
-                                               icon={<ShieldIcon fontSize="small"/>}>
-                                    <Timer handleClickSend={handleClickSendSms}></Timer>
-                                </InputWithIcon>
-                                <InputWithIcon ref={passRef} placeholder="输入密码" type="password"
-                                               onChange={pswVerify}
-                                               icon={<VpnKeyIcon fontSize="small"/>}/>
-                            </React.Fragment>
+                        action === 'signin' ? '欢迎回来' : '注册账号'
                     }
-                    <label style={{color: 'red', marginLeft: '40px', fontSize: '14px'}}>{message}</label>
-                    <div style={{margin: "10px 0 10px 40px", color: '#6e6d6d', fontSize: "14px"}}>
-                        {action === 'signin' ? '没有账号? ' : '已有账号 '}
-                        <Link color="#5054fd" onClick={toggleAction} sx={{cursor: "pointer", fontSize: "16px"}}>
-                            {action === 'signin' ? ' 注册' : ' 登录'}
-                        </Link>
-                    </div>
-                    <div style={{marginLeft: "30px"}}>
-                        <Agreement handleAgree={() => setAgree(!agree)}
-                                   agree={agree}
-                                   label={'我已阅读并同意登录协议'}
-                                   type={'login_agreement'}/>
-                    </div>
-                    <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-                        <SignButton onClick={handleLogin}>
-                            {
-                                action === 'signin' ? '登录' : '注册'
-                            }
-                        </SignButton>
-                        <SignButton onClick={handleWechatLogin}>
-                            <img src={WeChat} alt="we_login"/>
-                        </SignButton>
-                    </div>
-                </Stack>
-            </div>
+                </h1>
+                {
+                    action === 'signin' ?
+                        <React.Fragment>
+                            <IconInput placeholder="输入手机号"
+                                       onChange={handlePhoneChange}
+                                       value={phone}
+                                       icon={<PhoneIphoneIcon fontSize="large"/>}/>
+                            <IconInput placeholder="输入密码"
+                                       type="password"
+                                       value={password}
+                                       onChange={handlePswChange}
+                                       icon={<VpnKeyIcon fontSize="large"/>}/>
+                        </React.Fragment>
+                        :
+                        <React.Fragment>
+                            <IconInput ref={userNameRef} placeholder="输入昵称"
+                                       icon={<PersonIcon fontSize="small"/>}/>
+                            <IconInput ref={phoneRef} placeholder="输入手机号"
+                                       onChange={phoneVerify}
+                                       icon={<PhoneIphoneIcon fontSize="small"/>}/>
+                            <IconInput ref={codeRef} placeholder="输入短信验证码" type="verify"
+                                       icon={<ShieldIcon fontSize="small"/>}>
+                                <Timer handleClickSend={handleClickSendSms}></Timer>
+                            </IconInput>
+                            <IconInput ref={passRef} placeholder="输入密码" type="password"
+                                       onChange={pswVerify}
+                                       icon={<VpnKeyIcon fontSize="small"/>}/>
+                        </React.Fragment>
+                }
+                <label className="login__label--warning">{message}</label>
+                <div className="login__label--notify">
+                    {action === 'signin' ? '没有账号? ' : '已有账号 '}
+                    <Link className="login__label--big" onClick={toggleAction}>
+                        {action === 'signin' ? ' 注册' : ' 登录'}
+                    </Link>
+                </div>
+                <div className="login__agree-box">
+                    <Agreement handleAgree={() => setAgree(!agree)}
+                               agree={agree}
+                               label={'我已阅读并同意登录协议'}
+                               type={'login_agreement'}/>
+                </div>
+                <button onClick={handleLogin} className="login__btn  login__btn--text">
+                    {
+                        action === 'signin' ? '登录' : '注册'
+                    }
+                </button>
+                <button onClick={handleWechatLogin} className="login__btn login__btn--svg">
+                    <img src={WeChat} alt="we_login"/>
+                </button>
+            </Stack>
         </div>
     );
 }

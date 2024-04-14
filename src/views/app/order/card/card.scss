@@ -1,4 +1,4 @@
-.order-card-container {
+.order-card {
   background-color: #0f141a;
   width: 100%;
   display: flex;
@@ -8,61 +8,103 @@
   border-radius: 8px;
   position: relative;
 
-  * span {
-    margin-right: 20px;
-    margin-left: 20px;
+  &__fixed-label {
+    position: absolute;
+    top: -1rem;
+    right: 0;
+    z-index: 10;
+  }
+
+  &__heading {
+    & > span {
+      margin-right: 2rem;
+      margin-left: 2rem;
+      color: #7b7b7b;
+      font-size: 1.2rem;
+    }
+
+    & > hr {
+      display: inline;
+    }
+  }
+
+  &__body {
+    border-radius: 0 0 .8rem .8rem;
+    padding: 2rem;
+    width: 100%;
+
+    > hr {
+      height: 3rem;
+      background-color: rgb(65, 63, 63);
+      align-self: center;
+    }
+  }
+
+  &__cell {
+    font-size: 1.4rem;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: #7b7b7b;
-    font-size: 12px;
-  }
-}
 
-.order-card-header {
-}
+    &--price {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #1bbc9b;
+      font-size: 1.4rem;
+    }
 
-.order-card-body {
-  border-radius: 0 0 8px 8px;
-  padding: 20px;
+    &--text {
+      min-width: 20rem;
+      flex-direction: column;
 
-  > hr {
-    height: 30px;
-    background-color: rgb(65, 63, 63);
-    align-self: center;
-  }
+      &--countdown,
+      &--countdown::before {
+        content: '⌚';
+        color: white;
+        font-size: 1.2rem;
+      }
 
-  > span {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #1bbc9b;
-  }
+      &--waitpay {
+        color: #f02d2d;
+        margin: 0;
+      }
 
-  & .count-down::before {
-    content: '⌚';
-  }
+      &--sub-span {
+        font-size: 1.2rem;
+      }
+    }
 
-  & .text-cell {
-    text-align: center;
-    width: 250px;
-    font-size: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-  }
+    &--item {
+      min-width: 20rem;
+      max-width: 25rem;
 
-  & .cell {
-    text-align: center;
-    width: 250px;
-
-    > button {
-      margin-right: 5px;
-      font-size: 12px;
-      color: #595DFD !important;
-      background-color: rgba(89, 93, 253, 0.2) !important;
-      border-radius: 8px !important;
+      & > img {
+        width: auto;
+        height: 5rem;
+        border-radius: .5rem;
+      }
 
       &:hover {
-        background-color: rgba(89, 93, 253, 0.32) !important;
+        cursor: pointer;
+      }
+    }
+
+    &--btn {
+      flex: 1;
+
+      > button {
+        margin-right: .5rem;
+        font-size: 1.2rem;
+        color: #595DFD !important;
+        background-color: rgba(89, 93, 253, 0.2) !important;
+        border-radius: .8rem !important;
+
+        &:hover {
+          background-color: rgba(89, 93, 253, 0.32) !important;
+        }
       }
     }
   }

@@ -1,10 +1,13 @@
-.order-container {
+.order {
   width: 80%;
-  margin: auto; }
-  .order-container .header {
-    margin-top: 50px; }
-    .order-container .header > span {
-      color: #D1D1D1;
-      font-size: 24px; }
+  margin: auto;
+}
+.order__heading {
+  margin-top: 50px;
+}
+.order__heading > span {
+  color: #D1D1D1;
+  font-size: 24px;
+}
 
 /*# sourceMappingURL=order.css.map */

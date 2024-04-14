@@ -1,7 +1,1 @@
-{
-"version": 3,
-"mappings": "AAAA,UAAW;EACT,SAAS,EAAE,IAAI;EACf,KAAK,EAAE,KAAK",
-"sources": ["agreement.scss"],
-"names": [],
-"file": "agreement.css"
-}
+{"version":3,"sourceRoot":"","sources":["../../styles/_utility.scss","../../styles/_typography.scss","agreement.scss","../../styles/_variable.scss"],"names":[],"mappings":"AAAA;EACE;;;AAGF;EACE;;;AAGF;EACE;;;AAGF;EACE;;;AAGF;EACE;;;AAGF;EACE;;;AChBF;EACE;EACA;EACA;EACA;;;ACPF;EACE;EACA,OCYmB;EDXnB;EACA;;AAEA;EACE;;AAEA;EACE;;AAIJ;EACE;EACA;;AAEA;EACE","file":"agreement.css"}

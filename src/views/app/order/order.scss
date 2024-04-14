@@ -1,8 +1,8 @@
-.order-container {
+.order {
   width: 80%;
   margin: auto;
 
-  & .header {
+  &__heading {
     margin-top: 50px;
 
     > span {
@@ -11,3 +11,4 @@
     }
   }
 }
+

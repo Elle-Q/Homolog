@@ -1,0 +1,17 @@
+@use "../../../../styles" as *;
+
+.sidebar {
+  &__heading {
+    background-color: rgb(89, 93, 253);
+    color: #ffffff;
+    font-family: cursive;
+    font-size: 3.6rem;
+    padding: 1rem;
+    margin-bottom: 2rem;
+    border-radius: 0 100% 0 0;
+  }
+
+  &__body {
+    padding: 1rem;
+  }
+}

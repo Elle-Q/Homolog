@@ -9,7 +9,7 @@ import Logo from "./logo/logo";
 import {useDispatch, useSelector} from "react-redux";
 import useScroll from "../../../../hook/useScroll";
 import {openSider, selectSider, setShow} from "../../../../store/sider-slice";
-import {setKeyword, toggleSearch} from "../../../../store/search";
+import {toggleSearch} from "../../../../store/search";
 
 import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 import SearchIcon from '@mui/icons-material/Search';
@@ -25,6 +25,7 @@ import UserService from "../../../../api/user.service";
 import AvatarBadge from "../../../../components/avatar-badge/avatar-badge";
 import MiniProfile from "./mini-profile/mini-profile";
 import {updateUrl} from "../../../../utils/ToolUtil";
+import logo from "../../../../assets/logo/logo.png";
 
 function NavBar(props) {
     let [params] = useSearchParams();
@@ -74,43 +75,46 @@ function NavBar(props) {
     }
 
     return (
-        <div className="navbar-container"
-             style={{transform: `${scroll.direction === 'down' ? 'translateY(-100%)' : ''}`}}>
-            <AppBar position="static" sx={{backgroundColor: '#252422'}}>
-                <Toolbar>
-                    <Logo title="LEETROLL"/>
-                    <div className="search-bar">
-                        <input type="text"
+        <div className="header" style={{transform: `${scroll.direction === 'down' ? 'translateY(-100%)' : ''}`}}>
+            <AppBar position="static" sx={{backgroundColor: '#0f141a'}}>
+                <Toolbar sx={{gap: 5}}>
+                    <div className="header__logo-box" onClick={() => navigate("/")}>
+                        <img className="header__logo-img" src={logo} alt="logo"/>
+                        <h1 className="header__logo-text"> LEETROLL </h1>
+                    </div>
+                    <div className="header__search-bar">
+                        <input className="header__search-input" type="text"
                                placeholder="搜索"
                                defaultValue={params.get("keyword")}
                                onKeyDown={handleEnter}
                                onChange={(event) => setKeyword(event.target.value)}/>
-                        <IconButton className={'search-button'} onClick={handleSearch}>
-                            <SearchIcon fontSize="medium"/>
+                        <IconButton className="header__search-button" onClick={handleSearch}>
+                            <SearchIcon fontSize="large" sx={{color: "#fff"}}/>
                         </IconButton>
                     </div>
-                    <Stack direction="row" spacing={2} sx={{width: '20%', alignItems: 'center'}}>
+                    <Stack direction="row" spacing={2} className="header__nav">
                         <Link color="inherit" to={"/"}>
-                            <HomeIcon fontSize="medium"/>
+                            <HomeIcon fontSize="large"/>
                         </Link>
                         <Link color="inherit" to={"/order/open"}>
                             <Badge badgeContent={orderCount} color="success">
-                                <PaidIcon fontSize="medium"/>
+                                <PaidIcon fontSize="large"/>
                             </Badge>
                         </Link>
                         <a color="inherit" onClick={handleOpenCart}>
                             <Badge badgeContent={cartCount} color="success">
-                                <ShoppingCartIcon fontSize="medium"/>
+                                <ShoppingCartIcon fontSize="large"/>
                             </Badge>
                         </a>
                         <Link color="inherit" to={"/community"}>
-                            <SupervisorAccountIcon fontSize="medium"/>
+                            <SupervisorAccountIcon fontSize="large"/>
                         </Link>
-                        <div style={{position: 'relative'}}>
+                        <div className="header__user">
                             <AvatarBadge handleMouseOver={() => setShowMiniProfile(true)}
                                          user={user}
                                          size={{width: 5, height: 5}}/>
-                            <MiniProfile user={user} show={showMiniProfile} handleClose={() => setShowMiniProfile(false)}/>
+                            <MiniProfile user={user} show={showMiniProfile}
+                                         handleClose={() => setShowMiniProfile(false)}/>
                         </div>
                     </Stack>
                 </Toolbar>

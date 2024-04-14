@@ -1,11 +1,11 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {ColoredButton} from "../ui/CustomButton";
 import {updatePrice, updateTag} from "../../api/item.service";
 import './debugger.scss'
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import {ListMetrics} from "../../api/cat.service";
+import ColorButton from "../button/color-button";
 
 function Debugger(props) {
     const {item} = props;
@@ -30,10 +30,10 @@ function Debugger(props) {
     return (
         <div className="debugger">
             <span>{item.id}</span>
-            <ColoredButton color="#e82986">删除</ColoredButton>
+            <ColorButton color="#e82986">删除</ColorButton>
             <div>
                 <input defaultValue={item.price} ref={priceRef}></input>
-                <ColoredButton color="#ffd166" handleClick={handleUpdatePrice}>修改价格</ColoredButton>
+                <ColorButton color="#ffd166" handleClick={handleUpdatePrice}>修改价格</ColorButton>
             </div>
             <div>
                 <FormControl className="select-container" size="small">

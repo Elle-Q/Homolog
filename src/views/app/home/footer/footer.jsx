@@ -1,11 +1,10 @@
 import React, {useState} from 'react';
-import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import Stack from "@mui/material/Stack";
 import WECHAT from '../../../../assets/icons/wechat.svg';
 import DISCORD from '../../../../assets/icons/discord.svg';
 import BILIBILI from '../../../../assets/icons/bilibili.svg';
-import WEGROUP from '../../../../assets/images/wechat_group_official.jpg';
+import WEPERSONAL from '../../../../assets/images/wechat_personal.jpg';
 import './footer.scss'
 
 function Footer(props) {
@@ -21,17 +20,9 @@ function Footer(props) {
     }
 
     return (
-        <Box sx={{
-            boxShadow: "none",
-            position: 'relative',
-            width: '100%',
-            bottom: 0,
-            left: 0,
-            backgroundColor: "transparent",
-            marginTop: '30px'
-        }}>
+        <div className="footer">
             <Divider sx={{backgroundColor: '#403D39'}}/>
-            <div className={'footer-container'}>
+            <div className={'footer__content'}>
                 <Stack spacing={2} direction={'row'}>
                     <div>
                         <div>©LEETROLL 2024 All rights reserved.</div>
@@ -40,23 +31,23 @@ function Footer(props) {
 
                     <Divider orientation="vertical" sx={{backgroundColor: '#403D39'}} flexItem/>
                     <div>联系方式:</div>
-                    <div className={'footer-icon'} onMouseEnter={toggleWeHidden} onMouseLeave={toggleWeHidden}>
-                        <div className={'footer-pop'} hidden={weHidden}>
-                            <img alt="wechat_group" src={WEGROUP}/>
+                    <div className={'footer__icon'} onMouseEnter={toggleWeHidden} onMouseLeave={toggleWeHidden}>
+                        <div className={'footer__popup'} hidden={weHidden}>
+                            <img alt="wechat_personal" src={WEPERSONAL}/>
                         </div>
                         <img alt="wechat" title="wechat" src={WECHAT}/>
                     </div>
 
-                    <div className={'footer-icon'}>
+                    <div className={'footer__icon'}>
                         <img alt="discord" title="discord" src={DISCORD}/>
                     </div>
 
-                    <div className={'footer-icon'} onClick={handleToBili}>
+                    <div className={'footer__icon'} onClick={handleToBili}>
                         <img alt="bilibili" title="bilibili" src={BILIBILI}/>
                     </div>
                 </Stack>
             </div>
-        </Box>
+        </div>
     );
 }
 

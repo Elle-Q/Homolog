@@ -1,0 +1,11 @@
+@use "variable" as *;
+
+$font-family-apple: -apple-system, sans-serif;
+$font-family-cursive: -apple-system, sans-serif;
+
+.heading-1 {
+  font-family: cursive;
+  color: $color-white;
+  text-align: center;
+  font-size: 3.5rem;
+}

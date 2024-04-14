@@ -66,12 +66,9 @@ function IssueCard(props) {
             </Grid>
             <Grid item xs={11} style={{position: "relative"}}>
                 <ColoredLabel color={getOrderStatus(issue.status).color} content={issue.status} style={{
-                    fontWeight: 'bold',
-                    fontSize: '14px',
                     right: 0,
                     top: 0,
                     position: "absolute",
-                    padding: '3px 8px',
                     zIndex: 10,
                 }}/>
                 <Card onClick={handleGoToIssue} className="issue-card-container">

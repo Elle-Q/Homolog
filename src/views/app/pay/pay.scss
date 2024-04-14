@@ -1,0 +1,50 @@
+@use "../../../styles" as *;
+
+.pay {
+  color: $color-white-1;
+  font-size: 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  & * > span {
+    color: $color-grey-light-2;
+  }
+
+  &__radio {
+    display: inline !important;
+    margin-left: 3.5rem;
+
+    & .MuiRadio-root.Mui-checked {
+      color: $color-primary;
+    }
+
+    & .MuiSvgIcon-root {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+  }
+
+  &__price {
+    font-size: 1.8rem;
+    color: $color-white-1 !important;
+  }
+
+  &__btn-box {
+    text-align: center;
+    margin-top: 1rem;
+  }
+
+  &__btn {
+    font-size: 1.6rem !important;
+    color: #595DFD !important;
+    width: 20rem;
+    height: 4rem;
+    background-color: rgba(89, 93, 253, 0.2) !important;
+    border-radius: .8rem !important;
+
+    &:hover {
+      background-color: #252525 !important;
+    }
+  }
+}

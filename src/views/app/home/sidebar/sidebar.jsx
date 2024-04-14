@@ -5,6 +5,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {closeSider, selectSider} from "../../../../store/sider-slice";
 import Cart from "../../cart/cart";
 import Pay from "../../pay/pay";
+import "./sidebar.scss"
 
 function Sidebar(props) {
     const dispatch = useDispatch();
@@ -17,17 +18,16 @@ function Sidebar(props) {
     return (
         <Drawer
             anchor='right'
-            PaperProps={{sx: {backgroundColor: "rgba(49,47,46,0.9)", width: '23%'}}}
+            PaperProps={{sx: {backgroundColor: "#1C2129", width: '23%'}}}
             open={open}
             onClose={handleCloseSider}
         >
             <div>
-                <span className={'cart-span'}>
+                <span className={'sidebar__heading'}>
                     {show==='cart'?'购物车':'支付'}
                 </span>
             </div>
-            <Divider sx={{marginBottom: '20px'}}></Divider>
-            <div style={{padding: '10px'}}>
+            <div className="sidebar__body">
                 {
                     show === 'cart' ? <Cart />
                     : <Pay />

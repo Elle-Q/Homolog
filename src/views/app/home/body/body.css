@@ -1,25 +1,59 @@
-.home__header {
-  width: 80%;
+.mt-3 {
+  margin-top: 3rem !important;
+}
+
+.mb-3 {
+  margin-bottom: 3rem !important;
+}
+
+.mt-5 {
+  margin-top: 5rem !important;
+}
+
+.ml-3 {
+  margin-left: 3rem !important;
+}
+
+.ml-5 {
+  margin-left: 5rem !important;
+}
+
+.p-2 {
+  padding: 2rem !important;
+}
+
+.heading-1 {
+  font-family: cursive;
+  color: #fff;
+  text-align: center;
+  font-size: 3.5rem;
+}
+
+.home__nav {
+  width: 80vw;
   overflow: hidden;
   display: flex;
-  margin: 20px auto auto; }
-.home__body {
-  width: 80%;
+  margin: 2rem auto auto;
+}
+.home__content {
+  width: 80vw;
   overflow: hidden;
-  margin: auto; }
+  margin: auto;
+}
 .home__carousel-box {
   width: 65%;
   margin: auto;
-  border: 1px solid rgba(44, 44, 43, 0.8);
-  box-shadow: inset 0 0 50px #171717;
-  border-radius: 20px; }
+  box-shadow: 0 0.5rem 2rem #000;
+  border-radius: 2rem;
+}
 .home__cat-box {
-  width: 35%;
-  margin: 50px auto;
   display: flex;
+  flex: 1;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  gap: 15px; }
+  gap: 1.5rem;
+  margin: 5rem auto;
+}
 
 /*# sourceMappingURL=body.css.map */

@@ -24,8 +24,8 @@ function Order(props) {
     }
 
     return (
-        <div className="order-container">
-            <div className="header">
+        <div className="order">
+            <div className="order__heading">
                 <span>订单交易</span>
                 <NavLink to="/order/open" style={sty}>进行中 ({openCnt})</NavLink>
                 <NavLink to="/order/complete" style={sty}>已完成 ({closedCnt})</NavLink>

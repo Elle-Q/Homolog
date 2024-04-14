@@ -14,6 +14,7 @@ import {closeSider, selectSider, setShow} from "../../../store/sider-slice";
 import {createOrder} from "../../../api/pay.service";
 import {checkOrderStatus} from "../../../api/order.service";
 import Qrcode from "./qrcode/qrcode";
+import "./pay.scss"
 
 function Pay(props) {
 
@@ -83,66 +84,58 @@ function Pay(props) {
     }
 
     return (
-        <div style={{color: '#D1D1D1', fontSize: '14px'}}>
+        <div className="pay">
             <div>
                 <span>支付方式:</span>
                 <RadioGroup
                     value={payChannel}
                     onChange={handlePayTypeChange}
                     row={true}
-                    sx={{
-                        display: 'inline',
-                        ml: '35px',
-                        '& .MuiRadio-root.Mui-checked': {
-                            color: '#595DFD',
-                        },
-                        '& .MuiSvgIcon-root': {
-                            width: '15px',
-                            height: '15px',
-                        }
-                    }}
+                    className="pay__radio"
                 >
                     <FormControlLabel value="wepay" control={<Radio/>}
                                       label={
                                           <IconButton>
                                               <img alt="icon" src={wepay}/>
                                           </IconButton>}/>
-                    <FormControlLabel value="alipay" control={<Radio/>}
-                                      disabled={true}
-                                      label={
-                                          <IconButton>
-                                              <img alt="icon" src={alipay}/>
-                                          </IconButton>}/>
+                    {/*<FormControlLabel value="alipay" control={<Radio/>}*/}
+                    {/*                  disabled={true}*/}
+                    {/*                  label={*/}
+                    {/*                      <IconButton>*/}
+                    {/*                          <img alt="icon" src={alipay}/>*/}
+                    {/*                      </IconButton>}/>*/}
                 </RadioGroup>
             </div>
 
-            <Divider/>
-            <p>金额: ￥{orderDetail.totalPrice}</p>
-            <p>优惠: -￥0</p>
-            <p>应付金额: <span style={{fontSize: '18px', color: 'white'}}>￥{orderDetail.totalPrice}</span></p>
-
+            <Divider variant="middle"/>
+            <div>
+                <p><span>金额:</span> ￥{orderDetail.totalPrice}</p>
+                <p><span>优惠:</span> -￥0</p>
+                <p><span>应付金额:</span>
+                    <span className="pay__price">￥{orderDetail.totalPrice}</span></p>
+            </div>
             <Agreement handleAgree={() => setAgree(!agree)}
                        agree={agree}
                        label={'我已阅读并同意购买协议'}
                        type={'pay_agreement'}
             />
 
-            <div className={'cart-button-wrapper'}>
-                <Button className={'cart-button'}
+            <div className={'pay__btn-box'}>
+                <Button className={'pay__btn'}
                         onClick={handlePay}> 确认支付
-                    {/*(<Timer expire={validTime}/>)*/}
                 </Button>
             </div>
 
             {
-                !order.id && <div className={'cart-button-wrapper'}>
-                    <Button className={'cart-button'}
+                !order.id &&
+                <div className={'pay__btn-box'}>
+                    <Button className={'pay__btn'}
                             onClick={() => dispatch(setShow("cart"))}> 回到购物车
                     </Button>
                 </div>
             }
 
-            <Divider sx={{mt: '50px', mb: '50px'}}/>
+            <Divider variant="middle"/>
             <IconButton><ErrorOutlineIcon sx={{color: '#d85038'}}/></IconButton>
             <span>注意事项</span>
             <ul style={{fontSize: '12px'}}>

@@ -22,25 +22,24 @@ function Carousel({children: slides, autoSlide = false, showDots = true}) {
     }
 
     return (
-        <div className="carousel-container">
-            <div className="c-body" style={{
-                transform: `translateX(-${curr * 100}%)`,
-            }}>
+        <div className="home-carousel">
+            <div className="home-carousel__body"
+                 style={{transform: `translateX(-${curr * 100}%)`}}>
                 {slides}
             </div>
-            <IconButton onClick={prev} className="c-icon-container left">
-                <ArrowBackIosNewIcon fontSize="large" className="icon"/>
+            <IconButton onClick={prev} className="home-carousel__icon-box home-carousel__icon-box--left">
+                <ArrowBackIosNewIcon fontSize="large" className="home-carousel__icon"/>
             </IconButton>
-            <IconButton onClick={next} className="c-icon-container right">
-                <ArrowForwardIosIcon fontSize="large" className="icon"/>
+            <IconButton onClick={next} className="home-carousel__icon-box home-carousel__icon-box--right">
+                <ArrowForwardIosIcon fontSize="large" className="home-carousel__icon"/>
             </IconButton>
             {
                 showDots &&
-                <div className="c-footer">
-                    <div className="body">
+                <div className="home-carousel__footer">
+                    <div className="home-carousel__footer__body">
                         {
                             slides && slides.map((_, i) => (
-                                <div className="slide-bar"
+                                <div className="home-carousel__footer__bar"
                                      key={i}
                                      style={{opacity: `${curr === i ? 1 : 0.5}`, padding: `${curr === i ? 5 : 0}px`}}/>
                             ))

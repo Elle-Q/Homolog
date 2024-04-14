@@ -1,3 +1,5 @@
+@use "../../styles" as *;
+
 .login {
   min-height: 100vh;
   display: flex;
@@ -5,52 +7,154 @@
   align-items: center;
   background-image: url("../../assets/bg/login.svg");
   background-size: cover;
-  //font-family: cursive;
 
   &__box {
-    padding: 3rem;
-    background-color: rgba(28, 28, 28, 0.8);
-    border-radius: 10px;
-    box-shadow: 0 0 8px #36393f;
-    flex-direction: row;
     display: flex;
+    background-color: rgba($color-black, 0.7);
+    box-shadow: 0 .4rem 1rem $color-black;
+    border-radius: 1rem;
+    padding: 3rem;
+    position: relative;
+  }
+
+  &__input-box {
+    margin-top: 3rem;
+    text-align: end;
+    display: flex;
+    align-items: center;
+
+    &__icon {
+      color: $color-white-1 !important;
+    }
+
+    &__input {
+      font-family: $font-family-apple;
+      font-size: 1.6rem !important;
+      color: $color-white-1 !important;
+      background-color: rgba($color-black, .9);
+      margin-left: .5rem;
+      padding-left: .5rem;
+      border-radius: .5rem;
+      width: 45rem;
+      height: 5rem;
+
+      &:hover {
+        border: .1rem solid $color-primary;
+      }
+    }
+  }
+
+  &__label {
+    &--warning {
+      color: red !important;
+      margin-left: 4rem;
+      font-size: 1.4rem;
+    }
+
+    &--notify {
+      margin: 1rem 0 1rem 4rem;
+      color: $color-grey-light-2;
+      font-size: 1.4rem;
+    }
+
+    &--big {
+      cursor: pointer;
+      font-size: 1.6rem !important;
+      color: $color-primary;
+    }
+  }
+
+  &__agree-box {
+    margin-left: 3rem;
+  }
+
+  &__btn {
+    font-family: cursive;
+    align-self: center;
+    color: $color-white;
+    font-size: 2.6rem;
+    border: none;
+
+    &--text {
+      background-color: $color-primary;
+      border-radius: 4.5rem;
+      padding: 1.6rem 6rem;
+
+      &:hover {
+        cursor: pointer;
+        background-color: rgba($color-primary, 0.8);
+        color: $color-white,
+      }
+
+    }
+
+    &--svg {
+      background-color: rgba($color-black, .2);
+      position: absolute;
+      bottom: 0;
+      right: -18rem;
+      border-radius: 50%;
+      padding: 6rem;
+      outline: 2rem solid $color-primary;
+      transition: all 1s;
+      animation: pulpAnimation .8s infinite alternate;
+
+      & > img {
+        width: 5rem;
+      }
+
+      &:hover {
+        cursor: pointer;
+        background-color: rgba($color-black, 0.4);
+        color: $color-white;
+      }
+
+    }
+
+    &--varify {
+      background-color: rgba($color-primary, .6);
+      color: $color-white;
+      font-size: 1.6rem;
+      margin-left: -15rem;
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 2rem;
+      z-index: 10;
+
+      &:focus {
+        outline: none;
+      }
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
   }
 }
 
-.content {
-  gap: 5rem;
-  width: 100%;
-  padding-top: 3rem;
-  position: relative;
+.login-result__span {
+  font-size: 3rem;
+  color: $color-white-1;
+  font-weight: 500;
+  font-family: cursive;
+
+  & > * {
+    text-decoration: none;
+    margin-left: 2rem;
+    font-size: 3.6rem;
+    color: $color-white;
+  }
 }
 
-.content:before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  border-bottom: 1px solid #3399ff;
-  transform: scaleX(1);
-}
-
-
-@keyframes bgAnimation {
+@keyframes pulpAnimation {
   0% {
-    background-position: 0 50%;
+    transform: scale(1);
   }
-
-  50% {
-    background-position: 100% 50%;
+  40% {
+    transform: scale(1.05);
   }
-
   100% {
-    background-position: 0 50%;
+    transform: scale(1);
   }
-}
-
-.qr-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }

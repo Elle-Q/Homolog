@@ -5,12 +5,11 @@ import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import {downloadAttachment, GetItem} from "../../../api/item.service";
-import catBriefInfo from "../../../json/catBriefInfo.json"
 import List from "./list/list";
 import PrevShow from "./prev/prev-show";
 import {useDispatch} from "react-redux";
 import {setItem} from "../../../store/item-slice";
-import {ThumbUpButton} from "../../../components/ui/IconButton";
+import {ThumbUpButton} from "../../../components/button/icon-button";
 import {openSider} from "../../../store/sider-slice";
 import DownloadIcon from '@mui/icons-material/Download';
 import IconButton from "@mui/material/IconButton";
@@ -109,8 +108,9 @@ function Item() {
                         <div style={{width: '100%'}}>
                             <img src={data && data.main && data.main.link} alt="bg" className="main-img"/>
                         </div>
-                        <Typography component="h4"> {data.name} </Typography>
-                        <Typography component="p"> {data.desp} </Typography>
+
+                        <h1> {data.name} </h1>
+                        <p> {data.desp} </p>
 
                         <Stack>
                             <span> 价格: ￥{data.price}</span>

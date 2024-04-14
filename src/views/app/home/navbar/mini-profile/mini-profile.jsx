@@ -30,33 +30,28 @@ function MiniProfile(props) {
     };
 
     return (
-        <div hidden={!show} className="mini-profile-container" onMouseLeave={handleClose}>
+        <div hidden={!show} className="mini-profile" onMouseLeave={handleClose}>
             {
                 user ? <React.Fragment>
                         {
                             effects && effects.bg_effect && effects.bg_effect.map((effect, index) => (
-                                <div key={index} className="profile-mask">
+                                <div key={index} className="mini-profile--mask">
                                     <img alt="loop" src={effect}/>
                                 </div>
                             ))
                         }
-                        <div className="mini-profile-banner"
-                             style={{backgroundImage: `url(${user.bgImg})`, backgroundSize: '100% 100%'}}></div>
-                        <div className="mini-profile-avatar">
-                            <div className="avatar">
+                        <div className="mini-profile__banner" style={{backgroundImage: `url(${user.bgImg})`}}></div>
+                        <div className="mini-profile__avatar-box">
+                            <div className="mini-profile__avatar">
                                 <AvatarBadge user={user} size={{width: 10, height: 10}}/>
                             </div>
-                            <div className="avatar-mask">
+                            <div className="mini-profile__avatar--mask">
                                 <img alt="loop" src={effects && effects.frame_effect}/>
                             </div>
                         </div>
-                        <div style={{display: 'flex', justifyContent: 'flex-end', marginTop: '20px'}}>
-                            <div style={{
-                                padding: '5px 20px',
-                                backgroundColor: 'rgba(255,255,255,0.99)',
-                                borderRadius: '10px'
-                            }}>
-                                <IconButton style={{backgroundColor: '#00a896', width: '25px', height: '25px'}}>
+                        <div className="mini-profile__icon-box">
+                            <div className="mini-profile__icon-wrapper">
+                                <IconButton className="mini-profile__icon">
                                     {
                                         user.gender === 'female' ?
                                             <FemaleIcon fontSize="small" sx={{color: 'white'}}/>
@@ -65,37 +60,27 @@ function MiniProfile(props) {
                                 </IconButton>
                             </div>
                         </div>
-                        <div className="mini-profile-body">
-                            <div className="body">
-                                <span style={{fontSize: '18px'}}>{user.name}</span>
+                        <div className="mini-profile__nav">
+                            <div className="mini-profile__nav-box">
+                                <span style={{fontSize: '1.8rem'}}>{user.name}</span>
                                 <span>{user.moto}</span>
                                 <Divider/>
-                                <li className="link-li" onClick={enterAccount}>
+                                <li className="mini-profile__nav-link" onClick={enterAccount}>
                                     <img alt="icon" src={menuIcon}/>
                                     <span>个人主页</span>
                                 </li>
-                                <li className="link-li" onClick={() => navigate("/order/open")}>
+                                <li className="mini-profile__nav-link" onClick={() => navigate("/order/open")}>
                                     <img alt="icon" src={menuIcon}/>
                                     <span>我的订单</span>
                                 </li>
-
                             </div>
                         </div>
-                        <li className="link-li"
-                            style={{display: 'flex', justifyContent: 'center', color: '#595DFD', padding: '10px'}}>退出登录
-                        </li>
+                        <li className="mini-profile__nav-link mini-profile__logout">退出登录</li>
                     </React.Fragment>
                     :
-                    <div style={{
-                        height: '200px',
-                        display: 'flex',
-                        alignItems: "center",
-                        justifyContent: "center",
-                        color: '#777',
-                        fontSize: '20px'
-                    }}>
+                    <div className="mini-profile__login-box">
                         去
-                        <Link to={`/login`} style={{color: '#595DFD', width: '80px'}}>
+                        <Link className="mini-profile__login-btn" to={`/login`}>
                             登录
                         </Link>
                     </div>

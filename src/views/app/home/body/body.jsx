@@ -2,9 +2,9 @@ import React, {useEffect, useState} from 'react';
 import Subject from "./subject/subject";
 import {ListAllCat, ListCatsWith4Items} from "../../../../api/cat.service";
 import CatCard from "./cat-card/cat-card";
-import "./body.scss"
 import Carousel from "./carousel/carousel";
 import {getCarousel} from "../../../../api/config.service";
+import "./body.scss"
 
 function Body() {
 
@@ -36,7 +36,7 @@ function Body() {
 
     return (
         <React.Fragment>
-            <div className={'home__header'}>
+            <div className={'home__nav'}>
                 <div className="home__carousel-box">
                     <Carousel autoSlide={true}>
                         {
@@ -57,7 +57,7 @@ function Body() {
                     }
                 </div>
             </div>
-            <div className="home__body">
+            <div className="home__content">
                 {
                     catItems && catItems.map((catItem, index) => {
                         return (<Subject key={index} subject={catItem}/>)

@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import {Modal} from "../Modal";
+import {Modal} from "../modal/modal";
 import {Checkbox} from "@mui/material";
-import {pink} from "@mui/material/colors";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import Markdown from 'react-markdown'
 import {getAgreement} from "../../api/config.service";
@@ -30,29 +29,18 @@ function Agreement(props) {
 
     return (
         <React.Fragment>
-            <div style={{color: '#6e6d6d', fontSize: "14px", display: 'flex', alignItems: 'center'}}>
+            <div className="agreement">
                 <Checkbox
+                    className="agreement__checkbox"
                     checked={agree}
                     onChange={handleAgree}
                     size="small"
-                    sx={{
-                        color: pink[800],
-                        '&.Mui-checked': {
-                            color: pink[600],
-                        },
-                    }}
                 />
-                <span style={{fontSize:'12px'}}>{label}</span>
-                <HelpOutlineIcon sx={{
-                    width: '14px',
-                    verticalAlign: 'top',
-                    '&:hover': {
-                        color: '#8ecae6'
-                    }
-                }} onClick={toggleOpenAgr}/>
+                <span>{label}</span>
+                <HelpOutlineIcon className="agreement__icon" onClick={toggleOpenAgr}/>
             </div>
             <Modal title="leetroll用户登录注册协议"
-                   maxWidth="sm"
+                   maxWidth="md"
                    open={openAgreement}
                    handleClose={toggleOpenAgr}
                    handleOK={handleOK}>

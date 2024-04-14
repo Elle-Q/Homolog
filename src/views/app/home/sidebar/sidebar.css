@@ -1,0 +1,45 @@
+.mt-3 {
+  margin-top: 3rem !important;
+}
+
+.mb-3 {
+  margin-bottom: 3rem !important;
+}
+
+.mt-5 {
+  margin-top: 5rem !important;
+}
+
+.ml-3 {
+  margin-left: 3rem !important;
+}
+
+.ml-5 {
+  margin-left: 5rem !important;
+}
+
+.p-2 {
+  padding: 2rem !important;
+}
+
+.heading-1 {
+  font-family: cursive;
+  color: #fff;
+  text-align: center;
+  font-size: 3.5rem;
+}
+
+.sidebar__heading {
+  background-color: rgb(89, 93, 253);
+  color: #ffffff;
+  font-family: cursive;
+  font-size: 3.6rem;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  border-radius: 0 100% 0 0;
+}
+.sidebar__body {
+  padding: 1rem;
+}
+
+/*# sourceMappingURL=sidebar.css.map */

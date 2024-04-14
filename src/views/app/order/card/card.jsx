@@ -8,7 +8,6 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import {getOrderStatus} from "../../../../utils/ToolUtil";
 import {delOrder} from "../../../../api/order.service";
 import {setOpen} from "../../../../components/alert/confirm/confirmSlice";
@@ -66,67 +65,56 @@ function Card(props) {
     }
 
     return (
-        <div className="order-card-container">
-            <ColoredLabel color={orderStatus.color} content={orderStatus.text} style={{
-                fontWeight: 'bold',
-                fontSize: '12px',
-                right: -10,
-                top: -10,
-                position: "absolute",
-                padding: '5px 8px',
-                zIndex: 10,
-            }}/>
-            <div>
+        <div className="order-card">
+            <ColoredLabel color={orderStatus.color}
+                          content={orderStatus.text}
+                          className="order-card__fixed-label"/>
+            <div className="order-card__heading">
                 <span>订单编号: {order.id}</span>
-                <Divider orientation="vertical" sx={{display: 'inline', backgroundColor: 'rgb(65,63,63)',}}/>
+                <Divider orientation="vertical"/>
                 <span>创建时间: {order.createTime}</span>
                 {
                     order.payCode && <span>支付单号: {order.payCode}</span>
                 }
             </div>
-            <Divider sx={{backgroundColor: 'rgb(65,63,63)', width: '100%'}}/>
-            <Stack direction="row" className="order-card-body" spacing={3}>
-                <div className="cell">
+            <Divider sx={{width: '100%'}}/>
+            <Stack direction="row" className="order-card__body" spacing={3}>
+                <div className="order-card__cell order-card__cell--item" onClick={handleShowDetail}>
                     {
-                        thumbnails.map(thumbnail => {
-                            return <img key={thumbnail.itemId}
-                                        style={{width: 'auto', height: '50px', borderRadius: '5px'}}
-                                        src={thumbnail.main} alt="thumbnail"/>
-                        })
+                        thumbnails.map(thumbnail => (<img key={thumbnail.itemId} src={thumbnail.main} alt="thumbnail"/>))
                     }
-                    <MoreHorizIcon
-                        onClick={handleShowDetail}
-                        fontSize="large"
-                        sx={{color: 'rgb(65,63,63)', cursor: 'pointer'}}/>
+                    <MoreHorizIcon fontSize="large" sx={{color: 'rgb(65,63,63)', cursor: 'pointer'}}/>
                 </div>
-                <Divider orientation="vertical" flexItem/>
-                <span>￥{order.totalPrice}</span>
 
                 <Divider orientation="vertical" flexItem/>
-                <div className="text-cell">
+                <span className="order-card__cell--price">￥{order.totalPrice}</span>
+                <Divider orientation="vertical" flexItem/>
+
+                <div className="order-card__cell order-card__cell--text">
                     {
                         order.status !== 'closed' ?
                             <React.Fragment>
-                                <p style={{margin: '0', color: '#f02d2d'}}>等待付款</p>
-                                <span className="count-down">23:59:04</span>
+                                <p className="order-card__cell--text--waitpay">等待付款</p>
+                                <span className="order-card__cell--text--countdown">23:59:04</span>
                             </React.Fragment>
                             :
                             <React.Fragment>
-                                <span style={{color: '#7b7b7b'}}>付款成功</span>
-                                <span style={{fontSize: '10px', color: '#7b7b7b'}}>
-                                    {order.payChannel === 'wepay' ? '微信支付' : '支付宝'}</span>
+                                <span>付款成功</span>
+                                <span className="order-card__cell--text--sub-span"> {order.payChannel === 'wepay' ? '微信支付' : '支付宝'}</span>
                             </React.Fragment>
                     }
                 </div>
 
                 <Divider orientation="vertical" flexItem/>
-                <div className="text-cell">
-                    <p style={{margin: '0', color: '#7b7b7b'}}>付款时间</p>
-                    <span>{order.payTime ? order.payTime : '-'}</span>
+
+                <div className="order-card__cell order-card__cell--text">
+                    <p>付款时间</p>
+                    <span className="order-card__cell--text--sub-span">{order.payTime ? order.payTime : '-'}</span>
                 </div>
 
                 <Divider orientation="vertical" flexItem/>
-                <div className="cell">
+
+                <div className="order-card__cell order-card__cell--btn">
                     {order.status === 'open' && <Button onClick={handleGoPay}>立即支付</Button>}
                     {order.status !== 'closed' && <Button onClick={handleCancelOrder}>取消订单</Button>}
                     {order.status === 'closed' && <Button onClick={handleHelp}>申请售后</Button>}

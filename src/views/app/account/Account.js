@@ -1,10 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import Box from "@mui/material/Box";
-import TabBar from "./tab/TabBar";
-import BgModal from "./profile/bg/bg-modal";
+import TabBar from "./tab/tab";
+import BgModal from "./bg-modal/bg-modal";
 import UserService from "../../../api/user.service";
 import Profile from "./profile/profile";
-import {getCurrentEffect} from "../../../api/config.service";
+import "./account.scss"
 
 function Account(props) {
 
@@ -40,25 +39,13 @@ function Account(props) {
     };
 
     return (
-        <div style={{backgroundColor: '#111'}}>
-            <Box
-                sx={{
-                    display: "flex",
-                    height: '600px',
-                    justifyContent: "center",
-                    alignItems: "end",
-                    backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)), url(${bgUri})`,
-                    opacity: 1,
-                    '&:hover': {
-                        opacity: 0.8,
-                        transition: 'opacity 200ms ease-in ',
-                        cursor: 'pointer',
-                    },
-                }}
+        <div>
+            <div className="section-profile"
+                style={{ backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)), url(${bgUri})`,}}
                 onClick={onClickBG}
             >
                 <Profile />
-            </Box>
+            </div>
 
             {/*修改背景图像*/}
             <BgModal

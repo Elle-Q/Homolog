@@ -3,42 +3,54 @@
   margin-left: 5%;
   margin-top: 10px;
   margin-right: 5%;
-  color: white; }
-  .item-container span, .item-container h5 {
-    color: grey; }
-  .item-container .behave-area span {
-    font-size: 12px;
-    color: #5b5756; }
-  .item-container .main-img {
-    border-radius: 10px;
-    max-height: 300px;
-    max-width: 100%; }
-  .item-container .icon-container {
-    border: 1px solid #0f141a;
-    width: 100%;
-    min-height: 50px;
-    border-radius: 10px;
-    margin-top: 20px;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    background-color: #0f141a; }
-    .item-container .icon-container:hover {
-      background-color: rgba(15, 20, 26, 0.73); }
-  .item-container .tab {
-    cursor: pointer;
-    width: 110px;
-    height: 30px;
-    margin-bottom: 0;
-    text-align: center;
-    color: white;
-    font-size: 14px;
-    margin-right: 50px; }
-    .item-container .tab:hover {
-      color: #EB5050;
-      border-bottom: 3px solid #EB5050; }
+  color: white;
+}
+.item-container span, .item-container h5 {
+  color: grey;
+  font-size: 1.6rem;
+}
+.item-container p {
+  font-size: 1.6rem;
+}
+.item-container .behave-area span {
+  font-size: 12px;
+  color: #5b5756;
+}
+.item-container .main-img {
+  border-radius: 10px;
+  max-height: 300px;
+  max-width: 100%;
+}
+.item-container .icon-container {
+  border: 1px solid #0f141a;
+  width: 100%;
+  min-height: 50px;
+  border-radius: 10px;
+  margin-top: 20px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  background-color: #0f141a;
+}
+.item-container .icon-container:hover {
+  background-color: rgba(15, 20, 26, 0.73);
+}
+.item-container .tab {
+  cursor: pointer;
+  width: 110px;
+  height: 30px;
+  margin-bottom: 0;
+  text-align: center;
+  color: white;
+  font-size: 14px;
+  margin-right: 50px;
+}
+.item-container .tab:hover {
+  color: #EB5050;
+  border-bottom: 3px solid #EB5050;
+}
 
 .format-label {
   text-align: center;
@@ -46,14 +58,17 @@
   color: #6e6d6d;
   display: inline-block;
   padding: 4px 18px;
-  border-radius: 5px; }
-  .format-label:hover {
-    background-color: #595DFD;
-    color: white; }
+  border-radius: 5px;
+}
+.format-label:hover {
+  background-color: #595DFD;
+  color: white;
+}
 
 .select {
   background-color: #595DFD;
   color: white !important;
-  cursor: pointer; }
+  cursor: pointer;
+}
 
 /*# sourceMappingURL=item.css.map */

@@ -26,13 +26,16 @@ function Search() {
     }
 
     return (
-        <div className="search-container">
+        <div className="search">
             <Navbar catId={catId}/>
-            <div className="filter-container">
+            <div className="search__filter-box">
                 <span>{totalSize}个资源 </span>
                 <IconButton><FilterListIcon fontSize="small"/>过滤</IconButton>
             </div>
-            <SearchBody keyword={keywordP} catId={catIdP} metric={metricP} updateSize={updateSize}/>
+            <SearchBody keyword={keywordP}
+                        catId={catIdP}
+                        metric={metricP}
+                        updateSize={updateSize}/>
         </div>
     );
 }

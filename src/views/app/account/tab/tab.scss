@@ -1,3 +1,28 @@
+@use "../../../../styles" as *;
+
+.account-tab {
+
+  &__tab {
+    font-weight: 400;
+    font-size: 1.4rem !important;
+    margin-right: 1rem;
+    color: $color-grey-light-1 !important;
+
+    &.Mui-selected {
+      color: #595DFD !important;
+      background-color: $color-secondary-dark !important;
+    }
+
+    &:hover {
+      color: #595DFD !important;
+    }
+
+    &.Mui-focusVisible {
+      background-color: rgba(100, 95, 228, 0.32) !important;
+    }
+  }
+}
+
 .account-tab-container {
   flex-wrap: wrap;
   gap: 10px;

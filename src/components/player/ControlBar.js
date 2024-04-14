@@ -63,14 +63,14 @@ function ControlBar({
             }}
                     onClick={() => {
                     }}>
-                <SkipNextRoundedIcon fontSize="medium" sx={{color: '#595DFD'}}/>
+                <SkipNextRoundedIcon fontSize="large" sx={{color: '#595DFD'}}/>
             </Button>
             <Button sx={{
                 backgroundColor: "inherit",
                 border: "none",
             }}
                     onClick={rePlay}>
-                <ReplayRoundedIcon fontSize="medium" sx={{color: '#595DFD'}}/>
+                <ReplayRoundedIcon fontSize="large" sx={{color: '#595DFD'}}/>
             </Button>
             <span style={{color: "#777", fontSize: '14px'}}>{showTime} /</span>
             <span style={{color: "#777", fontSize: '14px'}}>&nbsp;{totalTime}</span>
@@ -89,7 +89,7 @@ function ControlBar({
                 <Typography
                     style={{
                         color: "#777",
-                        fontSize: '0.8rem',
+                        fontSize: '1.4rem',
                         fontFamily: '-apple-system'
                     }}>清晰度
                 </Typography>
@@ -101,7 +101,7 @@ function ControlBar({
                                 border: "none",
                                 backgroundColor: "transparent",
                                 color: '#777',
-                                fontSize: '0.8rem',
+                                fontSize: '1.4rem',
                                 mt: '2px',
                                 ml: '10px',
                                 pl: 0,

@@ -1,16 +1,18 @@
+@use "../../styles" as *;
 
 .item-card {
   display: flex;
   flex-direction: column;
-  border-radius: 20px !important;
-  background-color: #0f141a !important;
   justify-content: space-between;
-  box-shadow: 0 4px 8px #0f141a;
   height: fit-content;
-  min-height: 250px;
+  min-height: 25rem;
+  position: relative;
+  border-radius: 2rem !important;
+  background-color: $color-secondary-dark !important;
+  box-shadow: 0 .8rem .8rem $color-secondary-dark;
 
   &:hover {
-    border: 2px solid #313a56;
+    border: .2rem solid $color-secondary;
 
     & .media-container_texture > img {
       transform: scale(1.2);
@@ -18,9 +20,18 @@
     }
   }
 
+  &__heading {
+    font-size: 1.6rem;
+  }
+
+  &__btn-box {
+    justify-content: space-between;
+    align-items: center;
+  }
+
   .text {
-    margin-left: 15px;
-    font-size: 12px;
+    margin-left: 1.5rem;
+    font-size: 1.2rem;
     color: #5b5756
   }
 
@@ -29,20 +40,20 @@
   }
 
   span {
-    padding: 8px;
+    padding: .8rem;
     font-weight: bold;
     color: #ccc
   }
 
   .media-container {
     width: 100%;
-    border-radius: 20px;
+    border-radius: 2rem;
     display: flex;
     justify-content: center;
 
     > img {
       width: 100%;
-      border-radius: 20px;
+      border-radius: 2rem;
     }
   }
 
@@ -82,8 +93,8 @@
   }
 
   .media-container_tutorial {
-    max-height: 250px;
-    min-height: 200px;
+    max-height: 25rem;
+    min-height: 20rem;
     display: flex;
     overflow: hidden;
   }

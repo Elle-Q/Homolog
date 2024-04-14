@@ -34,10 +34,10 @@ function Cart() {
         setTotalPrice(price)
     }
 
-    const handleSelectItem = (event, item) => {
+    const handleSelectItem = (item) => {
         items.forEach(i => {
             if (i.id === item.id) {
-                i.checked = event.target.checked
+                i.checked = !i.checked
             }
         })
         setItems(items)
@@ -72,19 +72,21 @@ function Cart() {
 
     return (
         <React.Fragment>
-            {items && items.map(item => {
-                return <FormControlLabel
-                    key={item.id}
-                    label={<CartItem item={item} handleDelItem={handleDelItem}/>}
-                    control={<Checkbox onChange={(event) => handleSelectItem(event, item)}
-                                       size="small"
-                                       sx={{'& .MuiSvgIcon-root': {color: '#e82986'}}}/>}
-                >
-                </FormControlLabel>
-            })}
+            {items && items.map(item => (
+                <div className="cart__item-box" key={item.id}>
+                    <FormControlLabel
+                        label=""
+                        control={<Checkbox onChange={() => handleSelectItem(item)}
+                                           size="large"
+                                           sx={{'& .MuiSvgIcon-root': {color: '#e82986'}}}/>}
+                    />
+                    <CartItem item={item}
+                              handleDelItem={handleDelItem}/>
+                </div>
+            ))}
             {totalPrice > 0 &&
-                <div className={'cart-button-wrapper'}>
-                    <Button className={'cart-button'}
+                <div className={'cart__btn-box'}>
+                    <Button className={'cart__btn--pay'}
                             onClick={handleGoPay}> 去支付(￥{totalPrice})
                     </Button>
                 </div>

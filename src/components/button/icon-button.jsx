@@ -10,9 +10,11 @@ export const ThumbUpButton = (props) => {
                            width: `${props.width}`,
                            height: `${props.height}`,
                            color: `${props.color}`,
+                           backgroundColor: '#1C2129'
                        }}
                        onClick={props.onClick}>
-        <ThumbUpOffAltIcon sx={{width: `${props.width}`, height: `${props.height}`,}}/>
+        <ThumbUpOffAltIcon  fontSize="large"
+                            sx={{width: `${props.width}`, height: `${props.height}`,}}/>
     </IconButton>
 }
 
@@ -22,6 +24,7 @@ export const ThumbDownButton = (props) => {
                            width: `${props.width}`,
                            height: `${props.height}`,
                            color: `${props.color}`,
+                           backgroundColor: '#1C2129'
                        }}
                        onClick={props.onClick}>
         <ThumbDownOffAltIcon sx={{width: `${props.width}`, height: `${props.height}`,}}/>

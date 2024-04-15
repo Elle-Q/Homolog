@@ -15,6 +15,7 @@ import {useDispatch} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {addItem2Cart} from "../../../../api/cart.service";
 import {openSider, setData, setShow} from "../../../../store/sider-slice";
+import Countdown from "../../../../components/countdown/countdown";
 
 function Card(props) {
     const {data, cancelOrder} = props;
@@ -95,7 +96,8 @@ function Card(props) {
                         order.status !== 'closed' ?
                             <React.Fragment>
                                 <p className="order-card__cell--text--waitpay">等待付款</p>
-                                <span className="order-card__cell--text--countdown">23:59:04</span>
+                                <Countdown date={order.createTime} expire={86400}/>
+                                {/*<span className="order-card__cell--text--countdown">23:59:04</span>*/}
                             </React.Fragment>
                             :
                             <React.Fragment>
@@ -121,7 +123,7 @@ function Card(props) {
                 </div>
             </Stack>
 
-            <div hidden={!showDetail}>
+            <div hidden={!showDetail} className="fadein">
                 {
                     details.map(detail => (
                         <Stack key={detail.itemId} direction="row"

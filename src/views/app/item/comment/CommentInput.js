@@ -12,15 +12,14 @@ const InputBox = styled('div')(({theme}) => ({
     justifyContent: "space-between",
     flexDirection: 'column',
     zIndex: 1,
-    borderRadius: '1rem 1rem 0 0',
+    borderRadius: '1rem 1rem  0 0 ',
     backgroundColor: '#0A1929',
     width: '100%',
-    marginTop: '.5rem',
     minHeight: '5rem',
     padding: '0 1rem',
-    background: alpha('#0a0908', 0.5),
+    background: alpha('#0a0908', 0.7),
     '&:hover': {
-        backgroundColor: alpha('#0a0908', 0.7),
+        backgroundColor: alpha('#0a0908', 0.9),
     },
     '&:focus': {
         outline: 'none',
@@ -44,7 +43,7 @@ function CommentInput(props) {
     }
 
     return (
-        <div style={{position: 'relative'}}>
+        <div style={{position: 'relative'}} onClick={(e) => e.stopPropagation()}>
             <InputBox>
                 <div style={{display: 'flex', alignItems: 'center', justifyContent: 'flex-start'}}>
                     <IconButton onClick={handleSendComment}>
@@ -65,7 +64,7 @@ function CommentInput(props) {
                 showPicker &&
                 <div style={{
                     position: 'absolute',
-                    zIndex: 99,
+                    zIndex: 999,
                     left: '3rem',
                     top: '0',
                 }}>

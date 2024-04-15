@@ -1,0 +1,57 @@
+@use "../../styles" as *;
+
+.comment {
+  width: 100%;
+  margin-top: 1rem;
+  background-image: radial-gradient(circle, #1c2129, #191e25, #161b21, #13171e, #0f141a);
+  position: relative;
+  border-radius: 1rem;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    box-shadow: 0 0 30px 5px #595DFD;
+    filter: blur(50px);
+  }
+
+  &__user-box {
+    padding: .5rem 2rem;
+  }
+
+  &__user {
+    font-size: 1.4rem;
+    color: $color-grey-light-2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &-avatar {
+      width: 3rem !important;
+      height: 3rem !important;
+    }
+
+    &-name {
+      font-size: 1.4rem;
+      margin-left: .5rem;
+      color: $color-white-1;
+      font-weight: 700;
+    }
+
+    &-content {
+      flex: 1;
+      align-self: center;
+    }
+
+    &-time {
+      font-size: 1.1rem !important;
+      color: $color-grey-light-2;
+    }
+
+  }
+
+}

@@ -5,12 +5,10 @@ import HomeIcon from '@mui/icons-material/Home';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Stack from "@mui/material/Stack";
 import {Link, useLocation, useNavigate, useSearchParams} from "react-router-dom";
-import Logo from "./logo/logo";
 import {useDispatch, useSelector} from "react-redux";
 import useScroll from "../../../../hook/useScroll";
 import {openSider, selectSider, setShow} from "../../../../store/sider-slice";
 import {toggleSearch} from "../../../../store/search";
-
 import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 import SearchIcon from '@mui/icons-material/Search';
 import IconButton from "@mui/material/IconButton";

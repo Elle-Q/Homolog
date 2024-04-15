@@ -1,6 +1,7 @@
 .order {
   width: 80%;
   margin: auto;
+  min-height: 75vh;
 }
 .order__heading {
   margin-top: 50px;

@@ -6,6 +6,8 @@ import IssueCard from "./issue/issue-card";
 import Sider from "./sider/sider";
 import IssueService from "../../../api/issue.service";
 import './community.scss'
+import Office from "../../../assets/icons/office.png"
+import {FlexCenter} from "../../../components/center/center";
 
 function Community(props) {
 
@@ -24,13 +26,22 @@ function Community(props) {
 
     return (
         <div className="community">
-            <div className="community__heading-box">
-                <p className="community__heading">
-                    leetroll专注于视频教程翻译和3D资源下载 提供优质的视频教程翻译和丰富的3D资源
-                    促进知识分享和创意实践 <br></br>
-                    <span>视频教程翻译</span> &nbsp; <span>3D资源下载</span>
-                </p>
-            </div>
+            <FlexCenter>
+                <div className="community__header-box">
+                    <div className="community__header-heading-box--left">
+                        <img src={Office}/>
+                        <h1>我有工具<br/>你有创意</h1>
+                    </div>
+                    <div className="community__header-heading-box--right">
+                        <h2 className="community__header-heading-h2">视频教程翻译</h2>
+                        <p>leetroll字幕组人工精翻 涵盖blender maya brush hudini UE 3dMax等主流3d软件</p>
+                    </div>
+                    <div className="community__header-heading-box--right">
+                        <h2 className="community__header-heading-h2">3D资源下载</h2>
+                        <p>本站提供丰富的3d资源下载<br/> 模型 4k贴图 hdri 合集</p>
+                    </div>
+                </div>
+            </FlexCenter>
             <Box sx={{
                 width: '100%',
                 borderRadius: '10px',

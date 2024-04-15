@@ -4,67 +4,39 @@ import Grid from "@mui/material/Grid";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import CardContent from "@mui/material/CardContent";
-import {Divider} from "@mui/material";
+import {Divider, Fade, Grow} from "@mui/material";
 import ColoredLabel from "../../../../components/ui/ColoredLabel";
 import ModeCommentOutlinedIcon from '@mui/icons-material/ModeCommentOutlined';
-import {makeStyles} from "@mui/styles";
 import {getInternalDaysFromNow} from "../../../../utils/DateUtil";
 import {getOrderStatus} from "../../../../utils/ToolUtil";
 import Logo28 from '../../../../assets/logo/logo_28.png'
 import './issue-card.scss'
-import IconButton from "@mui/material/IconButton";
 import {Modal} from "../../../../components/modal/modal";
 import Markdown from "react-markdown";
-import CommentInput from "../../item/comment/CommentInput";
-import {AddComment, CountComment, ListComment} from "../../../../api/comment.service";
-
-const useStyles = makeStyles({
-    icon: {
-        width: '20px',
-        height: '16px',
-        color: 'white',
-        '&:hover': {
-            color: '#3399ff',
-        }
-    }
-});
+import {CountComment} from "../../../../api/comment.service";
+import Comment from "../../../../components/comment/comment";
+import IconBadge from "../../../../components/button/icon-badge";
 
 function IssueCard(props) {
-    const classes = useStyles()
     const {issue} = props
     const [showIssue, setShowIssue] = useState(false)
-    const [showComment, setShowComment] = useState(false)
-    const [comments, setComments] = useState([])
-    const [commentsSize, setCommentsSize] = useState([])
+    const [showComment, setShowComment] = useState(false);
+    const [commentsSize, setCommentsSize] = useState(0);
 
     useEffect(() => {
-        CountComment('issue', issue.id).then(resp => {
+        if (!issue) return;
+        CountComment("issue", issue.id).then(resp => {
             setCommentsSize(resp)
         })
     }, []);
 
-    const handleShowIssue = (e) => {
-        setShowIssue(!showIssue)
-    }
-
     const handleShowComment = (e) => {
         e.stopPropagation();
         setShowComment(!showComment);
-        ListComment('issue', issue.id).then(resp => {
-            setComments(resp)
-        })
     }
-
-    const handleSendComment = (content) => {
-        let params = {
-            rescType: 'issue',
-            rescId: issue.id,
-            content: content,
-        }
-        AddComment(params);
-        setShowComment(false);
+    const handleShowIssue = (e) => {
+        setShowIssue(!showIssue)
     }
-
 
     return (
         <Grid container>
@@ -88,27 +60,14 @@ function IssueCard(props) {
                         <pre>{issue.content} </pre>
                     </CardContent>
                     <div className="issue-card__footer">
-                        <IconButton className="issue-card__footer-icon" onClick={handleShowComment}>
-                            <ModeCommentOutlinedIcon className={classes.icon}/>
-                            {
-                                commentsSize > 0 &&
-                                <div className="issue-card__footer-icon--badge">{commentsSize}</div>
-                            }
-                        </IconButton>
+                        <IconBadge cnt={commentsSize}
+                                   handleClick={handleShowComment}
+                                   icon={<ModeCommentOutlinedIcon className="icon-badge__icon"/>}/>
                     </div>
                 </Box>
+
                 {
-                    showComment && <React.Fragment>
-                        <CommentInput handleSend={handleSendComment}/>
-                        {comments.map((comment, _) => (
-                            <div className="issue-card__comment">
-                                <Avatar className="issue-card__comment-avatar" src={comment.userAvatar}/>
-                                <p className="issue-card__comment-name">{comment.userName}: &nbsp;</p>
-                                <span className="issue-card__comment-content">{comment.content}</span>
-                                <p>{comment.createTime}</p>
-                            </div>
-                        ))}
-                    </React.Fragment>
+                    showComment && <Comment rescType="issue" rescId={issue.id}/>
                 }
             </Grid>
             <Modal

@@ -33,6 +33,7 @@
 
       &:hover {
         transform: scale(1.01);
+        border: 1px solid rgba($color-primary, 0.34);
       }
     }
 
@@ -78,23 +79,7 @@
   }
 
   &__footer {
-    display: flex;
-    padding: 0 .5rem .5rem 1.5rem;
-
-    &-icon {
-      background-color: $color-secondary !important;
-
-      &--badge {
-        position: absolute;
-        color: $color-white;
-        background-color: $color-pink-light-1;
-        border-radius: 50%;
-        width: 1.5rem;
-        aspect-ratio: 1;
-        top: 0;
-        right: 0;
-      }
-    }
+    padding: 0 1.5rem .5rem 1.5rem;
   }
 
   &__md {
@@ -106,29 +91,5 @@
     }
   }
 
-  &__comment {
-    font-size: 1.4rem;
-    color: $color-grey-light-2;
-    background-color: rgba(#0a0908, .5);
-    padding: .5rem 2rem;
-    display: flex;
-    align-items: center;
 
-    &-avatar {
-      width: 3rem !important;
-      height: 3rem !important;
-    }
-
-    &-name{
-      font-size: 1.4rem;
-      margin-left: .5rem;
-      color: $color-white-1;
-      font-weight: 700;
-    }
-
-    &-content{
-     flex: 1;
-    }
-
-  }
 }

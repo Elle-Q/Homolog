@@ -6,7 +6,7 @@ import Piece from "./piece/Piece";
 import Cart from "./cart/Cart";
 import Collect from "./collect/Collect";
 import Like from "./like/Like";
-import {TotalActionSize} from "../../../../api/item.service";
+import {TotalSizeByActionAndUser} from "../../../../api/item.service";
 import {countCart} from "../../../../api/cart.service";
 
 function TabPanel(props) {
@@ -49,19 +49,19 @@ const StyledTabs = styled((props) => (
 function TabBar(props) {
     const theme = useTheme();
     const [value, setValue] = React.useState(0);
-    const [pieces, setPieces] = useState([])
-    const [carts, setCarts] = useState([])
-    const [collects, setCollects] = useState([])
-    const [likes, setLikes] = useState([])
+    const [pieces, setPieces] = useState(0)
+    const [carts, setCarts] = useState(0)
+    const [collects, setCollects] = useState(0)
+    const [likes, setLikes] = useState(0)
 
     useEffect(() => {
-        TotalActionSize('like').then(resp => {
+        TotalSizeByActionAndUser('like').then(resp => {
             setLikes(resp)
         })
         countCart().then(resp => {
             setCarts(resp)
         })
-        TotalActionSize('collect').then(resp => {
+        TotalSizeByActionAndUser('collect').then(resp => {
             setCollects(resp)
         })
     }, []);
@@ -83,16 +83,16 @@ function TabBar(props) {
             </StyledTabs>
 
             <TabPanel value={value} index={0} dir={theme.direction}>
-                <Cart/>
+                <Cart totalSize={carts}/>
             </TabPanel>
             <TabPanel value={value} index={1} dir={theme.direction}>
-                <Collect/>
+                <Collect totalSize={collects}/>
             </TabPanel>
             <TabPanel value={value} index={2} dir={theme.direction}>
-                <Like/>
+                <Like totalSize={likes}/>
             </TabPanel>
             <TabPanel value={value} index={3} dir={theme.direction}>
-                <Piece/>
+                <Piece totalSize={pieces}/>
             </TabPanel>
         </div>
     );

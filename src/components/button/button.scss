@@ -36,3 +36,43 @@
     color: $color-primary;
   }
 }
+
+.icon-badge {
+  &__icon-box {
+    background-color: $color-secondary !important;
+
+    &:not(:last-child) {
+      margin-right: 1rem;
+    }
+
+  }
+
+  &__icon {
+    width: 2rem;
+    height: 1.6rem;
+    color: $color-white;
+
+    &--selected-primary {
+      color: $color-primary;
+    }
+
+    &--selected-pink {
+      color: $color-pink-dark-1;
+    }
+
+    &:hover {
+      color: $color-primary;
+    }
+  }
+
+  &__badge {
+    position: absolute;
+    color: $color-white;
+    background-color: $color-pink-light-1;
+    border-radius: 50%;
+    width: 1.5rem;
+    aspect-ratio: 1;
+    top: 0;
+    right: 0;
+  }
+}

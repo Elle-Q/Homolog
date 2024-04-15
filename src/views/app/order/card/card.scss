@@ -8,6 +8,11 @@
   border-radius: 8px;
   position: relative;
 
+  &:hover {
+    transform: scale(1.001);
+    border: 1px solid rgba(89, 93, 253, 0.34);
+  }
+
   &__fixed-label {
     position: absolute;
     top: -1rem;

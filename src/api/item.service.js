@@ -3,21 +3,29 @@ import api from "./api";
 export const GetItem = (itemId) => {
     return api.get(`/leetroll-app/item/get/${itemId}`)
 }
-export const ListActionItems = (pageNumber, action) => {
+export const ListItemsByActionAndUser = (pageNumber, action) => {
     let params = {
         pageNumber: pageNumber,
         pageSize: 12,
         action: action,
     }
-    return api.get(`/leetroll-app/item/listByAction`, {params: params})
+    return api.get(`/leetroll-app/item/listByActionAndUser`, {params: params})
 }
 
-export const TotalActionSize = (action) => {
+export const TotalSizeByActionAndUser = (action) => {
     let params = {
         action: action,
     }
+    return api.get(`/leetroll-app/item/countByActionAndUser`, {params: params})
+}
+
+export const TotalSizeByAction = (itemId) => {
+    let params = {
+        itemId: itemId,
+    }
     return api.get(`/leetroll-app/item/countByAction`, {params: params})
 }
+
 
 export const downloadAttachment = (itemId, format) => {
     return api.get(`/leetroll-app/item/download-attach/${itemId}`)

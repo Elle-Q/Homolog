@@ -1,14 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import ItemCard from "../../../../../components/item-card/item-card";
 import InfiniteScroll from "react-infinite-scroller";
-import {ListActionItems, TotalActionSize} from "../../../../../api/item.service";
+import {ListItemsByActionAndUser, TotalSizeByActionAndUser} from "../../../../../api/item.service";
 import '../tab.scss'
 
-function Collect(props) {
+function Collect({totalSize}) {
 
     const [items, setItems] = useState([])
     const [page, setPage] = useState(1);
-    const [totalSize, setTotalSize] = useState(1);
     const [hasMore, setHasMore] = useState(false);
 
     useEffect(() => {
@@ -17,12 +16,9 @@ function Collect(props) {
 
     const search = () => {
         let fetchItems = async () => {
-            await ListActionItems(1, 'collect').then((items) => {
+            await ListItemsByActionAndUser(1, 'collect').then((items) => {
                 setItems(items)
-                TotalActionSize('collect').then((size) => {
-                    setTotalSize(size)
-                    setHasMore(items.length < size)
-                })
+                setHasMore(items.length < totalSize)
             })
         }
         fetchItems().catch()
@@ -31,7 +27,7 @@ function Collect(props) {
 
     const loadMoreItems = () => {
         if (items.length >= totalSize) return
-        ListActionItems(page, 'collect').then((data) => {
+        ListItemsByActionAndUser(page, 'collect').then((data) => {
             let newList = [...items, ...data]
             setItems(newList)
             setPage(page + 1);

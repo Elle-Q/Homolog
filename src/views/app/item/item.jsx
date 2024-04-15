@@ -3,12 +3,11 @@ import Grid from "@mui/material/Grid";
 import {useNavigate, useParams} from "react-router-dom";
 import Stack from "@mui/material/Stack";
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import {downloadAttachment, GetItem} from "../../../api/item.service";
+import {downloadAttachment, GetItem, TotalSizeByAction} from "../../../api/item.service";
 import List from "./list/list";
 import PrevShow from "./prev/prev-show";
 import {useDispatch} from "react-redux";
 import {setItem} from "../../../store/item-slice";
-import {ThumbUpButton} from "../../../components/button/icon-button";
 import {openSider} from "../../../store/sider-slice";
 import DownloadIcon from '@mui/icons-material/Download';
 import IconButton from "@mui/material/IconButton";
@@ -18,6 +17,11 @@ import {toggleAtion} from "../../../api/action.service";
 import Divider from "@mui/material/Divider";
 import SlowMotionVideoIcon from '@mui/icons-material/SlowMotionVideo';
 import "./item.scss"
+import Comment from "../../../components/comment/comment";
+import IconBadge from "../../../components/button/icon-badge";
+import {CountComment} from "../../../api/comment.service";
+import ModeCommentOutlinedIcon from "@mui/icons-material/ModeCommentOutlined";
+import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 
 function Item() {
     let params = useParams();
@@ -27,7 +31,21 @@ function Item() {
     const [tab, setTab] = useState('review');
     const [selectedFormat, setSelectedFormat] = useState("")
     const navigate = useNavigate();
+    const [commentsSize, setCommentsSize] = useState(0);
+    const [likes, setLikes] = useState(0);
+    const [collects, setCollects] = useState(0);
     let dispatch = useDispatch();
+
+    useEffect(() => {
+        CountComment("item", id).then(resp => {
+            setCommentsSize(resp)
+        })
+        TotalSizeByAction(id, "like").then(resp => {
+            setLikes(resp.like)
+            setCollects(resp.collect)
+        })
+    }, [id]);
+
 
     useEffect(() => {
         const fetch = async () => {
@@ -58,13 +76,13 @@ function Item() {
 
     //获取资源的部分描述信息
     const getMark = () => {
-        if (!data || !data.mark || data.mark.trim().length === 0) return
+        /*if (!data || !data.mark || data.mark.trim().length === 0) return
         let json = JSON.parse(data.mark)
         let spans = []
         Object.keys(json).forEach(key => {
             spans.push(<span>{key}:{json[key]}</span>)
         });
-        return spans
+        return spans*/
     }
 
     const handleLike = () => {
@@ -164,21 +182,26 @@ function Item() {
                                 }
                             </div>
                             <div className="icon-container">
-                                <ThumbUpButton onClick={handleLike}
-                                               color={`${data.liked ? '#595DFD' : 'white'}`}></ThumbUpButton>
-                                <IconButton onClick={handleCollect}>
-                                    <FavoriteIcon fontSize="small"
-                                                  sx={{color: `${data.collected ? '#ff0a54' : 'white'}`}}/>
-                                </IconButton>
+                                <IconBadge cnt={commentsSize}
+                                           icon={<ModeCommentOutlinedIcon className="icon-badge__icon" fontSize="large"/>}
+                                           fontSize="large"/>
+                                <IconBadge cnt={likes}
+                                           handleClick={handleLike}
+                                           icon={<ThumbUpOffAltIcon className={`${data.liked ? 'icon-badge__icon--selected-primary' : ''} icon-badge__icon`} fontSize="large"/>}
+                                           fontSize="large"/>
+                                <IconBadge cnt={collects}
+                                           handleClick={handleCollect}
+                                           icon={<FavoriteIcon className={`${data.collected ? 'icon-badge__icon--selected-pink' : ''} icon-badge__icon`} fontSize="large"/>}
+                                           fontSize="large"/>
                             </div>
+                            <Comment rescType="item"
+                                     rescId={id}
+                                     fontSize="large"/>
                         </Stack>
                     </Stack>
                 </Grid>
 
-                <Grid item xs={12} sx={{marginTop: '30px'}}>
-                    {/*<Stack direction={'row'} styles={{justifyContent: 'center', borderBottom: '1px solid grey'}}>*/}
-                    {/*    {getTabContent(data.type)}*/}
-                    {/*</Stack>*/}
+                <Grid item xs={12} sx={{marginTop: '30px', display: 'flex'}}>
                 </Grid>
 
                 <Grid item xs={12} sx={{marginTop: '30px'}}>

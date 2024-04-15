@@ -4,11 +4,10 @@ import InfiniteScroll from "react-infinite-scroller";
 import {countCart, pageCart} from "../../../../../api/cart.service";
 import '../tab.scss'
 
-function Cart(props) {
+function Cart({totalSize}) {
 
     const [items, setItems] = useState([])
     const [page, setPage] = useState(1);
-    const [totalSize, setTotalSize] = useState(1);
     const [hasMore, setHasMore] = useState(false);
 
     useEffect(() => {
@@ -19,10 +18,7 @@ function Cart(props) {
         let fetchItems = async () => {
             await pageCart(1).then((items) => {
                 setItems(items)
-                countCart('like').then((size) => {
-                    setTotalSize(size)
-                    setHasMore(items.length < size)
-                })
+                setHasMore(items.length < totalSize)
             })
         }
         fetchItems().catch()

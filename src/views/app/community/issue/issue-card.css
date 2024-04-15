@@ -1,3 +1,17 @@
+.fadein {
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 .mt-3 {
   margin-top: 3rem !important;
 }
@@ -58,6 +72,7 @@
 }
 .issue-card__body--main:hover {
   transform: scale(1.01);
+  border: 1px solid rgba(89, 93, 253, 0.34);
 }
 .issue-card__heading {
   color: gray;
@@ -93,21 +108,7 @@
   font-weight: 400;
 }
 .issue-card__footer {
-  display: flex;
-  padding: 0 0.5rem 0.5rem 1.5rem;
-}
-.issue-card__footer-icon {
-  background-color: #1C2129 !important;
-}
-.issue-card__footer-icon--badge {
-  position: absolute;
-  color: #fff;
-  background-color: #D81B60;
-  border-radius: 50%;
-  width: 1.5rem;
-  aspect-ratio: 1;
-  top: 0;
-  right: 0;
+  padding: 0 1.5rem 0.5rem 1.5rem;
 }
 .issue-card__md {
   font-size: 1.6rem;
@@ -115,27 +116,6 @@
 }
 .issue-card__md * > img {
   width: 20rem;
-}
-.issue-card__comment {
-  font-size: 1.4rem;
-  color: #7b7b7b;
-  background-color: rgba(10, 9, 8, 0.5);
-  padding: 0.5rem 2rem;
-  display: flex;
-  align-items: center;
-}
-.issue-card__comment-avatar {
-  width: 3rem !important;
-  height: 3rem !important;
-}
-.issue-card__comment-name {
-  font-size: 1.4rem;
-  margin-left: 0.5rem;
-  color: #9f9f9f;
-  font-weight: 700;
-}
-.issue-card__comment-content {
-  flex: 1;
 }
 
 /*# sourceMappingURL=issue-card.css.map */

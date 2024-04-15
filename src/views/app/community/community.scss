@@ -3,31 +3,56 @@
 .community {
   min-height: 100vh;
 
-  &__heading-box {
+  &__header-box {
+    width: 40%;
     display: flex;
     align-items: center;
-    justify-content: center;
-    padding: 3rem;
+    justify-content: space-around;
+    min-width: 60rem;
+    padding: 0 2rem;
+    box-shadow: 0 .8rem .8rem $color-secondary-dark;
+    margin-bottom: 2rem;
+    border-radius: 2rem;
+    background-image: linear-gradient(to right, #1c2129, #191e25, #161b21, #13171e, #0f141a);
   }
 
-  &__heading {
-    width: 60vw;
-    font-size: 2rem;
-    color: #9f9f9f;
-    font-family: cursive;
-    padding: 2rem;
-    border-radius: 2rem;
-    text-align: center;
-    font-weight: 600;
-    text-shadow: 1px 1px 1px #000000;
 
+  &__header-heading-box {
+    &--left {
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
-    & > span {
-      font-size: 1.6rem;
-      color: $color-primary;
-      background-color:rgba($color-primary,0.3);
-      padding: .5rem 2rem;
-      border-radius: 2rem;
+      & > img {
+        width: 10rem;
+        margin-right: 2rem;
+      }
+
+      & > h1 {
+        font-size: 2rem;
+        color: $color-white;
+      }
     }
+
+    &--right {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      align-self: flex-start;
+      max-width: 25%;
+      padding: 5rem 0;
+
+      & > p {
+        color: $color-white-1;
+        font-size: 1.2rem;
+      }
+    }
+  }
+
+  &__header-heading-h2 {
+    color: $color-primary;
+    font-size: 1.4rem;
+
   }
 }

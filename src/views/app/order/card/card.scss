@@ -1,65 +1,122 @@
-.order-card-container {
-  background-color: #2F2F2F;
-  //width: 80%;
+.order-card {
+  background-color: #0f141a;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: start;
-  justify-content: end;
+  align-items: flex-start;
+  justify-content: flex-end;
   border-radius: 8px;
   position: relative;
 
-  * span {
-    margin-right: 20px;
-    margin-left: 20px;
-    color: #7b7b7b;
-    font-size: 12px;
-  }
-}
-
-.order-card-header {
-}
-
-.order-card-body {
-  border-radius: 0 0 8px 8px;
-  padding: 20px;
-
-  > hr {
-    height: 30px;
-    background-color: rgb(65, 63, 63);
-    align-self: center;
+  &:hover {
+    transform: scale(1.001);
+    border: 1px solid rgba(89, 93, 253, 0.34);
   }
 
-  > span {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #1bbc9b;
+  &__fixed-label {
+    position: absolute;
+    top: -1rem;
+    right: 0;
+    z-index: 10;
   }
 
-  & .count-down::before {
-    content: '⌚';
+  &__heading {
+    & > span {
+      margin-right: 2rem;
+      margin-left: 2rem;
+      color: #7b7b7b;
+      font-size: 1.2rem;
+    }
+
+    & > hr {
+      display: inline;
+    }
   }
 
-  & .cell {
+  &__body {
+    border-radius: 0 0 .8rem .8rem;
+    padding: 2rem;
+    width: 100%;
+
+    > hr {
+      height: 3rem;
+      background-color: rgb(65, 63, 63);
+      align-self: center;
+    }
+  }
+
+  &__cell {
+    font-size: 1.4rem;
     text-align: center;
-    font-size: 12px;
-    width: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #7b7b7b;
 
-    > button {
-      margin-right: 5px;
-      font-size: 12px;
-      color: #595DFD !important;
-      background-color: rgba(89, 93, 253, 0.2) !important;
-      border-radius: 8px !important;
+    &--price {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #1bbc9b;
+      font-size: 1.4rem;
+    }
+
+    &--text {
+      min-width: 20rem;
+      flex-direction: column;
+
+      &--countdown,
+      &--countdown::before {
+        content: '⌚';
+        color: white;
+        font-size: 1.2rem;
+      }
+
+      &--waitpay {
+        color: #f02d2d;
+        margin: 0;
+      }
+
+      &--sub-span {
+        font-size: 1.2rem;
+      }
+    }
+
+    &--item {
+      min-width: 30rem;
+      max-width: 35rem;
+      justify-content: flex-start;
+      & > img {
+        width: auto;
+        height: 5rem;
+        border-radius: .5rem;
+      }
 
       &:hover {
-        background-color: #252525 !important;
+        cursor: pointer;
+      }
+    }
+
+    &--btn {
+      flex: 1;
+
+      > button {
+        margin-right: .5rem;
+        font-size: 1.2rem;
+        color: #595DFD !important;
+        background-color: rgba(89, 93, 253, 0.2) !important;
+        border-radius: .8rem !important;
+
+        &:hover {
+          background-color: rgba(89, 93, 253, 0.32) !important;
+        }
       }
     }
   }
 }
 
 .order-detail-body {
+  margin-left: 50px;
   padding: 5px 50px;
 
   & * img {

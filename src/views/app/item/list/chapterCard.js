@@ -5,14 +5,14 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import {useDispatch, useSelector} from "react-redux";
 import {Link} from "react-router-dom";
-import {selectCart} from "../../../../store/cart-slice";
-import {selectItemModal} from "../item-slice";
+import {selectSider} from "../../../../store/sider-slice";
+import {selectItemModal} from "../../../../store/item-slice";
 
 const Container = styled.div`
   position: relative;
   width: 50%;
   height: 400px;
-  margin-left: ${props => props.index % 2 == 0 ? 200 : 500}px;
+  margin-left: ${props => props.index % 2 === 0 ? 200 : 500}px;
   background-color: rgb(23, 23, 23, 0.6);
   margin-top: 80px;
   border-radius: 20px;
@@ -74,7 +74,7 @@ function ChapterCard(props) {
     const {chapter, index} = props
     const dispatch = useDispatch();
     const {item} = useSelector(selectItemModal)
-    const {openCart, addItem} = useSelector(selectCart);
+    const {openCart, addItem} = useSelector(selectSider);
 
     const handleAdd2Cart =() => {
         dispatch(addItem(item))

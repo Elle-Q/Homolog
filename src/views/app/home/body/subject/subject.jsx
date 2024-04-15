@@ -1,10 +1,9 @@
 import React from 'react';
 import Stack from "@mui/material/Stack";
 import ItemCard from "../../../../../components/item-card/item-card";
-import AnimationText from "../../../../../components/AnimationText";
-import GradientButton from "../../../../../components/ui/GradientButton";
 import {Link} from "react-router-dom";
 import "./subject.scss"
+import Button from "@mui/material/Button";
 
 function Subject(props) {
     const {subject} = props;
@@ -12,38 +11,33 @@ function Subject(props) {
     if (subject === undefined || subject.items.length < 1) return <></>
 
     return (
-        <React.Fragment>
-            <div className="subject-header" >
+        <div className="subject">
+            <div className="subject__heading-box">
                 <div>
-                    <AnimationText title={subject.title}/>
-                    &nbsp;&nbsp;
-                    <AnimationText title={subject.subTitle}
-                                   fontSize={15}
-                                   spacing={1}
-                                   color='white'
-                                   display="inline"
-                    />
+                    <h1 className="subject__heading subject__heading--main">
+                        <span>{subject.title}</span>
+                    </h1>
+                    <h1 className="subject__heading subject__heading--sub">
+                        <span>{subject.subTitle}</span>
+                    </h1>
                 </div>
-                <div className="btn-container">
-                    <Link to={`/search?catId=${subject.id}`}>
-                        <GradientButton name="更多" color="linear-gradient(to right, #8184FF 0%, #595DFD 51%, #8184FF 100%)"/>
-                    </Link>
-                </div>
+                <Link to={`/search?catId=${subject.id}`} className="subject__btn-box">
+                    <button className="subject__btn">更多</button>
+                </Link>
             </div>
             <Stack
-                   direction='row'
-                   spacing={2}
-                   sx={{mt: '20px'}}
-                   justifyContent="center"
-                   display="flex"
+                direction='row'
+                spacing={2}
+                justifyContent="center"
+                display="flex"
             >
                 {
                     subject.items.map((item, index) => {
-                        return <ItemCard key={index} item={item}/>
+                        return <ItemCard key={index} item={item} width="23%"/>
                     })
                 }
             </Stack>
-        </React.Fragment>
+        </div>
 
     );
 }

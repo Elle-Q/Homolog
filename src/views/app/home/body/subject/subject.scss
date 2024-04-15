@@ -1,11 +1,58 @@
-.subject-header {
-  display: grid;
-  grid-template-columns:70% 30%;
-}
+@use "../../../../../styles" as *;
 
-.btn-container {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
+.subject {
+  margin-bottom: 5rem;
+
+  &__heading-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+  }
+
+  &__heading {
+    display: inline-block;
+    letter-spacing: .3rem;
+    margin-right: 1.5rem;
+
+    & > span {
+      transition: all .3s ease-in-out;
+      text-shadow: 0 .8rem .5rem $color-black;
+
+      &:hover {
+        color: $color-tertiary;
+      }
+    }
+
+    &--main {
+      color: $color-white;
+    }
+
+    &--sub {
+      color: $color-white-1;
+      font-size: 1.5rem;
+    }
+  }
+
+  &__btn-box {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  &__btn {
+    color: $color-grey-light-1;
+    background-color: $color-secondary-dark;
+    border-radius: .8rem;
+    font-size: 1.2rem;
+    padding: .7rem 2rem;
+    border: none;
+
+    &:hover {
+      color: $color-white;
+      background-color: rgba($color-secondary-dark, 0.7);
+    }
+  }
+
 }
 

@@ -16,6 +16,8 @@ const errorHandler = (data) => {
         case 401:
             window.location = "/login";
             break
+        default:
+            break
     }
 }
 

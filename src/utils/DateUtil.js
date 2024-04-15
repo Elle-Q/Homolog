@@ -13,3 +13,19 @@ export function StringToDate(dateString) {
             second: '2-digit'
         }).format(date)
 }
+
+export function getInternalDaysFromNow(endDateString) {
+    let startDate = new Date(endDateString);
+    let endDate = new Date();
+    let timeDiff = Math.abs(endDate.getTime() - startDate.getTime());
+    // 将毫秒数转换成天数并返回
+    return Math.ceil(timeDiff / (1000 * 3600 * 24));
+}
+
+export function getInternalSeconsFromNow(endDateString) {
+    let startDate = new Date(endDateString);
+    let endDate = new Date();
+    let timeDiff = Math.abs(endDate.getTime() - startDate.getTime());
+    // 将毫秒数转换成天数并返回
+    return Math.ceil(timeDiff /1000);
+}

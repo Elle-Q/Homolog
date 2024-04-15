@@ -1,52 +1,36 @@
 import React, {useState} from 'react';
-import Box from "@mui/material/Box";
-import {alpha} from "@mui/system";
 import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
 import {useNavigate} from 'react-router-dom';
-import InputWithIcon from "../../components/icon-input/InputWithIcon";
 import PhoneIphoneIcon from "@mui/icons-material/PhoneIphone";
 import VpnKeyIcon from "@mui/icons-material/VpnKey";
 import PersonIcon from "@mui/icons-material/Person";
 import ShieldIcon from "@mui/icons-material/Shield";
 import {Link} from "@mui/material";
 import UserService from "../../api/user.service";
-import AuthService, {authService} from "../../api/auth.service";
+import AuthService from "../../api/auth.service";
 import {useDispatch} from "react-redux";
-import './login.scss'
 import Timer from "./timer/timer";
-import styled from "styled-components";
 import {SendSmsCode} from "../../api/sms.service";
 import {isPhone, varifyPsw} from "../../utils/VarifyUtil";
-import Agreement from "./agreement/agreement";
+import Agreement from "../../components/agreement/agreement";
 import {loginFail, loginSuccess, registerSuccess} from "../../api/authSlice";
-
-const SignButton = styled(Button)({
-    backgroundColor: "rgba(92,96,253,0.62)",
-    color: '#dcddde',
-    fontSize: '18px',
-    width: '100%',
-    height: `50px`,
-    border: "none",
-    '&:hover': {
-        backgroundColor: alpha("#5C60FD9E", 0.6),
-    }
-})
-
+import WeChat from '../../assets/icons/wechat_login.svg'
+import IconInput from "./icon-input/icon-input";
+import './login.scss'
+import {isEmpty} from "../../utils/ToolUtil";
 
 function Login(props) {
     const [action, setAction] = useState('signin');//register
     const [phone, setPhone] = useState("");
     const [password, setPassword] = useState("")
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
     const userNameRef = React.createRef();
     const phoneRef = React.createRef();
     const passRef = React.createRef();
     const codeRef = React.createRef();
     const [message, setMessage] = useState("")
     const [agree, setAgree] = useState(false)
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const handleLogin = async () => {
         if (!agree) {
@@ -54,6 +38,10 @@ function Login(props) {
             return
         }
         if (action === 'signin') { //登录
+            if (isEmpty(phone) || isEmpty(password)) {
+                alert("手机号和密码不能为空")
+                return
+            }
             AuthService.login(phone, password).then(
                 resp => {
                     if (resp === null) {
@@ -65,6 +53,12 @@ function Login(props) {
                 }
             )
         } else { // 注册
+            if (isEmpty(userNameRef.current.value)
+                || isEmpty(phoneRef.current.value)
+                || isEmpty(passRef.current.value)) {
+                alert("昵称 手机号 密码均不能为空")
+                return
+            }
             AuthService.signup(
                 userNameRef.current.value,
                 phoneRef.current.value,
@@ -80,14 +74,24 @@ function Login(props) {
         }
     }
 
+    const handleWechatLogin = () => {
+        if (!agree) {
+            alert("请先同意用户协议!")
+            return
+        }
+        AuthService.welogin().then(resp => {
+            window.open(resp, '_self');
+        })
+    }
+
     const fetchUser = async () => {
-        await UserService.getUser().then(()=> {
+        await UserService.getUser().then(() => {
             navigate('/');
         });
     }
 
-    //todo: 验证手机号， 发送短信获取短信验证码
     const handleClickSendSms = () => {
+        if (!isPhone(phoneRef.current.value)) return
         SendSmsCode(phoneRef.current.value).then(code => {
         })
     }
@@ -119,7 +123,7 @@ function Login(props) {
     }
 
     const handlePhoneChange = (event) => {
-        // phoneVerify(event)
+        phoneVerify(event)
         setPhone(event.target.value)
     }
 
@@ -128,71 +132,72 @@ function Login(props) {
         setPassword(event.target.value)
     }
 
+    const check = () => {
+        if (!isPhone(phoneRef.current.value)) {
+            alert("手机号格式不正确")
+        }
+        return isPhone(phoneRef.current.value)
+    }
+
     return (
-        <div id="bgBody">
-            <Box sx={{
-                padding: '20px 20px 30px 20px',
-                backgroundColor: 'rgba(28,28,28,0.9)',
-                borderRadius: '10px',
-                boxShadow: '0 0 8px #36393f',
-            }}>
-                <Typography variant="h4" align="center" color='#fff' sx={{fontFamily: 'cursive'}}>
+        <div className="login">
+            <Stack className="login__box">
+                <h1 className="heading-1">
                     {
                         action === 'signin' ? '欢迎回来' : '注册账号'
                     }
-                </Typography>
-
-                <Stack sx={{mt: '5px'}}>
+                </h1>
+                {
+                    action === 'signin' ?
+                        <React.Fragment>
+                            <IconInput placeholder="输入手机号"
+                                       onChange={handlePhoneChange}
+                                       value={phone}
+                                       icon={<PhoneIphoneIcon fontSize="large"/>}/>
+                            <IconInput placeholder="输入密码"
+                                       type="password"
+                                       value={password}
+                                       onChange={handlePswChange}
+                                       icon={<VpnKeyIcon fontSize="large"/>}/>
+                        </React.Fragment>
+                        :
+                        <React.Fragment>
+                            <IconInput ref={userNameRef} placeholder="输入昵称"
+                                       icon={<PersonIcon fontSize="small"/>}/>
+                            <IconInput ref={phoneRef} placeholder="输入手机号"
+                                       onChange={phoneVerify}
+                                       icon={<PhoneIphoneIcon fontSize="small"/>}/>
+                            <IconInput ref={codeRef} placeholder="输入短信验证码" type="verify"
+                                       icon={<ShieldIcon fontSize="small"/>}>
+                                <Timer handleClickSend={handleClickSendSms} check={check}></Timer>
+                            </IconInput>
+                            <IconInput ref={passRef} placeholder="输入密码" type="password"
+                                       onChange={pswVerify}
+                                       icon={<VpnKeyIcon fontSize="small"/>}/>
+                        </React.Fragment>
+                }
+                <label className="login__label--warning">{message}</label>
+                <div className="login__label--notify">
+                    {action === 'signin' ? '没有账号? ' : '已有账号 '}
+                    <Link className="login__label--big" onClick={toggleAction}>
+                        {action === 'signin' ? ' 注册' : ' 登录'}
+                    </Link>
+                </div>
+                <div className="login__agree-box">
+                    <Agreement handleAgree={() => setAgree(!agree)}
+                               agree={agree}
+                               label={'我已阅读并同意登录协议'}
+                               type={'login_agreement'}/>
+                </div>
+                <button onClick={handleLogin} className="login__btn  login__btn--text">
                     {
-                        action === 'signin' ?
-                            <React.Fragment>
-                                <InputWithIcon placeholder="输入手机号"
-                                               onChange={handlePhoneChange}
-                                               value={phone}
-                                               icon={<PhoneIphoneIcon fontSize="small"/>}/>
-                                <InputWithIcon placeholder="输入密码"
-                                               type="password"
-                                               value={password}
-                                               onChange={handlePswChange}
-                                               icon={<VpnKeyIcon fontSize="small"/>}/>
-                            </React.Fragment>
-                            :
-                            <React.Fragment>
-                                <InputWithIcon ref={userNameRef} placeholder="输入昵称"
-                                               icon={<PersonIcon fontSize="small"/>}/>
-                                <InputWithIcon ref={phoneRef} placeholder="输入手机号"
-                                               onChange={phoneVerify}
-                                               icon={<PhoneIphoneIcon fontSize="small"/>}/>
-                                <InputWithIcon ref={codeRef} placeholder="输入短信验证码" type="verify"
-                                               icon={<ShieldIcon fontSize="small"/>}>
-                                    <Timer handleClickSend={handleClickSendSms}></Timer>
-                                </InputWithIcon>
-                                <InputWithIcon ref={passRef} placeholder="输入密码" type="password"
-                                               onChange={pswVerify}
-                                               icon={<VpnKeyIcon fontSize="small"/>}/>
-                            </React.Fragment>
+                        action === 'signin' ? '登录' : '注册'
                     }
-                    <label style={{color: 'red', marginLeft: '40px', fontSize: '14px'}}>{message}</label>
-                    <div style={{margin: "10px 0 10px 40px", color: '#6e6d6d', fontSize: "14px"}}>
-                        {action === 'signin' ? '没有账号? ' : '已有账号 '}
-                        <Link color="#3399FF" onClick={toggleAction} sx={{cursor: "pointer", fontSize: "16px"}}>
-                            {action === 'signin' ? ' 注册' : ' 登录'}
-                        </Link>
-                    </div>
-                    <div style={{marginLeft: "30px"}}>
-                        <Agreement handleAgree={() => setAgree(!agree)}
-                                   agree={agree}
-                                   label={'我已阅读并同意登录协议'}
-                                   type={'login_agreement'}/>
-                    </div>
-                    <SignButton onClick={handleLogin}>
-                        {
-                            action === 'signin' ? '登录' : '注册'
-                        }
-                    </SignButton>
-                </Stack>
-
-            </Box>
+                </button>
+                <button onClick={handleWechatLogin} className="login__btn login__btn--svg">
+                    <img src={WeChat} alt="we_login"/>
+                </button>
+            </Stack>
 
         </div>
     );

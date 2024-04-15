@@ -1,52 +1,48 @@
 import api from "./api";
-import {setChapters} from "../views/app/play/playSlice";
 
 export const GetItem = (itemId) => {
     return api.get(`/leetroll-app/item/get/${itemId}`)
-        .then(resp => {
-            return resp
-        })
+}
+export const ListItemsByActionAndUser = (pageNumber, action) => {
+    let params = {
+        pageNumber: pageNumber,
+        pageSize: 12,
+        action: action,
+    }
+    return api.get(`/leetroll-app/item/listByActionAndUser`, {params: params})
 }
 
-export const GetItemFiles = (itemId) => {
-    return api.get(`/leetroll-admin/item/files/${itemId}`)
-        .then(resp => {
-            return resp
-        })
+export const TotalSizeByActionAndUser = (action) => {
+    let params = {
+        action: action,
+    }
+    return api.get(`/leetroll-app/item/countByActionAndUser`, {params: params})
 }
 
-export const GetChapters = (itemId) => dispatch => {
-    return api.get(`/leetroll-app/item/chapter/${itemId}`)
-        .then(resp => {
-            dispatch(setChapters(resp))
-            return resp
-        })
+export const TotalSizeByAction = (itemId) => {
+    let params = {
+        itemId: itemId,
+    }
+    return api.get(`/leetroll-app/item/countByAction`, {params: params})
 }
 
-export const listItem = () => {
-    return api.get('/leetroll-admin/item/list')
-        .then(resp => {
-            return resp
-        })
+
+export const downloadAttachment = (itemId, format) => {
+    return api.get(`/leetroll-app/item/download-attach/${itemId}`)
 }
 
-export const UpdateItem = (param) => {
-    return api.post('/leetroll-admin/item/update', param)
-        .then(resp => {
-            return resp
-        })
+export const updatePrice = (itemId, price) => {
+    let params = {
+        id: itemId,
+        price: price,
+    }
+    return api.get(`/leetroll-app/item/update-price/`, {params: params})
 }
 
-export const UploadItemFiles = (param) => {
-    return api.post('/leetroll-admin/item/upload', param)
-        .then(resp => {
-            return resp
-        })
-}
-
-export const UploadItemChapters = (param) => {
-    return api.post('/leetroll-admin/chapter/upload', param)
-        .then(resp => {
-            return resp
-        })
+export const updateTag = (itemId, tag) => {
+    let params = {
+        id: itemId,
+        tag: tag,
+    }
+    return api.get(`/leetroll-app/item/update-tag/`, {params: params})
 }

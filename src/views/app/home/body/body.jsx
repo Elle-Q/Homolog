@@ -2,13 +2,21 @@ import React, {useEffect, useState} from 'react';
 import Subject from "./subject/subject";
 import {ListAllCat, ListCatsWith4Items} from "../../../../api/cat.service";
 import CatCard from "./cat-card/cat-card";
-import "./body.scss"
 import Carousel from "./carousel/carousel";
+import {getCarousel} from "../../../../api/config.service";
+import "./body.scss"
 
-function Body(props) {
+function Body() {
 
     const [cats, setCats] = useState([]);
     const [catItems, setCatItems] = useState([]);
+    const [slides, setSlides] = useState([])
+
+    useEffect(() => {
+        getCarousel().then(resp => {
+            setSlides(resp);
+        })
+    }, []);
 
     //查询所有category分类, 每个分类显示4个item卡片
     useEffect(() => {
@@ -28,11 +36,20 @@ function Body(props) {
 
     return (
         <React.Fragment>
-            <div className={'home-header'} style={{}}>
-                <div className="carousel">
-                    <Carousel/>
+            <div className={'home__nav'}>
+                <div className="home__carousel-box">
+                    <Carousel autoSlide={true}>
+                        {
+                            slides.map((item, index) => (
+                                <img style={{cursor: 'pointer'}}
+                                     key={index} src={item}
+                                     alt='carousel-item'
+                                />
+                            ))
+                        }
+                    </Carousel>
                 </div>
-                <div className="cat-container">
+                <div className="home__cat-box">
                     {
                         cats.map((cat, i) => (
                             <CatCard key={i} index={i} cat={cat}/>
@@ -40,7 +57,7 @@ function Body(props) {
                     }
                 </div>
             </div>
-            <div className="home-body">
+            <div className="home__content">
                 {
                     catItems && catItems.map((catItem, index) => {
                         return (<Subject key={index} subject={catItem}/>)

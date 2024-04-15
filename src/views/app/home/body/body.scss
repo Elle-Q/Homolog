@@ -1,35 +1,55 @@
+@use "../../../../styles" as *;
 
-.home-body {
-  width: 80%;
-  overflow: hidden;
-  margin: auto;
+.home {
+  &__nav {
+    width: 80vw;
+    overflow: hidden;
+    display: flex;
+    margin: 2rem auto auto;
+  }
+
+  &__content {
+    width: 80vw;
+    overflow: hidden;
+    margin: auto;
+  }
+
+  &__carousel-box {
+    width: 65%;
+    margin: auto;
+    box-shadow: 0 .5rem 2rem $color-black;
+    border-radius: 2rem;
+  }
+
+  &__cat-box {
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    margin: 5rem auto;
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 80%;
+      left: 50%;
+      width: 40%;
+      height: 10%;
+      z-index: -1;
+      box-shadow: 0 0 40px 30px #595DFD;
+      border-radius: 50%;
+      background-color: transparent;
+      transform: translate(-50%, -50%);
+      filter: blur(4rem);
+    }
+  }
+
 }
 
-.home-header {
-  width: 85%;
-  overflow: hidden;
-  display: flex;
-  margin: 20px auto auto;
-}
 
-.carousel {
-  width: 60%;
-  overflow: hidden;
-  margin: auto;
-  border: 1px solid rgba(44, 44, 43, 0.8);
-  height: 350px;
-  box-shadow: inset 0 0 50px rgb(23, 23, 23);
-  border-radius: 10px;
-}
 
-.cat-container {
-  width: 40%;
-  margin: 50px auto;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 15px;
-}
 
 

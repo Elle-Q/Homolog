@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
+import React from 'react';
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import CommentLabel from "./CommentLabel";
 import comments from "../../../../json/comments.json"
 import 'emoji-mart/css/emoji-mart.css'
-import CommentInput from "../../../../components/CommentInput";
+import CommentInput from "./CommentInput";
 
 
 function Comments(props) {

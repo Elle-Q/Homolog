@@ -2,7 +2,7 @@ import React from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {selectConfirm, setOpen} from "./confirmSlice";
 import {Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from "@mui/material";
-import {CancelButton, OKButton} from "../../ui/CustomButton";
+import {CancelButton, OKButton} from "../../button/text-button";
 
 function AlertDialog(props) {
     const {open, okHandle} = useSelector(selectConfirm);
@@ -26,11 +26,11 @@ function AlertDialog(props) {
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
         >
-            <DialogTitle id="alert-dialog-title">
+            <DialogTitle id="alert-dialog-title" sx={{fontSize: '2rem'}}>
                 {title}
             </DialogTitle>
             <DialogContent>
-                <DialogContentText id="alert-dialog-description">
+                <DialogContentText id="alert-dialog-description"  sx={{fontSize: '2rem'}}>
                     {note}
                 </DialogContentText>
             </DialogContent>

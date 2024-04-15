@@ -4,6 +4,8 @@ export const searchSlice = createSlice({
     name: 'search',
     initialState: {
         keyword: "",
+        metric: "",
+        catId: 0,
         doSearch: false
     },
     reducers: {
@@ -11,6 +13,18 @@ export const searchSlice = createSlice({
             return {
                 ...state,
                 keyword: action.payload,
+            }
+        },
+        setCatId: (state, action) => {
+            return {
+                ...state,
+                catId: action.payload,
+            }
+        },
+        setMetric: (state, action) => {
+            return {
+                ...state,
+                metric: action.payload,
             }
         },
         toggleSearch: (state, action) => {
@@ -22,7 +36,7 @@ export const searchSlice = createSlice({
     }
 })
 
-export const {setKeyword,toggleSearch} = searchSlice.actions
+export const {setKeyword, setCatId, setMetric, toggleSearch} = searchSlice.actions
 
 export const selectSearch = state => state.search
 

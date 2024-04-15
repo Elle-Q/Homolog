@@ -5,8 +5,13 @@
   margin-right: 5%;
   color: white;
 
-  & span {
+  & span, h5 {
     color: grey;
+    font-size: 1.6rem;
+  }
+
+  & p {
+    font-size: 1.6rem;
   }
 
   .behave-area span {
@@ -21,7 +26,7 @@
   }
 
   .icon-container {
-    border: 1px solid #3b3b39;
+    border: 1px solid #0f141a;
     width: 100%;
     min-height: 50px;
     border-radius: 10px;
@@ -31,14 +36,12 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    background-color: #0f141a;
 
     &:hover {
-      background-color: #2a2a2b;
+      background-color: rgba(15, 20, 26, 0.73);
     }
 
-    button {
-      color: #ffffff;
-    }
   }
 
   .tab {
@@ -56,4 +59,24 @@
       border-bottom: 3px solid #EB5050;
     }
   }
+}
+
+.format-label {
+  text-align: center;
+  border: 1px #3b3b39 solid;
+  color: #6e6d6d;
+  display: inline-block;
+  padding: 4px 18px;
+  border-radius: 5px;
+
+  &:hover {
+    background-color: #595DFD;
+    color: white;
+  }
+}
+
+.select {
+  background-color: #595DFD;
+  color: white !important;
+  cursor: pointer;
 }

@@ -1,0 +1,30 @@
+.debugger {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font-size: 1.6rem;
+}
+.debugger > span {
+  color: #e82986 !important;
+}
+.debugger * > input {
+  width: 50px;
+  font-size: 16px;
+  background-color: #ffffff;
+  border-radius: 0.3rem;
+  padding: 0.2rem 0.5rem;
+}
+.debugger .select-container {
+  background-color: white;
+  border-radius: 20px;
+  margin: 10px;
+  min-width: 120px;
+}
+.debugger .select-container:active {
+  border-radius: 20px;
+}
+
+/*# sourceMappingURL=debugger.css.map */

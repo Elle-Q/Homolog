@@ -1,27 +1,34 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import IconButton from "@mui/material/IconButton";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import {Link} from "react-router-dom";
-import PriceTag from "../PriceTag";
+import PriceTag from "./price-tag";
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import {openCart} from "../../store/cart-slice";
+import {openSider} from "../../store/sider-slice";
 import {useDispatch} from "react-redux";
 import "../../views/app/home/body/subject/subject.scss"
 import Stack from "@mui/material/Stack";
-import './index.scss'
+import './item-card.scss'
 import DownloadIcon from '@mui/icons-material/Download';
 import {addItem2Cart} from "../../api/cart.service";
+import {toggleAtion} from "../../api/action.service";
+import Box from "@mui/material/Box";
+import Debugger from "../debugger/debugger";
 
 function ItemCard(props) {
-    const {item} = props;
+    const {item, width} = props;
     const [collected, setCollected] = useState(false);
     const [added, setAdded] = useState(false);
     let dispatch = useDispatch();
 
+    useEffect(() => {
+        setCollected(item.collected)
+    }, [item]);
+
     const handleAdd2Cart = () => {
         setAdded(!added)
         addItem2Cart(item.id).then(resp => {
-            dispatch(openCart())
+            dispatch(openSider())
         })
     }
 
@@ -30,43 +37,63 @@ function ItemCard(props) {
         window.location.href = item.attachments[0].link
     }
 
+    const handleCollect = () => {
+        toggleAtion(item.id, 'collect').then(resp => {
+            setCollected(resp)
+        })
+    }
+
     const getClass = () => {
         if (item.type === 'hdri') {
-            return 'hdri-container'
+            return 'media-container media-container_hdri'
         } else if (item.type === 'doc') {
-            return 'doc-container'
+            return 'media-container media-container_doc'
         } else if (item.type === 'model') {
-            return 'model-container'
-        } else {
-            return 'normal-container'
+            return 'media-container'
+        } else if (item.type === 'model_bundle') {
+            return 'media-container media-container_bundle'
+        } else if (item.type === 'tutorial') {
+            return 'media-container media-container_tutorial'
+        } else if (item.type === 'image') {
+            return 'media-container media-container_img'
+        } else if (item.type === 'texture') {
+            return 'media-container media-container_texture'
         }
     }
 
     return (
-        <div className="item-card">
+        <Box className="item-card" sx={{width: `${width}`}}>
             <Link to={`/item/${item.id}`} key={item.id}>
                 <div className={getClass()}>
                     <img src={item.main && item.main.link} alt="item"/>
                 </div>
             </Link>
-
-            <span> {item.name}</span>
-            <Stack direction="row" sx={{justifyContent: 'center', alignItems: 'center'}}>
-                <IconButton onClick={() => setCollected(!collected)}>
-                    <FavoriteIcon fontSize="small" sx={{color: `${collected ? '#ff0a54' : 'white'}`}}/>
-                </IconButton>
-                <IconButton style={{marginRight: '40%'}}>
+            <span className="item-card__heading"> {item.name}</span>
+            <Stack className="item-card__btn-box" direction="row">
+                <div>
+                    <IconButton onClick={handleCollect}>
+                        <FavoriteIcon fontSize="large"
+                                      sx={{color: `${collected ? '#ff0a54' : 'white'}`}}/>
+                    </IconButton>
                     {
-                        item.price === 0 ? <DownloadIcon fontSize="small" onClick={handleDownload}/>
+                        item.bought ?
+                            <IconButton onClick={handleDownload}>
+                                <DownloadIcon fontSize="large"/>
+                            </IconButton>
                             :
-                            <AddShoppingCartIcon fontSize="small" onClick={handleAdd2Cart}
-                                                 sx={{color: `${added ? '#ff0a54' : 'white'}`}}/>
+                            <IconButton onClick={handleAdd2Cart}>
+                                <AddShoppingCartIcon fontSize="large"
+                                                     sx={{color: `${added ? '#ff0a54' : 'white'}`}}/>
+                            </IconButton>
                     }
-
-                </IconButton>
-                <PriceTag price={item.price}/>
+                </div>
+                {
+                    item.price !== 0 && <PriceTag price={item.price}/>
+                }
             </Stack>
-        </div>
+            {/*调试窗口*/}
+            {/*<Debugger item={item} />*/}
+        </Box>
     );
 }
 

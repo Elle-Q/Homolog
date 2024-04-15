@@ -2,7 +2,7 @@ import React from 'react';
 import Stack from "@mui/material/Stack";
 import ChapterCard from "./chapterCard";
 import Typography from "@mui/material/Typography";
-import {selectItemModal} from "../item-slice";
+import {selectItemModal} from "../../../../store/item-slice";
 import {useSelector} from "react-redux";
 
 function List(props) {

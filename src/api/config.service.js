@@ -33,3 +33,9 @@ export const getCarousel = () => {
         });
 }
 
+export const getCurrentEffect = () => {
+    return api.get(`/leetroll-app/config/bg_effect`)
+        .then((resp) => {
+            return resp
+        });
+}

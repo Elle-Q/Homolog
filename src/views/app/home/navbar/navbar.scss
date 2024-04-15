@@ -1,5 +1,6 @@
+@use "../../../../styles" as *;
 
-.navbar-container {
+.header {
   flex-grow: 1;
   box-shadow: none;
   position: sticky;
@@ -7,63 +8,83 @@
   top: 0;
   transition: transform 0.6s ease-in-out;
 
-  a {
+  > * a {
     border: 1px solid #4f518c;
     border-width: 0 thin;
     border-radius: 10px;
     text-align: center;
     vertical-align: middle;
-    width: 34px;
-    height: 34px;
-    padding: 7px;
-    color: white;
+    padding: 1rem;
+    color: $color-white;
     flex: 0 0 auto;
     cursor: pointer;
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    text-decoration: none;
+
+    &:hover {
+      transform: scale(1.05);
+    }
   }
 
   a::after {
     transform: scaleY(0.5);
     -webkit-transform: scaleY(.5);
   }
-}
 
-.search-bar {
-  display: flex;
-  margin: 0 5%;
-  width: 100%;
-  height: 45px;
-  font-family: cursive;
-
-
-  &:active {
-    border: 0;
+  &__logo-box {
+    display: flex;
+    cursor: pointer;
   }
 
-  > input {
-    width: 95%;
-    height: 100%;
+  &__logo-img {
+    width: 5rem;
+    height: 4.5rem;
+  }
+
+  &__logo-text {
+    display: block;
+    font-family: fantasy;
+    font-size: 3rem;
+    font-weight: 200;
+    margin-left: 1.5rem;
+  }
+
+  &__search-bar {
+    display: flex;
+    flex: 1;
+  }
+
+  &__search-input {
+    height: 4.5rem;
+    width: 100%;
     border: 0 none;
-    font-size: 18px;
+    font-size: 1.8rem;
     outline: none;
-    border-radius: 20px 0 0 20px;
+    border-radius: 2rem;
     text-align: center;
     letter-spacing: 0.094em;
-    background-color: #0e0d0d;
-    color: white;
-    font-family: cursive;
+    background-color: $color-secondary;
+    color: $color-white;
   }
 
-  & .search-button {
-    background-color: #595DFD;
-    color: white;
-    width: 5%;
-    border-radius: 0 20px 0 0;
-
-    &:hover {
-      background-color: #575af5;
-    }
+  &__search-button {
+    color: $color-white;
+    border-radius: 50%;
+    margin-left: -5rem !important;
   }
+
+  &__nav {
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  &__user {
+    position: relative;
+  }
+}
+
+.MuiBadge-badge {
+  font-size: 1.4rem !important;
 }

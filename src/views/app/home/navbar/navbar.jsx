@@ -4,16 +4,11 @@ import Toolbar from '@mui/material/Toolbar';
 import HomeIcon from '@mui/icons-material/Home';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Stack from "@mui/material/Stack";
-import Avatar from "@mui/material/Avatar";
-import {Link, useNavigate} from "react-router-dom";
-import Logo from "./logo";
-import {CustomBadge} from "../../../../components/ui/CustomBadge";
+import {Link, useLocation, useNavigate, useSearchParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {getColorFromUserStatus} from "../../../../utils/ToolUtil";
 import useScroll from "../../../../hook/useScroll";
-import {openCart, selectCart} from "../../../../store/cart-slice";
-import {setKeyword, toggleSearch} from "../../../../store/search";
-
+import {openSider, selectSider, setShow} from "../../../../store/sider-slice";
+import {toggleSearch} from "../../../../store/search";
 import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 import SearchIcon from '@mui/icons-material/Search';
 import IconButton from "@mui/material/IconButton";
@@ -25,17 +20,24 @@ import {countCart} from "../../../../api/cart.service";
 import {countOrder} from "../../../../api/order.service";
 import {selectOrder} from "../../../../store/order-slice";
 import UserService from "../../../../api/user.service";
-import {ListCatsWith4Items} from "../../../../api/cat.service";
+import AvatarBadge from "../../../../components/avatar-badge/avatar-badge";
+import MiniProfile from "./mini-profile/mini-profile";
+import {updateUrl} from "../../../../utils/ToolUtil";
+import logo from "../../../../assets/logo/logo.png";
 
 function NavBar(props) {
+    let [params] = useSearchParams();
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const {open} = useSelector(selectCart);
+    const {open} = useSelector(selectSider);
     const {refresh} = useSelector(selectOrder);
     const [cartCount, setCartCount] = useState(0)
     const [orderCount, setOrderCount] = useState(0)
-    const scroll = useScroll()
+    const [showMiniProfile, setShowMiniProfile] = useState(false)
     const [user, setUser] = useState({})
+    const [keyword, setKeyword] = useState("")
+    const scroll = useScroll()
+    const location = useLocation();
 
     useEffect(() => {
         countCart().then(resp => {
@@ -45,74 +47,73 @@ function NavBar(props) {
 
     useEffect(() => {
         countOrder().then(resp => {
-            setOrderCount(resp);
+            setOrderCount(resp.open);
         })
     }, [refresh]);
 
     useEffect(() => {
         setUser(UserService.getLocalUser())
+        return () => setShowMiniProfile(false)
     }, []);
 
-    const enterAccount = (e) => {
-        navigate('/account')
-    };
-
     const handleOpenCart = () => {
-        dispatch(openCart())
+        dispatch(openSider())
+        dispatch(setShow('cart'))
     }
 
     const handleEnter = (event) => {
         if (event.nativeEvent.keyCode === 13) {
-            dispatch(setKeyword(event.target.value))
-            dispatch(toggleSearch());
-            navigate('/search')
+            handleSearch();
         }
+    }
+    const handleSearch = (event) => {
+        dispatch(toggleSearch());
+        let url = updateUrl("keyword", keyword, location.search, "/search");
+        navigate(url)
     }
 
     return (
-        <div className="navbar-container"
-             style={{transform: `${scroll.direction === 'down' ? 'translateY(-100%)' : ''}`}}>
-            <AppBar position="static" sx={{backgroundColor: '#252422'}}>
-                <Toolbar>
-                    <Logo title="LEETROLL"/>
-                    <div className="search-bar">
-                        <input type="text" placeholder="搜索" onKeyDown={handleEnter}/>
-                        <IconButton className={'search-button'} onClick={() => navigate("/search")}>
-                            <SearchIcon fontSize="medium"/>
+        <div className="header" style={{transform: `${scroll.direction === 'down' ? 'translateY(-100%)' : ''}`}}>
+            <AppBar position="static" sx={{backgroundColor: '#0f141a'}}>
+                <Toolbar sx={{gap: 5}}>
+                    <div className="header__logo-box" onClick={() => navigate("/")}>
+                        <img className="header__logo-img" src={logo} alt="logo"/>
+                        <h1 className="header__logo-text"> LEETROLL </h1>
+                    </div>
+                    <div className="header__search-bar">
+                        <input className="header__search-input" type="text"
+                               placeholder="搜索"
+                               defaultValue={params.get("keyword")}
+                               onKeyDown={handleEnter}
+                               onChange={(event) => setKeyword(event.target.value)}/>
+                        <IconButton className="header__search-button" onClick={handleSearch}>
+                            <SearchIcon fontSize="large" sx={{color: "#fff"}}/>
                         </IconButton>
                     </div>
-                    <Stack direction="row" spacing={2} sx={{width: '20%', alignItems: 'center'}}>
-                        <Link color="inherit" to={"/home"}>
-                            <HomeIcon fontSize="medium"/>
+                    <Stack direction="row" spacing={2} className="header__nav">
+                        <Link color="inherit" to={"/"}>
+                            <HomeIcon fontSize="large"/>
                         </Link>
-                        <Link color="inherit" to={"/order"}>
+                        <Link color="inherit" to={"/order/open"}>
                             <Badge badgeContent={orderCount} color="success">
-                                <PaidIcon fontSize="medium"/>
+                                <PaidIcon fontSize="large"/>
                             </Badge>
                         </Link>
                         <a color="inherit" onClick={handleOpenCart}>
                             <Badge badgeContent={cartCount} color="success">
-                                <ShoppingCartIcon fontSize="medium"/>
+                                <ShoppingCartIcon fontSize="large"/>
                             </Badge>
                         </a>
                         <Link color="inherit" to={"/community"}>
-                            <SupervisorAccountIcon fontSize="medium"/>
+                            <SupervisorAccountIcon fontSize="large"/>
                         </Link>
-                        <CustomBadge
-                            overlap="circular"
-                            anchorOrigin={{vertical: 'bottom', horizontal: 'right'}}
-                            variant="dot"
-                            onClick={enterAccount}
-                            sx={{
-                                cursor: 'pointer',
-                                '& .MuiBadge-badge': {
-                                    backgroundColor: user && getColorFromUserStatus(user.status),
-                                    color: user && getColorFromUserStatus(user.status),
-                                }
-                            }}
-                        >
-                            <Avatar alt="avatar" src={user && user.avatar}/>
-                        </CustomBadge>
+                        <div className="header__user">
+                            <AvatarBadge handleMouseOver={() => setShowMiniProfile(true)}
+                                         user={user}
+                                         size={{width: 5, height: 5}}/>
+                            <MiniProfile user={user} show={showMiniProfile}
+                                         handleClose={() => setShowMiniProfile(false)}/>
+                        </div>
                     </Stack>
                 </Toolbar>
             </AppBar>

@@ -1,92 +1,50 @@
 import React, {useEffect, useState} from 'react';
-import Stack from "@mui/material/Stack";
-import {makeStyles} from "@mui/styles";
 import {isVideo} from "../../../../utils/ToolUtil";
-import SimplePlayer from "../../../../components/player/SimplePlayer";
-import Box from "@mui/material/Box";
+import PlayImg from '../../../../assets/images/play_img.jpg'
+import Carousel from "../carousel/carousel";
+import './prev-show.scss'
+import {getCurrentEffect} from "../../../../api/config.service";
 
+function PrevCard(props) {
+    const {prev} = props
+    const [zoomShow, setZoomShow] = useState(false)
 
-const useStyles = makeStyles({
-    prev: {
-        width: '1/4',
-        maxHeight: '100px',
-        cursor: "pointer",
-        borderRadius: '5px',
-
-        '&:hover': {
-            filter: 'grayscale(90%)',
-            transform: 'scale(1.1)',
-            border: '1px solid white',
-        }
-    }
-})
-
-const fileShowContainer = {
-    position: "relative",
-    height: '100px',
-    aspectRatio: '4/3',
-    '&:hover': {
-        filter: 'grayscale(90%)',
-        transform: 'scale(1.1)',
-        border: '1px solid white',
-    }
-}
-
-
-function PrevShow(props) {
-    const {preList} = props
-    const classes = useStyles();
-    const [currentPrev, setCurrentPrev] = useState();
-
-    useEffect(() => {
-        setCurrentPrev(preList && preList.length > 0 && preList[0])
-    }, [preList])
-
-
-    function handlePrevChange(prev, event) {
-        setCurrentPrev(prev);
-        let element = document.getElementById("prevList");
-        for (let i = 0; i < element.children.length; i++) {
-            element.children[i].style.border = '0px';
-        }
-        event.target.style.border = '2px solid white';
-        event.target.style.borderRadius = '5px';
+    const handleClose = (e) => {
+        setZoomShow(false);
     }
 
     return (
-        <React.Fragment>
-            {
-                currentPrev && isVideo(currentPrev.format) ? <SimplePlayer videoSrc={{
-                        type: `${currentPrev.key ? 'application/x-mpegURL' : 'video/mp4'}`,
-                        src: currentPrev.link
-                    }}/> :
-                    <div>
-                        <img src={currentPrev && currentPrev.link} alt='prevShow'
-                             style={{
-                                 width: 'auto',
-                                 maxHeight: '650px',
-                                 borderRadius: '25px',
-                             }}/>
-                    </div>
-            }
+        <div className="item-prev-container"
+             onMouseOver={() => setZoomShow(true)}
+             onMouseOut={handleClose}
+        >
+            <img alt='smallPrev' src={`${isVideo(prev.format) ? PlayImg : prev.link}`}/>
+            <div className="zoom-container" hidden={!zoomShow}>
+                <img alt='smallPrev' src={prev.link}/>
+            </div>
+        </div>
+    )
+}
 
-            <Stack id={"prevList"} direction={'row'} spacing={1} style={{justifyContent: "center", flexWrap: 'wrap'}}>
+function PrevShow(props) {
+    const {preList} = props
+    const [currentPrev, setCurrentPrev] = useState();
+
+    useEffect(() => {
+        setCurrentPrev(preList && preList.length > 0 && preList[0]);
+
+    }, [preList])
+
+    return (
+        <React.Fragment>
+            <Carousel slides={preList}></Carousel>
+            <div id="prevList">
                 {
-                    preList && preList.map((prev, index) => {
-                        return isVideo(prev.format) ?
-                            <Box sx={fileShowContainer} onClick={(event) => handlePrevChange(prev, event)}>
-                                <SimplePlayer videoSrc={{
-                                    type: `${prev.key ? 'application/x-mpegURL' : 'video/mp4'}`,
-                                    src: prev.link
-                                }}/></Box>
-                            :
-                            <img src={prev.link} alt='smallPrev'
-                                 key={'prev'.concat(index)}
-                                 className={classes.prev}
-                                 onClick={(event) => handlePrevChange(prev, event)}/>
-                    })
+                    preList && preList.map((prev, index) => (
+                        <PrevCard prev={prev} key={index}/>
+                    ))
                 }
-            </Stack>
+            </div>
         </React.Fragment>
     );
 }

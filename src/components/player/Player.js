@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import videojs from "video.js";
 import "video.js/dist/video-js.css";
-import './palyer.css'
+import './player.scss'
 import Hls from "hls.js";
 
 
@@ -37,7 +37,7 @@ function Player(props) {
             onReady(player)
         }
 
-    }, [options]);
+    }, [options, onReady]);
 
     // Dispose the Video.js player when the functional component unmounts
     React.useEffect(() => {
@@ -51,7 +51,6 @@ function Player(props) {
 
     return (
             <video
-                style={{borderRadius: '2px'}}
                 ref={videoRef}
                 className="video-js vjs-big-play-centered"
             />

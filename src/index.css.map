@@ -1,7 +1,1 @@
-{
-"version": 3,
-"mappings": ";AACA,IAAK;EACD,gBAAgB,EAAE,mIAAmI;EACrJ,WAAW,EAAE,kBAAkB;;AAGnC,8BAA8B;AAC9B,sBAAuB;EACnB,UAAU,EAAE,qCAAqC;;AAGrD,WAAW;AACX,mBAAoB;EAChB,KAAK,EAAE,IAAI;EACX,MAAM,EAAE,IAAI;;AAGhB,eAAe;AACf,yBAA0B;EACtB,gBAAgB,EAAE,OAAO;EACzB,gBAAgB,EAAE,wLAOE;EACpB,aAAa,EAAE,IAAI;;AAGvB,WAAW;AACX,yBAA0B;EACtB,gBAAgB,EAAE,OAAO;EACzB,aAAa,EAAE,IAAI",
-"sources": ["index.scss"],
-"names": [],
-"file": "index.css"
-}
+{"version":3,"sourceRoot":"","sources":["styles/_animation.scss","styles/_utility.scss","styles/_typography.scss","index.scss","styles/_variable.scss"],"names":[],"mappings":"AAAA;EACE;;;AAGF;EACE;IAAO;IAAY;;EACnB;IAAK;IAAY;;;ACNnB;EACE;;;AAGF;EACE;;;AAGF;EACE;;;AAGF;EACE;;;AAGF;EACE;;;AAGF;EACE;;;AChBF;EACE;EACA;EACA;EACA;;;ACPF;AAAA;AAAA;EAGE;EACA;EACA;;;AAGF;EACE;EACA;;;AAGF;EACE;EACA;EACA,OCFmB;EDGnB;EACA;;;AAGF;EACE;;;AAGF;EACE;EACA;;;AAGF;EACE,kBCjCc;EDkCd;EAQA;;;AAGF;EACE;EACA;;;AAGF;EACE;;AAEA;EACE;;;AAIJ;EACE;;AAEA;EACE;;AAGF;EACE;;;AAIJ;EACE;EACA;;;AAGF;EACE;;;AAGF;EACE;EACA","file":"index.css"}

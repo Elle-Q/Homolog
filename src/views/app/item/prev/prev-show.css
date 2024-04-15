@@ -1,0 +1,28 @@
+.item-prev-container {
+  display: inline-block;
+  position: relative;
+}
+.item-prev-container .zoom-container {
+  position: absolute;
+  z-index: 10;
+  bottom: 0;
+  left: 10rem;
+  background-color: rgba(89, 93, 253, 0.5);
+  padding: 2rem;
+  border-radius: 2rem;
+}
+.item-prev-container .zoom-container > img {
+  max-width: 50rem;
+  border-radius: 2rem;
+}
+.item-prev-container > img {
+  max-height: 150px;
+  border-radius: 10px;
+}
+.item-prev-container > img:hover {
+  cursor: pointer;
+  filter: grayscale(100);
+  transform: scale(0.9);
+}
+
+/*# sourceMappingURL=prev-show.css.map */

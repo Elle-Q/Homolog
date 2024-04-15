@@ -2,123 +2,88 @@ import React, {useEffect, useState} from 'react';
 import Player from "./Player";
 import Box from "@mui/material/Box";
 import ControlBar from "./ControlBar";
-import Barrage from 'barrage-ui';
-import barageData from '../../json/barrage.json'
-import DanmuInput from "../../views/app/play/video/DanmuInput";
-import Stack from "@mui/material/Stack";
+import Slider from '@mui/material/Slider';
+import {timeFormat} from "../../utils/ToolUtil";
 
 function VideoPlayer(props) {
 
-    const {videoSrc} = props;
-    const [danmuData, setDanmuData] = useState(null);
-    const [play, setPlay] = useState(false);
+    const {detail} = props;
+    const [isPlaying, setIsPlaying] = useState(false);
     const [visible, setVisible] = useState("hidden");
-    const [barrageVisible, setBarrageVisible] = useState(true);
+    const [progressTime, setProgressTime] = useState("00:00:00");
+    const [totalTime, setTotalTime] = useState(null);
     const playerRef = React.useRef(null);
-    const barrageRef = React.useRef(null);
-    const barrageInputRef = React.createRef();
+    const [process, setProcess] = useState(0)
+    const [duration, setDuration] = useState(100)
 
     const videoJsOptions = {
         autoplay: false,
-        height:"auto",
-        aspectRatio: "4:3",
+        aspectRatio: "16:9",
         controls: true,
         responsive: true,
         fluid: true,
-        sources: [videoSrc],
-        controlBar: {
-            children: [
-                {
-                    name: 'ProgressControl'
-                },
-            ]
-        }
+        sources: [{
+            type: 'application/x-mpegURL',
+            src: detail.link
+        }],
     }
 
     useEffect(() => {
-        barrageRef.current=new Barrage({
-            container: document.getElementById('videoPlayContainer'),
-            data: barageData,
-            config: {
-                duration: -1,
-                speed: 50,
-                fontSize: 15,
-                fontFamily: '-apple-system',
-                textShadowBlur: 1.0,
-                opacity: 0.5,
-                defaultColor: '#fff',
-            },
-        });
-    },[])
-
-    useEffect(() => {
-        // if (!playerRef.current) return;
         const player = playerRef.current;
         if (player) {
             player.pause();
-            player.src(videoSrc);
+            player.src(detail.link);
             player.load()
         }
-    },[videoSrc])
-
-    useEffect(() => {
-        const player = playerRef.current;
-        if (!player || !barrageVisible) return;
-        barrageRef.current.add({
-            time: player.currentTime() * 1000,
-            text: danmuData,
-            color:"red"
-        });
-    },[danmuData])
+        setDuration(detail.duration)
+        setTotalTime(timeFormat(detail.duration))
+    }, [detail])
 
     //toggle
     function togglePlay() {
         const player = playerRef.current;
-        if (play) {
+        if (isPlaying) {
             player.pause();
         } else {
             player.play();
         }
+        setIsPlaying(!isPlaying)
     }
-
-    //toggleShowBarrage
-    function toggleShowBarrage() {
-        setBarrageVisible(!barrageVisible);
-        if (barrageVisible) {
-            barrageRef.current.setData([]);
-        } else {
-            barrageRef.current.setData(barageData);
-        }
-    }
-
-    //发送弹幕
-    const handleDanmuSend = () => {
-        setDanmuData(barrageInputRef.current.value);
-        barrageInputRef.current.value = "";
-    }
-
 
     //listen event
     const handlePlayerReady = (player) => {
         playerRef.current = player;
         //   handle player events
         player.on(['waiting', 'pause'], () => {
-            setPlay(false);
-            barrageRef.current.pause();
+            setIsPlaying(false);
         });
 
         player.on('playing', () => {
-            setPlay(true)
-            barrageRef.current.play();
+            setIsPlaying(true)
         });
 
         player.on('dispose', () => {
         });
 
         player.on('seeked', () => {
-            setPlay(true);
-            barrageRef.current.goto(player.currentTime() * 1000);
+            setIsPlaying(true);
         });
+
+        player.on('timeupdate', () => {
+            setProgressTime(timeFormat(player.currentTime()))
+        });
+
+        player.on('tap', () => {
+            debugger
+            setIsPlaying(!isPlaying);
+        });
+
+        player.on("fullscreenchange", function(){
+            if(player.isFullscreen()){
+                player.exitFullscreen();
+            }
+        });
+
     };
 
     const rePlay = () => {
@@ -139,36 +104,40 @@ function VideoPlayer(props) {
         playerRef.current.playbackRate(myValue);
     };
 
+    const handleUpdateTime = (e) => {
+        setProcess(e.target.value);
+        playerRef.current.currentTime(e.target.value);
+    }
 
     return (
-        <Stack
-            id="videoPlayContainer"
-            sx={{
-                width: '100%',
-                backgroundColor: 'black',
-                borderRadius: '0 0 10px 10px',
-                zIndex: 1,
-                display: 'flex'
-            }}
-            onMouseEnter={() => setVisible("visible")}
-            onMouseLeave={() => setVisible("hidden")}
-        >
-            <Box sx={{display: 'flex', width:'65%', margin: 'auto'}}>
-                <Player options={videoJsOptions} onReady={handlePlayerReady} />
-            </Box>
-            <ControlBar play={play}
-                        togglePlay={togglePlay}
-                        visible={visible}
-                        barrageVisible={barrageVisible}
-                        rePlay={rePlay}
-                        setVolume={setVolume}
-                        enterFullScreen={enterFullScreen}
-                        handleRateClick={handleRateClick}
-                        toggleShowBarrage={toggleShowBarrage}
-            />
-            <DanmuInput ref={barrageInputRef} handleDanmuSend={handleDanmuSend}/>
-
-        </Stack>
+        <Box id="videoPlayContainer" sx={{width: '100%', margin: 'auto', position: 'relative'}}
+             onMouseEnter={() => setVisible("visible")}
+             onMouseLeave={() => setVisible("hidden")}>
+            <Player options={videoJsOptions} onReady={handlePlayerReady}/>
+            <div style={{position: "absolute", bottom: 0, width: '100%',}}>
+                <Slider
+                    value={process}
+                    max={duration}
+                    step={1}
+                    onChange={handleUpdateTime}
+                    sx={{
+                        color: "#595DFD",
+                        transition: 'opacity 2s',
+                        opacity: `${visible}` === 'visible' ? 1 : 0,
+                    }}
+                />
+                <ControlBar play={isPlaying}
+                            togglePlay={togglePlay}
+                            visible={visible}
+                            showTime={progressTime}
+                            totalTime={totalTime}
+                            rePlay={rePlay}
+                            setVolume={setVolume}
+                            enterFullScreen={enterFullScreen}
+                            handleRateClick={handleRateClick}
+                />
+            </div>
+        </Box>
     );
 }
 

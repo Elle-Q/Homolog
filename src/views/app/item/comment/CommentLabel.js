@@ -7,7 +7,7 @@ import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
 import IconButton from "@mui/material/IconButton";
 import Button from "@mui/material/Button";
-import {ThumbDownButton, ThumbUpButton} from "../../../../components/ui/IconButton";
+import {ThumbDownButton, ThumbUpButton} from "../../../../components/button/icon-button";
 
 function CommentLabel(props) {
     const {name, content, createTime, avatar, likeCnt,hateCnt } = props;

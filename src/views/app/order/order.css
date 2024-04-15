@@ -3,9 +3,6 @@
   margin: auto;
   min-height: 75vh;
 }
-.order__heading {
-  margin-top: 50px;
-}
 .order__heading > span {
   color: #D1D1D1;
   font-size: 24px;

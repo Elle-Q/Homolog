@@ -29,6 +29,22 @@
     align-items: center;
     gap: 1.5rem;
     margin: 5rem auto;
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 80%;
+      left: 50%;
+      width: 40%;
+      height: 10%;
+      z-index: -1;
+      box-shadow: 0 0 40px 30px #595DFD;
+      border-radius: 50%;
+      background-color: transparent;
+      transform: translate(-50%, -50%);
+      filter: blur(4rem);
+    }
   }
 
 }

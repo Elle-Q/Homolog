@@ -13,7 +13,8 @@ function ColorButton(props) {
                         backgroundColor: alpha(`${color}`, 0.4),
                     }
                 }}
-                onClick={handleClick}>
+                onClick={handleClick}
+        >
             {props.children}
         </Button>
     );

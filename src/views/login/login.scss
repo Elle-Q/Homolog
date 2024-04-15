@@ -112,7 +112,7 @@
     }
 
     &--varify {
-      background-color: rgba($color-primary, .6);
+      background-color: rgba($color-primary, .5);
       color: $color-white;
       font-size: 1.6rem;
       margin-left: -15rem;
@@ -127,9 +127,28 @@
 
       &:hover {
         cursor: pointer;
+        background-color: rgba($color-primary, .8);
       }
     }
+  }
 
+  &__quiz {
+    &-h1 {
+      font-size: 2rem;
+      font-weight: 600;
+      color: black;
+    }
+
+    &-option {
+      display: flex;
+      gap: 1rem;
+      padding: 2rem;
+
+      & > button {
+        font-size: 1.5rem !important;
+        border-radius: 1.5rem;
+      }
+    }
   }
 }
 

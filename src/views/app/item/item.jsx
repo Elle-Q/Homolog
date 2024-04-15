@@ -22,6 +22,7 @@ import IconBadge from "../../../components/button/icon-badge";
 import {CountComment} from "../../../api/comment.service";
 import ModeCommentOutlinedIcon from "@mui/icons-material/ModeCommentOutlined";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
+import {isJson} from "../../../utils/ToolUtil";
 
 function Item() {
     let params = useParams();
@@ -76,21 +77,23 @@ function Item() {
 
     //获取资源的部分描述信息
     const getMark = () => {
-        /*if (!data || !data.mark || data.mark.trim().length === 0) return
+        if (!data || !data.mark || data.mark.trim().length === 0 || !isJson(data.mark)) return
         let json = JSON.parse(data.mark)
         let spans = []
         Object.keys(json).forEach(key => {
             spans.push(<span>{key}:{json[key]}</span>)
         });
-        return spans*/
+        return spans
     }
 
     const handleLike = () => {
         toggleAtion(data.id, 'like').then(resp => {
             let newData = {...data, liked: resp}
             if (resp) {
+                setLikes(likes + 1)
                 newData = {...newData, liked: data.liked + 1}
             } else {
+                setLikes(likes - 1)
                 newData = {...newData, liked: data.liked - 1}
             }
             setData(newData)
@@ -101,8 +104,10 @@ function Item() {
         toggleAtion(data.id, 'collect').then(resp => {
             let newData = {...data, collected: resp}
             if (resp) {
+                setCollects(collects + 1)
                 newData = {...newData, collectCnt: data.collectCnt + 1}
             } else {
+                setCollects(collects - 1)
                 newData = {...newData, collectCnt: data.collectCnt - 1}
             }
             setData(newData)
@@ -133,13 +138,12 @@ function Item() {
                             <span> 价格: ￥{data.price}</span>
                             <span> 作者: {data.author}</span>
                             <span> 资源类型: {data.type}</span>
+                            {data.platform && <span> 附件包含: {data.platform}</span>}
                             {getMark()}
                         </Stack>
 
                         <Stack className="behave-area">
-                            <span> 有{data.likeCnt}人觉得该资源很赞 </span>
                             <span> 有{data.downCnt}人下载了该资源 </span>
-                            <span> 有{data.collectCnt}人收藏了该资源 </span>
                         </Stack>
 
                         <Divider sx={{backgroundColor: '#403D39'}}/>
@@ -183,15 +187,20 @@ function Item() {
                             </div>
                             <div className="icon-container">
                                 <IconBadge cnt={commentsSize}
-                                           icon={<ModeCommentOutlinedIcon className="icon-badge__icon" fontSize="large"/>}
+                                           icon={<ModeCommentOutlinedIcon className="icon-badge__icon"
+                                                                          fontSize="large"/>}
                                            fontSize="large"/>
                                 <IconBadge cnt={likes}
                                            handleClick={handleLike}
-                                           icon={<ThumbUpOffAltIcon className={`${data.liked ? 'icon-badge__icon--selected-primary' : ''} icon-badge__icon`} fontSize="large"/>}
+                                           icon={<ThumbUpOffAltIcon
+                                               className={`${data.liked ? 'icon-badge__icon--selected-primary' : ''} icon-badge__icon`}
+                                               fontSize="large"/>}
                                            fontSize="large"/>
                                 <IconBadge cnt={collects}
                                            handleClick={handleCollect}
-                                           icon={<FavoriteIcon className={`${data.collected ? 'icon-badge__icon--selected-pink' : ''} icon-badge__icon`} fontSize="large"/>}
+                                           icon={<FavoriteIcon
+                                               className={`${data.collected ? 'icon-badge__icon--selected-pink' : ''} icon-badge__icon`}
+                                               fontSize="large"/>}
                                            fontSize="large"/>
                             </div>
                             <Comment rescType="item"

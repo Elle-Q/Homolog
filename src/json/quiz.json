@@ -1,0 +1,12 @@
+[
+  {
+    "quiz": "以下属于3d软件的是?",
+    "answer": "blender",
+    "options": ["youtube","blender","sephora","gmail"]
+  },
+  {
+    "quiz": "以下不属于贴图类型的是?",
+    "answer": "你的自拍",
+    "options": ["次表面贴图","法线贴图","置换贴图","你的自拍"]
+  }
+]

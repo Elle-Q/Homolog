@@ -1,7 +1,5 @@
 import React, {useState} from 'react';
-import {alpha} from "@mui/system";
 import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
 import {useNavigate} from 'react-router-dom';
 import PhoneIphoneIcon from "@mui/icons-material/PhoneIphone";
 import VpnKeyIcon from "@mui/icons-material/VpnKey";
@@ -11,15 +9,15 @@ import {Link} from "@mui/material";
 import UserService from "../../api/user.service";
 import AuthService from "../../api/auth.service";
 import {useDispatch} from "react-redux";
-import './login.scss'
 import Timer from "./timer/timer";
-import styled from "styled-components";
 import {SendSmsCode} from "../../api/sms.service";
 import {isPhone, varifyPsw} from "../../utils/VarifyUtil";
 import Agreement from "../../components/agreement/agreement";
 import {loginFail, loginSuccess, registerSuccess} from "../../api/authSlice";
 import WeChat from '../../assets/icons/wechat_login.svg'
 import IconInput from "./icon-input/icon-input";
+import './login.scss'
+import {isEmpty} from "../../utils/ToolUtil";
 
 function Login(props) {
     const [action, setAction] = useState('signin');//register
@@ -40,6 +38,10 @@ function Login(props) {
             return
         }
         if (action === 'signin') { //登录
+            if (isEmpty(phone) || isEmpty(password)) {
+                alert("手机号和密码不能为空")
+                return
+            }
             AuthService.login(phone, password).then(
                 resp => {
                     if (resp === null) {
@@ -51,6 +53,12 @@ function Login(props) {
                 }
             )
         } else { // 注册
+            if (isEmpty(userNameRef.current.value)
+                || isEmpty(phoneRef.current.value)
+                || isEmpty(passRef.current.value)) {
+                alert("昵称 手机号 密码均不能为空")
+                return
+            }
             AuthService.signup(
                 userNameRef.current.value,
                 phoneRef.current.value,
@@ -82,8 +90,8 @@ function Login(props) {
         });
     }
 
-    //todo: 验证手机号， 发送短信获取短信验证码
     const handleClickSendSms = () => {
+        if (!isPhone(phoneRef.current.value)) return
         SendSmsCode(phoneRef.current.value).then(code => {
         })
     }
@@ -115,12 +123,20 @@ function Login(props) {
     }
 
     const handlePhoneChange = (event) => {
+        phoneVerify(event)
         setPhone(event.target.value)
     }
 
     const handlePswChange = (event) => {
         pswVerify(event)
         setPassword(event.target.value)
+    }
+
+    const check = () => {
+        if (!isPhone(phoneRef.current.value)) {
+            alert("手机号格式不正确")
+        }
+        return isPhone(phoneRef.current.value)
     }
 
     return (
@@ -153,7 +169,7 @@ function Login(props) {
                                        icon={<PhoneIphoneIcon fontSize="small"/>}/>
                             <IconInput ref={codeRef} placeholder="输入短信验证码" type="verify"
                                        icon={<ShieldIcon fontSize="small"/>}>
-                                <Timer handleClickSend={handleClickSendSms}></Timer>
+                                <Timer handleClickSend={handleClickSendSms} check={check}></Timer>
                             </IconInput>
                             <IconInput ref={passRef} placeholder="输入密码" type="password"
                                        onChange={pswVerify}
@@ -182,6 +198,7 @@ function Login(props) {
                     <img src={WeChat} alt="we_login"/>
                 </button>
             </Stack>
+
         </div>
     );
 }

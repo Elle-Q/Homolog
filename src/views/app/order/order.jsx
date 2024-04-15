@@ -3,6 +3,8 @@ import './order.scss'
 import {NavLink, Route, Routes} from "react-router-dom";
 import Tab from "./tab/tab";
 import {countOrder} from "../../../api/order.service";
+import {FlexCenter} from "../../../components/center/center";
+import Agenda from "../../../components/agenda/agenda";
 
 function Order(props) {
 
@@ -25,6 +27,7 @@ function Order(props) {
 
     return (
         <div className="order">
+            <FlexCenter> <Agenda/> </FlexCenter>
             <div className="order__heading">
                 <span>订单交易</span>
                 <NavLink to="/order/open" style={sty}>进行中 ({openCnt})</NavLink>

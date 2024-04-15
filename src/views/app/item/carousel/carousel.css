@@ -11,6 +11,8 @@
 .item-carousel-container * .icon {
   color: #00a896;
   padding: 5px;
+  width: 4rem;
+  height: 4rem;
 }
 .item-carousel-container * .icon:hover {
   color: rgba(255, 255, 255, 0.8);

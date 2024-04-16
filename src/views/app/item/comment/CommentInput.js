@@ -40,6 +40,7 @@ function CommentInput(props) {
     const handleSendComment = () => {
         if (comment.trim().length == 0) return;
         handleSend(comment);
+        setComment("");
     }
 
     return (
@@ -65,10 +66,11 @@ function CommentInput(props) {
                 <div style={{
                     position: 'absolute',
                     zIndex: 999,
-                    left: '3rem',
-                    top: '0',
                 }}>
-                    <Picker data={data} onEmojiSelect={handleSelectEmoji}/>
+                    <Picker data={data}
+                            onEmojiSelect={handleSelectEmoji}
+                            onClickOutside={() => setShowPicker(false)}
+                    />
                 </div>
             }
         </div>

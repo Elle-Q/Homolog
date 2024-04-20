@@ -7,19 +7,19 @@ import IconBadge from "../button/icon-badge";
 import UserService from "../../api/user.service";
 
 function Comment(props) {
-    const {rescType, rescId} = props
+    const {resctype, rescid} = props
     const [comments, setComments] = useState([]);
 
     useEffect(() => {
-        ListComment(rescType, rescId).then(resp => {
+        ListComment(resctype, rescid).then(resp => {
             setComments(resp)
         })
     }, []);
 
     const handleSendComment = (content) => {
         let params = {
-            rescType: rescType,
-            rescId: rescId,
+            rescType: resctype,
+            rescId: rescid,
             content: content,
         }
 
@@ -36,7 +36,7 @@ function Comment(props) {
         <div className="comment fadein" {...props}>
             <CommentInput handleSend={handleSendComment}/>
             {comments.map((comment, _) => (
-                <div className="comment__user-box">
+                <div className="comment__user-box" key={comment.id}>
                     <div className="comment__user">
                         <Avatar className="comment__user-avatar" src={comment.userAvatar}/>
                         <p className="comment__user-name">{comment.userName}: &nbsp;</p>

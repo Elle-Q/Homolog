@@ -61,6 +61,15 @@ export function timeFormat(time) {
     return `${hour}:${minute}:${second}`;
 }
 
+export function secondFormat(seconds) {
+    let time = Math.floor(seconds);
+    let minute = Math.floor((time % 3600) / 60);
+    let second = Math.floor(time % 60);
+    minute = minute < 10 ? "0" + minute : minute;
+    second = second < 10 ? "0" + second : second;
+    return `${minute}:${second}`;
+}
+
 export function updateUrl(key, newValue, params, path) {
     const searchParams = new URLSearchParams(params);
     searchParams.set(key, newValue);

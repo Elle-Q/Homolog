@@ -4,6 +4,7 @@ import InfiniteScroll from "react-infinite-scroller";
 import {ListItems, TotalSize} from "../../../../api/cat.service";
 import {useSelector} from "react-redux";
 import {selectSearch} from "../../../../store/search";
+import SoundCard from "../../../../components/sound-card/sound_card";
 
 function SearchBody(props) {
     const {keyword, catId, metric, updateSize} = props;
@@ -15,6 +16,7 @@ function SearchBody(props) {
     const [isFetching, setIsFetching] = useState(true);
 
     useEffect(() => {
+        setIsFetching(true)
         const fetchData = async () => {
             return await ListItems(1, keyword, catId, metric)
         }
@@ -36,33 +38,41 @@ function SearchBody(props) {
 
     const loadMoreItems = () => {
         if (isFetching) return
-        setHasMore(list.length < totalSize)
-        ListItems(page, keyword, catId, metric).then((data) => {
+
+        const fetchData = async () => {
+            setIsFetching(true)
+            return await ListItems(page, keyword, catId, metric);
+        }
+
+        fetchData().then((data) => {
             let newList = [...list, ...data]
             setList(newList)
             setPage(page + 1);
             setHasMore(newList.length < totalSize)
-        });
+            setIsFetching(false)
+        })
     };
 
     return (
         <React.Fragment>
-            {
-                !isFetching && <InfiniteScroll
-                    pageStart={page}
-                    loadMore={loadMoreItems}
-                    hasMore={hasMore}
-                    loader={<div key={0}>Loading...</div>}
-                >
-                    <div className="search__body">
-                        {
-                            list && list.map(item => (
-                                <ItemCard key={item.id} item={item} width="23%"/>
-                            ))
-                        }
-                    </div>
-                </InfiniteScroll>
-            }
+            <InfiniteScroll
+                pageStart={page}
+                loadMore={loadMoreItems}
+                hasMore={hasMore}
+                loader={<div key={0}>Loading...</div>}
+            >
+                <div className="search__body">
+                    {
+                        list && list.map(item => {
+                            if (item.type === 'sound') {
+                                return <SoundCard key={item.id} item={item}/>
+                            } else {
+                                return <ItemCard key={item.id} item={item} width="23%"/>
+                            }
+                        })
+                    }
+                </div>
+            </InfiniteScroll>
         </React.Fragment>
     );
 }

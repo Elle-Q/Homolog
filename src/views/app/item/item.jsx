@@ -203,8 +203,8 @@ function Item() {
                                                fontSize="large"/>}
                                            fontSize="large"/>
                             </div>
-                            <Comment rescType="item"
-                                     rescId={id}
+                            <Comment resctype="item"
+                                     rescid={id}
                                      fontSize="large"/>
                         </Stack>
                     </Stack>

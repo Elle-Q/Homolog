@@ -19,6 +19,7 @@
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "@types/react-transition-group": "^4.4.4",
+    "@wavesurfer/react": "^1.0.5",
     "axios": "^1.6.8",
     "barrage-ui": "^1.4.1",
     "dat.gui": "^0.7.9",
@@ -31,6 +32,7 @@
     "qiniu-js": "^3.4.0",
     "qrcode.react": "^3.1.0",
     "react": "^17.0.2",
+    "react-confetti-explosion": "^2.1.2",
     "react-dom": "^17.0.2",
     "react-draggable": "^4.4.4",
     "react-hook-form": "^7.27.1",
@@ -46,6 +48,8 @@
     "shortid": "^2.2.16",
     "three": "^0.138.3",
     "video.js": "^8.10.0",
+    "wavesurfer-react": "^3.0.2",
+    "wavesurfer.js": "^7.7.11",
     "web-vitals": "^1.1.2",
     "webfontloader": "^1.6.28"
   },
@@ -73,7 +77,6 @@
       "last 1 safari version"
     ]
   },
-
   "devDependencies": {
     "@reduxjs/toolkit": "^1.7.0",
     "material-ui-popup-state": "^2.0.0",

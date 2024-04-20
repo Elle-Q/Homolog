@@ -67,7 +67,7 @@ function IssueCard(props) {
                 </Box>
 
                 {
-                    showComment && <Comment rescType="issue" rescId={issue.id}/>
+                    showComment && <Comment resctype="issue" rescid={issue.id}/>
                 }
             </Grid>
             <Modal

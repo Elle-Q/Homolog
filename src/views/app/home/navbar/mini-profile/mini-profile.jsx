@@ -35,7 +35,7 @@ function MiniProfile(props) {
     }
 
     return (
-        <div hidden={!show} className="mini-profile" onMouseLeave={handleClose}>
+        <div hidden={!show} className="mini-profile fadedown" onMouseLeave={handleClose}>
             {
                 user ? <React.Fragment>
                         {

@@ -1,0 +1,282 @@
+[
+  {
+    "name": "环境音效",
+    "alias": "environment",
+    "sub": [
+      {
+        "name": "场景",
+        "alias": "scene",
+        "sub": [
+          {
+            "name": "城市",
+            "alias": "city"
+          },
+          {
+            "name": "森林",
+            "alias": "forest"
+          },
+          {
+            "name": "乡村",
+            "alias": "countryside"
+          },
+          {
+            "name": "酒吧",
+            "alias": "bar"
+          },
+          {
+            "name": "办公室",
+            "alias": "office"
+          },
+          {
+            "name": "海滩",
+            "alias": "beach"
+          },
+          {
+            "name": "车站",
+            "alias": "station"
+          },
+          {
+            "name": "餐厅",
+            "alias": "restaurant"
+          },
+          {
+            "name": "商店",
+            "alias": "store"
+          }
+        ]
+      },
+      {
+        "name": "天气",
+        "alias": "weather",
+        "sub": [
+          {
+            "name": "风",
+            "alias": "wind"
+          },
+          {
+            "name": "雨",
+            "alias": "rain"
+          },
+          {
+            "name": "雷电",
+            "alias": "thunder"
+          },
+          {
+            "name": "雪",
+            "alias": "snow"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "动作音效",
+    "alias": "action",
+    "sub": [
+      {
+        "name": "人物",
+        "alias": "human",
+        "sub": [
+          {
+            "name": "笑",
+            "alias": "laugh"
+          },
+          {
+            "name": "哭",
+            "alias": "cry"
+          },
+          {
+            "name": "喊叫",
+            "alias": "yell"
+          },
+          {
+            "name": "心跳",
+            "alias": "heartbeat"
+          },
+          {
+            "name": "呼吸",
+            "alias": "breath"
+          },
+          {
+            "name": "欢呼",
+            "alias": "cheer"
+          },
+          {
+            "name": "踢打",
+            "alias": "hit"
+          },
+          {
+            "name": "脚步声",
+            "alias": "footsteps"
+          },
+          {
+            "name": "咳嗽",
+            "alias": "cough"
+          },
+          {
+            "name": "挥舞",
+            "alias": "wave"
+          },
+          {
+            "name": "鼓掌",
+            "alias": "applaud"
+          }
+        ]
+      },
+      {
+        "name": "自然",
+        "alias": "nature",
+        "sub": [
+          {
+            "name": "火焰",
+            "alias": "fire"
+          },
+          {
+            "name": "水流",
+            "alias": "water flow"
+          },
+          {
+            "name": "沸腾",
+            "alias": "bubble"
+          },
+          {
+            "name": "瀑布",
+            "alias": "fall"
+          },
+          {
+            "name": "鸟鸣",
+            "alias": "bird"
+          },
+          {
+            "name": "动物叫声",
+            "alias": "animal"
+          },
+          {
+            "name": "呼啸声",
+            "alias": "whoosh"
+          }
+        ]
+      },
+      {
+        "name": "道具",
+        "alias": "props",
+        "sub": [
+          {
+            "name": "刀剑",
+            "alias": "sword"
+          },
+          {
+            "name": "枪声",
+            "alias": "shot"
+          },
+          {
+            "name": "爆炸",
+            "alias": "boom"
+          },
+          {
+            "name": "碎裂",
+            "alias": "shatter"
+          },
+          {
+            "name": "门",
+            "alias": "door"
+          }
+        ]
+      },
+      {
+        "name": "交通工具",
+        "alias": "trans",
+        "sub": [
+          {
+            "name": "飞机",
+            "alias": "plane"
+          },
+          {
+            "name": "小汽车",
+            "alias": "car"
+          },
+          {
+            "name": "卡车",
+            "alias": "truck"
+          },
+          {
+            "name": "摩托车",
+            "alias": "motor"
+          },
+          {
+            "name": "自行车",
+            "alias": "bike"
+          }
+        ]
+      },
+      {
+        "name": "其他",
+        "alias": "other",
+        "sub": [
+          {
+            "name": "嗖嗖声",
+            "alias": "plane"
+          },
+          {
+            "name": "嗡嗡声",
+            "alias": "drone"
+          },
+          {
+            "name": "嘘嘘声",
+            "alias": "truck"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "氛围音效",
+    "alias": "atmosphere",
+    "sub": [
+      {
+        "name": "情感",
+        "alias": "feeling",
+        "sub": [
+          {
+            "name": "轻松愉快",
+            "alias": "easy"
+          },
+          {
+            "name": "惊悚害怕",
+            "alias": "scary"
+          },
+          {
+            "name": "紧张刺激",
+            "alias": "thrilling"
+          },
+          {
+            "name": "悲伤绝望",
+            "alias": "sad downer"
+          }
+        ]
+      },
+      {
+        "name": "乐器",
+        "alias": "instrument",
+        "sub": [
+          {
+            "name": "吉他",
+            "alias": "guitar"
+          },
+          {
+            "name": "钢琴",
+            "alias": "piano"
+          },
+          {
+            "name": "萨克斯",
+            "alias": "saxophone"
+          },
+          {
+            "name": "盗梦空间",
+            "alias": "braam"
+          }
+        ]
+      }
+    ]
+  }
+]

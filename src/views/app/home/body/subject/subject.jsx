@@ -4,6 +4,7 @@ import ItemCard from "../../../../../components/item-card/item-card";
 import {Link} from "react-router-dom";
 import "./subject.scss"
 import Button from "@mui/material/Button";
+import SoundCard from "../../../../../components/sound-card/sound_card";
 
 function Subject(props) {
     const {subject} = props;
@@ -33,7 +34,7 @@ function Subject(props) {
             >
                 {
                     subject.items.map((item, index) => {
-                        return <ItemCard key={index} item={item} width="23%"/>
+                        return item.type === 'sound' ? <SoundCard key={item.id} item={item}/> : <ItemCard key={item.id} item={item} width="23%"/>
                     })
                 }
             </Stack>

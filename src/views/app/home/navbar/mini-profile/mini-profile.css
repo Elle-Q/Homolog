@@ -2,6 +2,14 @@
   animation: fadeIn 0.4s ease-in-out;
 }
 
+.fadedown {
+  animation: fadeDown 0.4s ease-in-out;
+}
+
+.circle {
+  animation: circle 0.6s ease-in-out;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -10,6 +18,46 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+@keyframes fadeDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes circle {
+  0% {
+    -webkit-transform: scale(0);
+    -moz-transform: scale(0);
+    transform: scale(0);
+  }
+  30% {
+    -webkit-transform: scaleX(1);
+    -webkit-transform: scaleY(0.02);
+    transform: scaleX(1);
+    transform: scaleY(0.02);
+  }
+  100% {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    transform: scale(1);
+  }
+}
+@keyframes infinite-rotation {
+  from {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    transform: rotate(360deg);
   }
 }
 .mt-3 {

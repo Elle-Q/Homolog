@@ -13,13 +13,17 @@ import DownloadIcon from '@mui/icons-material/Download';
 import {addItem2Cart} from "../../api/cart.service";
 import {toggleAtion} from "../../api/action.service";
 import Box from "@mui/material/Box";
+import ConfettiExplosion from 'react-confetti-explosion';
+
 import Debugger from "../debugger/debugger";
 
 function ItemCard(props) {
     const {item, width} = props;
     const [collected, setCollected] = useState(false);
     const [added, setAdded] = useState(false);
+    const [activated, setActivated] = useState(false);
     let dispatch = useDispatch();
+
 
     useEffect(() => {
         setCollected(item.collected)
@@ -38,32 +42,35 @@ function ItemCard(props) {
     }
 
     const handleCollect = () => {
+        if (!collected) {
+            setActivated(true);
+            setTimeout(() => setActivated(false), 1800);
+        }
         toggleAtion(item.id, 'collect').then(resp => {
             setCollected(resp)
         })
     }
 
     const getClass = () => {
+        let clName = "media-container circle"
         if (item.type === 'hdri') {
-            return 'media-container media-container_hdri'
-        } else if (item.type === 'doc') {
-            return 'media-container media-container_doc'
+            return clName.concat(' media-container_hdri')
         } else if (item.type === 'model') {
-            return 'media-container'
+            return clName
         } else if (item.type === 'model_bundle') {
-            return 'media-container media-container_bundle'
+            return clName.concat(' media-container_bundle')
         } else if (item.type === 'tutorial') {
-            return 'media-container media-container_tutorial'
+            return clName.concat(' media-container_tutorial')
         } else if (item.type === 'image') {
-            return 'media-container media-container_img'
+            return clName.concat(' media-container_img')
         } else if (item.type === 'texture') {
-            return 'media-container media-container_texture'
+            return clName.concat(' media-container_texture')
         }
     }
 
     return (
         <Box className="item-card" sx={{width: `${width}`}}>
-            <Link to={`/item/${item.id}`} key={item.id}>
+            <Link onClick={() => window.open(`/item/${item.id}`, "_blank")} key={item.id}>
                 <div className={getClass()}>
                     <img src={item.main && item.main.link} alt="item"/>
                 </div>
@@ -72,8 +79,7 @@ function ItemCard(props) {
             <Stack className="item-card__btn-box" direction="row">
                 <div>
                     <IconButton onClick={handleCollect}>
-                        <FavoriteIcon fontSize="large"
-                                      sx={{color: `${collected ? '#ff0a54' : 'white'}`}}/>
+                        <FavoriteIcon fontSize="large" sx={{color: `${collected ? '#ff0a54' : 'white'}`}}/>
                     </IconButton>
                     {
                         item.bought ?
@@ -91,6 +97,7 @@ function ItemCard(props) {
                     item.price !== 0 && <PriceTag price={item.price}/>
                 }
             </Stack>
+            {activated && <ConfettiExplosion />}
             {/*调试窗口*/}
             {/*<Debugger item={item} />*/}
         </Box>

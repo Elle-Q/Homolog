@@ -64,8 +64,8 @@ const colors = [
     {fontColor: '#fdb833', bgColor: '#fffae5', imgBgColor: '#ffee99'},
     {fontColor: '#07beb8', bgColor: '#B4F8F0', imgBgColor: '#59d2d0'},
     {fontColor: '#0077b6', bgColor: '#caf0f8', imgBgColor: '#00b4d8'},
-    {fontColor: '#a06cd5', bgColor: '#f4effa', imgBgColor: '#c8b1e4'},
-    {fontColor: '#ff8c42', bgColor: '#fdefef', imgBgColor: '#bfbdc1'},
+    {fontColor: '#595DFD', bgColor: '#fbfaff', imgBgColor: '#797cf2'},
+    {fontColor: '#000', bgColor: '#f5f3f4', imgBgColor: '#bfbdc1'},
 ];
 
 
@@ -84,7 +84,7 @@ function CatCard(props) {
                 <div className="text-container">
                     <span id="catName" className="title">{cat.title}</span>
                     <span>{cat.subTitle}</span>
-                    <span>300+ </span>
+                    <span>{cat.desp}</span>
                 </div>
                 <div className="icon-container">
                     <div id="icon-wrapper">

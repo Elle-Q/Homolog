@@ -1,0 +1,268 @@
+[
+  {
+    "name": "游戏",
+    "link": "/game",
+    "sub": [
+      {
+        "name": "人物/角色",
+        "link": "/character",
+        "sub": [
+          {
+            "name": "写实",
+            "link": "/real"
+          },
+          {
+            "name": "卡通",
+            "link": "/cartoon"
+          },
+          {
+            "name": "虚拟",
+            "link": "/virtual"
+          },
+          {
+            "name": "古代",
+            "link": "/ancient"
+          }
+        ]
+      },
+      {
+        "name": "建筑",
+        "link": "/building",
+        "sub": [
+          {
+            "name": "古风",
+            "link": "/reality"
+          },
+          {
+            "name": "现代",
+            "link": "/reality"
+          },
+          {
+            "name": "次世代",
+            "link": "/reality"
+          },
+          {
+            "name": "未来主义",
+            "link": "/future"
+          }
+        ]
+      },
+      {
+        "name": "交通",
+        "link": "/trans",
+        "sub": [
+          {
+            "name": "车辆",
+            "link": "/vehicle"
+          },
+          {
+            "name": "空中",
+            "link": "/air"
+          },
+          {
+            "name": "船舶",
+            "link": "/ship"
+          }
+        ]
+      },
+      {
+        "name": "道具/装备",
+        "link": "/props",
+        "sub": [
+          {
+            "name": "武器",
+            "link": "/weapon"
+          },
+          {
+            "name": "工具",
+            "link": "/tool"
+          },
+          {
+            "name": "装饰",
+            "link": "/decoration"
+          },
+          {
+            "name": "食物",
+            "link": "/food"
+          },
+          {
+            "name": "服装",
+            "link": "/cloth"
+          }
+        ]
+      },
+      {
+        "name": "自然",
+        "link": "/nature",
+        "sub": [
+          {
+            "name": "植物",
+            "link": "/plant"
+          },
+          {
+            "name": "地面",
+            "link": "/ground"
+          },
+          {
+            "name": "动物",
+            "link": "/animal"
+          }
+        ]
+      },
+      {
+        "name": "特效",
+        "link": "/effect",
+        "sub": [
+          {
+            "name": "光效",
+            "link": "/lighting"
+          },
+          {
+            "name": "粒子",
+            "link": "/particle"
+          },
+          {
+            "name": "自然",
+            "link": "/nature"
+          },
+          {
+            "name": "能量",
+            "link": "/energy"
+          },
+          {
+            "name": "其他",
+            "link": "/other"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "家装",
+    "link": "/game",
+    "sub": [
+      {
+        "name": "室内",
+        "link": "/interior",
+        "sub": [
+          {
+            "name": "家具",
+            "link": "/furniture"
+          },
+          {
+            "name": "装饰品",
+            "link": "/decor"
+          },
+          {
+            "name": "门窗",
+            "link": "/window door"
+          },
+          {
+            "name": "内饰",
+            "link": "/interior decor"
+          },
+          {
+            "name": "合集",
+            "link": "/bundle"
+          }
+        ]
+      },
+      {
+        "name": "户外",
+        "link": "/outdoor",
+        "sub": [
+          {
+            "name": "家具",
+            "link": "/furniture"
+          },
+          {
+            "name": "装饰",
+            "link": "/decor"
+          },
+          {
+            "name": "合集",
+            "link": "/bundle"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "3D打印",
+    "link": "/3d print",
+    "sub": [
+      {
+        "name": "艺术",
+        "link": "/art",
+        "sub": [
+          {
+            "name": "雕塑",
+            "link": "/sculpture"
+          },
+          {
+            "name": "艺术装饰品",
+            "link": "/artistic decor"
+          }
+        ]
+      },
+      {
+        "name": "生活",
+        "link": "/life",
+        "sub": [
+          {
+            "name": "车辆",
+            "link": "/vehicles"
+          },
+          {
+            "name": "飞机",
+            "link": "/plane"
+          },
+          {
+            "name": "船",
+            "link": "/ship"
+          },
+          {
+            "name": "人物",
+            "link": "/character"
+          },
+          {
+            "name": "动物",
+            "link": "/animal"
+          },
+          {
+            "name": "珠宝",
+            "link": "/jewelry"
+          },
+          {
+            "name": "生活用品",
+            "link": "/household"
+          }
+        ]
+      },
+      {
+        "name": "科技",
+        "link": "/tech",
+        "sub": [
+          {
+            "name": "机械零件",
+            "link": "/mechanical parts"
+          },
+          {
+            "name": "设备外壳",
+            "link": "/electronic device casings"
+          }
+        ]
+      },
+      {
+        "name": "其他",
+        "link": "/other",
+        "sub": [
+          {
+            "name": "定制模型",
+            "link": "/custom models"
+          }
+        ]
+      }
+    ]
+  }
+]

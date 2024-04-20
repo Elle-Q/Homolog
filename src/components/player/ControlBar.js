@@ -8,13 +8,10 @@ import ReplayRoundedIcon from "@mui/icons-material/ReplayRounded";
 import Stack from "@mui/material/Stack";
 import {VolumeUp} from "@mui/icons-material";
 import Slider from "@mui/material/Slider";
-import Switch from "@mui/material/Switch";
-import FormControlLabel from "@mui/material/FormControlLabel";
 import Typography from "@mui/material/Typography";
 import PopupState, {bindTrigger, bindMenu} from 'material-ui-popup-state';
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import FullscreenExitIcon from '@mui/icons-material/FullscreenExit';
 
 function ControlBar({
                         play,
@@ -24,7 +21,6 @@ function ControlBar({
                         totalTime,
                         rePlay,
                         setVolume,
-                        enterFullScreen,
                         handleRateClick,
                     }) {
     const [value, setValue] = useState(30);

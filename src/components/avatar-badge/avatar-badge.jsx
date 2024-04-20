@@ -17,6 +17,9 @@ function AvatarBadge(props) {
                     borderRadius: '50%',
                     backgroundColor: user && getColorFromUserStatus(user.status),
                     color: user && getColorFromUserStatus(user.status),
+                },
+                '&:hover': {
+                    cursor: 'pointer'
                 }
             }}
         >

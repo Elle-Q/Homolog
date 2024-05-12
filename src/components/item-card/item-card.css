@@ -101,9 +101,11 @@
   border-radius: 2rem !important;
   background-color: #0f141a !important;
   box-shadow: 0 0.8rem 0.8rem #0f141a;
+  margin-top: 2rem;
 }
 .item-card:hover {
   border: 0.2rem solid #1C2129;
+  cursor: pointer;
 }
 .item-card:hover .media-container_texture > img {
   transform: scale(1.2);
@@ -166,8 +168,8 @@
   align-items: center;
 }
 .item-card .media-container_img > img {
-  width: 80%;
-  height: 80%;
+  width: 100%;
+  height: 100%;
 }
 .item-card .media-container_doc {
   aspect-ratio: 0.8;

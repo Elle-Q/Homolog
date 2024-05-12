@@ -22,19 +22,22 @@ function Subject(props) {
                         <span>{subject.subTitle}</span>
                     </h1>
                 </div>
-                <Link to={`/search?catId=${subject.id}`} className="subject__btn-box">
+                <Link to={`/search/${subject.catName}`} className="subject__btn-box">
                     <button className="subject__btn">更多</button>
                 </Link>
             </div>
             <Stack
                 direction='row'
-                spacing={2}
+                gap={2}
                 justifyContent="center"
+                alignItems="center"
                 display="flex"
             >
                 {
                     subject.items.map((item, index) => {
-                        return item.type === 'sound' ? <SoundCard key={item.id} item={item}/> : <ItemCard key={item.id} item={item} width="23%"/>
+                        return item.type === 'sound' ?
+                            <SoundCard key={item.id} item={item} width={350}/> :
+                            <ItemCard key={item.id} item={item} width="23%"/>
                     })
                 }
             </Stack>

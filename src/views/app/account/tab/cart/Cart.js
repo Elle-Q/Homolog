@@ -18,7 +18,7 @@ function Cart({totalSize}) {
         let fetchItems = async () => {
             await pageCart(1).then((items) => {
                 setItems(items)
-                setHasMore(items.length < totalSize)
+                setHasMore(items ? items.length < totalSize : false)
             })
         }
         fetchItems().catch()
@@ -31,7 +31,7 @@ function Cart({totalSize}) {
             let newList = [...items, ...data]
             setItems(newList)
             setPage(page + 1);
-            setHasMore(newList.length < totalSize)
+            setHasMore(newList ? newList.length < totalSize : false)
         });
     };
 

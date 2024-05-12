@@ -4,7 +4,7 @@ import Toolbar from '@mui/material/Toolbar';
 import HomeIcon from '@mui/icons-material/Home';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Stack from "@mui/material/Stack";
-import {Link, useLocation, useNavigate, useSearchParams} from "react-router-dom";
+import {Link, useLocation, useNavigate, useParams, useSearchParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import useScroll from "../../../../hook/useScroll";
 import {openSider, selectSider, setShow} from "../../../../store/sider-slice";
@@ -22,11 +22,13 @@ import {selectOrder} from "../../../../store/order-slice";
 import UserService from "../../../../api/user.service";
 import AvatarBadge from "../../../../components/avatar-badge/avatar-badge";
 import MiniProfile from "./mini-profile/mini-profile";
-import {updateUrl} from "../../../../utils/ToolUtil";
 import logo from "../../../../assets/logo/logo.png";
+import Subscribe from "../../../../assets/icons/subscribe.svg"
+import menuIcon from "../../../../assets/icons/12/mouse.svg";
 
 function NavBar(props) {
-    let [params] = useSearchParams();
+    let params = useParams();
+    let curCat = params.cat ? params.cat : "model";
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const {open} = useSelector(selectSider);
@@ -37,7 +39,6 @@ function NavBar(props) {
     const [user, setUser] = useState({})
     const [keyword, setKeyword] = useState("")
     const scroll = useScroll()
-    const location = useLocation();
 
     useEffect(() => {
         countCart().then(resp => {
@@ -68,8 +69,7 @@ function NavBar(props) {
     }
     const handleSearch = (event) => {
         dispatch(toggleSearch());
-        let url = updateUrl("keyword", keyword, location.search, "/search");
-        navigate(url)
+        navigate(`/search/${curCat}/${keyword}`)
     }
 
     return (
@@ -83,7 +83,6 @@ function NavBar(props) {
                     <div className="header__search-bar">
                         <input className="header__search-input" type="text"
                                placeholder="搜索"
-                               defaultValue={params.get("keyword")}
                                onKeyDown={handleEnter}
                                onChange={(event) => setKeyword(event.target.value)}/>
                         <IconButton className="header__search-button" onClick={handleSearch}>
@@ -94,11 +93,11 @@ function NavBar(props) {
                         <Link color="inherit" to={"/"}>
                             <HomeIcon fontSize="large"/>
                         </Link>
-                        <Link color="inherit" to={"/order/open"}>
-                            <Badge badgeContent={orderCount} color="success">
-                                <PaidIcon fontSize="large"/>
-                            </Badge>
-                        </Link>
+                        {/*<Link color="inherit" to={"/order/open"}>*/}
+                        {/*    <Badge badgeContent={orderCount} color="success">*/}
+                        {/*        <PaidIcon fontSize="large"/>*/}
+                        {/*    </Badge>*/}
+                        {/*</Link>*/}
                         <a color="inherit" onClick={handleOpenCart}>
                             <Badge badgeContent={cartCount} color="success">
                                 <ShoppingCartIcon fontSize="large"/>
@@ -107,6 +106,10 @@ function NavBar(props) {
                         <Link color="inherit" to={"/community"}>
                             <SupervisorAccountIcon fontSize="large"/>
                         </Link>
+                        <Link color="inherit" to={"/subscribe"}>
+                            <img alt="icon" src={Subscribe}/>
+                        </Link>
+
                         <div className="header__user">
                             <AvatarBadge handleMouseOver={() => setShowMiniProfile(true)}
                                          user={user}

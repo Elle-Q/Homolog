@@ -1,137 +1,137 @@
 [
   {
     "name": "游戏",
-    "link": "/game",
+    "link": "game",
     "sub": [
       {
         "name": "人物/角色",
-        "link": "/character",
+        "link": "character",
         "sub": [
           {
             "name": "写实",
-            "link": "/real"
+            "link": "real"
           },
           {
             "name": "卡通",
-            "link": "/cartoon"
+            "link": "cartoon"
           },
           {
             "name": "虚拟",
-            "link": "/virtual"
+            "link": "virtual"
           },
           {
             "name": "古代",
-            "link": "/ancient"
+            "link": "ancient"
           }
         ]
       },
       {
         "name": "建筑",
-        "link": "/building",
+        "link": "building",
         "sub": [
           {
             "name": "古风",
-            "link": "/reality"
+            "link": "reality"
           },
           {
             "name": "现代",
-            "link": "/reality"
+            "link": "reality"
           },
           {
             "name": "次世代",
-            "link": "/reality"
+            "link": "reality"
           },
           {
             "name": "未来主义",
-            "link": "/future"
+            "link": "future"
           }
         ]
       },
       {
         "name": "交通",
-        "link": "/trans",
+        "link": "trans",
         "sub": [
           {
             "name": "车辆",
-            "link": "/vehicle"
+            "link": "vehicle"
           },
           {
             "name": "空中",
-            "link": "/air"
+            "link": "air"
           },
           {
             "name": "船舶",
-            "link": "/ship"
+            "link": "ship"
           }
         ]
       },
       {
         "name": "道具/装备",
-        "link": "/props",
+        "link": "props",
         "sub": [
           {
             "name": "武器",
-            "link": "/weapon"
+            "link": "weapon"
           },
           {
             "name": "工具",
-            "link": "/tool"
+            "link": "tool"
           },
           {
             "name": "装饰",
-            "link": "/decoration"
+            "link": "decoration"
           },
           {
             "name": "食物",
-            "link": "/food"
+            "link": "food"
           },
           {
             "name": "服装",
-            "link": "/cloth"
+            "link": "cloth"
           }
         ]
       },
       {
         "name": "自然",
-        "link": "/nature",
+        "link": "nature",
         "sub": [
           {
             "name": "植物",
-            "link": "/plant"
+            "link": "plant"
           },
           {
             "name": "地面",
-            "link": "/ground"
+            "link": "ground"
           },
           {
             "name": "动物",
-            "link": "/animal"
+            "link": "animal"
           }
         ]
       },
       {
         "name": "特效",
-        "link": "/effect",
+        "link": "effect",
         "sub": [
           {
             "name": "光效",
-            "link": "/lighting"
+            "link": "lighting"
           },
           {
             "name": "粒子",
-            "link": "/particle"
+            "link": "particle"
           },
           {
             "name": "自然",
-            "link": "/nature"
+            "link": "nature"
           },
           {
             "name": "能量",
-            "link": "/energy"
+            "link": "energy"
           },
           {
             "name": "其他",
-            "link": "/other"
+            "link": "other"
           }
         ]
       }
@@ -139,49 +139,49 @@
   },
   {
     "name": "家装",
-    "link": "/game",
+    "link": "game",
     "sub": [
       {
         "name": "室内",
-        "link": "/interior",
+        "link": "interior",
         "sub": [
           {
             "name": "家具",
-            "link": "/furniture"
+            "link": "furniture"
           },
           {
             "name": "装饰品",
-            "link": "/decor"
+            "link": "decor"
           },
           {
             "name": "门窗",
-            "link": "/window door"
+            "link": "window door"
           },
           {
             "name": "内饰",
-            "link": "/interior decor"
+            "link": "interior decor"
           },
           {
             "name": "合集",
-            "link": "/bundle"
+            "link": "bundle"
           }
         ]
       },
       {
         "name": "户外",
-        "link": "/outdoor",
+        "link": "outdoor",
         "sub": [
           {
             "name": "家具",
-            "link": "/furniture"
+            "link": "furniture"
           },
           {
             "name": "装饰",
-            "link": "/decor"
+            "link": "decor"
           },
           {
             "name": "合集",
-            "link": "/bundle"
+            "link": "bundle"
           }
         ]
       }
@@ -189,77 +189,77 @@
   },
   {
     "name": "3D打印",
-    "link": "/3d print",
+    "link": "3d print",
     "sub": [
       {
         "name": "艺术",
-        "link": "/art",
+        "link": "art",
         "sub": [
           {
             "name": "雕塑",
-            "link": "/sculpture"
+            "link": "sculpture"
           },
           {
             "name": "艺术装饰品",
-            "link": "/artistic decor"
+            "link": "artistic decor"
           }
         ]
       },
       {
         "name": "生活",
-        "link": "/life",
+        "link": "life",
         "sub": [
           {
             "name": "车辆",
-            "link": "/vehicles"
+            "link": "vehicles"
           },
           {
             "name": "飞机",
-            "link": "/plane"
+            "link": "plane"
           },
           {
             "name": "船",
-            "link": "/ship"
+            "link": "ship"
           },
           {
             "name": "人物",
-            "link": "/character"
+            "link": "character"
           },
           {
             "name": "动物",
-            "link": "/animal"
+            "link": "animal"
           },
           {
             "name": "珠宝",
-            "link": "/jewelry"
+            "link": "jewelry"
           },
           {
             "name": "生活用品",
-            "link": "/household"
+            "link": "household"
           }
         ]
       },
       {
         "name": "科技",
-        "link": "/tech",
+        "link": "tech",
         "sub": [
           {
             "name": "机械零件",
-            "link": "/mechanical parts"
+            "link": "mechanical parts"
           },
           {
             "name": "设备外壳",
-            "link": "/electronic device casings"
+            "link": "electronic device casings"
           }
         ]
       },
       {
         "name": "其他",
-        "link": "/other",
+        "link": "other",
         "sub": [
           {
             "name": "定制模型",
-            "link": "/custom models"
+            "link": "custom models"
           }
         ]
       }

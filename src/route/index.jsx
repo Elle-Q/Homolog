@@ -16,6 +16,9 @@ import Account from "../views/app/account/Account";
 import Partner from "../views/app/partner/Partner";
 import Community from "../views/app/community/community";
 import Issue from "../views/app/community/edit/issue";
+import SearchBody from "../views/app/search/search-body/search-body";
+import {item_loader} from "./loader";
+import Subscribe from "../views/app/subscribe/subscribe";
 
 function Index() {
 
@@ -38,10 +41,21 @@ function Index() {
                     },
                     {
                         path: '/search',
-                        element: <Search/>
+                        element: <Search/>,
+                        children: [
+                            {
+                                path: ':cat',
+                                element: <SearchBody/>,
+                            },
+                            {
+                                path: ':cat/:keyword',
+                                element: <SearchBody/>,
+                            }
+                        ]
                     },
                     {
                         path: '/item/:id',
+                        loader: item_loader,
                         element: <Item/>
                     },
                     {
@@ -55,6 +69,10 @@ function Index() {
                     {
                         path: '/community',
                         element: <Community/>
+                    },
+                    {
+                        path: '/subscribe',
+                        element: <Subscribe/>
                     },
                     {
                         path: '/issue',

@@ -3,7 +3,7 @@ import Grid from "@mui/material/Grid";
 import {useNavigate, useParams} from "react-router-dom";
 import Stack from "@mui/material/Stack";
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import {downloadAttachment, GetItem, TotalSizeByAction} from "../../../api/item.service";
+import {download, downloadAttachment, GetItem, TotalSizeByAction} from "../../../api/item.service";
 import List from "./list/list";
 import PrevShow from "./prev/prev-show";
 import {useDispatch} from "react-redux";
@@ -218,6 +218,7 @@ function Item() {
                         tab === 'list' ? <List/> : <React.Fragment/>/*<Comments/>*/
                     }
                 </Grid>
+
             </Grid>
         </div>
     );

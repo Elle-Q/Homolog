@@ -53,6 +53,7 @@ function Player(props) {
             <video
                 ref={videoRef}
                 className="video-js vjs-big-play-centered"
+                muted
             />
     );
 }

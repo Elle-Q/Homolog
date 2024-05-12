@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import IconButton from "@mui/material/IconButton";
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import PriceTag from "./price-tag";
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import {openSider} from "../../store/sider-slice";
@@ -16,6 +16,11 @@ import Box from "@mui/material/Box";
 import ConfettiExplosion from 'react-confetti-explosion';
 
 import Debugger from "../debugger/debugger";
+import {download} from "../../api/item.service";
+import SlowMotionVideoIcon from "@mui/icons-material/SlowMotionVideo";
+import {isVideo} from "../../utils/ToolUtil";
+import Player from "../player/Player";
+import SimplePlayer from "../player/SimplePlayer";
 
 function ItemCard(props) {
     const {item, width} = props;
@@ -23,7 +28,7 @@ function ItemCard(props) {
     const [added, setAdded] = useState(false);
     const [activated, setActivated] = useState(false);
     let dispatch = useDispatch();
-
+    let navigate = useNavigate();
 
     useEffect(() => {
         setCollected(item.collected)
@@ -38,7 +43,10 @@ function ItemCard(props) {
 
     //点击下载源文件
     const handleDownload = () => {
-        window.location.href = item.attachments[0].link
+        download(item.id)
+        if (item.attachments) {
+            window.location.href = item.attachments[0].link
+        }
     }
 
     const handleCollect = () => {
@@ -70,17 +78,39 @@ function ItemCard(props) {
 
     return (
         <Box className="item-card" sx={{width: `${width}`}}>
-            <Link onClick={() => window.open(`/item/${item.id}`, "_blank")} key={item.id}>
-                <div className={getClass()}>
-                    <img src={item.main && item.main.link} alt="item"/>
-                </div>
-            </Link>
+            {/*<Link to={`/item/${item.id}`} key={item.id}>*/}
+            {/*    <div className={getClass()}>*/}
+            {/*        {*/}
+            {/*            (item.main && isVideo(item.main.format)) ?*/}
+            {/*                <SimplePlayer src={item.main && item.main.link} />*/}
+            {/*                :*/}
+            {/*                <img src={item.main && item.main.link} alt="item"/>*/}
+            {/*        }*/}
+            {/*    </div>*/}
+            {/*</Link>*/}
+
+            {
+                (item.main && isVideo(item.main.format)) ?
+                    <div><SimplePlayer src={item.main && item.main.link}/></div>
+                    :
+                    <Link to={`/item/${item.id}`} key={item.id}>
+                        <div className={getClass()}>
+                            <img src={item.main && item.main.link} alt="item"/>
+                        </div>
+                    </Link>
+            }
             <span className="item-card__heading"> {item.name}</span>
             <Stack className="item-card__btn-box" direction="row">
                 <div>
                     <IconButton onClick={handleCollect}>
                         <FavoriteIcon fontSize="large" sx={{color: `${collected ? '#ff0a54' : 'white'}`}}/>
                     </IconButton>
+                    {
+                        item.type === 'tutorial' && item.bought &&
+                        <IconButton onClick={() => navigate(`/play/${item.id}`)}>
+                            <SlowMotionVideoIcon fontSize="large" sx={{color: "white"}}/>
+                        </IconButton>
+                    }
                     {
                         item.bought ?
                             <IconButton onClick={handleDownload}>
@@ -97,7 +127,7 @@ function ItemCard(props) {
                     item.price !== 0 && <PriceTag price={item.price}/>
                 }
             </Stack>
-            {activated && <ConfettiExplosion />}
+            {activated && <ConfettiExplosion/>}
             {/*调试窗口*/}
             {/*<Debugger item={item} />*/}
         </Box>

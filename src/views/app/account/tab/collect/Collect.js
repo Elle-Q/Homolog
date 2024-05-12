@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import ItemCard from "../../../../../components/item-card/item-card";
 import InfiniteScroll from "react-infinite-scroller";
-import {ListItemsByActionAndUser, TotalSizeByActionAndUser} from "../../../../../api/item.service";
+import {ListItemsByActionAndUser} from "../../../../../api/item.service";
 import '../tab.scss'
+import SoundCard from "../../../../../components/sound-card/sound_card";
 
 function Collect({totalSize}) {
 
@@ -17,8 +18,10 @@ function Collect({totalSize}) {
     const search = () => {
         let fetchItems = async () => {
             await ListItemsByActionAndUser(1, 'collect').then((items) => {
-                setItems(items)
-                setHasMore(items.length < totalSize)
+                setItems(items.map(i => {
+                    return {...i, collected: true}
+                }))
+                setHasMore(items ? items.length < totalSize : false)
             })
         }
         fetchItems().catch()
@@ -28,10 +31,13 @@ function Collect({totalSize}) {
     const loadMoreItems = () => {
         if (items.length >= totalSize) return
         ListItemsByActionAndUser(page, 'collect').then((data) => {
-            let newList = [...items, ...data]
+            let map = data.map(i => {
+                return {...i, collected: true}
+            });
+            let newList = [...items, ...map]
             setItems(newList)
             setPage(page + 1);
-            setHasMore(newList.length < totalSize)
+            setHasMore(newList ? newList.length < totalSize : false)
         });
     };
 
@@ -44,9 +50,13 @@ function Collect({totalSize}) {
         >
             <div className="account-tab-container">
                 {
-                    items && items.map(item => (
-                        <ItemCard item={item} width="250px"/>
-                    ))
+                    items && items.map(item => {
+                        if (item.type === 'sound') {
+                            return <SoundCard key={item.id} item={item}/>
+                        } else {
+                            return <ItemCard key={item.id} item={item} width="250px"/>
+                        }
+                    })
                 }
             </div>
         </InfiniteScroll>

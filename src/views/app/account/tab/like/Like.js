@@ -19,7 +19,7 @@ function Like({totalSize}) {
         let fetchItems = async () => {
             await ListItemsByActionAndUser(1, 'like').then((items) => {
                 setItems(items)
-                setHasMore(items.length < totalSize)
+                setHasMore(items ? items.length < totalSize : false)
             })
         }
         fetchItems().catch()
@@ -32,7 +32,7 @@ function Like({totalSize}) {
             let newList = [...items, ...data]
             setItems(newList)
             setPage(page + 1);
-            setHasMore(newList.length < totalSize)
+            setHasMore(newList ? newList.length < totalSize : false)
         });
     };
 

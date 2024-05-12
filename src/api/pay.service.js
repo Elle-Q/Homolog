@@ -11,4 +11,6 @@ export const createOrder = (order, details) => {
         })
 }
 
-
+export const subscribe = (vip) => {
+    return api.get(`/leetroll-app/pay/subscribe/${vip}`)
+}

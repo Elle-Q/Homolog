@@ -55,9 +55,9 @@ function TabBar(props) {
     const [likes, setLikes] = useState(0)
 
     useEffect(() => {
-        TotalSizeByActionAndUser('like').then(resp => {
-            setLikes(resp)
-        })
+        // TotalSizeByActionAndUser('like').then(resp => {
+        //     setLikes(resp)
+        // })
         countCart().then(resp => {
             setCarts(resp)
         })
@@ -78,7 +78,7 @@ function TabBar(props) {
             >
                 <Tab disableRipple className="account-tab__tab" label={`购物车(${carts})`}/>
                 <Tab disableRipple className="account-tab__tab" label={`收藏(${collects})`}/>
-                <Tab disableRipple className="account-tab__tab" label={`喜欢(${likes})`}/>
+                {/*<Tab disableRipple className="account-tab__tab" label={`喜欢(${likes})`}/>*/}
                 <Tab disableRipple className="account-tab__tab" label={`作品(${pieces})`}/>
             </StyledTabs>
 

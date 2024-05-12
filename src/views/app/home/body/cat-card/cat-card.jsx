@@ -73,7 +73,7 @@ function CatCard(props) {
     const {cat, index} = props;
 
     return (
-        <Link to={`/search?catId=${cat.id}`} key={cat.title} style={{width: '45%'}}>
+        <Link to={`/search/${cat.name}`} key={cat.title} style={{width: '45%'}}>
             <Container colors={colors[index]}>
                 <div id='img-container'>
                     <img

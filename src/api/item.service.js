@@ -46,3 +46,7 @@ export const updateTag = (itemId, tag) => {
     }
     return api.get(`/leetroll-app/item/update-tag/`, {params: params})
 }
+
+export const download = (itemId) => {
+    return api.get(`/leetroll-app/item/download/${itemId}`)
+}

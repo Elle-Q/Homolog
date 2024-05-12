@@ -22,6 +22,7 @@ function VideoPlayer(props) {
         controls: true,
         responsive: true,
         fluid: true,
+        muted: false,
         sources: [{
             type: 'application/x-mpegURL',
             src: detail.link
@@ -63,6 +64,7 @@ function VideoPlayer(props) {
         });
 
         player.on('dispose', () => {
+            player.dispose()
         });
 
         player.on('seeked', () => {
@@ -74,12 +76,11 @@ function VideoPlayer(props) {
         });
 
         player.on('tap', () => {
-            debugger
             setIsPlaying(!isPlaying);
         });
 
-        player.on("fullscreenchange", function(){
-            if(player.isFullscreen()){
+        player.on("fullscreenchange", function () {
+            if (player.isFullscreen()) {
                 player.exitFullscreen();
             }
         });

@@ -93,17 +93,15 @@
 }
 
 .sound-card {
-  background-color: #0f141a;
+  background-color: #111821;
   padding: 0.5rem 1.5rem;
   border-radius: 2rem;
   height: 15rem;
-  min-width: 32%;
+  width: 90%;
+  margin-top: 2rem;
 }
 .sound-card:hover {
   cursor: pointer;
-}
-.sound-card:hover * > .sound-card__controll-icon {
-  color: #595DFD;
 }
 .sound-card__top {
   display: flex;
@@ -116,15 +114,22 @@
   width: 100%;
 }
 .sound-card__controll-icon {
-  width: 3rem !important;
-  height: 3rem !important;
-  color: #595DFD;
+  width: 2.5rem !important;
+  height: 2.5rem !important;
+  margin-right: 1rem;
+  color: #eeeeee;
 }
 .sound-card__controll-icon:hover {
   cursor: pointer;
-  transform: scale(1.1);
-  transition: all 0.1s ease-in-out;
   color: #656f8d;
+}
+.sound-card__controll-icon--collect {
+  width: 2.5rem !important;
+  height: 2.5rem !important;
+}
+.sound-card__controll-icon--collect:hover {
+  cursor: pointer;
+  color: #ff0a54;
 }
 .sound-card__heading {
   margin-top: 1rem;
@@ -132,8 +137,11 @@
   display: flex;
 }
 .sound-card__heading > h2 {
-  display: inline-block;
+  display: block;
   color: #9f9f9f;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 .sound-card__heading--time {
   color: #9f9f9f;
@@ -179,6 +187,11 @@
 #waveform ::part(region-handle-right) {
   border-right-width: 4px !important;
   border-right-color: #fff000 !important;
+}
+
+.MuiTooltip-tooltip {
+  font-size: 1.6rem !important;
+  background-color: rgba(28, 33, 41, 0.8) !important;
 }
 
 /*# sourceMappingURL=sound_card.css.map */

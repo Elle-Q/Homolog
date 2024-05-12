@@ -1,69 +1,69 @@
 [
   {
     "name": "环境音效",
-    "alias": "environment",
+    "link": "environment",
     "sub": [
       {
         "name": "场景",
-        "alias": "scene",
+        "link": "scene",
         "sub": [
           {
             "name": "城市",
-            "alias": "city"
+            "link": "city"
           },
           {
             "name": "森林",
-            "alias": "forest"
+            "link": "forest"
           },
           {
             "name": "乡村",
-            "alias": "countryside"
+            "link": "countryside"
           },
           {
             "name": "酒吧",
-            "alias": "bar"
+            "link": "bar"
           },
           {
             "name": "办公室",
-            "alias": "office"
+            "link": "office"
           },
           {
             "name": "海滩",
-            "alias": "beach"
+            "link": "beach"
           },
           {
             "name": "车站",
-            "alias": "station"
+            "link": "station"
           },
           {
             "name": "餐厅",
-            "alias": "restaurant"
+            "link": "restaurant"
           },
           {
             "name": "商店",
-            "alias": "store"
+            "link": "store"
           }
         ]
       },
       {
         "name": "天气",
-        "alias": "weather",
+        "link": "weather",
         "sub": [
           {
             "name": "风",
-            "alias": "wind"
+            "link": "wind"
           },
           {
             "name": "雨",
-            "alias": "rain"
+            "link": "rain"
           },
           {
             "name": "雷电",
-            "alias": "thunder"
+            "link": "thunder"
           },
           {
             "name": "雪",
-            "alias": "snow"
+            "link": "snow"
           }
         ]
       }
@@ -71,159 +71,159 @@
   },
   {
     "name": "动作音效",
-    "alias": "action",
+    "link": "action",
     "sub": [
       {
         "name": "人物",
-        "alias": "human",
+        "link": "human",
         "sub": [
           {
             "name": "笑",
-            "alias": "laugh"
+            "link": "laugh"
           },
           {
             "name": "哭",
-            "alias": "cry"
+            "link": "cry"
           },
           {
             "name": "喊叫",
-            "alias": "yell"
+            "link": "yell"
           },
           {
             "name": "心跳",
-            "alias": "heartbeat"
+            "link": "heartbeat"
           },
           {
             "name": "呼吸",
-            "alias": "breath"
+            "link": "breath"
           },
           {
             "name": "欢呼",
-            "alias": "cheer"
+            "link": "cheer"
           },
           {
             "name": "踢打",
-            "alias": "hit"
+            "link": "hit"
           },
           {
             "name": "脚步声",
-            "alias": "footsteps"
+            "link": "footsteps"
           },
           {
             "name": "咳嗽",
-            "alias": "cough"
+            "link": "cough"
           },
           {
             "name": "挥舞",
-            "alias": "wave"
+            "link": "wave"
           },
           {
             "name": "鼓掌",
-            "alias": "applaud"
+            "link": "applaud"
           }
         ]
       },
       {
         "name": "自然",
-        "alias": "nature",
+        "link": "nature",
         "sub": [
           {
             "name": "火焰",
-            "alias": "fire"
+            "link": "fire"
           },
           {
             "name": "水流",
-            "alias": "water flow"
+            "link": "water flow"
           },
           {
             "name": "沸腾",
-            "alias": "bubble"
+            "link": "bubble"
           },
           {
             "name": "瀑布",
-            "alias": "fall"
+            "link": "fall"
           },
           {
             "name": "鸟鸣",
-            "alias": "bird"
+            "link": "bird"
           },
           {
             "name": "动物叫声",
-            "alias": "animal"
+            "link": "animal"
           },
           {
             "name": "呼啸声",
-            "alias": "whoosh"
+            "link": "whoosh"
           }
         ]
       },
       {
         "name": "道具",
-        "alias": "props",
+        "link": "props",
         "sub": [
           {
             "name": "刀剑",
-            "alias": "sword"
+            "link": "sword"
           },
           {
             "name": "枪声",
-            "alias": "shot"
+            "link": "shot"
           },
           {
             "name": "爆炸",
-            "alias": "boom"
+            "link": "boom"
           },
           {
             "name": "碎裂",
-            "alias": "shatter"
+            "link": "shatter"
           },
           {
             "name": "门",
-            "alias": "door"
+            "link": "door"
           }
         ]
       },
       {
         "name": "交通工具",
-        "alias": "trans",
+        "link": "trans",
         "sub": [
           {
             "name": "飞机",
-            "alias": "plane"
+            "link": "plane"
           },
           {
             "name": "小汽车",
-            "alias": "car"
+            "link": "car"
           },
           {
             "name": "卡车",
-            "alias": "truck"
+            "link": "truck"
           },
           {
             "name": "摩托车",
-            "alias": "motor"
+            "link": "motor"
           },
           {
             "name": "自行车",
-            "alias": "bike"
+            "link": "bike"
           }
         ]
       },
       {
         "name": "其他",
-        "alias": "other",
+        "link": "other",
         "sub": [
           {
             "name": "嗖嗖声",
-            "alias": "plane"
+            "link": "plane"
           },
           {
             "name": "嗡嗡声",
-            "alias": "drone"
+            "link": "drone"
           },
           {
             "name": "嘘嘘声",
-            "alias": "truck"
+            "link": "truck"
           }
         ]
       }
@@ -231,49 +231,49 @@
   },
   {
     "name": "氛围音效",
-    "alias": "atmosphere",
+    "link": "atmosphere",
     "sub": [
       {
         "name": "情感",
-        "alias": "feeling",
+        "link": "feeling",
         "sub": [
           {
             "name": "轻松愉快",
-            "alias": "easy"
+            "link": "easy"
           },
           {
             "name": "惊悚害怕",
-            "alias": "scary"
+            "link": "scary"
           },
           {
             "name": "紧张刺激",
-            "alias": "thrilling"
+            "link": "thrilling"
           },
           {
             "name": "悲伤绝望",
-            "alias": "sad downer"
+            "link": "sad downer"
           }
         ]
       },
       {
         "name": "乐器",
-        "alias": "instrument",
+        "link": "instrument",
         "sub": [
           {
             "name": "吉他",
-            "alias": "guitar"
+            "link": "guitar"
           },
           {
             "name": "钢琴",
-            "alias": "piano"
+            "link": "piano"
           },
           {
             "name": "萨克斯",
-            "alias": "saxophone"
+            "link": "saxophone"
           },
           {
             "name": "盗梦空间",
-            "alias": "braam"
+            "link": "braam"
           }
         ]
       }

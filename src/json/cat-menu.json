@@ -1,0 +1,795 @@
+[
+  {
+    "name": "模型",
+    "link": "model",
+    "icon": "/menu/3d.svg",
+    "sub": [
+      {
+        "name": "游戏",
+        "link": "game",
+        "sub": [
+          {
+            "name": "合集",
+            "link": "bundle",
+            "sub": []
+          },
+          {
+            "name": "人物/角色",
+            "link": "character",
+            "sub": [
+              {
+                "name": "写实",
+                "link": "real"
+              },
+              {
+                "name": "卡通",
+                "link": "cartoon"
+              },
+              {
+                "name": "虚拟",
+                "link": "virtual"
+              },
+              {
+                "name": "古代",
+                "link": "ancient"
+              }
+            ]
+          },
+          {
+            "name": "建筑",
+            "link": "building",
+            "sub": [
+              {
+                "name": "古风",
+                "link": "reality"
+              },
+              {
+                "name": "现代",
+                "link": "reality"
+              },
+              {
+                "name": "次世代",
+                "link": "reality"
+              },
+              {
+                "name": "未来主义",
+                "link": "future"
+              }
+            ]
+          },
+          {
+            "name": "交通",
+            "link": "trans",
+            "sub": [
+              {
+                "name": "车辆",
+                "link": "vehicle"
+              },
+              {
+                "name": "空中",
+                "link": "air"
+              },
+              {
+                "name": "船舶",
+                "link": "ship"
+              }
+            ]
+          },
+          {
+            "name": "道具/装备",
+            "link": "props",
+            "sub": [
+              {
+                "name": "武器",
+                "link": "weapon"
+              },
+              {
+                "name": "工具",
+                "link": "tool"
+              },
+              {
+                "name": "装饰",
+                "link": "decoration"
+              },
+              {
+                "name": "食物",
+                "link": "food"
+              },
+              {
+                "name": "服装",
+                "link": "cloth"
+              }
+            ]
+          },
+          {
+            "name": "自然",
+            "link": "nature",
+            "sub": [
+              {
+                "name": "植物",
+                "link": "plant"
+              },
+              {
+                "name": "地面",
+                "link": "ground"
+              },
+              {
+                "name": "动物",
+                "link": "animal"
+              }
+            ]
+          },
+          {
+            "name": "特效",
+            "link": "effect",
+            "sub": [
+              {
+                "name": "光效",
+                "link": "lighting"
+              },
+              {
+                "name": "粒子",
+                "link": "particle"
+              },
+              {
+                "name": "自然",
+                "link": "nature"
+              },
+              {
+                "name": "能量",
+                "link": "energy"
+              },
+              {
+                "name": "其他",
+                "link": "other"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "家装",
+        "link": "home_decor",
+        "sub": [
+          {
+            "name": "室内",
+            "link": "interior",
+            "sub": [
+              {
+                "name": "家具",
+                "link": "furniture"
+              },
+              {
+                "name": "装饰",
+                "link": "decoration"
+              },
+              {
+                "name": "门窗",
+                "link": "window door"
+              },
+              {
+                "name": "植物",
+                "link": "plant"
+              },
+              {
+                "name": "灯具",
+                "link": "lights"
+              },
+              {
+                "name": "生活用品",
+                "link": "life_product"
+              },
+              {
+                "name": "合集",
+                "link": "bundle"
+              }
+            ]
+          },
+          {
+            "name": "户外",
+            "link": "exterior",
+            "sub": [
+              {
+                "name": "家具",
+                "link": "furniture"
+              },
+              {
+                "name": "装饰",
+                "link": "decoration"
+              },
+              {
+                "name": "合集",
+                "link": "bundle"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "3D打印",
+        "link": "3d print",
+        "sub": [
+          {
+            "name": "艺术",
+            "link": "art",
+            "sub": [
+              {
+                "name": "雕塑",
+                "link": "sculpture"
+              },
+              {
+                "name": "艺术装饰品",
+                "link": "artistic decor"
+              }
+            ]
+          },
+          {
+            "name": "生活",
+            "link": "life",
+            "sub": [
+              {
+                "name": "车辆",
+                "link": "vehicles"
+              },
+              {
+                "name": "飞机",
+                "link": "plane"
+              },
+              {
+                "name": "船",
+                "link": "ship"
+              },
+              {
+                "name": "人物",
+                "link": "character"
+              },
+              {
+                "name": "动物",
+                "link": "animal"
+              },
+              {
+                "name": "珠宝",
+                "link": "jewelry"
+              },
+              {
+                "name": "生活用品",
+                "link": "household"
+              }
+            ]
+          },
+          {
+            "name": "科技",
+            "link": "tech",
+            "sub": [
+              {
+                "name": "机械零件",
+                "link": "mechanical parts"
+              },
+              {
+                "name": "设备外壳",
+                "link": "electronic device casings"
+              }
+            ]
+          },
+          {
+            "name": "其他",
+            "link": "other",
+            "sub": [
+              {
+                "name": "定制模型",
+                "link": "custom models"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "贴图",
+    "link": "texture",
+    "icon": "/menu/texture.svg",
+    "sub": [
+      {
+        "name": "",
+        "link": "all",
+        "sub": [
+          {
+            "name": "全部",
+            "link": "all",
+            "sub": [
+              {
+                "name": "树皮",
+                "link": "bark"
+              },
+              {
+                "name": "砖",
+                "link": "brick"
+              },
+              {
+                "name": "陶瓷",
+                "link": "ceramic"
+              },
+              {
+                "name": "覆层",
+                "link": "cladding"
+              },
+              {
+                "name": "水泥",
+                "link": "concrete"
+              },
+              {
+                "name": "织物",
+                "link": "fabric"
+              },
+              {
+                "name": "地面",
+                "link": "ground"
+              },
+              {
+                "name": "大理石",
+                "link": "marble"
+              },
+              {
+                "name": "金属",
+                "link": "metal"
+              },
+              {
+                "name": "油漆",
+                "link": "paint"
+              },
+              {
+                "name": "纸张",
+                "link": "paper"
+              },
+              {
+                "name": "石膏",
+                "link": "plaster"
+              },
+              {
+                "name": "塑料",
+                "link": "plastic"
+              },
+              {
+                "name": "岩石",
+                "link": "rock"
+              },
+              {
+                "name": "屋顶",
+                "link": "roofing"
+              },
+              {
+                "name": "商店",
+                "link": "stone"
+              },
+              {
+                "name": "街道",
+                "link": "street"
+              },
+              {
+                "name": "表面缺陷",
+                "link": "surface imperfection"
+              },
+              {
+                "name": "瓷砖",
+                "link": "tile"
+              },
+              {
+                "name": "木材",
+                "link": "wood"
+              },
+              {
+                "name": "VFX",
+                "link": "VFX"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "音效库",
+    "link": "sound",
+    "icon": "/menu/sound.svg",
+    "sub": [
+      {
+        "name": "环境音效",
+        "link": "environment",
+        "sub": [
+          {
+            "name": "场景",
+            "link": "scene",
+            "sub": [
+              {
+                "name": "城市",
+                "link": "city"
+              },
+              {
+                "name": "森林",
+                "link": "forest"
+              },
+              {
+                "name": "乡村",
+                "link": "countryside"
+              },
+              {
+                "name": "酒吧",
+                "link": "bar"
+              },
+              {
+                "name": "办公室",
+                "link": "office"
+              },
+              {
+                "name": "海滩",
+                "link": "beach"
+              },
+              {
+                "name": "车站",
+                "link": "station"
+              },
+              {
+                "name": "餐厅",
+                "link": "restaurant"
+              },
+              {
+                "name": "商店",
+                "link": "store"
+              }
+            ]
+          },
+          {
+            "name": "自然",
+            "link": "nature",
+            "sub": [
+              {
+                "name": "火焰",
+                "link": "fire"
+              },
+              {
+                "name": "水流",
+                "link": "water flow"
+              },
+              {
+                "name": "瀑布",
+                "link": "fall"
+              },
+              {
+                "name": "鸟鸣",
+                "link": "birdsong"
+              },
+              {
+                "name": "动物叫声",
+                "link": "animal"
+              }
+            ]
+          },
+          {
+            "name": "天气",
+            "link": "weather",
+            "sub": [
+              {
+                "name": "风",
+                "link": "wind"
+              },
+              {
+                "name": "雨",
+                "link": "rain"
+              },
+              {
+                "name": "雷电",
+                "link": "thunder"
+              },
+              {
+                "name": "雪",
+                "link": "snow"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "动作音效",
+        "link": "action",
+        "sub": [
+          {
+            "name": "人物",
+            "link": "human",
+            "sub": [
+              {
+                "name": "笑",
+                "link": "laugh"
+              },
+              {
+                "name": "哭",
+                "link": "cry"
+              },
+              {
+                "name": "喊叫",
+                "link": "yell"
+              },
+              {
+                "name": "心跳",
+                "link": "heart"
+              },
+              {
+                "name": "呼吸",
+                "link": "breath"
+              },
+              {
+                "name": "欢呼",
+                "link": "cheer"
+              },
+              {
+                "name": "踢打",
+                "link": "kick"
+              },
+              {
+                "name": "脚步声",
+                "link": "footsteps"
+              },
+              {
+                "name": "咳嗽",
+                "link": "cough"
+              },
+              {
+                "name": "鼓掌",
+                "link": "clapping"
+              },
+              {
+                "name": "吹",
+                "link": "whistle"
+              }
+            ]
+          },
+          {
+            "name": "物品",
+            "link": "items",
+            "sub": [
+              {
+                "name": "武器",
+                "link": "weapon"
+              },
+              {
+                "name": "车辆",
+                "link": "vehicle"
+              },
+              {
+                "name": "飞机",
+                "link": "plane"
+              },
+              {
+                "name": "机械",
+                "link": "mechanisms"
+              },
+              {
+                "name": "木头",
+                "link": "wood"
+              },
+              {
+                "name": "枪",
+                "link": "gun"
+              },
+              {
+                "name": "门",
+                "link": "door"
+              },
+              {
+                "name": "钟/表/铃",
+                "link": "clock_ring"
+              },
+              {
+                "name": "衣服",
+                "link": "cloth"
+              },
+              {
+                "name": "机器人",
+                "link": "robo"
+              },
+              {
+                "name": "生活用品",
+                "link": "daily_necessity"
+              },
+              {
+                "name": "厨房",
+                "link": "kitchen"
+              }
+            ]
+          },
+          {
+            "name": "特征",
+            "link": "feature",
+            "sub": [
+              {
+                "name": "爆破",
+                "link": "explosion"
+              },
+              {
+                "name": "打/击",
+                "link": "impacts"
+              },
+              {
+                "name": "沸腾",
+                "link": "bubble"
+              },
+              {
+                "name": "碰撞",
+                "link": "collision"
+              },
+              {
+                "name": "落地",
+                "link": "drops"
+              },
+              {
+                "name": "摩擦",
+                "link": "friction"
+              },
+              {
+                "name": "飞过",
+                "link": "flyby"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "氛围音效",
+        "link": "atmosphere",
+        "sub": [
+          {
+            "name": "情感",
+            "link": "feeling",
+            "sub": [
+              {
+                "name": "轻松愉快",
+                "link": "easy"
+              },
+              {
+                "name": "惊悚害怕",
+                "link": "scary"
+              },
+              {
+                "name": "紧张刺激",
+                "link": "thrilling"
+              },
+              {
+                "name": "悲伤/低沉",
+                "link": "downer"
+              }
+            ]
+          },
+          {
+            "name": "乐器",
+            "link": "instrument",
+            "sub": [
+              {
+                "name": "弹拨",
+                "link": "plucked_string"
+              },
+              {
+                "name": "钢琴",
+                "link": "piano"
+              },
+              {
+                "name": "低音",
+                "link": "bass"
+              },
+              {
+                "name": "打击乐",
+                "link": "percussion"
+              },
+              {
+                "name": "盗梦空间/铜管",
+                "link": "brass"
+              },
+              {
+                "name": "编钟",
+                "link": "chime"
+              }
+            ]
+          },
+          {
+            "name": "其他",
+            "link": "other",
+            "sub": [
+              {
+                "name": "嗡嗡声",
+                "link": "drone"
+              },
+              {
+                "name": "嗖嗖声",
+                "link": "whoosh"
+              },
+              {
+                "name": "上升/下降音",
+                "link": "riser downer"
+              },
+              {
+                "name": "科幻音",
+                "link": "scifi"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "图片",
+    "link": "image",
+    "icon": "/menu/image.svg",
+    "sub": [
+      {
+        "name": "",
+        "link": "",
+        "sub": [
+          {
+            "name": "全部",
+            "link": "all",
+            "sub": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "教程",
+    "link": "tutorial",
+    "icon": "/menu/video.svg",
+    "sub": [
+      {
+        "name": "",
+        "link": "",
+        "sub": [
+          {
+            "name": "全部",
+            "link": "all",
+            "sub": [
+              {
+                "name": "Blender",
+                "link": "blender"
+              },
+              {
+                "name": "Maya",
+                "link": "maya"
+              },
+              {
+                "name": "Unreal Engine",
+                "link": "unreal engine"
+              },
+              {
+                "name": "ZBush",
+                "link": "zbush"
+              },
+              {
+                "name": "Marvelous Designer",
+                "link": "md"
+              },
+              {
+                "name": "C4D",
+                "link": "c4d"
+              },
+              {
+                "name": "3dMax",
+                "link": "3dmax"
+              },
+              {
+                "name": "Houdini",
+                "link": "houdini"
+              },
+              {
+                "name": "Unity 3D",
+                "link": "unity 3d"
+              },
+              {
+                "name": "Substance Painter",
+                "link": "substance painter"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

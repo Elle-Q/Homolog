@@ -4,7 +4,6 @@ import '../cart/cart.scss'
 import {FormControlLabel, Radio, RadioGroup} from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import wepay from '../../../assets/icons/wepay.svg'
-import alipay from '../../../assets/icons/alipay.svg'
 import Divider from "@mui/material/Divider";
 import Agreement from "../../../components/agreement/agreement";
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
@@ -16,7 +15,7 @@ import {checkOrderStatus} from "../../../api/order.service";
 import Qrcode from "./qrcode/qrcode";
 import "./pay.scss"
 
-function Pay(props) {
+function Pay() {
 
     const {order} = useSelector(selectSider);
     const [orderDetail, setOrderDetail] = useState({})

@@ -20,7 +20,6 @@ function UserDrawer(props) {
     const {toggleDrawer, open, user} = props;
     const [userDetail, setUserDetail] = React.useState();
     const nameRef = React.createRef();
-    const phoneRef = React.createRef();
     const motoRef = React.createRef();
 
     useEffect(() => {
@@ -45,7 +44,6 @@ function UserDrawer(props) {
         let user = {
             ...userDetail,
             name: nameRef.current.value,
-            phone: phoneRef.current.value,
             moto: motoRef.current.value,
         }
         UserService.update(user).then(
@@ -97,7 +95,8 @@ function UserDrawer(props) {
                 </div>
                 <div className="user-drawer__input-box">
                     <span>手机: </span>
-                    <Input className="user-drawer__input" inputRef={nameRef}
+                    <Input className="user-drawer__input"
+                           disabled={true}
                            defaultValue={userDetail.phone}/>
                 </div>
                 <GenderRadio/>

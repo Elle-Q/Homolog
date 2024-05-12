@@ -1,18 +1,15 @@
 @use '../../styles' as *;
 
 .sound-card {
-  background-color: $color-secondary-dark;
+  background-color: #111821;
   padding: .5rem 1.5rem;
   border-radius: 2rem;
   height: 15rem;
-  min-width: 32%;
+  width: 90%;
+  margin-top: 2rem;
 
   &:hover {
     cursor: pointer;
-
-    & * > .sound-card__controll-icon {
-      color: $color-primary;
-    }
   }
 
   &__top {
@@ -27,16 +24,24 @@
     width: 100%;
 
     &-icon {
-      width: 3rem !important;
-      height: 3rem !important;
-      color: $color-primary;
-
+      width: 2.5rem !important;
+      height: 2.5rem !important;
+      margin-right: 1rem;
+      color: #eeeeee;
 
       &:hover {
         cursor: pointer;
-        transform: scale(1.1);
-        transition: all .1s ease-in-out;
         color: #656f8d;
+      }
+
+      &--collect {
+        width: 2.5rem !important;
+        height: 2.5rem !important;
+
+        &:hover {
+          cursor: pointer;
+          color: #ff0a54;
+        }
       }
     }
   }
@@ -47,8 +52,11 @@
     display: flex;
 
     & > h2 {
-      display: inline-block;
+      display: block;
       color: $color-white-1;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
     }
 
     &--time {
@@ -71,7 +79,7 @@
   top: 28px;
   border-radius: 4px;
   background-color: white;
-  box-shadow: 0 0 8px 1px #595DFD;
+  box-shadow: 0 0 8px 1px $color-primary;
 }
 
 #waveform ::part(cursor):after {
@@ -105,4 +113,9 @@
 #waveform ::part(region-handle-right) {
   border-right-width: 4px !important;
   border-right-color: #fff000 !important;
+}
+
+.MuiTooltip-tooltip {
+  font-size: 1.6rem !important;
+  background-color: rgba($color-secondary, .8) !important;
 }
